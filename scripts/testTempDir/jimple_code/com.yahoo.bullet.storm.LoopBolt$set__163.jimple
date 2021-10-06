@@ -1,0 +1,56 @@
+public final class com.yahoo.bullet.storm.LoopBolt$set__163 extends java.lang.Object implements java.util.function.BiConsumer
+{
+    com.yahoo.bullet.storm.BulletStormConfig cap0;
+
+    public static java.util.function.BiConsumer bootstrap$(com.yahoo.bullet.storm.BulletStormConfig)
+    {
+        com.yahoo.bullet.storm.BulletStormConfig $r0;
+        com.yahoo.bullet.storm.LoopBolt$set__163 $r1;
+
+        $r0 := @parameter0: com.yahoo.bullet.storm.BulletStormConfig;
+
+        $r1 = new com.yahoo.bullet.storm.LoopBolt$set__163;
+
+        specialinvoke $r1.<com.yahoo.bullet.storm.LoopBolt$set__163: void <init>(com.yahoo.bullet.storm.BulletStormConfig)>($r0);
+
+        return $r1;
+    }
+
+    public void <init>(com.yahoo.bullet.storm.BulletStormConfig)
+    {
+        com.yahoo.bullet.storm.LoopBolt$set__163 $r0;
+        com.yahoo.bullet.storm.BulletStormConfig $r1;
+
+        $r0 := @this: com.yahoo.bullet.storm.LoopBolt$set__163;
+
+        $r1 := @parameter0: com.yahoo.bullet.storm.BulletStormConfig;
+
+        specialinvoke $r0.<java.lang.Object: void <init>()>();
+
+        $r0.<com.yahoo.bullet.storm.LoopBolt$set__163: com.yahoo.bullet.storm.BulletStormConfig cap0> = $r1;
+
+        return;
+    }
+
+    public void accept(java.lang.Object, java.lang.Object)
+    {
+        com.yahoo.bullet.storm.LoopBolt$set__163 $r0;
+        java.lang.Object $r1, $r2;
+        java.lang.String $r3;
+        com.yahoo.bullet.storm.BulletStormConfig $r4;
+
+        $r0 := @this: com.yahoo.bullet.storm.LoopBolt$set__163;
+
+        $r1 := @parameter0: java.lang.Object;
+
+        $r2 := @parameter1: java.lang.Object;
+
+        $r3 = (java.lang.String) $r1;
+
+        $r4 = $r0.<com.yahoo.bullet.storm.LoopBolt$set__163: com.yahoo.bullet.storm.BulletStormConfig cap0>;
+
+        virtualinvoke $r4.<com.yahoo.bullet.common.Config: void set(java.lang.String,java.lang.Object)>($r3, $r2);
+
+        return;
+    }
+}

@@ -1,0 +1,42 @@
+public final class com.yahoo.bullet.storm.batching.BatchManager$compress__117 extends java.lang.Object implements java.util.function.Consumer
+{
+
+    public static java.util.function.Consumer bootstrap$()
+    {
+        com.yahoo.bullet.storm.batching.BatchManager$compress__117 $r0;
+
+        $r0 = new com.yahoo.bullet.storm.batching.BatchManager$compress__117;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.batching.BatchManager$compress__117: void <init>()>();
+
+        return $r0;
+    }
+
+    public void <init>()
+    {
+        com.yahoo.bullet.storm.batching.BatchManager$compress__117 $r0;
+
+        $r0 := @this: com.yahoo.bullet.storm.batching.BatchManager$compress__117;
+
+        specialinvoke $r0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public void accept(java.lang.Object)
+    {
+        com.yahoo.bullet.storm.batching.BatchManager$compress__117 $r0;
+        java.lang.Object $r1;
+        com.yahoo.bullet.storm.batching.Partition $r2;
+
+        $r0 := @this: com.yahoo.bullet.storm.batching.BatchManager$compress__117;
+
+        $r1 := @parameter0: java.lang.Object;
+
+        $r2 = (com.yahoo.bullet.storm.batching.Partition) $r1;
+
+        virtualinvoke $r2.<com.yahoo.bullet.storm.batching.Partition: void compress()>();
+
+        return;
+    }
+}

@@ -1,0 +1,20 @@
+class com.yahoo.bullet.storm.batching.BatchManagerTest$1Dummy extends java.lang.Object
+{
+    final com.yahoo.bullet.storm.batching.BatchManagerTest this$0;
+
+    void <init>(com.yahoo.bullet.storm.batching.BatchManagerTest)
+    {
+        com.yahoo.bullet.storm.batching.BatchManagerTest$1Dummy r0;
+        com.yahoo.bullet.storm.batching.BatchManagerTest r1;
+
+        r0 := @this: com.yahoo.bullet.storm.batching.BatchManagerTest$1Dummy;
+
+        r1 := @parameter0: com.yahoo.bullet.storm.batching.BatchManagerTest;
+
+        r0.<com.yahoo.bullet.storm.batching.BatchManagerTest$1Dummy: com.yahoo.bullet.storm.batching.BatchManagerTest this$0> = r1;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+}

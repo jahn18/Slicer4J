@@ -1,0 +1,66 @@
+public final class com.yahoo.bullet.storm.StormUtils$lambda_submit_0__223 extends java.lang.Object implements java.util.function.Consumer
+{
+    org.apache.storm.Config cap0;
+    com.yahoo.bullet.storm.BulletStormConfig cap1;
+
+    public static java.util.function.Consumer bootstrap$(org.apache.storm.Config, com.yahoo.bullet.storm.BulletStormConfig)
+    {
+        org.apache.storm.Config $r0;
+        com.yahoo.bullet.storm.BulletStormConfig $r1;
+        com.yahoo.bullet.storm.StormUtils$lambda_submit_0__223 $r2;
+
+        $r0 := @parameter0: org.apache.storm.Config;
+
+        $r1 := @parameter1: com.yahoo.bullet.storm.BulletStormConfig;
+
+        $r2 = new com.yahoo.bullet.storm.StormUtils$lambda_submit_0__223;
+
+        specialinvoke $r2.<com.yahoo.bullet.storm.StormUtils$lambda_submit_0__223: void <init>(org.apache.storm.Config,com.yahoo.bullet.storm.BulletStormConfig)>($r0, $r1);
+
+        return $r2;
+    }
+
+    public void <init>(org.apache.storm.Config, com.yahoo.bullet.storm.BulletStormConfig)
+    {
+        com.yahoo.bullet.storm.StormUtils$lambda_submit_0__223 $r0;
+        org.apache.storm.Config $r1;
+        com.yahoo.bullet.storm.BulletStormConfig $r2;
+
+        $r0 := @this: com.yahoo.bullet.storm.StormUtils$lambda_submit_0__223;
+
+        $r1 := @parameter0: org.apache.storm.Config;
+
+        $r2 := @parameter1: com.yahoo.bullet.storm.BulletStormConfig;
+
+        specialinvoke $r0.<java.lang.Object: void <init>()>();
+
+        $r0.<com.yahoo.bullet.storm.StormUtils$lambda_submit_0__223: org.apache.storm.Config cap0> = $r1;
+
+        $r0.<com.yahoo.bullet.storm.StormUtils$lambda_submit_0__223: com.yahoo.bullet.storm.BulletStormConfig cap1> = $r2;
+
+        return;
+    }
+
+    public void accept(java.lang.Object)
+    {
+        com.yahoo.bullet.storm.StormUtils$lambda_submit_0__223 $r0;
+        java.lang.Object $r1;
+        java.lang.String $r2;
+        org.apache.storm.Config $r3;
+        com.yahoo.bullet.storm.BulletStormConfig $r4;
+
+        $r0 := @this: com.yahoo.bullet.storm.StormUtils$lambda_submit_0__223;
+
+        $r1 := @parameter0: java.lang.Object;
+
+        $r2 = (java.lang.String) $r1;
+
+        $r3 = $r0.<com.yahoo.bullet.storm.StormUtils$lambda_submit_0__223: org.apache.storm.Config cap0>;
+
+        $r4 = $r0.<com.yahoo.bullet.storm.StormUtils$lambda_submit_0__223: com.yahoo.bullet.storm.BulletStormConfig cap1>;
+
+        staticinvoke <com.yahoo.bullet.storm.StormUtils: void lambda$submit$0(org.apache.storm.Config,com.yahoo.bullet.storm.BulletStormConfig,java.lang.String)>($r3, $r4, $r2);
+
+        return;
+    }
+}

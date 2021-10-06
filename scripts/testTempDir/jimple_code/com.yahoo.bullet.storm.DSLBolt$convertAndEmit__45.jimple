@@ -1,0 +1,51 @@
+public final class com.yahoo.bullet.storm.DSLBolt$convertAndEmit__45 extends java.lang.Object implements java.util.function.Consumer
+{
+    com.yahoo.bullet.storm.DSLBolt cap0;
+
+    public static java.util.function.Consumer bootstrap$(com.yahoo.bullet.storm.DSLBolt)
+    {
+        com.yahoo.bullet.storm.DSLBolt $r0;
+        com.yahoo.bullet.storm.DSLBolt$convertAndEmit__45 $r1;
+
+        $r0 := @parameter0: com.yahoo.bullet.storm.DSLBolt;
+
+        $r1 = new com.yahoo.bullet.storm.DSLBolt$convertAndEmit__45;
+
+        specialinvoke $r1.<com.yahoo.bullet.storm.DSLBolt$convertAndEmit__45: void <init>(com.yahoo.bullet.storm.DSLBolt)>($r0);
+
+        return $r1;
+    }
+
+    public void <init>(com.yahoo.bullet.storm.DSLBolt)
+    {
+        com.yahoo.bullet.storm.DSLBolt$convertAndEmit__45 $r0;
+        com.yahoo.bullet.storm.DSLBolt $r1;
+
+        $r0 := @this: com.yahoo.bullet.storm.DSLBolt$convertAndEmit__45;
+
+        $r1 := @parameter0: com.yahoo.bullet.storm.DSLBolt;
+
+        specialinvoke $r0.<java.lang.Object: void <init>()>();
+
+        $r0.<com.yahoo.bullet.storm.DSLBolt$convertAndEmit__45: com.yahoo.bullet.storm.DSLBolt cap0> = $r1;
+
+        return;
+    }
+
+    public void accept(java.lang.Object)
+    {
+        com.yahoo.bullet.storm.DSLBolt$convertAndEmit__45 $r0;
+        java.lang.Object $r1;
+        com.yahoo.bullet.storm.DSLBolt $r2;
+
+        $r0 := @this: com.yahoo.bullet.storm.DSLBolt$convertAndEmit__45;
+
+        $r1 := @parameter0: java.lang.Object;
+
+        $r2 = $r0.<com.yahoo.bullet.storm.DSLBolt$convertAndEmit__45: com.yahoo.bullet.storm.DSLBolt cap0>;
+
+        virtualinvoke $r2.<com.yahoo.bullet.storm.DSLBolt: void convertAndEmit(java.lang.Object)>($r1);
+
+        return;
+    }
+}

@@ -1,0 +1,119 @@
+public class com.yahoo.bullet.storm.metric.MapCountMetric extends java.lang.Object implements org.apache.storm.metric.api.IMetric
+{
+    private java.util.Map counts;
+
+    public void <init>()
+    {
+        com.yahoo.bullet.storm.metric.MapCountMetric r0;
+        java.util.HashMap $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.metric.MapCountMetric;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        $r1 = new java.util.HashMap;
+
+        specialinvoke $r1.<java.util.HashMap: void <init>()>();
+
+        r0.<com.yahoo.bullet.storm.metric.MapCountMetric: java.util.Map counts> = $r1;
+
+        return;
+    }
+
+    public void add(java.lang.String, long)
+    {
+        com.yahoo.bullet.storm.metric.MapCountMetric r0;
+        java.lang.String r1;
+        java.util.Map $r2, $r5;
+        java.lang.Long $r3, r7, r8;
+        java.lang.Object $r4;
+        long $l0, l1, $l2;
+
+        r0 := @this: com.yahoo.bullet.storm.metric.MapCountMetric;
+
+        r1 := @parameter0: java.lang.String;
+
+        l1 := @parameter1: long;
+
+        $r2 = r0.<com.yahoo.bullet.storm.metric.MapCountMetric: java.util.Map counts>;
+
+        $r3 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(0L);
+
+        $r4 = interfaceinvoke $r2.<java.util.Map: java.lang.Object getOrDefault(java.lang.Object,java.lang.Object)>(r1, $r3);
+
+        r7 = (java.lang.Long) $r4;
+
+        $l0 = virtualinvoke r7.<java.lang.Long: long longValue()>();
+
+        $l2 = $l0 + l1;
+
+        r8 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>($l2);
+
+        $r5 = r0.<com.yahoo.bullet.storm.metric.MapCountMetric: java.util.Map counts>;
+
+        interfaceinvoke $r5.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(r1, r8);
+
+        return;
+    }
+
+    public void set(java.lang.String, long)
+    {
+        com.yahoo.bullet.storm.metric.MapCountMetric r0;
+        java.lang.String r1;
+        long l0;
+        java.util.Map $r2;
+        java.lang.Long $r3;
+
+        r0 := @this: com.yahoo.bullet.storm.metric.MapCountMetric;
+
+        r1 := @parameter0: java.lang.String;
+
+        l0 := @parameter1: long;
+
+        $r2 = r0.<com.yahoo.bullet.storm.metric.MapCountMetric: java.util.Map counts>;
+
+        $r3 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(l0);
+
+        interfaceinvoke $r2.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(r1, $r3);
+
+        return;
+    }
+
+    public void clear()
+    {
+        com.yahoo.bullet.storm.metric.MapCountMetric r0;
+        java.util.Map $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.metric.MapCountMetric;
+
+        $r1 = r0.<com.yahoo.bullet.storm.metric.MapCountMetric: java.util.Map counts>;
+
+        interfaceinvoke $r1.<java.util.Map: void clear()>();
+
+        return;
+    }
+
+    public java.lang.Object getValueAndReset()
+    {
+        com.yahoo.bullet.storm.metric.MapCountMetric r0;
+        java.util.Map $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.metric.MapCountMetric;
+
+        $r1 = r0.<com.yahoo.bullet.storm.metric.MapCountMetric: java.util.Map counts>;
+
+        return $r1;
+    }
+
+    public java.util.Map getCounts()
+    {
+        com.yahoo.bullet.storm.metric.MapCountMetric r0;
+        java.util.Map $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.metric.MapCountMetric;
+
+        $r1 = r0.<com.yahoo.bullet.storm.metric.MapCountMetric: java.util.Map counts>;
+
+        return $r1;
+    }
+}

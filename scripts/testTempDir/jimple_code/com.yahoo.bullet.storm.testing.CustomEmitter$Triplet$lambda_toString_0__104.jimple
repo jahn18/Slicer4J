@@ -1,0 +1,41 @@
+public final class com.yahoo.bullet.storm.testing.CustomEmitter$Triplet$lambda_toString_0__104 extends java.lang.Object implements java.util.function.BinaryOperator
+{
+
+    public static java.util.function.BinaryOperator bootstrap$()
+    {
+        com.yahoo.bullet.storm.testing.CustomEmitter$Triplet$lambda_toString_0__104 $r0;
+
+        $r0 = new com.yahoo.bullet.storm.testing.CustomEmitter$Triplet$lambda_toString_0__104;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.testing.CustomEmitter$Triplet$lambda_toString_0__104: void <init>()>();
+
+        return $r0;
+    }
+
+    public void <init>()
+    {
+        com.yahoo.bullet.storm.testing.CustomEmitter$Triplet$lambda_toString_0__104 $r0;
+
+        $r0 := @this: com.yahoo.bullet.storm.testing.CustomEmitter$Triplet$lambda_toString_0__104;
+
+        specialinvoke $r0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public java.lang.Object apply(java.lang.Object, java.lang.Object)
+    {
+        com.yahoo.bullet.storm.testing.CustomEmitter$Triplet$lambda_toString_0__104 $r0;
+        java.lang.Object $r1, $r2, $r3;
+
+        $r0 := @this: com.yahoo.bullet.storm.testing.CustomEmitter$Triplet$lambda_toString_0__104;
+
+        $r1 := @parameter0: java.lang.Object;
+
+        $r2 := @parameter1: java.lang.Object;
+
+        $r3 = staticinvoke <com.yahoo.bullet.storm.testing.CustomEmitter$Triplet: java.lang.Object lambda$toString$0(java.lang.Object,java.lang.Object)>($r1, $r2);
+
+        return $r3;
+    }
+}

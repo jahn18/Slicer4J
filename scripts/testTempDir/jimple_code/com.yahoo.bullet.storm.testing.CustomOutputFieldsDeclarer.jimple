@@ -1,0 +1,288 @@
+public class com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer extends java.lang.Object implements org.apache.storm.topology.OutputFieldsDeclarer
+{
+    private java.util.Map captured;
+    private java.util.Map directMap;
+
+    public void <init>()
+    {
+        com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer r0;
+        java.util.HashMap $r1, $r2;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        $r1 = new java.util.HashMap;
+
+        specialinvoke $r1.<java.util.HashMap: void <init>()>();
+
+        r0.<com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer: java.util.Map captured> = $r1;
+
+        $r2 = new java.util.HashMap;
+
+        specialinvoke $r2.<java.util.HashMap: void <init>()>();
+
+        r0.<com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer: java.util.Map directMap> = $r2;
+
+        return;
+    }
+
+    private void addAll(java.lang.String, org.apache.storm.tuple.Fields, boolean)
+    {
+        com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer r0;
+        java.lang.String r1;
+        org.apache.storm.tuple.Fields r2;
+        java.util.Map $r3, $r5;
+        boolean z0;
+        java.lang.Boolean $r6;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: org.apache.storm.tuple.Fields;
+
+        z0 := @parameter2: boolean;
+
+        $r3 = r0.<com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer: java.util.Map captured>;
+
+        interfaceinvoke $r3.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(r1, r2);
+
+        $r5 = r0.<com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer: java.util.Map directMap>;
+
+        $r6 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(z0);
+
+        interfaceinvoke $r5.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(r1, $r6);
+
+        return;
+    }
+
+    public boolean areFieldsPresent(org.apache.storm.tuple.Fields)
+    {
+        com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer r0;
+        java.util.Map $r1;
+        java.util.Collection $r2;
+        java.util.stream.Stream $r3;
+        org.apache.storm.tuple.Fields r4;
+        java.util.function.Predicate $r5;
+        boolean $z0;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer;
+
+        r4 := @parameter0: org.apache.storm.tuple.Fields;
+
+        $r1 = r0.<com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer: java.util.Map captured>;
+
+        $r2 = interfaceinvoke $r1.<java.util.Map: java.util.Collection values()>();
+
+        $r3 = interfaceinvoke $r2.<java.util.Collection: java.util.stream.Stream stream()>();
+
+        $r5 = staticinvoke <com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer$lambda_areFieldsPresent_0__78: java.util.function.Predicate bootstrap$(org.apache.storm.tuple.Fields)>(r4);
+
+        $z0 = interfaceinvoke $r3.<java.util.stream.Stream: boolean anyMatch(java.util.function.Predicate)>($r5);
+
+        return $z0;
+    }
+
+    public boolean areFieldsPresent(java.lang.String, org.apache.storm.tuple.Fields)
+    {
+        com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer r0;
+        java.lang.String r1;
+        java.util.Map $r2, $r3;
+        boolean $z0, $z1, $z2;
+        java.lang.Object $r4;
+        org.apache.storm.tuple.Fields $r5, r7;
+        java.util.List $r6, $r8;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        r7 := @parameter1: org.apache.storm.tuple.Fields;
+
+        $r2 = r0.<com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer: java.util.Map captured>;
+
+        $z0 = interfaceinvoke $r2.<java.util.Map: boolean containsKey(java.lang.Object)>(r1);
+
+        if $z0 == 0 goto label1;
+
+        $r3 = r0.<com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer: java.util.Map captured>;
+
+        $r4 = interfaceinvoke $r3.<java.util.Map: java.lang.Object get(java.lang.Object)>(r1);
+
+        $r5 = (org.apache.storm.tuple.Fields) $r4;
+
+        $r6 = virtualinvoke $r5.<org.apache.storm.tuple.Fields: java.util.List toList()>();
+
+        $r8 = virtualinvoke r7.<org.apache.storm.tuple.Fields: java.util.List toList()>();
+
+        $z1 = interfaceinvoke $r6.<java.util.List: boolean equals(java.lang.Object)>($r8);
+
+        if $z1 == 0 goto label1;
+
+        $z2 = 1;
+
+        goto label2;
+
+     label1:
+        $z2 = 0;
+
+     label2:
+        return $z2;
+    }
+
+    public boolean areFieldsPresent(java.lang.String, boolean, org.apache.storm.tuple.Fields)
+    {
+        com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer r0;
+        java.lang.String r1;
+        org.apache.storm.tuple.Fields r2;
+        boolean $z0, $z1, z2, $z3;
+        java.util.Map $r3;
+        java.lang.Object $r4;
+        java.lang.Boolean $r5;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        z2 := @parameter1: boolean;
+
+        r2 := @parameter2: org.apache.storm.tuple.Fields;
+
+        $z0 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer: boolean areFieldsPresent(java.lang.String,org.apache.storm.tuple.Fields)>(r1, r2);
+
+        if $z0 == 0 goto label1;
+
+        $r3 = r0.<com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer: java.util.Map directMap>;
+
+        $r4 = interfaceinvoke $r3.<java.util.Map: java.lang.Object get(java.lang.Object)>(r1);
+
+        $r5 = (java.lang.Boolean) $r4;
+
+        $z1 = virtualinvoke $r5.<java.lang.Boolean: boolean booleanValue()>();
+
+        if $z1 != z2 goto label1;
+
+        $z3 = 1;
+
+        goto label2;
+
+     label1:
+        $z3 = 0;
+
+     label2:
+        return $z3;
+    }
+
+    public boolean areFieldsDeclared()
+    {
+        com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer r0;
+        java.util.Map $r1;
+        boolean $z0, $z1;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer;
+
+        $r1 = r0.<com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer: java.util.Map captured>;
+
+        $z0 = interfaceinvoke $r1.<java.util.Map: boolean isEmpty()>();
+
+        if $z0 != 0 goto label1;
+
+        $z1 = 1;
+
+        goto label2;
+
+     label1:
+        $z1 = 0;
+
+     label2:
+        return $z1;
+    }
+
+    public void declare(org.apache.storm.tuple.Fields)
+    {
+        com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer r0;
+        org.apache.storm.tuple.Fields r1;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer;
+
+        r1 := @parameter0: org.apache.storm.tuple.Fields;
+
+        specialinvoke r0.<com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer: void addAll(java.lang.String,org.apache.storm.tuple.Fields,boolean)>("default", r1, 0);
+
+        return;
+    }
+
+    public void declare(boolean, org.apache.storm.tuple.Fields)
+    {
+        com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer r0;
+        org.apache.storm.tuple.Fields r1;
+        boolean z0;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer;
+
+        z0 := @parameter0: boolean;
+
+        r1 := @parameter1: org.apache.storm.tuple.Fields;
+
+        specialinvoke r0.<com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer: void addAll(java.lang.String,org.apache.storm.tuple.Fields,boolean)>("default", r1, z0);
+
+        return;
+    }
+
+    public void declareStream(java.lang.String, org.apache.storm.tuple.Fields)
+    {
+        com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer r0;
+        java.lang.String r1;
+        org.apache.storm.tuple.Fields r2;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: org.apache.storm.tuple.Fields;
+
+        specialinvoke r0.<com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer: void addAll(java.lang.String,org.apache.storm.tuple.Fields,boolean)>(r1, r2, 0);
+
+        return;
+    }
+
+    public void declareStream(java.lang.String, boolean, org.apache.storm.tuple.Fields)
+    {
+        com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer r0;
+        java.lang.String r1;
+        org.apache.storm.tuple.Fields r2;
+        boolean z0;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        z0 := @parameter1: boolean;
+
+        r2 := @parameter2: org.apache.storm.tuple.Fields;
+
+        specialinvoke r0.<com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer: void addAll(java.lang.String,org.apache.storm.tuple.Fields,boolean)>(r1, r2, 0);
+
+        return;
+    }
+
+    public static boolean lambda$areFieldsPresent$0(org.apache.storm.tuple.Fields, org.apache.storm.tuple.Fields)
+    {
+        org.apache.storm.tuple.Fields r0, r2;
+        java.util.List $r1, $r3;
+        boolean $z0;
+
+        r2 := @parameter0: org.apache.storm.tuple.Fields;
+
+        r0 := @parameter1: org.apache.storm.tuple.Fields;
+
+        $r1 = virtualinvoke r0.<org.apache.storm.tuple.Fields: java.util.List toList()>();
+
+        $r3 = virtualinvoke r2.<org.apache.storm.tuple.Fields: java.util.List toList()>();
+
+        $z0 = interfaceinvoke $r1.<java.util.List: boolean equals(java.lang.Object)>($r3);
+
+        return $z0;
+    }
+}

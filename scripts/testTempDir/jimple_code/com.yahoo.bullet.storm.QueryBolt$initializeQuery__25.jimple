@@ -1,0 +1,54 @@
+public final class com.yahoo.bullet.storm.QueryBolt$initializeQuery__25 extends java.lang.Object implements java.util.function.Consumer
+{
+    com.yahoo.bullet.storm.QueryBolt cap0;
+
+    public static java.util.function.Consumer bootstrap$(com.yahoo.bullet.storm.QueryBolt)
+    {
+        com.yahoo.bullet.storm.QueryBolt $r0;
+        com.yahoo.bullet.storm.QueryBolt$initializeQuery__25 $r1;
+
+        $r0 := @parameter0: com.yahoo.bullet.storm.QueryBolt;
+
+        $r1 = new com.yahoo.bullet.storm.QueryBolt$initializeQuery__25;
+
+        specialinvoke $r1.<com.yahoo.bullet.storm.QueryBolt$initializeQuery__25: void <init>(com.yahoo.bullet.storm.QueryBolt)>($r0);
+
+        return $r1;
+    }
+
+    public void <init>(com.yahoo.bullet.storm.QueryBolt)
+    {
+        com.yahoo.bullet.storm.QueryBolt$initializeQuery__25 $r0;
+        com.yahoo.bullet.storm.QueryBolt $r1;
+
+        $r0 := @this: com.yahoo.bullet.storm.QueryBolt$initializeQuery__25;
+
+        $r1 := @parameter0: com.yahoo.bullet.storm.QueryBolt;
+
+        specialinvoke $r0.<java.lang.Object: void <init>()>();
+
+        $r0.<com.yahoo.bullet.storm.QueryBolt$initializeQuery__25: com.yahoo.bullet.storm.QueryBolt cap0> = $r1;
+
+        return;
+    }
+
+    public void accept(java.lang.Object)
+    {
+        com.yahoo.bullet.storm.QueryBolt$initializeQuery__25 $r0;
+        java.lang.Object $r1;
+        com.yahoo.bullet.pubsub.PubSubMessage $r2;
+        com.yahoo.bullet.storm.QueryBolt $r3;
+
+        $r0 := @this: com.yahoo.bullet.storm.QueryBolt$initializeQuery__25;
+
+        $r1 := @parameter0: java.lang.Object;
+
+        $r2 = (com.yahoo.bullet.pubsub.PubSubMessage) $r1;
+
+        $r3 = $r0.<com.yahoo.bullet.storm.QueryBolt$initializeQuery__25: com.yahoo.bullet.storm.QueryBolt cap0>;
+
+        virtualinvoke $r3.<com.yahoo.bullet.storm.QueryBolt: void initializeQuery(com.yahoo.bullet.pubsub.PubSubMessage)>($r2);
+
+        return;
+    }
+}

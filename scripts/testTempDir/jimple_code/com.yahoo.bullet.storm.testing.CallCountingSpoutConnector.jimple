@@ -1,0 +1,88 @@
+public class com.yahoo.bullet.storm.testing.CallCountingSpoutConnector extends com.yahoo.bullet.storm.SpoutConnector
+{
+    private static final long serialVersionUID;
+
+    public void <init>(com.yahoo.bullet.common.BulletConfig)
+    {
+        com.yahoo.bullet.storm.testing.CallCountingSpoutConnector r0;
+        com.yahoo.bullet.common.BulletConfig r1;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CallCountingSpoutConnector;
+
+        r1 := @parameter0: com.yahoo.bullet.common.BulletConfig;
+
+        specialinvoke r0.<com.yahoo.bullet.storm.SpoutConnector: void <init>(com.yahoo.bullet.common.BulletConfig)>(r1);
+
+        return;
+    }
+
+    public java.util.List read()
+    {
+        java.util.List $r0;
+        com.yahoo.bullet.storm.testing.CallCountingSpoutConnector r1;
+
+        r1 := @this: com.yahoo.bullet.storm.testing.CallCountingSpoutConnector;
+
+        $r0 = staticinvoke <java.util.Collections: java.util.List emptyList()>();
+
+        return $r0;
+    }
+
+    public com.yahoo.bullet.storm.testing.CallCountingSpout getProxy()
+    {
+        com.yahoo.bullet.storm.testing.CallCountingSpoutConnector r0;
+        org.apache.storm.topology.IRichSpout $r1;
+        com.yahoo.bullet.storm.testing.CallCountingSpout $r2;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CallCountingSpoutConnector;
+
+        $r1 = r0.<com.yahoo.bullet.storm.testing.CallCountingSpoutConnector: org.apache.storm.topology.IRichSpout spout>;
+
+        $r2 = (com.yahoo.bullet.storm.testing.CallCountingSpout) $r1;
+
+        return $r2;
+    }
+
+    public java.util.Map getOpenMap()
+    {
+        com.yahoo.bullet.storm.testing.CallCountingSpoutConnector r0;
+        java.util.Map $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CallCountingSpoutConnector;
+
+        $r1 = r0.<com.yahoo.bullet.storm.testing.CallCountingSpoutConnector: java.util.Map stormConfiguration>;
+
+        return $r1;
+    }
+
+    public org.apache.storm.task.TopologyContext getOpenContext()
+    {
+        com.yahoo.bullet.storm.testing.CallCountingSpoutConnector r0;
+        org.apache.storm.task.TopologyContext $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CallCountingSpoutConnector;
+
+        $r1 = r0.<com.yahoo.bullet.storm.testing.CallCountingSpoutConnector: org.apache.storm.task.TopologyContext context>;
+
+        return $r1;
+    }
+
+    public org.apache.storm.spout.SpoutOutputCollector getOpenCollector()
+    {
+        com.yahoo.bullet.storm.testing.CallCountingSpoutConnector r0;
+        org.apache.storm.spout.SpoutOutputCollector $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CallCountingSpoutConnector;
+
+        $r1 = r0.<com.yahoo.bullet.storm.testing.CallCountingSpoutConnector: org.apache.storm.spout.SpoutOutputCollector outputCollector>;
+
+        return $r1;
+    }
+
+    public static void <clinit>()
+    {
+        <com.yahoo.bullet.storm.testing.CallCountingSpoutConnector: long serialVersionUID> = 5538368781947223090L;
+
+        return;
+    }
+}

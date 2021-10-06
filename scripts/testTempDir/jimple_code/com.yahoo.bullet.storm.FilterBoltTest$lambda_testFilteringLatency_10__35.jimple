@@ -1,0 +1,52 @@
+public final class com.yahoo.bullet.storm.FilterBoltTest$lambda_testFilteringLatency_10__35 extends java.lang.Object implements java.util.function.IntFunction
+{
+    com.yahoo.bullet.record.BulletRecord cap0;
+
+    public static java.util.function.IntFunction bootstrap$(com.yahoo.bullet.record.BulletRecord)
+    {
+        com.yahoo.bullet.record.BulletRecord $r0;
+        com.yahoo.bullet.storm.FilterBoltTest$lambda_testFilteringLatency_10__35 $r1;
+
+        $r0 := @parameter0: com.yahoo.bullet.record.BulletRecord;
+
+        $r1 = new com.yahoo.bullet.storm.FilterBoltTest$lambda_testFilteringLatency_10__35;
+
+        specialinvoke $r1.<com.yahoo.bullet.storm.FilterBoltTest$lambda_testFilteringLatency_10__35: void <init>(com.yahoo.bullet.record.BulletRecord)>($r0);
+
+        return $r1;
+    }
+
+    public void <init>(com.yahoo.bullet.record.BulletRecord)
+    {
+        com.yahoo.bullet.storm.FilterBoltTest$lambda_testFilteringLatency_10__35 $r0;
+        com.yahoo.bullet.record.BulletRecord $r1;
+
+        $r0 := @this: com.yahoo.bullet.storm.FilterBoltTest$lambda_testFilteringLatency_10__35;
+
+        $r1 := @parameter0: com.yahoo.bullet.record.BulletRecord;
+
+        specialinvoke $r0.<java.lang.Object: void <init>()>();
+
+        $r0.<com.yahoo.bullet.storm.FilterBoltTest$lambda_testFilteringLatency_10__35: com.yahoo.bullet.record.BulletRecord cap0> = $r1;
+
+        return;
+    }
+
+    public java.lang.Object apply(int)
+    {
+        com.yahoo.bullet.storm.FilterBoltTest$lambda_testFilteringLatency_10__35 $r0;
+        int $i0;
+        com.yahoo.bullet.record.BulletRecord $r1;
+        org.apache.storm.tuple.Tuple $r2;
+
+        $r0 := @this: com.yahoo.bullet.storm.FilterBoltTest$lambda_testFilteringLatency_10__35;
+
+        $i0 := @parameter0: int;
+
+        $r1 = $r0.<com.yahoo.bullet.storm.FilterBoltTest$lambda_testFilteringLatency_10__35: com.yahoo.bullet.record.BulletRecord cap0>;
+
+        $r2 = staticinvoke <com.yahoo.bullet.storm.FilterBoltTest: org.apache.storm.tuple.Tuple lambda$testFilteringLatency$10(com.yahoo.bullet.record.BulletRecord,int)>($r1, $i0);
+
+        return $r2;
+    }
+}

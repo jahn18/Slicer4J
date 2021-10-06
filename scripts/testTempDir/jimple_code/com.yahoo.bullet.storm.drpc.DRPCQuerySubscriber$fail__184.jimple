@@ -1,0 +1,51 @@
+public final class com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber$fail__184 extends java.lang.Object implements java.util.function.Consumer
+{
+    org.apache.storm.drpc.DRPCSpout cap0;
+
+    public static java.util.function.Consumer bootstrap$(org.apache.storm.drpc.DRPCSpout)
+    {
+        org.apache.storm.drpc.DRPCSpout $r0;
+        com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber$fail__184 $r1;
+
+        $r0 := @parameter0: org.apache.storm.drpc.DRPCSpout;
+
+        $r1 = new com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber$fail__184;
+
+        specialinvoke $r1.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber$fail__184: void <init>(org.apache.storm.drpc.DRPCSpout)>($r0);
+
+        return $r1;
+    }
+
+    public void <init>(org.apache.storm.drpc.DRPCSpout)
+    {
+        com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber$fail__184 $r0;
+        org.apache.storm.drpc.DRPCSpout $r1;
+
+        $r0 := @this: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber$fail__184;
+
+        $r1 := @parameter0: org.apache.storm.drpc.DRPCSpout;
+
+        specialinvoke $r0.<java.lang.Object: void <init>()>();
+
+        $r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber$fail__184: org.apache.storm.drpc.DRPCSpout cap0> = $r1;
+
+        return;
+    }
+
+    public void accept(java.lang.Object)
+    {
+        com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber$fail__184 $r0;
+        java.lang.Object $r1;
+        org.apache.storm.drpc.DRPCSpout $r2;
+
+        $r0 := @this: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber$fail__184;
+
+        $r1 := @parameter0: java.lang.Object;
+
+        $r2 = $r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber$fail__184: org.apache.storm.drpc.DRPCSpout cap0>;
+
+        virtualinvoke $r2.<org.apache.storm.drpc.DRPCSpout: void fail(java.lang.Object)>($r1);
+
+        return;
+    }
+}

@@ -1,0 +1,68 @@
+public class com.yahoo.bullet.storm.drpc.utils.DRPCError extends com.yahoo.bullet.common.BulletError implements java.io.Serializable
+{
+    public static final java.lang.String GENERIC_RESOLUTION;
+    public static final java.lang.String GENERIC_ERROR;
+    public static final com.yahoo.bullet.storm.drpc.utils.DRPCError CANNOT_REACH_DRPC;
+
+    public void <init>(java.lang.String, java.lang.String)
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCError r0;
+        java.lang.String r1, r2;
+        java.util.List $r3;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCError;
+
+        r1 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: java.lang.String;
+
+        $r3 = staticinvoke <java.util.Collections: java.util.List singletonList(java.lang.Object)>(r2);
+
+        specialinvoke r0.<com.yahoo.bullet.common.BulletError: void <init>(java.lang.String,java.util.List)>(r1, $r3);
+
+        return;
+    }
+
+    public java.lang.String asJSONClip()
+    {
+        java.lang.Object[] $r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCError r1;
+        com.yahoo.bullet.result.Meta $r2;
+        com.yahoo.bullet.result.Clip $r3;
+        java.lang.String $r4;
+        com.yahoo.bullet.common.BulletError[] $r5;
+
+        r1 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCError;
+
+        $r0 = newarray (com.yahoo.bullet.common.BulletError)[1];
+
+        $r0[0] = r1;
+
+        $r5 = (com.yahoo.bullet.common.BulletError[]) $r0;
+
+        $r2 = staticinvoke <com.yahoo.bullet.result.Meta: com.yahoo.bullet.result.Meta of(com.yahoo.bullet.common.BulletError[])>($r5);
+
+        $r3 = staticinvoke <com.yahoo.bullet.result.Clip: com.yahoo.bullet.result.Clip of(com.yahoo.bullet.result.Meta)>($r2);
+
+        $r4 = virtualinvoke $r3.<com.yahoo.bullet.result.Clip: java.lang.String asJSON()>();
+
+        return $r4;
+    }
+
+    static void <clinit>()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCError $r0;
+
+        <com.yahoo.bullet.storm.drpc.utils.DRPCError: java.lang.String GENERIC_ERROR> = "Cannot reach the DRPC server";
+
+        <com.yahoo.bullet.storm.drpc.utils.DRPCError: java.lang.String GENERIC_RESOLUTION> = "Please try again later";
+
+        $r0 = new com.yahoo.bullet.storm.drpc.utils.DRPCError;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.drpc.utils.DRPCError: void <init>(java.lang.String,java.lang.String)>("Cannot reach the DRPC server", "Please try again later");
+
+        <com.yahoo.bullet.storm.drpc.utils.DRPCError: com.yahoo.bullet.storm.drpc.utils.DRPCError CANNOT_REACH_DRPC> = $r0;
+
+        return;
+    }
+}

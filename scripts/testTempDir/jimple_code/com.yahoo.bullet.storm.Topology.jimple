@@ -1,0 +1,113 @@
+public class com.yahoo.bullet.storm.Topology extends java.lang.Object
+{
+    private static final org.slf4j.Logger log;
+    public static final java.lang.String CONFIGURATION_ARG;
+    public static final java.lang.String HELP_ARG;
+    public static final joptsimple.OptionParser PARSER;
+
+    public void <init>()
+    {
+        com.yahoo.bullet.storm.Topology r0;
+
+        r0 := @this: com.yahoo.bullet.storm.Topology;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static void main(java.lang.String[]) throws java.lang.Exception
+    {
+        java.lang.String[] r0;
+        joptsimple.OptionParser $r1;
+        joptsimple.OptionSet r2;
+        boolean $z0, $z1;
+        java.lang.Object $r3;
+        java.lang.String r4, $r8;
+        com.yahoo.bullet.storm.BulletStormConfig $r5;
+        org.slf4j.Logger $r7;
+        org.apache.storm.topology.TopologyBuilder $r9;
+
+        r0 := @parameter0: java.lang.String[];
+
+        $r1 = <com.yahoo.bullet.storm.Topology: joptsimple.OptionParser PARSER>;
+
+        r2 = virtualinvoke $r1.<joptsimple.OptionParser: joptsimple.OptionSet parse(java.lang.String[])>(r0);
+
+        $z0 = virtualinvoke r2.<joptsimple.OptionSet: boolean has(java.lang.String)>("help");
+
+        if $z0 != 0 goto label1;
+
+        $z1 = virtualinvoke r2.<joptsimple.OptionSet: boolean has(java.lang.String)>("bullet-conf");
+
+        if $z1 != 0 goto label2;
+
+     label1:
+        staticinvoke <com.yahoo.bullet.storm.Topology: void printHelp()>();
+
+        return;
+
+     label2:
+        $r3 = virtualinvoke r2.<joptsimple.OptionSet: java.lang.Object valueOf(java.lang.String)>("bullet-conf");
+
+        r4 = (java.lang.String) $r3;
+
+        $r5 = new com.yahoo.bullet.storm.BulletStormConfig;
+
+        specialinvoke $r5.<com.yahoo.bullet.storm.BulletStormConfig: void <init>(java.lang.String)>(r4);
+
+        $r7 = <com.yahoo.bullet.storm.Topology: org.slf4j.Logger log>;
+
+        $r8 = virtualinvoke $r5.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.String toString()>();
+
+        interfaceinvoke $r7.<org.slf4j.Logger: void info(java.lang.String)>($r8);
+
+        $r9 = new org.apache.storm.topology.TopologyBuilder;
+
+        specialinvoke $r9.<org.apache.storm.topology.TopologyBuilder: void <init>()>();
+
+        staticinvoke <com.yahoo.bullet.storm.StormUtils: void submit(com.yahoo.bullet.storm.BulletStormConfig,org.apache.storm.topology.TopologyBuilder)>($r5, $r9);
+
+        return;
+    }
+
+    private static void printHelp() throws java.io.IOException
+    {
+        java.io.PrintStream $r0, $r1;
+        joptsimple.OptionParser $r2;
+
+        $r0 = <java.lang.System: java.io.PrintStream out>;
+
+        virtualinvoke $r0.<java.io.PrintStream: void println(java.lang.String)>("If you want to connect your existing topology to Bullet, you should compile in\nthe Bullet jar and use the submit() method in the StormUtils class to wire up\nBullet to the tail end of your topology (that should be producing BulletRecords).\n\nIf you want to use Bullet DSL to plug in an existing data source, please set the\nfollowing in your YAML configuration:\n\nbullet.topology.dsl.spout.enable: true\nbullet.topology.dsl.spout.parallelism: (The parallelism hint for the spout)\nbullet.topology.dsl.spout.cpu.load: (The CPU load given to the spout in the Storm RAS scheduler)\nbullet.topology.dsl.spout.memory.on.heap.load: (The on-heap memory given to the spout in the Storm RAS scheduler)\nbullet.topology.dsl.spout.memory.off.heap.load: (The off-heap memory given to the spout in the Storm RAS scheduler)\n\nIf you want to use a DSL Bolt in addition to the DSL Spout, set the following:\n\nbullet.topology.dsl.bolt.enable: true\nbullet.topology.dsl.bolt.parallelism: --\nbullet.topology.dsl.bolt.cpu.load: --\nbullet.topology.dsl.bolt.memory.on.heap.load: --\nbullet.topology.dsl.bolt.memory.off.heap.load: --\n\nAlso, if you want to enable a BulletDeserializer for DSLSpout or DSLBolt, set the following:\n\nbullet.topology.dsl.deserializer.enable: true\n\nIf instead you want to connect a custom Spout that implements IRichSpout and emits\nBulletRecords, set the following:\n\nbullet.topology.bullet.spout.class.name: \"your-bullet-spout\"\nbullet.topology.bullet.spout.args: [ \"your-list-of-string-args\"]\nbullet.topology.bullet.spout.parallelism: --\nbullet.topology.bullet.spout.cpu.load: --\nbullet.topology.bullet.spout.memory.on.heap.load: --\nbullet.topology.bullet.spout.memory.off.heap.load: --\n");
+
+        $r2 = <com.yahoo.bullet.storm.Topology: joptsimple.OptionParser PARSER>;
+
+        $r1 = <java.lang.System: java.io.PrintStream out>;
+
+        virtualinvoke $r2.<joptsimple.OptionParser: void printHelpOn(java.io.OutputStream)>($r1);
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        org.slf4j.Logger $r0;
+        com.yahoo.bullet.storm.Topology$1 $r1;
+
+        <com.yahoo.bullet.storm.Topology: java.lang.String HELP_ARG> = "help";
+
+        <com.yahoo.bullet.storm.Topology: java.lang.String CONFIGURATION_ARG> = "bullet-conf";
+
+        $r0 = staticinvoke <org.slf4j.LoggerFactory: org.slf4j.Logger getLogger(java.lang.Class)>(class "Lcom/yahoo/bullet/storm/Topology;");
+
+        <com.yahoo.bullet.storm.Topology: org.slf4j.Logger log> = $r0;
+
+        $r1 = new com.yahoo.bullet.storm.Topology$1;
+
+        specialinvoke $r1.<com.yahoo.bullet.storm.Topology$1: void <init>()>();
+
+        <com.yahoo.bullet.storm.Topology: joptsimple.OptionParser PARSER> = $r1;
+
+        return;
+    }
+}

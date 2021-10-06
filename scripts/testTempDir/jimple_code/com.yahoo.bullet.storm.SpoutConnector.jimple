@@ -1,0 +1,295 @@
+public abstract class com.yahoo.bullet.storm.SpoutConnector extends com.yahoo.bullet.dsl.connector.BulletConnector implements org.apache.storm.topology.IRichSpout, org.apache.storm.ICredentialsListener
+{
+    private static final long serialVersionUID;
+    protected org.apache.storm.topology.IRichSpout spout;
+    protected java.util.Map stormConfiguration;
+    protected transient org.apache.storm.task.TopologyContext context;
+    protected transient org.apache.storm.spout.SpoutOutputCollector outputCollector;
+
+    public void <init>(com.yahoo.bullet.common.BulletConfig)
+    {
+        com.yahoo.bullet.storm.SpoutConnector r0;
+        com.yahoo.bullet.common.BulletConfig r1;
+        org.apache.storm.topology.IRichSpout $r2;
+
+        r0 := @this: com.yahoo.bullet.storm.SpoutConnector;
+
+        r1 := @parameter0: com.yahoo.bullet.common.BulletConfig;
+
+        specialinvoke r0.<com.yahoo.bullet.dsl.connector.BulletConnector: void <init>(com.yahoo.bullet.common.BulletConfig)>(r1);
+
+        $r2 = virtualinvoke r0.<com.yahoo.bullet.storm.SpoutConnector: org.apache.storm.topology.IRichSpout getSpout()>();
+
+        r0.<com.yahoo.bullet.storm.SpoutConnector: org.apache.storm.topology.IRichSpout spout> = $r2;
+
+        return;
+    }
+
+    public void initialize()
+    {
+        com.yahoo.bullet.storm.SpoutConnector r0;
+        org.apache.storm.spout.SpoutOutputCollector $r1;
+        org.apache.storm.task.TopologyContext $r2;
+        java.util.Map $r3;
+        org.apache.storm.topology.IRichSpout $r4;
+
+        r0 := @this: com.yahoo.bullet.storm.SpoutConnector;
+
+        $r4 = r0.<com.yahoo.bullet.storm.SpoutConnector: org.apache.storm.topology.IRichSpout spout>;
+
+        $r3 = r0.<com.yahoo.bullet.storm.SpoutConnector: java.util.Map stormConfiguration>;
+
+        $r2 = r0.<com.yahoo.bullet.storm.SpoutConnector: org.apache.storm.task.TopologyContext context>;
+
+        $r1 = r0.<com.yahoo.bullet.storm.SpoutConnector: org.apache.storm.spout.SpoutOutputCollector outputCollector>;
+
+        interfaceinvoke $r4.<org.apache.storm.topology.IRichSpout: void open(java.util.Map,org.apache.storm.task.TopologyContext,org.apache.storm.spout.SpoutOutputCollector)>($r3, $r2, $r1);
+
+        virtualinvoke r0.<com.yahoo.bullet.storm.SpoutConnector: void activate()>();
+
+        return;
+    }
+
+    public void close()
+    {
+        com.yahoo.bullet.storm.SpoutConnector r0;
+
+        r0 := @this: com.yahoo.bullet.storm.SpoutConnector;
+
+        virtualinvoke r0.<com.yahoo.bullet.storm.SpoutConnector: void deactivate()>();
+
+        return;
+    }
+
+    public void nextTuple()
+    {
+        com.yahoo.bullet.storm.SpoutConnector r0;
+        org.apache.storm.topology.IRichSpout $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.SpoutConnector;
+
+        $r1 = r0.<com.yahoo.bullet.storm.SpoutConnector: org.apache.storm.topology.IRichSpout spout>;
+
+        interfaceinvoke $r1.<org.apache.storm.topology.IRichSpout: void nextTuple()>();
+
+        return;
+    }
+
+    public void open(java.util.Map, org.apache.storm.task.TopologyContext, org.apache.storm.spout.SpoutOutputCollector)
+    {
+        com.yahoo.bullet.storm.SpoutConnector r0;
+        java.util.Map r1;
+        org.apache.storm.task.TopologyContext r2;
+        org.apache.storm.spout.SpoutOutputCollector r3;
+        org.apache.storm.topology.IRichSpout $r4;
+
+        r0 := @this: com.yahoo.bullet.storm.SpoutConnector;
+
+        r1 := @parameter0: java.util.Map;
+
+        r2 := @parameter1: org.apache.storm.task.TopologyContext;
+
+        r3 := @parameter2: org.apache.storm.spout.SpoutOutputCollector;
+
+        r0.<com.yahoo.bullet.storm.SpoutConnector: java.util.Map stormConfiguration> = r1;
+
+        r0.<com.yahoo.bullet.storm.SpoutConnector: org.apache.storm.task.TopologyContext context> = r2;
+
+        r0.<com.yahoo.bullet.storm.SpoutConnector: org.apache.storm.spout.SpoutOutputCollector outputCollector> = r3;
+
+        $r4 = r0.<com.yahoo.bullet.storm.SpoutConnector: org.apache.storm.topology.IRichSpout spout>;
+
+        interfaceinvoke $r4.<org.apache.storm.topology.IRichSpout: void open(java.util.Map,org.apache.storm.task.TopologyContext,org.apache.storm.spout.SpoutOutputCollector)>(r1, r2, r3);
+
+        return;
+    }
+
+    public void setCredentials(java.util.Map)
+    {
+        com.yahoo.bullet.storm.SpoutConnector r0;
+        org.apache.storm.topology.IRichSpout $r1, $r2;
+        boolean $z0;
+        java.util.Map r3;
+        org.apache.storm.ICredentialsListener $r4;
+
+        r0 := @this: com.yahoo.bullet.storm.SpoutConnector;
+
+        r3 := @parameter0: java.util.Map;
+
+        $r1 = r0.<com.yahoo.bullet.storm.SpoutConnector: org.apache.storm.topology.IRichSpout spout>;
+
+        $z0 = $r1 instanceof org.apache.storm.ICredentialsListener;
+
+        if $z0 == 0 goto label1;
+
+        $r2 = r0.<com.yahoo.bullet.storm.SpoutConnector: org.apache.storm.topology.IRichSpout spout>;
+
+        $r4 = (org.apache.storm.ICredentialsListener) $r2;
+
+        interfaceinvoke $r4.<org.apache.storm.ICredentialsListener: void setCredentials(java.util.Map)>(r3);
+
+     label1:
+        return;
+    }
+
+    public void activate()
+    {
+        com.yahoo.bullet.storm.SpoutConnector r0;
+        org.apache.storm.topology.IRichSpout $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.SpoutConnector;
+
+        $r1 = r0.<com.yahoo.bullet.storm.SpoutConnector: org.apache.storm.topology.IRichSpout spout>;
+
+        interfaceinvoke $r1.<org.apache.storm.topology.IRichSpout: void activate()>();
+
+        return;
+    }
+
+    public void deactivate()
+    {
+        com.yahoo.bullet.storm.SpoutConnector r0;
+        org.apache.storm.topology.IRichSpout $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.SpoutConnector;
+
+        $r1 = r0.<com.yahoo.bullet.storm.SpoutConnector: org.apache.storm.topology.IRichSpout spout>;
+
+        interfaceinvoke $r1.<org.apache.storm.topology.IRichSpout: void deactivate()>();
+
+        return;
+    }
+
+    public void ack(java.lang.Object)
+    {
+        com.yahoo.bullet.storm.SpoutConnector r0;
+        java.lang.Object r1;
+        org.apache.storm.topology.IRichSpout $r2;
+
+        r0 := @this: com.yahoo.bullet.storm.SpoutConnector;
+
+        r1 := @parameter0: java.lang.Object;
+
+        $r2 = r0.<com.yahoo.bullet.storm.SpoutConnector: org.apache.storm.topology.IRichSpout spout>;
+
+        interfaceinvoke $r2.<org.apache.storm.topology.IRichSpout: void ack(java.lang.Object)>(r1);
+
+        return;
+    }
+
+    public void fail(java.lang.Object)
+    {
+        com.yahoo.bullet.storm.SpoutConnector r0;
+        java.lang.Object r1;
+        org.apache.storm.topology.IRichSpout $r2;
+
+        r0 := @this: com.yahoo.bullet.storm.SpoutConnector;
+
+        r1 := @parameter0: java.lang.Object;
+
+        $r2 = r0.<com.yahoo.bullet.storm.SpoutConnector: org.apache.storm.topology.IRichSpout spout>;
+
+        interfaceinvoke $r2.<org.apache.storm.topology.IRichSpout: void fail(java.lang.Object)>(r1);
+
+        return;
+    }
+
+    public void declareOutputFields(org.apache.storm.topology.OutputFieldsDeclarer)
+    {
+        com.yahoo.bullet.storm.SpoutConnector r0;
+        org.apache.storm.topology.OutputFieldsDeclarer r1;
+        org.apache.storm.topology.IRichSpout $r2;
+
+        r0 := @this: com.yahoo.bullet.storm.SpoutConnector;
+
+        r1 := @parameter0: org.apache.storm.topology.OutputFieldsDeclarer;
+
+        $r2 = r0.<com.yahoo.bullet.storm.SpoutConnector: org.apache.storm.topology.IRichSpout spout>;
+
+        interfaceinvoke $r2.<org.apache.storm.topology.IRichSpout: void declareOutputFields(org.apache.storm.topology.OutputFieldsDeclarer)>(r1);
+
+        return;
+    }
+
+    public java.util.Map getComponentConfiguration()
+    {
+        com.yahoo.bullet.storm.SpoutConnector r0;
+        org.apache.storm.topology.IRichSpout $r1;
+        java.util.Map $r2;
+
+        r0 := @this: com.yahoo.bullet.storm.SpoutConnector;
+
+        $r1 = r0.<com.yahoo.bullet.storm.SpoutConnector: org.apache.storm.topology.IRichSpout spout>;
+
+        $r2 = interfaceinvoke $r1.<org.apache.storm.topology.IRichSpout: java.util.Map getComponentConfiguration()>();
+
+        return $r2;
+    }
+
+    protected org.apache.storm.topology.IRichSpout getSpout()
+    {
+        com.yahoo.bullet.storm.SpoutConnector r0;
+        com.yahoo.bullet.dsl.BulletDSLConfig $r1;
+        java.lang.Object $r2;
+        org.apache.storm.topology.IRichSpout $r3;
+
+        r0 := @this: com.yahoo.bullet.storm.SpoutConnector;
+
+        $r1 = r0.<com.yahoo.bullet.storm.SpoutConnector: com.yahoo.bullet.dsl.BulletDSLConfig config>;
+
+        $r2 = virtualinvoke $r1.<com.yahoo.bullet.dsl.BulletDSLConfig: java.lang.Object loadConfiguredClass(java.lang.String)>("bullet.topology.dsl.spout.connector.class.name");
+
+        $r3 = (org.apache.storm.topology.IRichSpout) $r2;
+
+        return $r3;
+    }
+
+    public void setStormConfiguration(java.util.Map)
+    {
+        com.yahoo.bullet.storm.SpoutConnector r0;
+        java.util.Map r1;
+
+        r0 := @this: com.yahoo.bullet.storm.SpoutConnector;
+
+        r1 := @parameter0: java.util.Map;
+
+        r0.<com.yahoo.bullet.storm.SpoutConnector: java.util.Map stormConfiguration> = r1;
+
+        return;
+    }
+
+    public void setContext(org.apache.storm.task.TopologyContext)
+    {
+        com.yahoo.bullet.storm.SpoutConnector r0;
+        org.apache.storm.task.TopologyContext r1;
+
+        r0 := @this: com.yahoo.bullet.storm.SpoutConnector;
+
+        r1 := @parameter0: org.apache.storm.task.TopologyContext;
+
+        r0.<com.yahoo.bullet.storm.SpoutConnector: org.apache.storm.task.TopologyContext context> = r1;
+
+        return;
+    }
+
+    public void setOutputCollector(org.apache.storm.spout.SpoutOutputCollector)
+    {
+        com.yahoo.bullet.storm.SpoutConnector r0;
+        org.apache.storm.spout.SpoutOutputCollector r1;
+
+        r0 := @this: com.yahoo.bullet.storm.SpoutConnector;
+
+        r1 := @parameter0: org.apache.storm.spout.SpoutOutputCollector;
+
+        r0.<com.yahoo.bullet.storm.SpoutConnector: org.apache.storm.spout.SpoutOutputCollector outputCollector> = r1;
+
+        return;
+    }
+
+    public static void <clinit>()
+    {
+        <com.yahoo.bullet.storm.SpoutConnector: long serialVersionUID> = -4270291448244475213L;
+
+        return;
+    }
+}

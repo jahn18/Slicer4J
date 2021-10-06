@@ -1,0 +1,449 @@
+public class com.yahoo.bullet.storm.LoopBoltTest extends java.lang.Object
+{
+    private com.yahoo.bullet.storm.BulletStormConfig config;
+    private com.yahoo.bullet.storm.testing.CustomCollector collector;
+    private com.yahoo.bullet.storm.LoopBolt bolt;
+    private com.yahoo.bullet.storm.testing.CustomPublisher publisher;
+
+    public void <init>()
+    {
+        com.yahoo.bullet.storm.LoopBoltTest r0;
+
+        r0 := @this: com.yahoo.bullet.storm.LoopBoltTest;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public void setup()
+    {
+        com.yahoo.bullet.storm.LoopBoltTest r0;
+        com.yahoo.bullet.storm.BulletStormConfig $r1, $r3;
+        com.yahoo.bullet.storm.LoopBolt $r2, $r6, $r8;
+        com.yahoo.bullet.storm.testing.CustomCollector $r4, $r5;
+        com.yahoo.bullet.pubsub.Publisher $r9;
+        com.yahoo.bullet.storm.testing.CustomPublisher $r10;
+
+        r0 := @this: com.yahoo.bullet.storm.LoopBoltTest;
+
+        $r1 = new com.yahoo.bullet.storm.BulletStormConfig;
+
+        specialinvoke $r1.<com.yahoo.bullet.storm.BulletStormConfig: void <init>(java.lang.String)>("test_config.yaml");
+
+        r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.BulletStormConfig config> = $r1;
+
+        $r2 = new com.yahoo.bullet.storm.LoopBolt;
+
+        $r3 = r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        specialinvoke $r2.<com.yahoo.bullet.storm.LoopBolt: void <init>(com.yahoo.bullet.storm.BulletStormConfig)>($r3);
+
+        r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.LoopBolt bolt> = $r2;
+
+        $r4 = new com.yahoo.bullet.storm.testing.CustomCollector;
+
+        specialinvoke $r4.<com.yahoo.bullet.storm.testing.CustomCollector: void <init>()>();
+
+        r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.testing.CustomCollector collector> = $r4;
+
+        $r6 = r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.LoopBolt bolt>;
+
+        $r5 = r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.testing.CustomCollector collector>;
+
+        staticinvoke <com.yahoo.bullet.storm.testing.ComponentUtils: org.apache.storm.topology.IRichBolt prepare(org.apache.storm.topology.IRichBolt,com.yahoo.bullet.storm.testing.CustomCollector)>($r6, $r5);
+
+        $r8 = r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.LoopBolt bolt>;
+
+        $r9 = virtualinvoke $r8.<com.yahoo.bullet.storm.LoopBolt: com.yahoo.bullet.pubsub.Publisher getPublisher()>();
+
+        $r10 = (com.yahoo.bullet.storm.testing.CustomPublisher) $r9;
+
+        r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.testing.CustomPublisher publisher> = $r10;
+
+        return;
+    }
+
+    public void testFailingToCreatePubSub()
+    {
+        com.yahoo.bullet.storm.LoopBoltTest r0;
+        com.yahoo.bullet.storm.BulletStormConfig $r1, $r3;
+        com.yahoo.bullet.storm.LoopBolt $r2;
+        com.yahoo.bullet.storm.testing.CustomCollector $r4;
+
+        r0 := @this: com.yahoo.bullet.storm.LoopBoltTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.pubsub.class.name", "fake.class");
+
+        $r2 = new com.yahoo.bullet.storm.LoopBolt;
+
+        $r3 = r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        specialinvoke $r2.<com.yahoo.bullet.storm.LoopBolt: void <init>(com.yahoo.bullet.storm.BulletStormConfig)>($r3);
+
+        $r4 = r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.testing.CustomCollector collector>;
+
+        staticinvoke <com.yahoo.bullet.storm.testing.ComponentUtils: org.apache.storm.topology.IRichBolt prepare(org.apache.storm.topology.IRichBolt,com.yahoo.bullet.storm.testing.CustomCollector)>($r2, $r4);
+
+        return;
+    }
+
+    public void testSwitchingIntoQueryPublishing()
+    {
+        com.yahoo.bullet.storm.LoopBoltTest r0;
+        com.yahoo.bullet.storm.testing.CustomPublisher $r1;
+        com.yahoo.bullet.pubsub.PubSub$Context $r2, $r3;
+        com.yahoo.bullet.storm.BulletStormConfig $r4, $r6;
+        java.lang.Object $r5, $r7;
+
+        r0 := @this: com.yahoo.bullet.storm.LoopBoltTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.testing.CustomPublisher publisher>;
+
+        $r2 = virtualinvoke $r1.<com.yahoo.bullet.storm.testing.CustomPublisher: com.yahoo.bullet.pubsub.PubSub$Context getContext()>();
+
+        $r3 = <com.yahoo.bullet.pubsub.PubSub$Context: com.yahoo.bullet.pubsub.PubSub$Context QUERY_SUBMISSION>;
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r2, $r3);
+
+        $r4 = r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        $r5 = virtualinvoke $r4.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("fake.setting");
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r5, "foo");
+
+        $r6 = r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        $r7 = virtualinvoke $r6.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.name");
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r7, "test");
+
+        return;
+    }
+
+    public void testMessagesAreLooped()
+    {
+        com.yahoo.bullet.pubsub.PubSubMessage[] $r0;
+        com.yahoo.bullet.pubsub.PubSubMessage $r1, $r3, $r5, $r18, $r21, $r26, $r29;
+        com.yahoo.bullet.pubsub.Metadata$Signal $r2, $r4, $r6;
+        java.util.List r7, $r16, $r24;
+        java.util.ArrayList $r8;
+        java.util.function.Consumer $r10;
+        int $i0, $i1, $i2, i5;
+        com.yahoo.bullet.storm.LoopBoltTest r11;
+        com.yahoo.bullet.storm.LoopBolt $r12;
+        java.lang.Object $r13, $r17, $r20, $r25, $r28;
+        org.apache.storm.tuple.Tuple $r14;
+        com.yahoo.bullet.storm.testing.CustomPublisher $r15, $r23;
+        java.lang.String $r19, $r22;
+        com.yahoo.bullet.pubsub.Metadata $r27, $r30;
+        com.yahoo.bullet.storm.testing.CustomCollector $r31;
+        long $l3, $l4;
+
+        r11 := @this: com.yahoo.bullet.storm.LoopBoltTest;
+
+        $r0 = newarray (com.yahoo.bullet.pubsub.PubSubMessage)[3];
+
+        $r1 = new com.yahoo.bullet.pubsub.PubSubMessage;
+
+        $r2 = <com.yahoo.bullet.pubsub.Metadata$Signal: com.yahoo.bullet.pubsub.Metadata$Signal KILL>;
+
+        specialinvoke $r1.<com.yahoo.bullet.pubsub.PubSubMessage: void <init>(java.lang.String,com.yahoo.bullet.pubsub.Metadata$Signal)>("42", $r2);
+
+        $r0[0] = $r1;
+
+        $r3 = new com.yahoo.bullet.pubsub.PubSubMessage;
+
+        $r4 = <com.yahoo.bullet.pubsub.Metadata$Signal: com.yahoo.bullet.pubsub.Metadata$Signal COMPLETE>;
+
+        specialinvoke $r3.<com.yahoo.bullet.pubsub.PubSubMessage: void <init>(java.lang.String,com.yahoo.bullet.pubsub.Metadata$Signal)>("43", $r4);
+
+        $r0[1] = $r3;
+
+        $r5 = new com.yahoo.bullet.pubsub.PubSubMessage;
+
+        $r6 = (com.yahoo.bullet.pubsub.Metadata$Signal) null;
+
+        specialinvoke $r5.<com.yahoo.bullet.pubsub.PubSubMessage: void <init>(java.lang.String,com.yahoo.bullet.pubsub.Metadata$Signal)>("44", $r6);
+
+        $r0[2] = $r5;
+
+        r7 = staticinvoke <java.util.Arrays: java.util.List asList(java.lang.Object[])>($r0);
+
+        $r8 = new java.util.ArrayList;
+
+        specialinvoke $r8.<java.util.ArrayList: void <init>()>();
+
+        $r10 = staticinvoke <com.yahoo.bullet.storm.LoopBoltTest$lambda_testMessagesAreLooped_0__46: java.util.function.Consumer bootstrap$(java.util.List)>($r8);
+
+        interfaceinvoke r7.<java.util.List: void forEach(java.util.function.Consumer)>($r10);
+
+        i5 = 0;
+
+     label1:
+        $i0 = interfaceinvoke $r8.<java.util.List: int size()>();
+
+        if i5 >= $i0 goto label2;
+
+        $r12 = r11.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.LoopBolt bolt>;
+
+        $r13 = interfaceinvoke $r8.<java.util.List: java.lang.Object get(int)>(i5);
+
+        $r14 = (org.apache.storm.tuple.Tuple) $r13;
+
+        virtualinvoke $r12.<com.yahoo.bullet.storm.LoopBolt: void execute(org.apache.storm.tuple.Tuple)>($r14);
+
+        $r15 = r11.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.testing.CustomPublisher publisher>;
+
+        $r16 = virtualinvoke $r15.<com.yahoo.bullet.storm.testing.CustomPublisher: java.util.List getSent()>();
+
+        $r17 = interfaceinvoke $r16.<java.util.List: java.lang.Object get(int)>(i5);
+
+        $r18 = (com.yahoo.bullet.pubsub.PubSubMessage) $r17;
+
+        $r19 = virtualinvoke $r18.<com.yahoo.bullet.pubsub.PubSubMessage: java.lang.String getId()>();
+
+        $r20 = interfaceinvoke r7.<java.util.List: java.lang.Object get(int)>(i5);
+
+        $r21 = (com.yahoo.bullet.pubsub.PubSubMessage) $r20;
+
+        $r22 = virtualinvoke $r21.<com.yahoo.bullet.pubsub.PubSubMessage: java.lang.String getId()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r19, $r22);
+
+        $r23 = r11.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.testing.CustomPublisher publisher>;
+
+        $r24 = virtualinvoke $r23.<com.yahoo.bullet.storm.testing.CustomPublisher: java.util.List getSent()>();
+
+        $r25 = interfaceinvoke $r24.<java.util.List: java.lang.Object get(int)>(i5);
+
+        $r26 = (com.yahoo.bullet.pubsub.PubSubMessage) $r25;
+
+        $r27 = virtualinvoke $r26.<com.yahoo.bullet.pubsub.PubSubMessage: com.yahoo.bullet.pubsub.Metadata getMetadata()>();
+
+        $r28 = interfaceinvoke r7.<java.util.List: java.lang.Object get(int)>(i5);
+
+        $r29 = (com.yahoo.bullet.pubsub.PubSubMessage) $r28;
+
+        $r30 = virtualinvoke $r29.<com.yahoo.bullet.pubsub.PubSubMessage: com.yahoo.bullet.pubsub.Metadata getMetadata()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r27, $r30);
+
+        $r31 = r11.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.testing.CustomCollector collector>;
+
+        $i1 = virtualinvoke $r31.<com.yahoo.bullet.storm.testing.CustomCollector: int getAckedCount()>();
+
+        $l4 = (long) $i1;
+
+        $i2 = i5 + 1;
+
+        $l3 = (long) $i2;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l4, $l3);
+
+        i5 = i5 + 1;
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    public void testAcksEvenOnException() throws java.lang.Exception
+    {
+        com.yahoo.bullet.storm.LoopBoltTest r0;
+        com.yahoo.bullet.storm.testing.CustomPublisher $r1, $r12;
+        java.lang.Object[] $r2, $r7;
+        com.yahoo.bullet.pubsub.Metadata $r3, $r8;
+        com.yahoo.bullet.pubsub.Metadata$Signal $r4, $r9;
+        com.yahoo.bullet.storm.LoopBolt $r5, $r10;
+        org.apache.storm.tuple.Tuple $r6, $r11;
+        java.util.List $r13;
+        boolean $z0;
+        com.yahoo.bullet.storm.testing.CustomCollector $r14;
+        int $i0;
+        long $l1;
+
+        r0 := @this: com.yahoo.bullet.storm.LoopBoltTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.testing.CustomPublisher publisher>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.testing.CustomPublisher: void close()>();
+
+        $r5 = r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.LoopBolt bolt>;
+
+        $r2 = newarray (java.lang.Object)[2];
+
+        $r2[0] = "42";
+
+        $r3 = new com.yahoo.bullet.pubsub.Metadata;
+
+        $r4 = <com.yahoo.bullet.pubsub.Metadata$Signal: com.yahoo.bullet.pubsub.Metadata$Signal KILL>;
+
+        specialinvoke $r3.<com.yahoo.bullet.pubsub.Metadata: void <init>(com.yahoo.bullet.pubsub.Metadata$Signal,java.io.Serializable)>($r4, null);
+
+        $r2[1] = $r3;
+
+        $r6 = staticinvoke <com.yahoo.bullet.storm.testing.TupleUtils: org.apache.storm.tuple.Tuple makeTuple(java.lang.Object[])>($r2);
+
+        virtualinvoke $r5.<com.yahoo.bullet.storm.LoopBolt: void execute(org.apache.storm.tuple.Tuple)>($r6);
+
+        $r10 = r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.LoopBolt bolt>;
+
+        $r7 = newarray (java.lang.Object)[2];
+
+        $r7[0] = "43";
+
+        $r8 = new com.yahoo.bullet.pubsub.Metadata;
+
+        $r9 = <com.yahoo.bullet.pubsub.Metadata$Signal: com.yahoo.bullet.pubsub.Metadata$Signal FAIL>;
+
+        specialinvoke $r8.<com.yahoo.bullet.pubsub.Metadata: void <init>(com.yahoo.bullet.pubsub.Metadata$Signal,java.io.Serializable)>($r9, null);
+
+        $r7[1] = $r8;
+
+        $r11 = staticinvoke <com.yahoo.bullet.storm.testing.TupleUtils: org.apache.storm.tuple.Tuple makeTuple(java.lang.Object[])>($r7);
+
+        virtualinvoke $r10.<com.yahoo.bullet.storm.LoopBolt: void execute(org.apache.storm.tuple.Tuple)>($r11);
+
+        $r12 = r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.testing.CustomPublisher publisher>;
+
+        $r13 = virtualinvoke $r12.<com.yahoo.bullet.storm.testing.CustomPublisher: java.util.List getSent()>();
+
+        $z0 = interfaceinvoke $r13.<java.util.List: boolean isEmpty()>();
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z0);
+
+        $r14 = r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.testing.CustomCollector collector>;
+
+        $i0 = virtualinvoke $r14.<com.yahoo.bullet.storm.testing.CustomCollector: int getAckedCount()>();
+
+        $l1 = (long) $i0;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l1, 2L);
+
+        return;
+    }
+
+    public void testCleanupClosesPublisher()
+    {
+        com.yahoo.bullet.storm.LoopBoltTest r0;
+        com.yahoo.bullet.storm.testing.CustomPublisher $r1, $r2, $r4, $r5, $r7, $r8;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5;
+        com.yahoo.bullet.storm.LoopBolt $r3, $r6;
+
+        r0 := @this: com.yahoo.bullet.storm.LoopBoltTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.testing.CustomPublisher publisher>;
+
+        $z0 = virtualinvoke $r1.<com.yahoo.bullet.storm.testing.CustomPublisher: boolean isClosed()>();
+
+        staticinvoke <org.junit.Assert: void assertFalse(boolean)>($z0);
+
+        $r2 = r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.testing.CustomPublisher publisher>;
+
+        $z1 = virtualinvoke $r2.<com.yahoo.bullet.storm.testing.CustomPublisher: boolean isThrown()>();
+
+        staticinvoke <org.junit.Assert: void assertFalse(boolean)>($z1);
+
+        $r3 = r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.LoopBolt bolt>;
+
+        virtualinvoke $r3.<com.yahoo.bullet.storm.LoopBolt: void cleanup()>();
+
+        $r4 = r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.testing.CustomPublisher publisher>;
+
+        $z2 = virtualinvoke $r4.<com.yahoo.bullet.storm.testing.CustomPublisher: boolean isClosed()>();
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z2);
+
+        $r5 = r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.testing.CustomPublisher publisher>;
+
+        $z3 = virtualinvoke $r5.<com.yahoo.bullet.storm.testing.CustomPublisher: boolean isThrown()>();
+
+        staticinvoke <org.junit.Assert: void assertFalse(boolean)>($z3);
+
+        $r6 = r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.LoopBolt bolt>;
+
+        virtualinvoke $r6.<com.yahoo.bullet.storm.LoopBolt: void cleanup()>();
+
+        $r7 = r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.testing.CustomPublisher publisher>;
+
+        $z4 = virtualinvoke $r7.<com.yahoo.bullet.storm.testing.CustomPublisher: boolean isClosed()>();
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z4);
+
+        $r8 = r0.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.testing.CustomPublisher publisher>;
+
+        $z5 = virtualinvoke $r8.<com.yahoo.bullet.storm.testing.CustomPublisher: boolean isThrown()>();
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z5);
+
+        return;
+    }
+
+    public void testDeclareOutputFields()
+    {
+        com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer $r0;
+        com.yahoo.bullet.storm.LoopBoltTest r2;
+        com.yahoo.bullet.storm.LoopBolt $r3;
+        boolean $z0, $z1;
+
+        r2 := @this: com.yahoo.bullet.storm.LoopBoltTest;
+
+        $r0 = new com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer: void <init>()>();
+
+        $r3 = r2.<com.yahoo.bullet.storm.LoopBoltTest: com.yahoo.bullet.storm.LoopBolt bolt>;
+
+        virtualinvoke $r3.<com.yahoo.bullet.storm.LoopBolt: void declareOutputFields(org.apache.storm.topology.OutputFieldsDeclarer)>($r0);
+
+        $z0 = virtualinvoke $r0.<com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer: boolean areFieldsDeclared()>();
+
+        if $z0 != 0 goto label1;
+
+        $z1 = 1;
+
+        goto label2;
+
+     label1:
+        $z1 = 0;
+
+     label2:
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z1);
+
+        return;
+    }
+
+    public static void lambda$testMessagesAreLooped$0(java.util.List, com.yahoo.bullet.pubsub.PubSubMessage)
+    {
+        java.util.List r0;
+        java.lang.Object[] $r1;
+        com.yahoo.bullet.pubsub.PubSubMessage r2;
+        java.lang.String $r3;
+        com.yahoo.bullet.pubsub.Metadata $r4;
+        org.apache.storm.tuple.Tuple $r5;
+
+        r0 := @parameter0: java.util.List;
+
+        r2 := @parameter1: com.yahoo.bullet.pubsub.PubSubMessage;
+
+        $r1 = newarray (java.lang.Object)[2];
+
+        $r3 = virtualinvoke r2.<com.yahoo.bullet.pubsub.PubSubMessage: java.lang.String getId()>();
+
+        $r1[0] = $r3;
+
+        $r4 = virtualinvoke r2.<com.yahoo.bullet.pubsub.PubSubMessage: com.yahoo.bullet.pubsub.Metadata getMetadata()>();
+
+        $r1[1] = $r4;
+
+        $r5 = staticinvoke <com.yahoo.bullet.storm.testing.TupleUtils: org.apache.storm.tuple.Tuple makeTuple(java.lang.Object[])>($r1);
+
+        interfaceinvoke r0.<java.util.List: boolean add(java.lang.Object)>($r5);
+
+        return;
+    }
+}

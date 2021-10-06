@@ -1,0 +1,132 @@
+class com.yahoo.bullet.storm.QuerySpout$Replay extends java.lang.Object
+{
+    private java.lang.String id;
+    private long timestamp;
+    private boolean stopped;
+
+    java.lang.String getId()
+    {
+        com.yahoo.bullet.storm.QuerySpout$Replay r0;
+        java.lang.String $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.QuerySpout$Replay;
+
+        $r1 = r0.<com.yahoo.bullet.storm.QuerySpout$Replay: java.lang.String id>;
+
+        return $r1;
+    }
+
+    long getTimestamp()
+    {
+        com.yahoo.bullet.storm.QuerySpout$Replay r0;
+        long $l0;
+
+        r0 := @this: com.yahoo.bullet.storm.QuerySpout$Replay;
+
+        $l0 = r0.<com.yahoo.bullet.storm.QuerySpout$Replay: long timestamp>;
+
+        return $l0;
+    }
+
+    boolean isStopped()
+    {
+        com.yahoo.bullet.storm.QuerySpout$Replay r0;
+        boolean $z0;
+
+        r0 := @this: com.yahoo.bullet.storm.QuerySpout$Replay;
+
+        $z0 = r0.<com.yahoo.bullet.storm.QuerySpout$Replay: boolean stopped>;
+
+        return $z0;
+    }
+
+    public void <init>(java.lang.String, long, boolean)
+    {
+        com.yahoo.bullet.storm.QuerySpout$Replay r0;
+        java.lang.String r1;
+        long l0;
+        boolean z0;
+
+        r0 := @this: com.yahoo.bullet.storm.QuerySpout$Replay;
+
+        r1 := @parameter0: java.lang.String;
+
+        l0 := @parameter1: long;
+
+        z0 := @parameter2: boolean;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        r0.<com.yahoo.bullet.storm.QuerySpout$Replay: java.lang.String id> = r1;
+
+        r0.<com.yahoo.bullet.storm.QuerySpout$Replay: long timestamp> = l0;
+
+        r0.<com.yahoo.bullet.storm.QuerySpout$Replay: boolean stopped> = z0;
+
+        return;
+    }
+
+    static boolean access$002(com.yahoo.bullet.storm.QuerySpout$Replay, boolean)
+    {
+        com.yahoo.bullet.storm.QuerySpout$Replay r0;
+        boolean z0;
+
+        r0 := @parameter0: com.yahoo.bullet.storm.QuerySpout$Replay;
+
+        z0 := @parameter1: boolean;
+
+        r0.<com.yahoo.bullet.storm.QuerySpout$Replay: boolean stopped> = z0;
+
+        return z0;
+    }
+
+    static long access$100(com.yahoo.bullet.storm.QuerySpout$Replay)
+    {
+        com.yahoo.bullet.storm.QuerySpout$Replay r0;
+        long $l0;
+
+        r0 := @parameter0: com.yahoo.bullet.storm.QuerySpout$Replay;
+
+        $l0 = r0.<com.yahoo.bullet.storm.QuerySpout$Replay: long timestamp>;
+
+        return $l0;
+    }
+
+    static boolean access$000(com.yahoo.bullet.storm.QuerySpout$Replay)
+    {
+        com.yahoo.bullet.storm.QuerySpout$Replay r0;
+        boolean $z0;
+
+        r0 := @parameter0: com.yahoo.bullet.storm.QuerySpout$Replay;
+
+        $z0 = r0.<com.yahoo.bullet.storm.QuerySpout$Replay: boolean stopped>;
+
+        return $z0;
+    }
+
+    static long access$102(com.yahoo.bullet.storm.QuerySpout$Replay, long)
+    {
+        com.yahoo.bullet.storm.QuerySpout$Replay r0;
+        long l0;
+
+        r0 := @parameter0: com.yahoo.bullet.storm.QuerySpout$Replay;
+
+        l0 := @parameter1: long;
+
+        r0.<com.yahoo.bullet.storm.QuerySpout$Replay: long timestamp> = l0;
+
+        return l0;
+    }
+
+    static java.lang.String access$200(com.yahoo.bullet.storm.QuerySpout$Replay)
+    {
+        com.yahoo.bullet.storm.QuerySpout$Replay r0;
+        java.lang.String $r1;
+
+        r0 := @parameter0: com.yahoo.bullet.storm.QuerySpout$Replay;
+
+        $r1 = r0.<com.yahoo.bullet.storm.QuerySpout$Replay: java.lang.String id>;
+
+        return $r1;
+    }
+}

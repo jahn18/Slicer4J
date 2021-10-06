@@ -1,0 +1,39 @@
+public final class com.yahoo.bullet.storm.FilterBoltTest$RateLimitedFilterBolt$init__13 extends java.lang.Object implements java.util.function.Supplier
+{
+
+    public static java.util.function.Supplier bootstrap$()
+    {
+        com.yahoo.bullet.storm.FilterBoltTest$RateLimitedFilterBolt$init__13 $r0;
+
+        $r0 = new com.yahoo.bullet.storm.FilterBoltTest$RateLimitedFilterBolt$init__13;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.FilterBoltTest$RateLimitedFilterBolt$init__13: void <init>()>();
+
+        return $r0;
+    }
+
+    public void <init>()
+    {
+        com.yahoo.bullet.storm.FilterBoltTest$RateLimitedFilterBolt$init__13 $r0;
+
+        $r0 := @this: com.yahoo.bullet.storm.FilterBoltTest$RateLimitedFilterBolt$init__13;
+
+        specialinvoke $r0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public java.lang.Object get()
+    {
+        com.yahoo.bullet.storm.FilterBoltTest$RateLimitedFilterBolt$init__13 $r0;
+        java.util.ArrayList $r1;
+
+        $r0 := @this: com.yahoo.bullet.storm.FilterBoltTest$RateLimitedFilterBolt$init__13;
+
+        $r1 = new java.util.ArrayList;
+
+        specialinvoke $r1.<java.util.ArrayList: void <init>()>();
+
+        return $r1;
+    }
+}

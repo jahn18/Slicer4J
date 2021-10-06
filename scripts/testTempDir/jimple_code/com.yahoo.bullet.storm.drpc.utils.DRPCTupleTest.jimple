@@ -1,0 +1,559 @@
+public class com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest extends java.lang.Object
+{
+    private java.util.List data;
+    private com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple;
+
+    public void <init>()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public void setup()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        java.util.ArrayList $r1;
+        java.util.List $r2, $r3, $r6;
+        java.lang.Integer $r4;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r5;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = new java.util.ArrayList;
+
+        specialinvoke $r1.<java.util.ArrayList: void <init>()>();
+
+        r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: java.util.List data> = $r1;
+
+        $r2 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: java.util.List data>;
+
+        interfaceinvoke $r2.<java.util.List: boolean add(java.lang.Object)>("foo");
+
+        $r3 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: java.util.List data>;
+
+        $r4 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(1);
+
+        interfaceinvoke $r3.<java.util.List: boolean add(java.lang.Object)>($r4);
+
+        $r5 = new com.yahoo.bullet.storm.drpc.utils.DRPCTuple;
+
+        $r6 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: java.util.List data>;
+
+        specialinvoke $r5.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: void <init>(java.util.List)>($r6);
+
+        r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple> = $r5;
+
+        return;
+    }
+
+    public void gettingByIndex()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1, $r3, $r6, $r8;
+        java.lang.Object $r2, $r4;
+        java.lang.Integer $r5;
+        java.lang.String $r7, $r9;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        $r2 = virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: java.lang.Object getValue(int)>(0);
+
+        staticinvoke <org.testng.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r2, "foo");
+
+        $r3 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        $r4 = virtualinvoke $r3.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: java.lang.Object getValue(int)>(1);
+
+        $r5 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(1);
+
+        staticinvoke <org.testng.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r4, $r5);
+
+        $r6 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        $r7 = virtualinvoke $r6.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: java.lang.String getString(int)>(0);
+
+        staticinvoke <org.testng.Assert: void assertEquals(java.lang.String,java.lang.String)>($r7, "foo");
+
+        $r8 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        $r9 = virtualinvoke $r8.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: java.lang.String getString(int)>(1);
+
+        staticinvoke <org.testng.Assert: void assertEquals(java.lang.String,java.lang.String)>($r9, "1");
+
+        return;
+    }
+
+    public void gettingOutOfRangeValue()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: java.lang.Object getValue(int)>(2);
+
+        return;
+    }
+
+    public void gettingOutOfRangeString()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: java.lang.String getString(int)>(2);
+
+        return;
+    }
+
+    public void testGettingAllData()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+        java.util.List $r2, $r3;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        $r2 = virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: java.util.List getValues()>();
+
+        $r3 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: java.util.List data>;
+
+        staticinvoke <org.testng.Assert: void assertEquals(java.util.Collection,java.util.Collection)>($r2, $r3);
+
+        return;
+    }
+
+    public void testingSize()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1, $r3;
+        int $i0, $i1;
+        java.util.List $r2;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        $i0 = virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: int size()>();
+
+        staticinvoke <org.testng.Assert: void assertEquals(int,int)>($i0, 2);
+
+        $r2 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: java.util.List data>;
+
+        interfaceinvoke $r2.<java.util.List: boolean add(java.lang.Object)>("bar");
+
+        $r3 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        $i1 = virtualinvoke $r3.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: int size()>();
+
+        staticinvoke <org.testng.Assert: void assertEquals(int,int)>($i1, 3);
+
+        return;
+    }
+
+    public void testGetSourceGlobalStreamId()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: org.apache.storm.generated.GlobalStreamId getSourceGlobalStreamId()>();
+
+        return;
+    }
+
+    public void testGetSourceComponent()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: java.lang.String getSourceComponent()>();
+
+        return;
+    }
+
+    public void testGetSourceTask()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: int getSourceTask()>();
+
+        return;
+    }
+
+    public void testGetSourceStreamId()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: java.lang.String getSourceStreamId()>();
+
+        return;
+    }
+
+    public void testGetMessageId()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: org.apache.storm.tuple.MessageId getMessageId()>();
+
+        return;
+    }
+
+    public void testContains()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: boolean contains(java.lang.String)>(null);
+
+        return;
+    }
+
+    public void testGetFields()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: org.apache.storm.tuple.Fields getFields()>();
+
+        return;
+    }
+
+    public void testFieldIndex()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: int fieldIndex(java.lang.String)>(null);
+
+        return;
+    }
+
+    public void testSelect()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: java.util.List select(org.apache.storm.tuple.Fields)>(null);
+
+        return;
+    }
+
+    public void testGetInteger()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: java.lang.Integer getInteger(int)>(0);
+
+        return;
+    }
+
+    public void testGetLong()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: java.lang.Long getLong(int)>(0);
+
+        return;
+    }
+
+    public void testGetBoolean()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: java.lang.Boolean getBoolean(int)>(0);
+
+        return;
+    }
+
+    public void testGetShort()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: java.lang.Short getShort(int)>(0);
+
+        return;
+    }
+
+    public void testGetByte()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: java.lang.Byte getByte(int)>(0);
+
+        return;
+    }
+
+    public void testGetDouble()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: java.lang.Double getDouble(int)>(0);
+
+        return;
+    }
+
+    public void testGetFloat()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: java.lang.Float getFloat(int)>(0);
+
+        return;
+    }
+
+    public void testGetBinary()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: byte[] getBinary(int)>(0);
+
+        return;
+    }
+
+    public void testGetValueByField()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: java.lang.Object getValueByField(java.lang.String)>(null);
+
+        return;
+    }
+
+    public void testGetStringByField()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: java.lang.String getStringByField(java.lang.String)>(null);
+
+        return;
+    }
+
+    public void testGetIntegerByField()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: java.lang.Integer getIntegerByField(java.lang.String)>(null);
+
+        return;
+    }
+
+    public void testGetLongByField()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: java.lang.Long getLongByField(java.lang.String)>(null);
+
+        return;
+    }
+
+    public void testGetBooleanByField()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: java.lang.Boolean getBooleanByField(java.lang.String)>(null);
+
+        return;
+    }
+
+    public void testGetShortByField()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: java.lang.Short getShortByField(java.lang.String)>(null);
+
+        return;
+    }
+
+    public void testGetByteByField()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: java.lang.Byte getByteByField(java.lang.String)>(null);
+
+        return;
+    }
+
+    public void testGetDoubleByField()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: java.lang.Double getDoubleByField(java.lang.String)>(null);
+
+        return;
+    }
+
+    public void testGetFloatByField()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: java.lang.Float getFloatByField(java.lang.String)>(null);
+
+        return;
+    }
+
+    public void testGetBinaryByField()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: byte[] getBinaryByField(java.lang.String)>(null);
+
+        return;
+    }
+
+    public void testGetContext()
+    {
+        com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.utils.DRPCTupleTest: com.yahoo.bullet.storm.drpc.utils.DRPCTuple tuple>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: org.apache.storm.task.GeneralTopologyContext getContext()>();
+
+        return;
+    }
+}

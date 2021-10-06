@@ -1,0 +1,498 @@
+public class com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest extends java.lang.Object
+{
+    private com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber subscriber;
+    private com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout;
+
+    public void <init>()
+    {
+        com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest r0;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public void setup()
+    {
+        com.yahoo.bullet.storm.drpc.DRPCConfig $r0;
+        com.yahoo.bullet.storm.testing.CustomTopologyContext $r2;
+        java.lang.Integer $r3;
+        java.util.List $r4;
+        com.yahoo.bullet.common.Config $r6;
+        java.util.Optional $r7;
+        java.util.Map r8;
+        com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector $r9;
+        com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest r11;
+        com.yahoo.bullet.storm.drpc.MockDRPCSpout $r12, $r14;
+        com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber $r13;
+
+        r11 := @this: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest;
+
+        $r0 = new com.yahoo.bullet.storm.drpc.DRPCConfig;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.drpc.DRPCConfig: void <init>(java.lang.String)>("test_drpc_config.yaml");
+
+        $r2 = new com.yahoo.bullet.storm.testing.CustomTopologyContext;
+
+        $r3 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(1);
+
+        $r4 = staticinvoke <java.util.Collections: java.util.List singletonList(java.lang.Object)>($r3);
+
+        specialinvoke $r2.<com.yahoo.bullet.storm.testing.CustomTopologyContext: void <init>(java.util.List,java.lang.String,int)>($r4, "foo", 0);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.drpc.DRPCConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.storm.context", $r2);
+
+        $r6 = new com.yahoo.bullet.common.Config;
+
+        specialinvoke $r6.<com.yahoo.bullet.common.Config: void <init>(java.lang.String)>("test_storm_config.yaml");
+
+        $r7 = staticinvoke <java.util.Optional: java.util.Optional empty()>();
+
+        r8 = virtualinvoke $r6.<com.yahoo.bullet.common.Config: java.util.Map getAll(java.util.Optional)>($r7);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.drpc.DRPCConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.storm.config", r8);
+
+        $r9 = new com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector;
+
+        specialinvoke $r9.<com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector: void <init>()>();
+
+        $r12 = new com.yahoo.bullet.storm.drpc.MockDRPCSpout;
+
+        specialinvoke $r12.<com.yahoo.bullet.storm.drpc.MockDRPCSpout: void <init>(java.lang.String,com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector)>("foo", $r9);
+
+        r11.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout> = $r12;
+
+        $r13 = new com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber;
+
+        $r14 = r11.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout>;
+
+        specialinvoke $r13.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: void <init>(com.yahoo.bullet.common.BulletConfig,int,com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector,org.apache.storm.drpc.DRPCSpout)>($r0, 5, $r9, $r14);
+
+        r11.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber subscriber> = $r13;
+
+        return;
+    }
+
+    public void testReadingNothingFromSpout() throws java.lang.Exception
+    {
+        com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest r0;
+        com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber $r1, $r3;
+        com.yahoo.bullet.pubsub.PubSubMessage $r2, $r4;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber subscriber>;
+
+        $r2 = virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: com.yahoo.bullet.pubsub.PubSubMessage receive()>();
+
+        staticinvoke <org.junit.Assert: void assertNull(java.lang.Object)>($r2);
+
+        $r3 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber subscriber>;
+
+        $r4 = virtualinvoke $r3.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: com.yahoo.bullet.pubsub.PubSubMessage receive()>();
+
+        staticinvoke <org.junit.Assert: void assertNull(java.lang.Object)>($r4);
+
+        return;
+    }
+
+    public void testReadingFromSpout() throws java.lang.Exception
+    {
+        com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest r0;
+        com.yahoo.bullet.storm.drpc.MockDRPCSpout $r1, $r2, $r3;
+        com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber $r4, $r7, $r10;
+        java.lang.String $r5, $r6, $r8, $r9, $r11, $r12;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5;
+        com.yahoo.bullet.pubsub.PubSubMessage r13, r15, r17;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.MockDRPCSpout: void addMessageParts(java.lang.String,java.lang.String)>("foo", "{\'duration\': 2000}");
+
+        $r2 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout>;
+
+        virtualinvoke $r2.<com.yahoo.bullet.storm.drpc.MockDRPCSpout: void addMessageParts(java.lang.String,java.lang.String)>("bar", "{}");
+
+        $r3 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout>;
+
+        virtualinvoke $r3.<com.yahoo.bullet.storm.drpc.MockDRPCSpout: void addMessageParts(java.lang.String,java.lang.String)>("baz", "{}");
+
+        $r4 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber subscriber>;
+
+        r13 = virtualinvoke $r4.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: com.yahoo.bullet.pubsub.PubSubMessage receive()>();
+
+        $r5 = virtualinvoke r13.<com.yahoo.bullet.pubsub.PubSubMessage: java.lang.String getId()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r5, "foo");
+
+        $r6 = virtualinvoke r13.<com.yahoo.bullet.pubsub.PubSubMessage: java.lang.String getContentAsString()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r6, "{\'duration\': 2000}");
+
+        $z0 = virtualinvoke r13.<com.yahoo.bullet.pubsub.PubSubMessage: boolean hasSignal()>();
+
+        staticinvoke <org.junit.Assert: void assertFalse(boolean)>($z0);
+
+        $z1 = virtualinvoke r13.<com.yahoo.bullet.pubsub.PubSubMessage: boolean hasMetadata()>();
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z1);
+
+        virtualinvoke r13.<com.yahoo.bullet.pubsub.PubSubMessage: com.yahoo.bullet.pubsub.Metadata getMetadata()>();
+
+        $r7 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber subscriber>;
+
+        r15 = virtualinvoke $r7.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: com.yahoo.bullet.pubsub.PubSubMessage receive()>();
+
+        $r8 = virtualinvoke r15.<com.yahoo.bullet.pubsub.PubSubMessage: java.lang.String getId()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r8, "bar");
+
+        $r9 = virtualinvoke r15.<com.yahoo.bullet.pubsub.PubSubMessage: java.lang.String getContentAsString()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r9, "{}");
+
+        $z2 = virtualinvoke r15.<com.yahoo.bullet.pubsub.PubSubMessage: boolean hasSignal()>();
+
+        staticinvoke <org.junit.Assert: void assertFalse(boolean)>($z2);
+
+        $z3 = virtualinvoke r15.<com.yahoo.bullet.pubsub.PubSubMessage: boolean hasMetadata()>();
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z3);
+
+        virtualinvoke r15.<com.yahoo.bullet.pubsub.PubSubMessage: com.yahoo.bullet.pubsub.Metadata getMetadata()>();
+
+        $r10 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber subscriber>;
+
+        r17 = virtualinvoke $r10.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: com.yahoo.bullet.pubsub.PubSubMessage receive()>();
+
+        $r11 = virtualinvoke r17.<com.yahoo.bullet.pubsub.PubSubMessage: java.lang.String getId()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r11, "baz");
+
+        $r12 = virtualinvoke r17.<com.yahoo.bullet.pubsub.PubSubMessage: java.lang.String getContentAsString()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r12, "{}");
+
+        $z4 = virtualinvoke r17.<com.yahoo.bullet.pubsub.PubSubMessage: boolean hasSignal()>();
+
+        staticinvoke <org.junit.Assert: void assertFalse(boolean)>($z4);
+
+        $z5 = virtualinvoke r17.<com.yahoo.bullet.pubsub.PubSubMessage: boolean hasMetadata()>();
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z5);
+
+        virtualinvoke r17.<com.yahoo.bullet.pubsub.PubSubMessage: com.yahoo.bullet.pubsub.Metadata getMetadata()>();
+
+        return;
+    }
+
+    public void testClosing()
+    {
+        com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest r0;
+        com.yahoo.bullet.storm.drpc.MockDRPCSpout $r1, $r3;
+        boolean $z0, $z1;
+        com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber $r2;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout>;
+
+        $z0 = virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.MockDRPCSpout: boolean isClosed()>();
+
+        staticinvoke <org.junit.Assert: void assertFalse(boolean)>($z0);
+
+        $r2 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber subscriber>;
+
+        virtualinvoke $r2.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: void close()>();
+
+        $r3 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout>;
+
+        $z1 = virtualinvoke $r3.<com.yahoo.bullet.storm.drpc.MockDRPCSpout: boolean isClosed()>();
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z1);
+
+        return;
+    }
+
+    public void testClosingFailsPendingDRPCRequests() throws java.lang.Exception
+    {
+        com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest r0;
+        com.yahoo.bullet.storm.drpc.MockDRPCSpout $r1, $r2, $r3, $r10, $r12, $r14;
+        com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber $r4, $r6, $r8, $r11;
+        boolean $z0, $z1;
+        java.util.HashSet $r13, $r17;
+        java.util.List $r15, $r22;
+        java.lang.Object[] $r18;
+        java.lang.Object $r19, $r20, $r21;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.MockDRPCSpout: void addMessageParts(java.lang.String,java.lang.String)>("foo", "{\'duration\': 2000}");
+
+        $r2 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout>;
+
+        virtualinvoke $r2.<com.yahoo.bullet.storm.drpc.MockDRPCSpout: void addMessageParts(java.lang.String,java.lang.String)>("bar", "{}");
+
+        $r3 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout>;
+
+        virtualinvoke $r3.<com.yahoo.bullet.storm.drpc.MockDRPCSpout: void addMessageParts(java.lang.String,java.lang.String)>("baz", "{}");
+
+        $r4 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber subscriber>;
+
+        virtualinvoke $r4.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: com.yahoo.bullet.pubsub.PubSubMessage receive()>();
+
+        $r6 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber subscriber>;
+
+        virtualinvoke $r6.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: com.yahoo.bullet.pubsub.PubSubMessage receive()>();
+
+        $r8 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber subscriber>;
+
+        virtualinvoke $r8.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: com.yahoo.bullet.pubsub.PubSubMessage receive()>();
+
+        $r10 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout>;
+
+        $z0 = virtualinvoke $r10.<com.yahoo.bullet.storm.drpc.MockDRPCSpout: boolean isClosed()>();
+
+        staticinvoke <org.junit.Assert: void assertFalse(boolean)>($z0);
+
+        $r11 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber subscriber>;
+
+        virtualinvoke $r11.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: void close()>();
+
+        $r12 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout>;
+
+        $z1 = virtualinvoke $r12.<com.yahoo.bullet.storm.drpc.MockDRPCSpout: boolean isClosed()>();
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z1);
+
+        $r13 = new java.util.HashSet;
+
+        $r14 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout>;
+
+        $r15 = virtualinvoke $r14.<com.yahoo.bullet.storm.drpc.MockDRPCSpout: java.util.List getFailed()>();
+
+        specialinvoke $r13.<java.util.HashSet: void <init>(java.util.Collection)>($r15);
+
+        $r17 = new java.util.HashSet;
+
+        $r18 = newarray (java.lang.Object)[3];
+
+        $r19 = staticinvoke <com.yahoo.bullet.storm.drpc.MockDRPCSpout: java.lang.Object makeMessageID(java.lang.String,int)>("foo", 0);
+
+        $r18[0] = $r19;
+
+        $r20 = staticinvoke <com.yahoo.bullet.storm.drpc.MockDRPCSpout: java.lang.Object makeMessageID(java.lang.String,int)>("bar", 1);
+
+        $r18[1] = $r20;
+
+        $r21 = staticinvoke <com.yahoo.bullet.storm.drpc.MockDRPCSpout: java.lang.Object makeMessageID(java.lang.String,int)>("baz", 2);
+
+        $r18[2] = $r21;
+
+        $r22 = staticinvoke <java.util.Arrays: java.util.List asList(java.lang.Object[])>($r18);
+
+        specialinvoke $r17.<java.util.HashSet: void <init>(java.util.Collection)>($r22);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r13, $r17);
+
+        return;
+    }
+
+    public void testCommittingRemovesPendingDRPCRequests() throws java.lang.Exception
+    {
+        com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest r0;
+        com.yahoo.bullet.storm.drpc.MockDRPCSpout $r1, $r2, $r3, $r11, $r13, $r15;
+        com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber $r4, $r6, $r8, $r10, $r12;
+        boolean $z0, $z1;
+        java.util.HashSet $r14, $r18;
+        java.util.List $r16, $r22;
+        java.lang.Object[] $r19;
+        java.lang.Object $r20, $r21;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.MockDRPCSpout: void addMessageParts(java.lang.String,java.lang.String)>("foo", "{\'duration\': 2000}");
+
+        $r2 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout>;
+
+        virtualinvoke $r2.<com.yahoo.bullet.storm.drpc.MockDRPCSpout: void addMessageParts(java.lang.String,java.lang.String)>("bar", "{}");
+
+        $r3 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout>;
+
+        virtualinvoke $r3.<com.yahoo.bullet.storm.drpc.MockDRPCSpout: void addMessageParts(java.lang.String,java.lang.String)>("baz", "{}");
+
+        $r4 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber subscriber>;
+
+        virtualinvoke $r4.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: com.yahoo.bullet.pubsub.PubSubMessage receive()>();
+
+        $r6 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber subscriber>;
+
+        virtualinvoke $r6.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: com.yahoo.bullet.pubsub.PubSubMessage receive()>();
+
+        $r8 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber subscriber>;
+
+        virtualinvoke $r8.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: com.yahoo.bullet.pubsub.PubSubMessage receive()>();
+
+        $r10 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber subscriber>;
+
+        virtualinvoke $r10.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: void commit(java.lang.String)>("foo");
+
+        $r11 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout>;
+
+        $z0 = virtualinvoke $r11.<com.yahoo.bullet.storm.drpc.MockDRPCSpout: boolean isClosed()>();
+
+        staticinvoke <org.junit.Assert: void assertFalse(boolean)>($z0);
+
+        $r12 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber subscriber>;
+
+        virtualinvoke $r12.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: void close()>();
+
+        $r13 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout>;
+
+        $z1 = virtualinvoke $r13.<com.yahoo.bullet.storm.drpc.MockDRPCSpout: boolean isClosed()>();
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z1);
+
+        $r14 = new java.util.HashSet;
+
+        $r15 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout>;
+
+        $r16 = virtualinvoke $r15.<com.yahoo.bullet.storm.drpc.MockDRPCSpout: java.util.List getFailed()>();
+
+        specialinvoke $r14.<java.util.HashSet: void <init>(java.util.Collection)>($r16);
+
+        $r18 = new java.util.HashSet;
+
+        $r19 = newarray (java.lang.Object)[2];
+
+        $r20 = staticinvoke <com.yahoo.bullet.storm.drpc.MockDRPCSpout: java.lang.Object makeMessageID(java.lang.String,int)>("bar", 1);
+
+        $r19[0] = $r20;
+
+        $r21 = staticinvoke <com.yahoo.bullet.storm.drpc.MockDRPCSpout: java.lang.Object makeMessageID(java.lang.String,int)>("baz", 2);
+
+        $r19[1] = $r21;
+
+        $r22 = staticinvoke <java.util.Arrays: java.util.List asList(java.lang.Object[])>($r19);
+
+        specialinvoke $r18.<java.util.HashSet: void <init>(java.util.Collection)>($r22);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r14, $r18);
+
+        return;
+    }
+
+    public void testFailingDoesNotRemovePendingDRPCRequests() throws java.lang.Exception
+    {
+        com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest r0;
+        com.yahoo.bullet.storm.drpc.MockDRPCSpout $r1, $r2, $r3, $r10, $r13, $r15, $r17, $r19;
+        com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber $r4, $r6, $r8, $r12, $r16;
+        java.util.List $r11, $r14, $r20, $r27;
+        boolean $z0, $z1, $z2, $z3;
+        java.util.HashSet $r18, $r22;
+        java.lang.Object[] $r23;
+        java.lang.Object $r24, $r25, $r26;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.MockDRPCSpout: void addMessageParts(java.lang.String,java.lang.String)>("foo", "{\'duration\': 2000}");
+
+        $r2 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout>;
+
+        virtualinvoke $r2.<com.yahoo.bullet.storm.drpc.MockDRPCSpout: void addMessageParts(java.lang.String,java.lang.String)>("bar", "{}");
+
+        $r3 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout>;
+
+        virtualinvoke $r3.<com.yahoo.bullet.storm.drpc.MockDRPCSpout: void addMessageParts(java.lang.String,java.lang.String)>("baz", "{}");
+
+        $r4 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber subscriber>;
+
+        virtualinvoke $r4.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: com.yahoo.bullet.pubsub.PubSubMessage receive()>();
+
+        $r6 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber subscriber>;
+
+        virtualinvoke $r6.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: com.yahoo.bullet.pubsub.PubSubMessage receive()>();
+
+        $r8 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber subscriber>;
+
+        virtualinvoke $r8.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: com.yahoo.bullet.pubsub.PubSubMessage receive()>();
+
+        $r10 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout>;
+
+        $r11 = virtualinvoke $r10.<com.yahoo.bullet.storm.drpc.MockDRPCSpout: java.util.List getFailed()>();
+
+        $z0 = interfaceinvoke $r11.<java.util.List: boolean isEmpty()>();
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z0);
+
+        $r12 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber subscriber>;
+
+        virtualinvoke $r12.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: void fail(java.lang.String)>("bar");
+
+        $r13 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout>;
+
+        $r14 = virtualinvoke $r13.<com.yahoo.bullet.storm.drpc.MockDRPCSpout: java.util.List getFailed()>();
+
+        $z1 = interfaceinvoke $r14.<java.util.List: boolean isEmpty()>();
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z1);
+
+        $r15 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout>;
+
+        $z2 = virtualinvoke $r15.<com.yahoo.bullet.storm.drpc.MockDRPCSpout: boolean isClosed()>();
+
+        staticinvoke <org.junit.Assert: void assertFalse(boolean)>($z2);
+
+        $r16 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber subscriber>;
+
+        virtualinvoke $r16.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: void close()>();
+
+        $r17 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout>;
+
+        $z3 = virtualinvoke $r17.<com.yahoo.bullet.storm.drpc.MockDRPCSpout: boolean isClosed()>();
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z3);
+
+        $r18 = new java.util.HashSet;
+
+        $r19 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriberTest: com.yahoo.bullet.storm.drpc.MockDRPCSpout mockSpout>;
+
+        $r20 = virtualinvoke $r19.<com.yahoo.bullet.storm.drpc.MockDRPCSpout: java.util.List getFailed()>();
+
+        specialinvoke $r18.<java.util.HashSet: void <init>(java.util.Collection)>($r20);
+
+        $r22 = new java.util.HashSet;
+
+        $r23 = newarray (java.lang.Object)[3];
+
+        $r24 = staticinvoke <com.yahoo.bullet.storm.drpc.MockDRPCSpout: java.lang.Object makeMessageID(java.lang.String,int)>("foo", 0);
+
+        $r23[0] = $r24;
+
+        $r25 = staticinvoke <com.yahoo.bullet.storm.drpc.MockDRPCSpout: java.lang.Object makeMessageID(java.lang.String,int)>("bar", 1);
+
+        $r23[1] = $r25;
+
+        $r26 = staticinvoke <com.yahoo.bullet.storm.drpc.MockDRPCSpout: java.lang.Object makeMessageID(java.lang.String,int)>("baz", 2);
+
+        $r23[2] = $r26;
+
+        $r27 = staticinvoke <java.util.Arrays: java.util.List asList(java.lang.Object[])>($r23);
+
+        specialinvoke $r22.<java.util.HashSet: void <init>(java.util.Collection)>($r27);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r18, $r22);
+
+        return;
+    }
+}

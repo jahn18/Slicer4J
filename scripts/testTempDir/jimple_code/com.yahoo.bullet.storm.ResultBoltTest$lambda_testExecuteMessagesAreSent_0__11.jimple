@@ -1,0 +1,54 @@
+public final class com.yahoo.bullet.storm.ResultBoltTest$lambda_testExecuteMessagesAreSent_0__11 extends java.lang.Object implements java.util.function.Consumer
+{
+    java.util.List cap0;
+
+    public static java.util.function.Consumer bootstrap$(java.util.List)
+    {
+        java.util.List $r0;
+        com.yahoo.bullet.storm.ResultBoltTest$lambda_testExecuteMessagesAreSent_0__11 $r1;
+
+        $r0 := @parameter0: java.util.List;
+
+        $r1 = new com.yahoo.bullet.storm.ResultBoltTest$lambda_testExecuteMessagesAreSent_0__11;
+
+        specialinvoke $r1.<com.yahoo.bullet.storm.ResultBoltTest$lambda_testExecuteMessagesAreSent_0__11: void <init>(java.util.List)>($r0);
+
+        return $r1;
+    }
+
+    public void <init>(java.util.List)
+    {
+        com.yahoo.bullet.storm.ResultBoltTest$lambda_testExecuteMessagesAreSent_0__11 $r0;
+        java.util.List $r1;
+
+        $r0 := @this: com.yahoo.bullet.storm.ResultBoltTest$lambda_testExecuteMessagesAreSent_0__11;
+
+        $r1 := @parameter0: java.util.List;
+
+        specialinvoke $r0.<java.lang.Object: void <init>()>();
+
+        $r0.<com.yahoo.bullet.storm.ResultBoltTest$lambda_testExecuteMessagesAreSent_0__11: java.util.List cap0> = $r1;
+
+        return;
+    }
+
+    public void accept(java.lang.Object)
+    {
+        com.yahoo.bullet.storm.ResultBoltTest$lambda_testExecuteMessagesAreSent_0__11 $r0;
+        java.lang.Object $r1;
+        com.yahoo.bullet.pubsub.PubSubMessage $r2;
+        java.util.List $r3;
+
+        $r0 := @this: com.yahoo.bullet.storm.ResultBoltTest$lambda_testExecuteMessagesAreSent_0__11;
+
+        $r1 := @parameter0: java.lang.Object;
+
+        $r2 = (com.yahoo.bullet.pubsub.PubSubMessage) $r1;
+
+        $r3 = $r0.<com.yahoo.bullet.storm.ResultBoltTest$lambda_testExecuteMessagesAreSent_0__11: java.util.List cap0>;
+
+        staticinvoke <com.yahoo.bullet.storm.ResultBoltTest: void lambda$testExecuteMessagesAreSent$0(java.util.List,com.yahoo.bullet.pubsub.PubSubMessage)>($r3, $r2);
+
+        return;
+    }
+}

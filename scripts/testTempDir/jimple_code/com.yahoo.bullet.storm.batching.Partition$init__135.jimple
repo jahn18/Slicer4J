@@ -1,0 +1,45 @@
+public final class com.yahoo.bullet.storm.batching.Partition$init__135 extends java.lang.Object implements java.util.function.Function
+{
+
+    public static java.util.function.Function bootstrap$()
+    {
+        com.yahoo.bullet.storm.batching.Partition$init__135 $r0;
+
+        $r0 = new com.yahoo.bullet.storm.batching.Partition$init__135;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.batching.Partition$init__135: void <init>()>();
+
+        return $r0;
+    }
+
+    public void <init>()
+    {
+        com.yahoo.bullet.storm.batching.Partition$init__135 $r0;
+
+        $r0 := @this: com.yahoo.bullet.storm.batching.Partition$init__135;
+
+        specialinvoke $r0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public java.lang.Object apply(java.lang.Object)
+    {
+        com.yahoo.bullet.storm.batching.Partition$init__135 $r0;
+        java.lang.Object $r1;
+        java.util.Map $r2;
+        java.util.HashMap $r3;
+
+        $r0 := @this: com.yahoo.bullet.storm.batching.Partition$init__135;
+
+        $r1 := @parameter0: java.lang.Object;
+
+        $r2 = (java.util.Map) $r1;
+
+        $r3 = new java.util.HashMap;
+
+        specialinvoke $r3.<java.util.HashMap: void <init>(java.util.Map)>($r2);
+
+        return $r3;
+    }
+}

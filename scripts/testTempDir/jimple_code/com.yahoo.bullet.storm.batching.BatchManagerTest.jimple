@@ -1,0 +1,1701 @@
+public class com.yahoo.bullet.storm.batching.BatchManagerTest extends java.lang.Object
+{
+    private static final int BATCH_SIZE;
+    private static final int PARTITION_COUNT;
+    private com.yahoo.bullet.storm.batching.BatchManager batchManager;
+
+    public void <init>()
+    {
+        com.yahoo.bullet.storm.batching.BatchManagerTest r0;
+
+        r0 := @this: com.yahoo.bullet.storm.batching.BatchManagerTest;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public void setup()
+    {
+        com.yahoo.bullet.storm.batching.BatchManagerTest r0;
+        com.yahoo.bullet.storm.batching.BatchManager $r1, $r2, $r6, $r10;
+        java.util.List $r3, $r7, $r11;
+        java.lang.Object $r4, $r8, $r12;
+        com.yahoo.bullet.storm.batching.Partition $r5, $r9, $r13;
+        boolean $z0;
+        int $i0;
+        long $l1;
+        boolean[] $r14;
+
+        r0 := @this: com.yahoo.bullet.storm.batching.BatchManagerTest;
+
+        $r1 = new com.yahoo.bullet.storm.batching.BatchManager;
+
+        specialinvoke $r1.<com.yahoo.bullet.storm.batching.BatchManager: void <init>(int,int,boolean)>(10000, 4, 1);
+
+        r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager> = $r1;
+
+        $r2 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r3 = virtualinvoke $r2.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r4 = interfaceinvoke $r3.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r5 = (com.yahoo.bullet.storm.batching.Partition) $r4;
+
+        $z0 = virtualinvoke $r5.<com.yahoo.bullet.storm.batching.Partition: boolean isBatchCompressEnable()>();
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z0);
+
+        $r6 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r7 = virtualinvoke $r6.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r8 = interfaceinvoke $r7.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r9 = (com.yahoo.bullet.storm.batching.Partition) $r8;
+
+        $i0 = virtualinvoke $r9.<com.yahoo.bullet.storm.batching.Partition: int getBatchSize()>();
+
+        $l1 = (long) $i0;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l1, 10000L);
+
+        $r10 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r11 = virtualinvoke $r10.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r12 = interfaceinvoke $r11.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r13 = (com.yahoo.bullet.storm.batching.Partition) $r12;
+
+        $r14 = virtualinvoke $r13.<com.yahoo.bullet.storm.batching.Partition: boolean[] getChanged()>();
+
+        staticinvoke <org.junit.Assert: void assertNotNull(java.lang.Object)>($r14);
+
+        return;
+    }
+
+    public void testConstructorInvalidPartitionCount()
+    {
+        com.yahoo.bullet.storm.batching.BatchManager $r0;
+        com.yahoo.bullet.storm.batching.BatchManagerTest r1;
+
+        r1 := @this: com.yahoo.bullet.storm.batching.BatchManagerTest;
+
+        $r0 = new com.yahoo.bullet.storm.batching.BatchManager;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.batching.BatchManager: void <init>(int,int,boolean)>(0, 0, 0);
+
+        return;
+    }
+
+    public void testConstructorInvalidBatchSize()
+    {
+        com.yahoo.bullet.storm.batching.BatchManager $r0;
+        com.yahoo.bullet.storm.batching.BatchManagerTest r1;
+
+        r1 := @this: com.yahoo.bullet.storm.batching.BatchManagerTest;
+
+        $r0 = new com.yahoo.bullet.storm.batching.BatchManager;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.batching.BatchManager: void <init>(int,int,boolean)>(0, 1, 0);
+
+        return;
+    }
+
+    public void testBatchesAndCompressedBatchesMatch()
+    {
+        com.yahoo.bullet.storm.batching.BatchManagerTest r0;
+        com.yahoo.bullet.storm.batching.BatchManager $r1, $r3, $r5, $r13, $r14, $r15, $r17;
+        java.util.List $r2, $r4, r16, r18;
+        int $i0, $i2, $i4, $i6, $i8, $i10, $i12, i13;
+        long $l1, $l3, $l5, $l7, $l9, $l11;
+        java.util.stream.IntStream $r6;
+        java.util.stream.Stream $r7;
+        java.util.function.Function $r8, $r9;
+        java.util.stream.Collector $r10;
+        java.lang.Object $r11, $r19, $r20, $r22;
+        java.util.Map r12;
+        byte[] $r21;
+
+        r0 := @this: com.yahoo.bullet.storm.batching.BatchManagerTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r2 = virtualinvoke $r1.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getBatches()>();
+
+        $i0 = interfaceinvoke $r2.<java.util.List: int size()>();
+
+        $l1 = (long) $i0;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l1, 4L);
+
+        $r3 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r4 = virtualinvoke $r3.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getCompressedBatches()>();
+
+        $i2 = interfaceinvoke $r4.<java.util.List: int size()>();
+
+        $l3 = (long) $i2;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l3, 4L);
+
+        $r5 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i4 = virtualinvoke $r5.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l5 = (long) $i4;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l5, 0L);
+
+        $r6 = staticinvoke <java.util.stream.IntStream: java.util.stream.IntStream range(int,int)>(0, 10000);
+
+        $r7 = interfaceinvoke $r6.<java.util.stream.IntStream: java.util.stream.Stream boxed()>();
+
+        $r8 = staticinvoke <com.yahoo.bullet.storm.batching.BatchManagerTest$toString__140: java.util.function.Function bootstrap$()>();
+
+        $r9 = staticinvoke <com.yahoo.bullet.storm.batching.BatchManagerTest$toString__144: java.util.function.Function bootstrap$()>();
+
+        $r10 = staticinvoke <java.util.stream.Collectors: java.util.stream.Collector toMap(java.util.function.Function,java.util.function.Function)>($r8, $r9);
+
+        $r11 = interfaceinvoke $r7.<java.util.stream.Stream: java.lang.Object collect(java.util.stream.Collector)>($r10);
+
+        r12 = (java.util.Map) $r11;
+
+        $r13 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r13.<com.yahoo.bullet.storm.batching.BatchManager: void addAll(java.util.Map)>(r12);
+
+        $r14 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i6 = virtualinvoke $r14.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l7 = (long) $i6;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l7, 10000L);
+
+        $r15 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        r16 = virtualinvoke $r15.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getBatches()>();
+
+        $r17 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        r18 = virtualinvoke $r17.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getCompressedBatches()>();
+
+        $i8 = interfaceinvoke r16.<java.util.List: int size()>();
+
+        $l9 = (long) $i8;
+
+        $i10 = interfaceinvoke r18.<java.util.List: int size()>();
+
+        $l11 = (long) $i10;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l9, $l11);
+
+        i13 = 0;
+
+     label1:
+        $i12 = interfaceinvoke r16.<java.util.List: int size()>();
+
+        if i13 >= $i12 goto label2;
+
+        $r19 = interfaceinvoke r16.<java.util.List: java.lang.Object get(int)>(i13);
+
+        $r20 = interfaceinvoke r18.<java.util.List: java.lang.Object get(int)>(i13);
+
+        $r21 = (byte[]) $r20;
+
+        $r22 = staticinvoke <com.yahoo.bullet.storm.batching.BatchManager: java.lang.Object decompress(byte[])>($r21);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r19, $r22);
+
+        i13 = i13 + 1;
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    public void testPartitionedBatchesAndCompressedPartitionedBatchesMatch()
+    {
+        com.yahoo.bullet.storm.batching.BatchManagerTest r0;
+        com.yahoo.bullet.storm.batching.BatchManager $r1, $r2, $r16, $r17, $r18, $r19;
+        int $i0, $i2, $i4, $i6, i7;
+        long $l1, $l3, $l5;
+        java.util.Collection $r3, $r6;
+        java.util.stream.Stream $r4, $r7, $r10;
+        java.util.function.Predicate $r5, $r8;
+        boolean $z0, $z1, $z2;
+        java.util.stream.IntStream $r9;
+        java.util.function.Function $r11, $r12;
+        java.util.stream.Collector $r13;
+        java.lang.Object $r14, $r24, $r26, $r28, $r30, $r31, $r33;
+        java.util.Map r15, r34, r35, r36, r37;
+        java.util.Set $r20, $r21, $r22;
+        java.util.Iterator r23;
+        java.lang.Integer r25;
+        java.util.List r27, r29;
+        byte[] $r32;
+
+        r0 := @this: com.yahoo.bullet.storm.batching.BatchManagerTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        r34 = virtualinvoke $r1.<com.yahoo.bullet.storm.batching.BatchManager: java.util.Map getPartitionedBatches()>();
+
+        $r2 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        r35 = virtualinvoke $r2.<com.yahoo.bullet.storm.batching.BatchManager: java.util.Map getPartitionedCompressedBatches()>();
+
+        $i0 = interfaceinvoke r34.<java.util.Map: int size()>();
+
+        $l1 = (long) $i0;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l1, 4L);
+
+        $r3 = interfaceinvoke r34.<java.util.Map: java.util.Collection values()>();
+
+        $r4 = interfaceinvoke $r3.<java.util.Collection: java.util.stream.Stream stream()>();
+
+        $r5 = staticinvoke <com.yahoo.bullet.storm.batching.BatchManagerTest$lambda_testPartitionedBatchesAndCompressedPartitionedBatchesMatch_0__141: java.util.function.Predicate bootstrap$()>();
+
+        $z0 = interfaceinvoke $r4.<java.util.stream.Stream: boolean allMatch(java.util.function.Predicate)>($r5);
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z0);
+
+        $i2 = interfaceinvoke r35.<java.util.Map: int size()>();
+
+        $l3 = (long) $i2;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l3, 4L);
+
+        $r6 = interfaceinvoke r35.<java.util.Map: java.util.Collection values()>();
+
+        $r7 = interfaceinvoke $r6.<java.util.Collection: java.util.stream.Stream stream()>();
+
+        $r8 = staticinvoke <com.yahoo.bullet.storm.batching.BatchManagerTest$lambda_testPartitionedBatchesAndCompressedPartitionedBatchesMatch_1__145: java.util.function.Predicate bootstrap$()>();
+
+        $z1 = interfaceinvoke $r7.<java.util.stream.Stream: boolean allMatch(java.util.function.Predicate)>($r8);
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z1);
+
+        $r9 = staticinvoke <java.util.stream.IntStream: java.util.stream.IntStream range(int,int)>(0, 10000);
+
+        $r10 = interfaceinvoke $r9.<java.util.stream.IntStream: java.util.stream.Stream boxed()>();
+
+        $r11 = staticinvoke <com.yahoo.bullet.storm.batching.BatchManagerTest$toString__147: java.util.function.Function bootstrap$()>();
+
+        $r12 = staticinvoke <com.yahoo.bullet.storm.batching.BatchManagerTest$toString__150: java.util.function.Function bootstrap$()>();
+
+        $r13 = staticinvoke <java.util.stream.Collectors: java.util.stream.Collector toMap(java.util.function.Function,java.util.function.Function)>($r11, $r12);
+
+        $r14 = interfaceinvoke $r10.<java.util.stream.Stream: java.lang.Object collect(java.util.stream.Collector)>($r13);
+
+        r15 = (java.util.Map) $r14;
+
+        $r16 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r16.<com.yahoo.bullet.storm.batching.BatchManager: void addAll(java.util.Map)>(r15);
+
+        $r17 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i4 = virtualinvoke $r17.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l5 = (long) $i4;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l5, 10000L);
+
+        $r18 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        r36 = virtualinvoke $r18.<com.yahoo.bullet.storm.batching.BatchManager: java.util.Map getPartitionedBatches()>();
+
+        $r19 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        r37 = virtualinvoke $r19.<com.yahoo.bullet.storm.batching.BatchManager: java.util.Map getPartitionedCompressedBatches()>();
+
+        $r20 = interfaceinvoke r36.<java.util.Map: java.util.Set keySet()>();
+
+        $r21 = interfaceinvoke r37.<java.util.Map: java.util.Set keySet()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r20, $r21);
+
+        $r22 = interfaceinvoke r36.<java.util.Map: java.util.Set keySet()>();
+
+        r23 = interfaceinvoke $r22.<java.util.Set: java.util.Iterator iterator()>();
+
+     label1:
+        $z2 = interfaceinvoke r23.<java.util.Iterator: boolean hasNext()>();
+
+        if $z2 == 0 goto label4;
+
+        $r24 = interfaceinvoke r23.<java.util.Iterator: java.lang.Object next()>();
+
+        r25 = (java.lang.Integer) $r24;
+
+        $r26 = interfaceinvoke r36.<java.util.Map: java.lang.Object get(java.lang.Object)>(r25);
+
+        r27 = (java.util.List) $r26;
+
+        $r28 = interfaceinvoke r37.<java.util.Map: java.lang.Object get(java.lang.Object)>(r25);
+
+        r29 = (java.util.List) $r28;
+
+        i7 = 0;
+
+     label2:
+        $i6 = interfaceinvoke r27.<java.util.List: int size()>();
+
+        if i7 >= $i6 goto label3;
+
+        $r30 = interfaceinvoke r27.<java.util.List: java.lang.Object get(int)>(i7);
+
+        $r31 = interfaceinvoke r29.<java.util.List: java.lang.Object get(int)>(i7);
+
+        $r32 = (byte[]) $r31;
+
+        $r33 = staticinvoke <com.yahoo.bullet.storm.batching.BatchManager: java.lang.Object decompress(byte[])>($r32);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r30, $r33);
+
+        i7 = i7 + 1;
+
+        goto label2;
+
+     label3:
+        goto label1;
+
+     label4:
+        return;
+    }
+
+    public void testGetBatchesImmutable()
+    {
+        com.yahoo.bullet.storm.batching.BatchManagerTest r0;
+        com.yahoo.bullet.storm.batching.BatchManager $r1, $r2, $r3, $r4, $r8, $r9, $r12;
+        int $i0, $i2, $i4, $i6, $i8;
+        long $l1, $l3, $l5, $l7, $l9;
+        java.util.List r5, $r13, $r16;
+        java.lang.Object $r6, $r10, $r14;
+        java.util.Map $r7, $r11;
+        com.yahoo.bullet.storm.batching.Partition $r15;
+
+        r0 := @this: com.yahoo.bullet.storm.batching.BatchManagerTest;
+
+        $r1 = new com.yahoo.bullet.storm.batching.BatchManager;
+
+        specialinvoke $r1.<com.yahoo.bullet.storm.batching.BatchManager: void <init>(int,int,boolean)>(10000, 1, 1);
+
+        r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager> = $r1;
+
+        $r2 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r2.<com.yahoo.bullet.storm.batching.BatchManager: void add(java.lang.String,java.lang.Object)>("aaa", "bbb");
+
+        $r3 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i0 = virtualinvoke $r3.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l1 = (long) $i0;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l1, 1L);
+
+        $r4 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        r5 = virtualinvoke $r4.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getBatches()>();
+
+        $r6 = interfaceinvoke r5.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r7 = (java.util.Map) $r6;
+
+        $i2 = interfaceinvoke $r7.<java.util.Map: int size()>();
+
+        $l3 = (long) $i2;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l3, 1L);
+
+        $r8 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r8.<com.yahoo.bullet.storm.batching.BatchManager: void remove(java.lang.String)>("aaa");
+
+        $r9 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i4 = virtualinvoke $r9.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l5 = (long) $i4;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l5, 0L);
+
+        $r10 = interfaceinvoke r5.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r11 = (java.util.Map) $r10;
+
+        $i6 = interfaceinvoke $r11.<java.util.Map: int size()>();
+
+        $l7 = (long) $i6;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l7, 1L);
+
+        interfaceinvoke r5.<java.util.List: void clear()>();
+
+        $r12 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r13 = virtualinvoke $r12.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r14 = interfaceinvoke $r13.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r15 = (com.yahoo.bullet.storm.batching.Partition) $r14;
+
+        $r16 = virtualinvoke $r15.<com.yahoo.bullet.storm.batching.Partition: java.util.List getBatches()>();
+
+        $i8 = interfaceinvoke $r16.<java.util.List: int size()>();
+
+        $l9 = (long) $i8;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l9, 1L);
+
+        return;
+    }
+
+    public void testGetBatchesForPartitionImmutable()
+    {
+        com.yahoo.bullet.storm.batching.BatchManagerTest r0;
+        com.yahoo.bullet.storm.batching.BatchManager $r1, $r2, $r3, $r4, $r8, $r9, $r12;
+        int $i0, $i2, $i4, $i6, $i8;
+        long $l1, $l3, $l5, $l7, $l9;
+        java.util.List r5, $r13, $r16;
+        java.lang.Object $r6, $r10, $r14;
+        java.util.Map $r7, $r11;
+        com.yahoo.bullet.storm.batching.Partition $r15;
+
+        r0 := @this: com.yahoo.bullet.storm.batching.BatchManagerTest;
+
+        $r1 = new com.yahoo.bullet.storm.batching.BatchManager;
+
+        specialinvoke $r1.<com.yahoo.bullet.storm.batching.BatchManager: void <init>(int,int,boolean)>(10000, 1, 1);
+
+        r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager> = $r1;
+
+        $r2 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r2.<com.yahoo.bullet.storm.batching.BatchManager: void add(java.lang.String,java.lang.Object)>("aaa", "bbb");
+
+        $r3 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i0 = virtualinvoke $r3.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l1 = (long) $i0;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l1, 1L);
+
+        $r4 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        r5 = virtualinvoke $r4.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getBatchesForPartition(int)>(0);
+
+        $r6 = interfaceinvoke r5.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r7 = (java.util.Map) $r6;
+
+        $i2 = interfaceinvoke $r7.<java.util.Map: int size()>();
+
+        $l3 = (long) $i2;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l3, 1L);
+
+        $r8 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r8.<com.yahoo.bullet.storm.batching.BatchManager: void remove(java.lang.String)>("aaa");
+
+        $r9 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i4 = virtualinvoke $r9.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l5 = (long) $i4;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l5, 0L);
+
+        $r10 = interfaceinvoke r5.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r11 = (java.util.Map) $r10;
+
+        $i6 = interfaceinvoke $r11.<java.util.Map: int size()>();
+
+        $l7 = (long) $i6;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l7, 1L);
+
+        interfaceinvoke r5.<java.util.List: void clear()>();
+
+        $r12 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r13 = virtualinvoke $r12.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r14 = interfaceinvoke $r13.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r15 = (com.yahoo.bullet.storm.batching.Partition) $r14;
+
+        $r16 = virtualinvoke $r15.<com.yahoo.bullet.storm.batching.Partition: java.util.List getBatches()>();
+
+        $i8 = interfaceinvoke $r16.<java.util.List: int size()>();
+
+        $l9 = (long) $i8;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l9, 1L);
+
+        return;
+    }
+
+    public void testGetPartitionedBatchesImmutable()
+    {
+        com.yahoo.bullet.storm.batching.BatchManagerTest r0;
+        com.yahoo.bullet.storm.batching.BatchManager $r1, $r2, $r3, $r4, $r11, $r12, $r15;
+        int $i0, $i2, $i4, $i6, $i8;
+        long $l1, $l3, $l5, $l7, $l9;
+        java.util.Map $r5, $r10, $r14;
+        java.lang.Integer $r6;
+        java.lang.Object $r7, $r9, $r13, $r17;
+        java.util.List r8, $r16, $r19;
+        com.yahoo.bullet.storm.batching.Partition $r18;
+
+        r0 := @this: com.yahoo.bullet.storm.batching.BatchManagerTest;
+
+        $r1 = new com.yahoo.bullet.storm.batching.BatchManager;
+
+        specialinvoke $r1.<com.yahoo.bullet.storm.batching.BatchManager: void <init>(int,int,boolean)>(10000, 1, 1);
+
+        r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager> = $r1;
+
+        $r2 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r2.<com.yahoo.bullet.storm.batching.BatchManager: void add(java.lang.String,java.lang.Object)>("aaa", "bbb");
+
+        $r3 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i0 = virtualinvoke $r3.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l1 = (long) $i0;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l1, 1L);
+
+        $r4 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r5 = virtualinvoke $r4.<com.yahoo.bullet.storm.batching.BatchManager: java.util.Map getPartitionedBatches()>();
+
+        $r6 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(0);
+
+        $r7 = interfaceinvoke $r5.<java.util.Map: java.lang.Object get(java.lang.Object)>($r6);
+
+        r8 = (java.util.List) $r7;
+
+        $r9 = interfaceinvoke r8.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r10 = (java.util.Map) $r9;
+
+        $i2 = interfaceinvoke $r10.<java.util.Map: int size()>();
+
+        $l3 = (long) $i2;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l3, 1L);
+
+        $r11 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r11.<com.yahoo.bullet.storm.batching.BatchManager: void remove(java.lang.String)>("aaa");
+
+        $r12 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i4 = virtualinvoke $r12.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l5 = (long) $i4;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l5, 0L);
+
+        $r13 = interfaceinvoke r8.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r14 = (java.util.Map) $r13;
+
+        $i6 = interfaceinvoke $r14.<java.util.Map: int size()>();
+
+        $l7 = (long) $i6;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l7, 1L);
+
+        interfaceinvoke r8.<java.util.List: void clear()>();
+
+        $r15 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r16 = virtualinvoke $r15.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r17 = interfaceinvoke $r16.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r18 = (com.yahoo.bullet.storm.batching.Partition) $r17;
+
+        $r19 = virtualinvoke $r18.<com.yahoo.bullet.storm.batching.Partition: java.util.List getBatches()>();
+
+        $i8 = interfaceinvoke $r19.<java.util.List: int size()>();
+
+        $l9 = (long) $i8;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l9, 1L);
+
+        return;
+    }
+
+    public void testGetCompressedBatchesImmutable()
+    {
+        com.yahoo.bullet.storm.batching.BatchManagerTest r0;
+        com.yahoo.bullet.storm.batching.BatchManager $r1, $r2, $r3, $r4, $r8, $r9, $r10, $r13;
+        int $i0, $i2, $i4;
+        long $l1, $l3, $l5;
+        java.util.List r5, $r14, $r17;
+        java.lang.Object $r6, $r12, $r15;
+        byte[] r7;
+        com.yahoo.bullet.storm.batching.Partition $r16;
+
+        r0 := @this: com.yahoo.bullet.storm.batching.BatchManagerTest;
+
+        $r1 = new com.yahoo.bullet.storm.batching.BatchManager;
+
+        specialinvoke $r1.<com.yahoo.bullet.storm.batching.BatchManager: void <init>(int,int,boolean)>(10000, 1, 1);
+
+        r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager> = $r1;
+
+        $r2 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r2.<com.yahoo.bullet.storm.batching.BatchManager: void add(java.lang.String,java.lang.Object)>("aaa", "bbb");
+
+        $r3 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i0 = virtualinvoke $r3.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l1 = (long) $i0;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l1, 1L);
+
+        $r4 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        r5 = virtualinvoke $r4.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getCompressedBatches()>();
+
+        $r6 = interfaceinvoke r5.<java.util.List: java.lang.Object get(int)>(0);
+
+        r7 = (byte[]) $r6;
+
+        $r8 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r8.<com.yahoo.bullet.storm.batching.BatchManager: void remove(java.lang.String)>("aaa");
+
+        $r9 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i2 = virtualinvoke $r9.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l3 = (long) $i2;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l3, 0L);
+
+        $r10 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r10.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getCompressedBatches()>();
+
+        $r12 = interfaceinvoke r5.<java.util.List: java.lang.Object get(int)>(0);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>(r7, $r12);
+
+        interfaceinvoke r5.<java.util.List: void clear()>();
+
+        $r13 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r14 = virtualinvoke $r13.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r15 = interfaceinvoke $r14.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r16 = (com.yahoo.bullet.storm.batching.Partition) $r15;
+
+        $r17 = virtualinvoke $r16.<com.yahoo.bullet.storm.batching.Partition: java.util.List getData()>();
+
+        $i4 = interfaceinvoke $r17.<java.util.List: int size()>();
+
+        $l5 = (long) $i4;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l5, 1L);
+
+        return;
+    }
+
+    public void testGetCompressedBatchesForPartitionImmutable()
+    {
+        com.yahoo.bullet.storm.batching.BatchManagerTest r0;
+        com.yahoo.bullet.storm.batching.BatchManager $r1, $r2, $r3, $r4, $r8, $r9, $r10, $r13;
+        int $i0, $i2, $i4;
+        long $l1, $l3, $l5;
+        java.util.List r5, $r14, $r17;
+        java.lang.Object $r6, $r12, $r15;
+        byte[] r7;
+        com.yahoo.bullet.storm.batching.Partition $r16;
+
+        r0 := @this: com.yahoo.bullet.storm.batching.BatchManagerTest;
+
+        $r1 = new com.yahoo.bullet.storm.batching.BatchManager;
+
+        specialinvoke $r1.<com.yahoo.bullet.storm.batching.BatchManager: void <init>(int,int,boolean)>(10000, 1, 1);
+
+        r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager> = $r1;
+
+        $r2 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r2.<com.yahoo.bullet.storm.batching.BatchManager: void add(java.lang.String,java.lang.Object)>("aaa", "bbb");
+
+        $r3 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i0 = virtualinvoke $r3.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l1 = (long) $i0;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l1, 1L);
+
+        $r4 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        r5 = virtualinvoke $r4.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getCompressedBatchesForPartition(int)>(0);
+
+        $r6 = interfaceinvoke r5.<java.util.List: java.lang.Object get(int)>(0);
+
+        r7 = (byte[]) $r6;
+
+        $r8 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r8.<com.yahoo.bullet.storm.batching.BatchManager: void remove(java.lang.String)>("aaa");
+
+        $r9 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i2 = virtualinvoke $r9.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l3 = (long) $i2;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l3, 0L);
+
+        $r10 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r10.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getCompressedBatches()>();
+
+        $r12 = interfaceinvoke r5.<java.util.List: java.lang.Object get(int)>(0);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>(r7, $r12);
+
+        interfaceinvoke r5.<java.util.List: void clear()>();
+
+        $r13 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r14 = virtualinvoke $r13.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r15 = interfaceinvoke $r14.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r16 = (com.yahoo.bullet.storm.batching.Partition) $r15;
+
+        $r17 = virtualinvoke $r16.<com.yahoo.bullet.storm.batching.Partition: java.util.List getData()>();
+
+        $i4 = interfaceinvoke $r17.<java.util.List: int size()>();
+
+        $l5 = (long) $i4;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l5, 1L);
+
+        return;
+    }
+
+    public void testGetCompressedPartitionedBatchesImmutable()
+    {
+        com.yahoo.bullet.storm.batching.BatchManagerTest r0;
+        com.yahoo.bullet.storm.batching.BatchManager $r1, $r2, $r3, $r4, $r11, $r12, $r13, $r16;
+        int $i0, $i2, $i4;
+        long $l1, $l3, $l5;
+        java.util.Map $r5;
+        java.lang.Integer $r6;
+        java.lang.Object $r7, $r9, $r15, $r18;
+        java.util.List r8, $r17, $r20;
+        byte[] r10;
+        com.yahoo.bullet.storm.batching.Partition $r19;
+
+        r0 := @this: com.yahoo.bullet.storm.batching.BatchManagerTest;
+
+        $r1 = new com.yahoo.bullet.storm.batching.BatchManager;
+
+        specialinvoke $r1.<com.yahoo.bullet.storm.batching.BatchManager: void <init>(int,int,boolean)>(10000, 1, 1);
+
+        r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager> = $r1;
+
+        $r2 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r2.<com.yahoo.bullet.storm.batching.BatchManager: void add(java.lang.String,java.lang.Object)>("aaa", "bbb");
+
+        $r3 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i0 = virtualinvoke $r3.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l1 = (long) $i0;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l1, 1L);
+
+        $r4 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r5 = virtualinvoke $r4.<com.yahoo.bullet.storm.batching.BatchManager: java.util.Map getPartitionedCompressedBatches()>();
+
+        $r6 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(0);
+
+        $r7 = interfaceinvoke $r5.<java.util.Map: java.lang.Object get(java.lang.Object)>($r6);
+
+        r8 = (java.util.List) $r7;
+
+        $r9 = interfaceinvoke r8.<java.util.List: java.lang.Object get(int)>(0);
+
+        r10 = (byte[]) $r9;
+
+        $r11 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r11.<com.yahoo.bullet.storm.batching.BatchManager: void remove(java.lang.String)>("aaa");
+
+        $r12 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i2 = virtualinvoke $r12.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l3 = (long) $i2;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l3, 0L);
+
+        $r13 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r13.<com.yahoo.bullet.storm.batching.BatchManager: java.util.Map getPartitionedCompressedBatches()>();
+
+        $r15 = interfaceinvoke r8.<java.util.List: java.lang.Object get(int)>(0);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>(r10, $r15);
+
+        interfaceinvoke r8.<java.util.List: void clear()>();
+
+        $r16 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r17 = virtualinvoke $r16.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r18 = interfaceinvoke $r17.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r19 = (com.yahoo.bullet.storm.batching.Partition) $r18;
+
+        $r20 = virtualinvoke $r19.<com.yahoo.bullet.storm.batching.Partition: java.util.List getData()>();
+
+        $i4 = interfaceinvoke $r20.<java.util.List: int size()>();
+
+        $l5 = (long) $i4;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l5, 1L);
+
+        return;
+    }
+
+    public void testGetCompressedBatchesThrowsWhenCompressionIsDisabled()
+    {
+        com.yahoo.bullet.storm.batching.BatchManager $r0;
+        com.yahoo.bullet.storm.batching.BatchManagerTest r2;
+
+        r2 := @this: com.yahoo.bullet.storm.batching.BatchManagerTest;
+
+        $r0 = new com.yahoo.bullet.storm.batching.BatchManager;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.batching.BatchManager: void <init>(int,int,boolean)>(10000, 4, 0);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getCompressedBatches()>();
+
+        return;
+    }
+
+    public void testGetCompressedBatchesForPartitionThrowsWhenCompressionIsDisabled()
+    {
+        com.yahoo.bullet.storm.batching.BatchManager $r0;
+        com.yahoo.bullet.storm.batching.BatchManagerTest r2;
+
+        r2 := @this: com.yahoo.bullet.storm.batching.BatchManagerTest;
+
+        $r0 = new com.yahoo.bullet.storm.batching.BatchManager;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.batching.BatchManager: void <init>(int,int,boolean)>(10000, 4, 0);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getCompressedBatchesForPartition(int)>(0);
+
+        return;
+    }
+
+    public void testGetCompressedPartitionedBatchesThrowsWhenCompressionIsDisabled()
+    {
+        com.yahoo.bullet.storm.batching.BatchManager $r0;
+        com.yahoo.bullet.storm.batching.BatchManagerTest r2;
+
+        r2 := @this: com.yahoo.bullet.storm.batching.BatchManagerTest;
+
+        $r0 = new com.yahoo.bullet.storm.batching.BatchManager;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.batching.BatchManager: void <init>(int,int,boolean)>(10000, 4, 0);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.batching.BatchManager: java.util.Map getPartitionedCompressedBatches()>();
+
+        return;
+    }
+
+    public void testAddRemoveContainsClear()
+    {
+        java.util.stream.IntStream $r0, $r19, $r46;
+        java.util.stream.Stream $r1, $r20, $r22, $r47;
+        java.util.function.Function $r2, $r3, $r21, $r48, $r49;
+        java.util.stream.Collector $r4, $r23, $r50;
+        java.lang.Object $r5, $r24, $r32, $r36, $r40, $r44, $r51, $r56, $r62, $r66, $r70, $r74, $r78, $r82, $r86;
+        com.yahoo.bullet.storm.batching.BatchManagerTest r6;
+        com.yahoo.bullet.storm.batching.BatchManager $r7, $r8, $r9, $r10, $r11, $r12, $r13, $r14, $r15, $r16, $r17, $r18, $r26, $r27, $r28, $r29, $r30, $r34, $r38, $r42, $r52, $r53, $r54, $r58, $r59, $r60, $r64, $r68, $r72, $r76, $r80, $r84;
+        int $i0, $i2, $i4, $i6, $i8, $i10, $i12, $i14, $i16, $i18, $i20, $i22, $i23, $i25, $i26, $i27, $i28, $i29, $i30, $i31;
+        long $l1, $l3, $l5, $l7, $l9, $l11, $l13, $l15, $l17, $l19, $l21, $l24;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5;
+        java.util.Set r25;
+        java.util.List $r31, $r35, $r39, $r43, $r55, $r61, $r65, $r69, $r73, $r77, $r81, $r85;
+        com.yahoo.bullet.storm.batching.Partition $r33, $r37, $r41, $r45, $r57, $r63, $r67, $r71, $r75, $r79, $r83, $r87;
+        java.util.Map r88, r89;
+
+        r6 := @this: com.yahoo.bullet.storm.batching.BatchManagerTest;
+
+        $r0 = staticinvoke <java.util.stream.IntStream: java.util.stream.IntStream range(int,int)>(0, 10000);
+
+        $r1 = interfaceinvoke $r0.<java.util.stream.IntStream: java.util.stream.Stream boxed()>();
+
+        $r2 = staticinvoke <com.yahoo.bullet.storm.batching.BatchManagerTest$toString__148: java.util.function.Function bootstrap$()>();
+
+        $r3 = staticinvoke <com.yahoo.bullet.storm.batching.BatchManagerTest$toString__152: java.util.function.Function bootstrap$()>();
+
+        $r4 = staticinvoke <java.util.stream.Collectors: java.util.stream.Collector toMap(java.util.function.Function,java.util.function.Function)>($r2, $r3);
+
+        $r5 = interfaceinvoke $r1.<java.util.stream.Stream: java.lang.Object collect(java.util.stream.Collector)>($r4);
+
+        r88 = (java.util.Map) $r5;
+
+        $r7 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r7.<com.yahoo.bullet.storm.batching.BatchManager: void addAll(java.util.Map)>(r88);
+
+        $r8 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i0 = virtualinvoke $r8.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l1 = (long) $i0;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l1, 10000L);
+
+        $r9 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $z0 = virtualinvoke $r9.<com.yahoo.bullet.storm.batching.BatchManager: boolean contains(java.lang.String)>("aaa");
+
+        staticinvoke <org.junit.Assert: void assertFalse(boolean)>($z0);
+
+        $r10 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r10.<com.yahoo.bullet.storm.batching.BatchManager: void add(java.lang.String,java.lang.Object)>("aaa", "bbb");
+
+        $r11 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $z1 = virtualinvoke $r11.<com.yahoo.bullet.storm.batching.BatchManager: boolean contains(java.lang.String)>("aaa");
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z1);
+
+        $r12 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i2 = virtualinvoke $r12.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l3 = (long) $i2;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l3, 10001L);
+
+        $r13 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $z2 = virtualinvoke $r13.<com.yahoo.bullet.storm.batching.BatchManager: boolean contains(java.lang.String)>("1234");
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z2);
+
+        $r14 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r14.<com.yahoo.bullet.storm.batching.BatchManager: void remove(java.lang.String)>("1234");
+
+        $r15 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $z3 = virtualinvoke $r15.<com.yahoo.bullet.storm.batching.BatchManager: boolean contains(java.lang.String)>("1234");
+
+        staticinvoke <org.junit.Assert: void assertFalse(boolean)>($z3);
+
+        $r16 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i4 = virtualinvoke $r16.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l5 = (long) $i4;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l5, 10000L);
+
+        $r17 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r17.<com.yahoo.bullet.storm.batching.BatchManager: void remove(java.lang.String)>("1234");
+
+        $r18 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i6 = virtualinvoke $r18.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l7 = (long) $i6;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l7, 10000L);
+
+        $r19 = staticinvoke <java.util.stream.IntStream: java.util.stream.IntStream range(int,int)>(0, 10000);
+
+        $r20 = interfaceinvoke $r19.<java.util.stream.IntStream: java.util.stream.Stream boxed()>();
+
+        $r21 = staticinvoke <com.yahoo.bullet.storm.batching.BatchManagerTest$toString__154: java.util.function.Function bootstrap$()>();
+
+        $r22 = interfaceinvoke $r20.<java.util.stream.Stream: java.util.stream.Stream map(java.util.function.Function)>($r21);
+
+        $r23 = staticinvoke <java.util.stream.Collectors: java.util.stream.Collector toSet()>();
+
+        $r24 = interfaceinvoke $r22.<java.util.stream.Stream: java.lang.Object collect(java.util.stream.Collector)>($r23);
+
+        r25 = (java.util.Set) $r24;
+
+        $r26 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r26.<com.yahoo.bullet.storm.batching.BatchManager: void removeAll(java.util.Set)>(r25);
+
+        $r27 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i8 = virtualinvoke $r27.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l9 = (long) $i8;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l9, 1L);
+
+        $r28 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r28.<com.yahoo.bullet.storm.batching.BatchManager: void add(java.lang.String,java.lang.Object)>("aaa", "bbb");
+
+        $r29 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i10 = virtualinvoke $r29.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l11 = (long) $i10;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l11, 1L);
+
+        $r30 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r31 = virtualinvoke $r30.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r32 = interfaceinvoke $r31.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r33 = (com.yahoo.bullet.storm.batching.Partition) $r32;
+
+        $i12 = virtualinvoke $r33.<com.yahoo.bullet.storm.batching.Partition: int getBatchCount()>();
+
+        $l13 = (long) $i12;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l13, 1L);
+
+        $r34 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r35 = virtualinvoke $r34.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r36 = interfaceinvoke $r35.<java.util.List: java.lang.Object get(int)>(1);
+
+        $r37 = (com.yahoo.bullet.storm.batching.Partition) $r36;
+
+        $i14 = virtualinvoke $r37.<com.yahoo.bullet.storm.batching.Partition: int getBatchCount()>();
+
+        $l15 = (long) $i14;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l15, 1L);
+
+        $r38 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r39 = virtualinvoke $r38.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r40 = interfaceinvoke $r39.<java.util.List: java.lang.Object get(int)>(2);
+
+        $r41 = (com.yahoo.bullet.storm.batching.Partition) $r40;
+
+        $i16 = virtualinvoke $r41.<com.yahoo.bullet.storm.batching.Partition: int getBatchCount()>();
+
+        $l17 = (long) $i16;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l17, 1L);
+
+        $r42 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r43 = virtualinvoke $r42.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r44 = interfaceinvoke $r43.<java.util.List: java.lang.Object get(int)>(3);
+
+        $r45 = (com.yahoo.bullet.storm.batching.Partition) $r44;
+
+        $i18 = virtualinvoke $r45.<com.yahoo.bullet.storm.batching.Partition: int getBatchCount()>();
+
+        $l19 = (long) $i18;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l19, 1L);
+
+        $r46 = staticinvoke <java.util.stream.IntStream: java.util.stream.IntStream range(int,int)>(0, 40000);
+
+        $r47 = interfaceinvoke $r46.<java.util.stream.IntStream: java.util.stream.Stream boxed()>();
+
+        $r48 = staticinvoke <com.yahoo.bullet.storm.batching.BatchManagerTest$toString__158: java.util.function.Function bootstrap$()>();
+
+        $r49 = staticinvoke <com.yahoo.bullet.storm.batching.BatchManagerTest$toString__160: java.util.function.Function bootstrap$()>();
+
+        $r50 = staticinvoke <java.util.stream.Collectors: java.util.stream.Collector toMap(java.util.function.Function,java.util.function.Function)>($r48, $r49);
+
+        $r51 = interfaceinvoke $r47.<java.util.stream.Stream: java.lang.Object collect(java.util.stream.Collector)>($r50);
+
+        r89 = (java.util.Map) $r51;
+
+        $r52 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r52.<com.yahoo.bullet.storm.batching.BatchManager: void addAll(java.util.Map)>(r89);
+
+        $r53 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i20 = virtualinvoke $r53.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l21 = (long) $i20;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l21, 40001L);
+
+        $r54 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r55 = virtualinvoke $r54.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r56 = interfaceinvoke $r55.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r57 = (com.yahoo.bullet.storm.batching.Partition) $r56;
+
+        $i22 = virtualinvoke $r57.<com.yahoo.bullet.storm.batching.Partition: int getBatchCount()>();
+
+        if $i22 == 2 goto label1;
+
+        $r76 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r77 = virtualinvoke $r76.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r78 = interfaceinvoke $r77.<java.util.List: java.lang.Object get(int)>(1);
+
+        $r79 = (com.yahoo.bullet.storm.batching.Partition) $r78;
+
+        $i29 = virtualinvoke $r79.<com.yahoo.bullet.storm.batching.Partition: int getBatchCount()>();
+
+        if $i29 == 2 goto label1;
+
+        $r80 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r81 = virtualinvoke $r80.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r82 = interfaceinvoke $r81.<java.util.List: java.lang.Object get(int)>(2);
+
+        $r83 = (com.yahoo.bullet.storm.batching.Partition) $r82;
+
+        $i30 = virtualinvoke $r83.<com.yahoo.bullet.storm.batching.Partition: int getBatchCount()>();
+
+        if $i30 == 2 goto label1;
+
+        $r84 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r85 = virtualinvoke $r84.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r86 = interfaceinvoke $r85.<java.util.List: java.lang.Object get(int)>(3);
+
+        $r87 = (com.yahoo.bullet.storm.batching.Partition) $r86;
+
+        $i31 = virtualinvoke $r87.<com.yahoo.bullet.storm.batching.Partition: int getBatchCount()>();
+
+        if $i31 != 2 goto label2;
+
+     label1:
+        $z4 = 1;
+
+        goto label3;
+
+     label2:
+        $z4 = 0;
+
+     label3:
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z4);
+
+        $r58 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r58.<com.yahoo.bullet.storm.batching.BatchManager: void clear()>();
+
+        $r59 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i23 = virtualinvoke $r59.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l24 = (long) $i23;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l24, 0L);
+
+        $r60 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r61 = virtualinvoke $r60.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r62 = interfaceinvoke $r61.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r63 = (com.yahoo.bullet.storm.batching.Partition) $r62;
+
+        $i25 = virtualinvoke $r63.<com.yahoo.bullet.storm.batching.Partition: int getBatchCount()>();
+
+        if $i25 == 2 goto label4;
+
+        $r64 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r65 = virtualinvoke $r64.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r66 = interfaceinvoke $r65.<java.util.List: java.lang.Object get(int)>(1);
+
+        $r67 = (com.yahoo.bullet.storm.batching.Partition) $r66;
+
+        $i26 = virtualinvoke $r67.<com.yahoo.bullet.storm.batching.Partition: int getBatchCount()>();
+
+        if $i26 == 2 goto label4;
+
+        $r68 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r69 = virtualinvoke $r68.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r70 = interfaceinvoke $r69.<java.util.List: java.lang.Object get(int)>(2);
+
+        $r71 = (com.yahoo.bullet.storm.batching.Partition) $r70;
+
+        $i27 = virtualinvoke $r71.<com.yahoo.bullet.storm.batching.Partition: int getBatchCount()>();
+
+        if $i27 == 2 goto label4;
+
+        $r72 = r6.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r73 = virtualinvoke $r72.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r74 = interfaceinvoke $r73.<java.util.List: java.lang.Object get(int)>(3);
+
+        $r75 = (com.yahoo.bullet.storm.batching.Partition) $r74;
+
+        $i28 = virtualinvoke $r75.<com.yahoo.bullet.storm.batching.Partition: int getBatchCount()>();
+
+        if $i28 != 2 goto label5;
+
+     label4:
+        $z5 = 1;
+
+        goto label6;
+
+     label5:
+        $z5 = 0;
+
+     label6:
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z5);
+
+        return;
+    }
+
+    public void testPartitionResizing()
+    {
+        com.yahoo.bullet.storm.batching.BatchManagerTest r0;
+        com.yahoo.bullet.storm.batching.BatchManager $r1, $r2, $r3, $r7, $r11, $r22, $r23, $r24, $r28, $r29, $r30, $r34, $r38, $r42, $r43, $r44, $r55, $r56, $r57, $r61, $r62, $r63, $r67, $r71;
+        int $i0, $i2, $i4, $i6, $i8, $i10, $i12, $i14, $i16, $i18, $i20, $i22, $i24, $i26, $i28, $i30, $i32, $i34;
+        long $l1, $l3, $l5, $l7, $l9, $l11, $l13, $l15, $l17, $l19, $l21, $l23, $l25, $l27, $l29, $l31, $l33, $l35;
+        java.util.List $r4, $r8, $r12, $r25, $r31, $r35, $r39, $r45, $r58, $r64, $r68, $r72;
+        java.lang.Object $r5, $r9, $r13, $r20, $r26, $r32, $r36, $r40, $r46, $r53, $r59, $r65, $r69, $r73;
+        com.yahoo.bullet.storm.batching.Partition $r6, $r10, $r14, $r27, $r33, $r37, $r41, $r47, $r60, $r66, $r70, $r74;
+        java.util.stream.IntStream $r15, $r48;
+        java.util.stream.Stream $r16, $r49, $r51;
+        java.util.function.Function $r17, $r18, $r50;
+        java.util.stream.Collector $r19, $r52;
+        java.util.Map r21;
+        java.util.Set r54;
+
+        r0 := @this: com.yahoo.bullet.storm.batching.BatchManagerTest;
+
+        $r1 = new com.yahoo.bullet.storm.batching.BatchManager;
+
+        specialinvoke $r1.<com.yahoo.bullet.storm.batching.BatchManager: void <init>(int,int,boolean)>(10000, 1, 0);
+
+        r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager> = $r1;
+
+        $r2 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i0 = virtualinvoke $r2.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l1 = (long) $i0;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l1, 0L);
+
+        $r3 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r4 = virtualinvoke $r3.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r5 = interfaceinvoke $r4.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r6 = (com.yahoo.bullet.storm.batching.Partition) $r5;
+
+        $i2 = virtualinvoke $r6.<com.yahoo.bullet.storm.batching.Partition: int getBatchCount()>();
+
+        $l3 = (long) $i2;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l3, 1L);
+
+        $r7 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r8 = virtualinvoke $r7.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r9 = interfaceinvoke $r8.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r10 = (com.yahoo.bullet.storm.batching.Partition) $r9;
+
+        $i4 = virtualinvoke $r10.<com.yahoo.bullet.storm.batching.Partition: int getMaxCapacity()>();
+
+        $l5 = (long) $i4;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l5, 10000L);
+
+        $r11 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r12 = virtualinvoke $r11.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r13 = interfaceinvoke $r12.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r14 = (com.yahoo.bullet.storm.batching.Partition) $r13;
+
+        $i6 = virtualinvoke $r14.<com.yahoo.bullet.storm.batching.Partition: int getMinCapacity()>();
+
+        $l7 = (long) $i6;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l7, 0L);
+
+        $r15 = staticinvoke <java.util.stream.IntStream: java.util.stream.IntStream range(int,int)>(0, 10000);
+
+        $r16 = interfaceinvoke $r15.<java.util.stream.IntStream: java.util.stream.Stream boxed()>();
+
+        $r17 = staticinvoke <com.yahoo.bullet.storm.batching.BatchManagerTest$toString__151: java.util.function.Function bootstrap$()>();
+
+        $r18 = staticinvoke <com.yahoo.bullet.storm.batching.BatchManagerTest$toString__155: java.util.function.Function bootstrap$()>();
+
+        $r19 = staticinvoke <java.util.stream.Collectors: java.util.stream.Collector toMap(java.util.function.Function,java.util.function.Function)>($r17, $r18);
+
+        $r20 = interfaceinvoke $r16.<java.util.stream.Stream: java.lang.Object collect(java.util.stream.Collector)>($r19);
+
+        r21 = (java.util.Map) $r20;
+
+        $r22 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r22.<com.yahoo.bullet.storm.batching.BatchManager: void addAll(java.util.Map)>(r21);
+
+        $r23 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i8 = virtualinvoke $r23.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l9 = (long) $i8;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l9, 10000L);
+
+        $r24 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r25 = virtualinvoke $r24.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r26 = interfaceinvoke $r25.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r27 = (com.yahoo.bullet.storm.batching.Partition) $r26;
+
+        $i10 = virtualinvoke $r27.<com.yahoo.bullet.storm.batching.Partition: int getBatchCount()>();
+
+        $l11 = (long) $i10;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l11, 1L);
+
+        $r28 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r28.<com.yahoo.bullet.storm.batching.BatchManager: void add(java.lang.String,java.lang.Object)>("aaa", "bbb");
+
+        $r29 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i12 = virtualinvoke $r29.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l13 = (long) $i12;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l13, 10001L);
+
+        $r30 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r31 = virtualinvoke $r30.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r32 = interfaceinvoke $r31.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r33 = (com.yahoo.bullet.storm.batching.Partition) $r32;
+
+        $i14 = virtualinvoke $r33.<com.yahoo.bullet.storm.batching.Partition: int getBatchCount()>();
+
+        $l15 = (long) $i14;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l15, 2L);
+
+        $r34 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r35 = virtualinvoke $r34.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r36 = interfaceinvoke $r35.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r37 = (com.yahoo.bullet.storm.batching.Partition) $r36;
+
+        $i16 = virtualinvoke $r37.<com.yahoo.bullet.storm.batching.Partition: int getMaxCapacity()>();
+
+        $l17 = (long) $i16;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l17, 20000L);
+
+        $r38 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r39 = virtualinvoke $r38.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r40 = interfaceinvoke $r39.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r41 = (com.yahoo.bullet.storm.batching.Partition) $r40;
+
+        $i18 = virtualinvoke $r41.<com.yahoo.bullet.storm.batching.Partition: int getMinCapacity()>();
+
+        $l19 = (long) $i18;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l19, 5000L);
+
+        $r42 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r42.<com.yahoo.bullet.storm.batching.BatchManager: void remove(java.lang.String)>("aaa");
+
+        $r43 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i20 = virtualinvoke $r43.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l21 = (long) $i20;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l21, 10000L);
+
+        $r44 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r45 = virtualinvoke $r44.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r46 = interfaceinvoke $r45.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r47 = (com.yahoo.bullet.storm.batching.Partition) $r46;
+
+        $i22 = virtualinvoke $r47.<com.yahoo.bullet.storm.batching.Partition: int getBatchCount()>();
+
+        $l23 = (long) $i22;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l23, 2L);
+
+        $r48 = staticinvoke <java.util.stream.IntStream: java.util.stream.IntStream range(int,int)>(0, 5000);
+
+        $r49 = interfaceinvoke $r48.<java.util.stream.IntStream: java.util.stream.Stream boxed()>();
+
+        $r50 = staticinvoke <com.yahoo.bullet.storm.batching.BatchManagerTest$toString__157: java.util.function.Function bootstrap$()>();
+
+        $r51 = interfaceinvoke $r49.<java.util.stream.Stream: java.util.stream.Stream map(java.util.function.Function)>($r50);
+
+        $r52 = staticinvoke <java.util.stream.Collectors: java.util.stream.Collector toSet()>();
+
+        $r53 = interfaceinvoke $r51.<java.util.stream.Stream: java.lang.Object collect(java.util.stream.Collector)>($r52);
+
+        r54 = (java.util.Set) $r53;
+
+        $r55 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r55.<com.yahoo.bullet.storm.batching.BatchManager: void removeAll(java.util.Set)>(r54);
+
+        $r56 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i24 = virtualinvoke $r56.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l25 = (long) $i24;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l25, 5000L);
+
+        $r57 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r58 = virtualinvoke $r57.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r59 = interfaceinvoke $r58.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r60 = (com.yahoo.bullet.storm.batching.Partition) $r59;
+
+        $i26 = virtualinvoke $r60.<com.yahoo.bullet.storm.batching.Partition: int getBatchCount()>();
+
+        $l27 = (long) $i26;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l27, 2L);
+
+        $r61 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        virtualinvoke $r61.<com.yahoo.bullet.storm.batching.BatchManager: void remove(java.lang.String)>("5000");
+
+        $r62 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $i28 = virtualinvoke $r62.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l29 = (long) $i28;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l29, 4999L);
+
+        $r63 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r64 = virtualinvoke $r63.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r65 = interfaceinvoke $r64.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r66 = (com.yahoo.bullet.storm.batching.Partition) $r65;
+
+        $i30 = virtualinvoke $r66.<com.yahoo.bullet.storm.batching.Partition: int getBatchCount()>();
+
+        $l31 = (long) $i30;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l31, 1L);
+
+        $r67 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r68 = virtualinvoke $r67.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r69 = interfaceinvoke $r68.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r70 = (com.yahoo.bullet.storm.batching.Partition) $r69;
+
+        $i32 = virtualinvoke $r70.<com.yahoo.bullet.storm.batching.Partition: int getMaxCapacity()>();
+
+        $l33 = (long) $i32;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l33, 10000L);
+
+        $r71 = r0.<com.yahoo.bullet.storm.batching.BatchManagerTest: com.yahoo.bullet.storm.batching.BatchManager batchManager>;
+
+        $r72 = virtualinvoke $r71.<com.yahoo.bullet.storm.batching.BatchManager: java.util.List getPartitions()>();
+
+        $r73 = interfaceinvoke $r72.<java.util.List: java.lang.Object get(int)>(0);
+
+        $r74 = (com.yahoo.bullet.storm.batching.Partition) $r73;
+
+        $i34 = virtualinvoke $r74.<com.yahoo.bullet.storm.batching.Partition: int getMinCapacity()>();
+
+        $l35 = (long) $i34;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l35, 0L);
+
+        return;
+    }
+
+    public void testCompressDecompress()
+    {
+        byte[] r0;
+        java.lang.Object $r1;
+        java.lang.String r2;
+        com.yahoo.bullet.storm.batching.BatchManagerTest r3;
+
+        r3 := @this: com.yahoo.bullet.storm.batching.BatchManagerTest;
+
+        r0 = staticinvoke <com.yahoo.bullet.storm.batching.BatchManager: byte[] compress(java.lang.Object)>("Hello world!");
+
+        staticinvoke <org.junit.Assert: void assertNotNull(java.lang.Object)>(r0);
+
+        $r1 = staticinvoke <com.yahoo.bullet.storm.batching.BatchManager: java.lang.Object decompress(byte[])>(r0);
+
+        r2 = (java.lang.String) $r1;
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>(r2, "Hello world!");
+
+        return;
+    }
+
+    public void testCompressException()
+    {
+        com.yahoo.bullet.storm.batching.BatchManagerTest$1Dummy $r0;
+        com.yahoo.bullet.storm.batching.BatchManagerTest r1;
+        byte[] $r2;
+
+        r1 := @this: com.yahoo.bullet.storm.batching.BatchManagerTest;
+
+        $r0 = new com.yahoo.bullet.storm.batching.BatchManagerTest$1Dummy;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.batching.BatchManagerTest$1Dummy: void <init>(com.yahoo.bullet.storm.batching.BatchManagerTest)>(r1);
+
+        $r2 = staticinvoke <com.yahoo.bullet.storm.batching.BatchManager: byte[] compress(java.lang.Object)>($r0);
+
+        staticinvoke <org.junit.Assert: void assertNull(java.lang.Object)>($r2);
+
+        return;
+    }
+
+    public void testDecompressException()
+    {
+        byte[] $r0;
+        java.lang.Object $r1;
+        com.yahoo.bullet.storm.batching.BatchManagerTest r2;
+
+        r2 := @this: com.yahoo.bullet.storm.batching.BatchManagerTest;
+
+        $r0 = newarray (byte)[0];
+
+        $r1 = staticinvoke <com.yahoo.bullet.storm.batching.BatchManager: java.lang.Object decompress(byte[])>($r0);
+
+        staticinvoke <org.junit.Assert: void assertNull(java.lang.Object)>($r1);
+
+        return;
+    }
+
+    public static boolean lambda$testPartitionedBatchesAndCompressedPartitionedBatchesMatch$1(java.util.List)
+    {
+        java.util.List r0;
+        int $i0;
+        boolean $z0;
+
+        r0 := @parameter0: java.util.List;
+
+        $i0 = interfaceinvoke r0.<java.util.List: int size()>();
+
+        if $i0 != 1 goto label1;
+
+        $z0 = 1;
+
+        goto label2;
+
+     label1:
+        $z0 = 0;
+
+     label2:
+        return $z0;
+    }
+
+    public static boolean lambda$testPartitionedBatchesAndCompressedPartitionedBatchesMatch$0(java.util.List)
+    {
+        java.util.List r0;
+        int $i0;
+        boolean $z0;
+
+        r0 := @parameter0: java.util.List;
+
+        $i0 = interfaceinvoke r0.<java.util.List: int size()>();
+
+        if $i0 != 1 goto label1;
+
+        $z0 = 1;
+
+        goto label2;
+
+     label1:
+        $z0 = 0;
+
+     label2:
+        return $z0;
+    }
+
+    public static void <clinit>()
+    {
+        <com.yahoo.bullet.storm.batching.BatchManagerTest: int PARTITION_COUNT> = 4;
+
+        <com.yahoo.bullet.storm.batching.BatchManagerTest: int BATCH_SIZE> = 10000;
+
+        return;
+    }
+}

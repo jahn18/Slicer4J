@@ -1,0 +1,728 @@
+public class com.yahoo.bullet.storm.FilterBolt extends com.yahoo.bullet.storm.QueryBolt
+{
+    private static final org.slf4j.Logger log;
+    private static final long serialVersionUID;
+    private java.lang.String recordComponent;
+    private transient com.yahoo.bullet.querying.QueryManager manager;
+    private transient org.apache.storm.metric.api.ReducedMetric averageLatency;
+    private transient int statsTickInterval;
+    private transient int statsTickCount;
+    private transient int duplicatedCount;
+
+    public void <init>(java.lang.String, com.yahoo.bullet.storm.BulletStormConfig)
+    {
+        com.yahoo.bullet.storm.FilterBolt r0;
+        com.yahoo.bullet.storm.BulletStormConfig r1;
+        java.lang.String r2;
+
+        r0 := @this: com.yahoo.bullet.storm.FilterBolt;
+
+        r2 := @parameter0: java.lang.String;
+
+        r1 := @parameter1: com.yahoo.bullet.storm.BulletStormConfig;
+
+        specialinvoke r0.<com.yahoo.bullet.storm.QueryBolt: void <init>(com.yahoo.bullet.storm.BulletStormConfig)>(r1);
+
+        r0.<com.yahoo.bullet.storm.FilterBolt: java.lang.String recordComponent> = r2;
+
+        return;
+    }
+
+    public void prepare(java.util.Map, org.apache.storm.task.TopologyContext, org.apache.storm.task.OutputCollector)
+    {
+        com.yahoo.bullet.storm.FilterBolt r0;
+        java.util.Map r1;
+        org.apache.storm.task.TopologyContext r2;
+        org.apache.storm.task.OutputCollector r3;
+        java.lang.String $r4;
+        com.yahoo.bullet.storm.TupleClassifier $r5;
+        com.yahoo.bullet.storm.BulletStormConfig $r6, $r10;
+        java.lang.Object $r7;
+        java.lang.Integer $r8;
+        int $i0;
+        com.yahoo.bullet.querying.QueryManager $r9;
+        com.yahoo.bullet.storm.metric.BulletMetrics $r11, $r12;
+        boolean $z0;
+        org.apache.storm.metric.api.ReducedMetric $r13;
+
+        r0 := @this: com.yahoo.bullet.storm.FilterBolt;
+
+        r1 := @parameter0: java.util.Map;
+
+        r2 := @parameter1: org.apache.storm.task.TopologyContext;
+
+        r3 := @parameter2: org.apache.storm.task.OutputCollector;
+
+        specialinvoke r0.<com.yahoo.bullet.storm.QueryBolt: void prepare(java.util.Map,org.apache.storm.task.TopologyContext,org.apache.storm.task.OutputCollector)>(r1, r2, r3);
+
+        $r5 = r0.<com.yahoo.bullet.storm.FilterBolt: com.yahoo.bullet.storm.TupleClassifier classifier>;
+
+        $r4 = r0.<com.yahoo.bullet.storm.FilterBolt: java.lang.String recordComponent>;
+
+        virtualinvoke $r5.<com.yahoo.bullet.storm.TupleClassifier: void setRecordComponent(java.lang.String)>($r4);
+
+        $r6 = r0.<com.yahoo.bullet.storm.FilterBolt: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        $r7 = virtualinvoke $r6.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.filter.bolt.stats.report.ticks", class "Ljava/lang/Integer;");
+
+        $r8 = (java.lang.Integer) $r7;
+
+        $i0 = virtualinvoke $r8.<java.lang.Integer: int intValue()>();
+
+        r0.<com.yahoo.bullet.storm.FilterBolt: int statsTickInterval> = $i0;
+
+        r0.<com.yahoo.bullet.storm.FilterBolt: int statsTickCount> = 0;
+
+        $r9 = new com.yahoo.bullet.querying.QueryManager;
+
+        $r10 = r0.<com.yahoo.bullet.storm.FilterBolt: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        specialinvoke $r9.<com.yahoo.bullet.querying.QueryManager: void <init>(com.yahoo.bullet.common.BulletConfig)>($r10);
+
+        r0.<com.yahoo.bullet.storm.FilterBolt: com.yahoo.bullet.querying.QueryManager manager> = $r9;
+
+        $r11 = r0.<com.yahoo.bullet.storm.FilterBolt: com.yahoo.bullet.storm.metric.BulletMetrics metrics>;
+
+        $z0 = virtualinvoke $r11.<com.yahoo.bullet.storm.metric.BulletMetrics: boolean isEnabled()>();
+
+        if $z0 == 0 goto label1;
+
+        $r12 = r0.<com.yahoo.bullet.storm.FilterBolt: com.yahoo.bullet.storm.metric.BulletMetrics metrics>;
+
+        $r13 = virtualinvoke $r12.<com.yahoo.bullet.storm.metric.BulletMetrics: org.apache.storm.metric.api.ReducedMetric registerAveragingMetric(java.lang.String,org.apache.storm.task.TopologyContext)>("bullet_filter_latency", r2);
+
+        r0.<com.yahoo.bullet.storm.FilterBolt: org.apache.storm.metric.api.ReducedMetric averageLatency> = $r13;
+
+     label1:
+        return;
+    }
+
+    public void execute(org.apache.storm.tuple.Tuple)
+    {
+        com.yahoo.bullet.storm.FilterBolt r0;
+        org.apache.storm.tuple.Tuple r1;
+        com.yahoo.bullet.storm.TupleClassifier $r2;
+        java.util.Optional $r3;
+        com.yahoo.bullet.storm.TupleClassifier$Type $r4, r6;
+        java.lang.Object $r5;
+        int[] $r7;
+        int $i0, $i1;
+        org.slf4j.Logger $r9;
+        org.apache.storm.task.OutputCollector $r10;
+
+        r0 := @this: com.yahoo.bullet.storm.FilterBolt;
+
+        r1 := @parameter0: org.apache.storm.tuple.Tuple;
+
+        $r2 = r0.<com.yahoo.bullet.storm.FilterBolt: com.yahoo.bullet.storm.TupleClassifier classifier>;
+
+        $r3 = virtualinvoke $r2.<com.yahoo.bullet.storm.TupleClassifier: java.util.Optional classify(org.apache.storm.tuple.Tuple)>(r1);
+
+        $r4 = <com.yahoo.bullet.storm.TupleClassifier$Type: com.yahoo.bullet.storm.TupleClassifier$Type UNKNOWN_TUPLE>;
+
+        $r5 = virtualinvoke $r3.<java.util.Optional: java.lang.Object orElse(java.lang.Object)>($r4);
+
+        r6 = (com.yahoo.bullet.storm.TupleClassifier$Type) $r5;
+
+        $r7 = <com.yahoo.bullet.storm.FilterBolt$1: int[] $SwitchMap$com$yahoo$bullet$storm$TupleClassifier$Type>;
+
+        $i0 = virtualinvoke r6.<com.yahoo.bullet.storm.TupleClassifier$Type: int ordinal()>();
+
+        $i1 = $r7[$i0];
+
+        tableswitch($i1)
+        {
+            case 1: goto label1;
+            case 2: goto label2;
+            case 3: goto label3;
+            case 4: goto label4;
+            case 5: goto label5;
+            default: goto label6;
+        };
+
+     label1:
+        specialinvoke r0.<com.yahoo.bullet.storm.FilterBolt: void onTick()>();
+
+        goto label7;
+
+     label2:
+        virtualinvoke r0.<com.yahoo.bullet.storm.FilterBolt: com.yahoo.bullet.pubsub.Metadata onMeta(org.apache.storm.tuple.Tuple)>(r1);
+
+        goto label7;
+
+     label3:
+        virtualinvoke r0.<com.yahoo.bullet.storm.FilterBolt: void onQuery(org.apache.storm.tuple.Tuple)>(r1);
+
+        goto label7;
+
+     label4:
+        specialinvoke r0.<com.yahoo.bullet.storm.FilterBolt: void onRecord(org.apache.storm.tuple.Tuple)>(r1);
+
+        specialinvoke r0.<com.yahoo.bullet.storm.FilterBolt: void updateLatency(org.apache.storm.tuple.Tuple)>(r1);
+
+        goto label7;
+
+     label5:
+        virtualinvoke r0.<com.yahoo.bullet.storm.FilterBolt: void onBatch(org.apache.storm.tuple.Tuple)>(r1);
+
+        goto label7;
+
+     label6:
+        $r9 = <com.yahoo.bullet.storm.FilterBolt: org.slf4j.Logger log>;
+
+        interfaceinvoke $r9.<org.slf4j.Logger: void error(java.lang.String,java.lang.Object)>("Unknown tuple encountered: {}", r6);
+
+        return;
+
+     label7:
+        $r10 = r0.<com.yahoo.bullet.storm.FilterBolt: org.apache.storm.task.OutputCollector collector>;
+
+        virtualinvoke $r10.<org.apache.storm.task.OutputCollector: void ack(org.apache.storm.tuple.Tuple)>(r1);
+
+        return;
+    }
+
+    public void declareOutputFields(org.apache.storm.topology.OutputFieldsDeclarer)
+    {
+        org.apache.storm.topology.OutputFieldsDeclarer r0;
+        org.apache.storm.tuple.Fields $r1, $r3, $r5;
+        java.lang.String[] $r2, $r4, $r6;
+        com.yahoo.bullet.storm.FilterBolt r7;
+
+        r7 := @this: com.yahoo.bullet.storm.FilterBolt;
+
+        r0 := @parameter0: org.apache.storm.topology.OutputFieldsDeclarer;
+
+        $r1 = new org.apache.storm.tuple.Fields;
+
+        $r2 = newarray (java.lang.String)[2];
+
+        $r2[0] = "id";
+
+        $r2[1] = "data";
+
+        specialinvoke $r1.<org.apache.storm.tuple.Fields: void <init>(java.lang.String[])>($r2);
+
+        interfaceinvoke r0.<org.apache.storm.topology.OutputFieldsDeclarer: void declareStream(java.lang.String,org.apache.storm.tuple.Fields)>("default", $r1);
+
+        $r3 = new org.apache.storm.tuple.Fields;
+
+        $r4 = newarray (java.lang.String)[2];
+
+        $r4[0] = "id";
+
+        $r4[1] = "error";
+
+        specialinvoke $r3.<org.apache.storm.tuple.Fields: void <init>(java.lang.String[])>($r4);
+
+        interfaceinvoke r0.<org.apache.storm.topology.OutputFieldsDeclarer: void declareStream(java.lang.String,org.apache.storm.tuple.Fields)>("error", $r3);
+
+        $r5 = new org.apache.storm.tuple.Fields;
+
+        $r6 = newarray (java.lang.String)[2];
+
+        $r6[0] = "id";
+
+        $r6[1] = "metadata";
+
+        specialinvoke $r5.<org.apache.storm.tuple.Fields: void <init>(java.lang.String[])>($r6);
+
+        interfaceinvoke r0.<org.apache.storm.topology.OutputFieldsDeclarer: void declareStream(java.lang.String,org.apache.storm.tuple.Fields)>("feedback", $r5);
+
+        return;
+    }
+
+    protected boolean hasQuery(java.lang.String)
+    {
+        com.yahoo.bullet.storm.FilterBolt r0;
+        java.lang.String r1;
+        com.yahoo.bullet.querying.QueryManager $r2;
+        boolean $z0;
+        org.slf4j.Logger $r3;
+        int $i0, $i1;
+
+        r0 := @this: com.yahoo.bullet.storm.FilterBolt;
+
+        r1 := @parameter0: java.lang.String;
+
+        $r2 = r0.<com.yahoo.bullet.storm.FilterBolt: com.yahoo.bullet.querying.QueryManager manager>;
+
+        $z0 = virtualinvoke $r2.<com.yahoo.bullet.querying.QueryManager: boolean hasQuery(java.lang.String)>(r1);
+
+        if $z0 == 0 goto label1;
+
+        $r3 = <com.yahoo.bullet.storm.FilterBolt: org.slf4j.Logger log>;
+
+        interfaceinvoke $r3.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object)>("Duplicate for request {}", r1);
+
+        $i0 = r0.<com.yahoo.bullet.storm.FilterBolt: int duplicatedCount>;
+
+        $i1 = $i0 + 1;
+
+        r0.<com.yahoo.bullet.storm.FilterBolt: int duplicatedCount> = $i1;
+
+        return 1;
+
+     label1:
+        return 0;
+    }
+
+    protected void initializeQuery(com.yahoo.bullet.pubsub.PubSubMessage)
+    {
+        java.lang.String r0, $r10, $r12;
+        com.yahoo.bullet.storm.FilterBolt r1;
+        com.yahoo.bullet.pubsub.PubSubMessageSerDe $r2;
+        com.yahoo.bullet.querying.Querier$Mode $r3;
+        com.yahoo.bullet.query.Query $r4;
+        com.yahoo.bullet.pubsub.Metadata $r5;
+        com.yahoo.bullet.storm.BulletStormConfig $r6;
+        com.yahoo.bullet.querying.QueryManager $r7;
+        org.slf4j.Logger $r8, $r13, $r15;
+        com.yahoo.bullet.querying.RunningQuery $r9, $r11;
+        java.lang.RuntimeException $r14;
+        com.yahoo.bullet.pubsub.PubSubMessage r16, r17;
+        com.yahoo.bullet.querying.Querier r18;
+
+        r1 := @this: com.yahoo.bullet.storm.FilterBolt;
+
+        r16 := @parameter0: com.yahoo.bullet.pubsub.PubSubMessage;
+
+        r0 = virtualinvoke r16.<com.yahoo.bullet.pubsub.PubSubMessage: java.lang.String getId()>();
+
+     label1:
+        $r2 = r1.<com.yahoo.bullet.storm.FilterBolt: com.yahoo.bullet.pubsub.PubSubMessageSerDe querySerDe>;
+
+        r17 = virtualinvoke $r2.<com.yahoo.bullet.pubsub.PubSubMessageSerDe: com.yahoo.bullet.pubsub.PubSubMessage fromMessage(com.yahoo.bullet.pubsub.PubSubMessage)>(r16);
+
+        $r3 = <com.yahoo.bullet.querying.Querier$Mode: com.yahoo.bullet.querying.Querier$Mode PARTITION>;
+
+        $r4 = virtualinvoke r17.<com.yahoo.bullet.pubsub.PubSubMessage: com.yahoo.bullet.query.Query getContentAsQuery()>();
+
+        $r5 = virtualinvoke r17.<com.yahoo.bullet.pubsub.PubSubMessage: com.yahoo.bullet.pubsub.Metadata getMetadata()>();
+
+        $r6 = r1.<com.yahoo.bullet.storm.FilterBolt: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        r18 = virtualinvoke r1.<com.yahoo.bullet.storm.FilterBolt: com.yahoo.bullet.querying.Querier createQuerier(com.yahoo.bullet.querying.Querier$Mode,java.lang.String,com.yahoo.bullet.query.Query,com.yahoo.bullet.pubsub.Metadata,com.yahoo.bullet.common.BulletConfig)>($r3, r0, $r4, $r5, $r6);
+
+        $r7 = r1.<com.yahoo.bullet.storm.FilterBolt: com.yahoo.bullet.querying.QueryManager manager>;
+
+        virtualinvoke $r7.<com.yahoo.bullet.querying.QueryManager: void addQuery(java.lang.String,com.yahoo.bullet.querying.Querier)>(r0, r18);
+
+        $r8 = <com.yahoo.bullet.storm.FilterBolt: org.slf4j.Logger log>;
+
+        $r9 = virtualinvoke r18.<com.yahoo.bullet.querying.Querier: com.yahoo.bullet.querying.RunningQuery getRunningQuery()>();
+
+        $r10 = virtualinvoke $r9.<com.yahoo.bullet.querying.RunningQuery: java.lang.String getId()>();
+
+        $r11 = virtualinvoke r18.<com.yahoo.bullet.querying.Querier: com.yahoo.bullet.querying.RunningQuery getRunningQuery()>();
+
+        $r12 = virtualinvoke $r11.<com.yahoo.bullet.querying.RunningQuery: java.lang.String getQueryString()>();
+
+        interfaceinvoke $r8.<org.slf4j.Logger: void info(java.lang.String,java.lang.Object,java.lang.Object)>("Initialized query {} : {}", $r10, $r12);
+
+        $r13 = <com.yahoo.bullet.storm.FilterBolt: org.slf4j.Logger log>;
+
+        interfaceinvoke $r13.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object)>("Initialized query {}", r18);
+
+     label2:
+        return;
+
+     label3:
+        $r14 := @caughtexception;
+
+        $r15 = <com.yahoo.bullet.storm.FilterBolt: org.slf4j.Logger log>;
+
+        interfaceinvoke $r15.<org.slf4j.Logger: void error(java.lang.String,java.lang.Object)>("Failed to initialize query for request {}", r0);
+
+        return;
+
+        catch java.lang.RuntimeException from label1 to label2 with label3;
+    }
+
+    protected void removeQuery(java.lang.String)
+    {
+        com.yahoo.bullet.storm.FilterBolt r0;
+        java.lang.String r1;
+        com.yahoo.bullet.querying.QueryManager $r2;
+
+        r0 := @this: com.yahoo.bullet.storm.FilterBolt;
+
+        r1 := @parameter0: java.lang.String;
+
+        specialinvoke r0.<com.yahoo.bullet.storm.QueryBolt: void removeQuery(java.lang.String)>(r1);
+
+        $r2 = r0.<com.yahoo.bullet.storm.FilterBolt: com.yahoo.bullet.querying.QueryManager manager>;
+
+        virtualinvoke $r2.<com.yahoo.bullet.querying.QueryManager: com.yahoo.bullet.querying.Querier removeAndGetQuery(java.lang.String)>(r1);
+
+        return;
+    }
+
+    private void onRecord(org.apache.storm.tuple.Tuple)
+    {
+        org.apache.storm.tuple.Tuple r0;
+        java.lang.Object $r1;
+        com.yahoo.bullet.record.BulletRecord r2;
+        com.yahoo.bullet.storm.FilterBolt r3;
+        com.yahoo.bullet.querying.QueryManager $r4;
+        com.yahoo.bullet.querying.QueryCategorizer $r5;
+
+        r3 := @this: com.yahoo.bullet.storm.FilterBolt;
+
+        r0 := @parameter0: org.apache.storm.tuple.Tuple;
+
+        $r1 = interfaceinvoke r0.<org.apache.storm.tuple.Tuple: java.lang.Object getValue(int)>(0);
+
+        r2 = (com.yahoo.bullet.record.BulletRecord) $r1;
+
+        $r4 = r3.<com.yahoo.bullet.storm.FilterBolt: com.yahoo.bullet.querying.QueryManager manager>;
+
+        $r5 = virtualinvoke $r4.<com.yahoo.bullet.querying.QueryManager: com.yahoo.bullet.querying.QueryCategorizer categorize(com.yahoo.bullet.record.BulletRecord)>(r2);
+
+        specialinvoke r3.<com.yahoo.bullet.storm.FilterBolt: void handleCategorizedQueries(com.yahoo.bullet.querying.QueryCategorizer)>($r5);
+
+        return;
+    }
+
+    private void onTick()
+    {
+        com.yahoo.bullet.storm.FilterBolt r0;
+        com.yahoo.bullet.querying.QueryManager $r1;
+        com.yahoo.bullet.querying.QueryCategorizer $r2;
+
+        r0 := @this: com.yahoo.bullet.storm.FilterBolt;
+
+        $r1 = r0.<com.yahoo.bullet.storm.FilterBolt: com.yahoo.bullet.querying.QueryManager manager>;
+
+        $r2 = virtualinvoke $r1.<com.yahoo.bullet.querying.QueryManager: com.yahoo.bullet.querying.QueryCategorizer categorize()>();
+
+        specialinvoke r0.<com.yahoo.bullet.storm.FilterBolt: void handleCategorizedQueries(com.yahoo.bullet.querying.QueryCategorizer)>($r2);
+
+        specialinvoke r0.<com.yahoo.bullet.storm.FilterBolt: void handleStats()>();
+
+        virtualinvoke r0.<com.yahoo.bullet.storm.FilterBolt: void emitReplayRequestIfNecessary()>();
+
+        return;
+    }
+
+    private void handleCategorizedQueries(com.yahoo.bullet.querying.QueryCategorizer)
+    {
+        com.yahoo.bullet.querying.QueryCategorizer r0;
+        java.util.Map r1, r7, r12;
+        java.util.Set $r2, $r6, $r8, $r11, $r13;
+        com.yahoo.bullet.storm.FilterBolt r3;
+        java.util.function.Consumer $r4, $r9, $r14, $r16;
+        com.yahoo.bullet.querying.QueryManager $r5, $r10, $r22;
+        java.util.Collection $r15;
+        java.lang.Object[] $r17;
+        org.slf4j.Logger $r18;
+        int $i0, $i1, $i2, $i3;
+        java.lang.Integer $r19, $r20, $r21, $r23;
+
+        r3 := @this: com.yahoo.bullet.storm.FilterBolt;
+
+        r0 := @parameter0: com.yahoo.bullet.querying.QueryCategorizer;
+
+        r1 = virtualinvoke r0.<com.yahoo.bullet.querying.QueryCategorizer: java.util.Map getDone()>();
+
+        $r2 = interfaceinvoke r1.<java.util.Map: java.util.Set entrySet()>();
+
+        $r4 = staticinvoke <com.yahoo.bullet.storm.FilterBolt$emitData__6: java.util.function.Consumer bootstrap$(com.yahoo.bullet.storm.FilterBolt)>(r3);
+
+        interfaceinvoke $r2.<java.util.Set: void forEach(java.util.function.Consumer)>($r4);
+
+        $r5 = r3.<com.yahoo.bullet.storm.FilterBolt: com.yahoo.bullet.querying.QueryManager manager>;
+
+        $r6 = interfaceinvoke r1.<java.util.Map: java.util.Set keySet()>();
+
+        virtualinvoke $r5.<com.yahoo.bullet.querying.QueryManager: void removeQueries(java.util.Set)>($r6);
+
+        r7 = virtualinvoke r0.<com.yahoo.bullet.querying.QueryCategorizer: java.util.Map getRateLimited()>();
+
+        $r8 = interfaceinvoke r7.<java.util.Map: java.util.Set entrySet()>();
+
+        $r9 = staticinvoke <com.yahoo.bullet.storm.FilterBolt$emitError__8: java.util.function.Consumer bootstrap$(com.yahoo.bullet.storm.FilterBolt)>(r3);
+
+        interfaceinvoke $r8.<java.util.Set: void forEach(java.util.function.Consumer)>($r9);
+
+        $r10 = r3.<com.yahoo.bullet.storm.FilterBolt: com.yahoo.bullet.querying.QueryManager manager>;
+
+        $r11 = interfaceinvoke r7.<java.util.Map: java.util.Set keySet()>();
+
+        virtualinvoke $r10.<com.yahoo.bullet.querying.QueryManager: void removeQueries(java.util.Set)>($r11);
+
+        r12 = virtualinvoke r0.<com.yahoo.bullet.querying.QueryCategorizer: java.util.Map getClosed()>();
+
+        $r13 = interfaceinvoke r12.<java.util.Map: java.util.Set entrySet()>();
+
+        $r14 = staticinvoke <com.yahoo.bullet.storm.FilterBolt$emitData__12: java.util.function.Consumer bootstrap$(com.yahoo.bullet.storm.FilterBolt)>(r3);
+
+        interfaceinvoke $r13.<java.util.Set: void forEach(java.util.function.Consumer)>($r14);
+
+        $r15 = interfaceinvoke r12.<java.util.Map: java.util.Collection values()>();
+
+        $r16 = staticinvoke <com.yahoo.bullet.storm.FilterBolt$reset__15: java.util.function.Consumer bootstrap$()>();
+
+        interfaceinvoke $r15.<java.util.Collection: void forEach(java.util.function.Consumer)>($r16);
+
+        $r18 = <com.yahoo.bullet.storm.FilterBolt: org.slf4j.Logger log>;
+
+        $r17 = newarray (java.lang.Object)[4];
+
+        $i0 = interfaceinvoke r1.<java.util.Map: int size()>();
+
+        $r19 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($i0);
+
+        $r17[0] = $r19;
+
+        $i1 = interfaceinvoke r7.<java.util.Map: int size()>();
+
+        $r20 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($i1);
+
+        $r17[1] = $r20;
+
+        $i2 = interfaceinvoke r12.<java.util.Map: int size()>();
+
+        $r21 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($i2);
+
+        $r17[2] = $r21;
+
+        $r22 = r3.<com.yahoo.bullet.storm.FilterBolt: com.yahoo.bullet.querying.QueryManager manager>;
+
+        $i3 = virtualinvoke $r22.<com.yahoo.bullet.querying.QueryManager: int size()>();
+
+        $r23 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($i3);
+
+        $r17[3] = $r23;
+
+        interfaceinvoke $r18.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object[])>("Done: {}, Rate limited: {}, Closed: {}, Active: {}", $r17);
+
+        return;
+    }
+
+    private void handleStats()
+    {
+        com.yahoo.bullet.storm.FilterBolt r0;
+        int $i0, $i1, $i2, $i3, $i4;
+        com.yahoo.bullet.querying.QueryManager $r1;
+        org.slf4j.Logger $r2, $r4;
+        java.util.Map $r3;
+        java.lang.Integer $r5;
+
+        r0 := @this: com.yahoo.bullet.storm.FilterBolt;
+
+        $i0 = r0.<com.yahoo.bullet.storm.FilterBolt: int statsTickCount>;
+
+        $i1 = $i0 + 1;
+
+        r0.<com.yahoo.bullet.storm.FilterBolt: int statsTickCount> = $i1;
+
+        $i3 = r0.<com.yahoo.bullet.storm.FilterBolt: int statsTickCount>;
+
+        $i2 = r0.<com.yahoo.bullet.storm.FilterBolt: int statsTickInterval>;
+
+        if $i3 >= $i2 goto label1;
+
+        return;
+
+     label1:
+        r0.<com.yahoo.bullet.storm.FilterBolt: int statsTickCount> = 0;
+
+        $r2 = <com.yahoo.bullet.storm.FilterBolt: org.slf4j.Logger log>;
+
+        $r1 = r0.<com.yahoo.bullet.storm.FilterBolt: com.yahoo.bullet.querying.QueryManager manager>;
+
+        $r3 = virtualinvoke $r1.<com.yahoo.bullet.querying.QueryManager: java.util.Map getStats()>();
+
+        interfaceinvoke $r2.<org.slf4j.Logger: void info(java.lang.String,java.lang.Object)>("Query Manager Statistics:\n{}\n", $r3);
+
+        $r4 = <com.yahoo.bullet.storm.FilterBolt: org.slf4j.Logger log>;
+
+        $i4 = r0.<com.yahoo.bullet.storm.FilterBolt: int duplicatedCount>;
+
+        $r5 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($i4);
+
+        interfaceinvoke $r4.<org.slf4j.Logger: void info(java.lang.String,java.lang.Object)>("Duplicated queries count: {}", $r5);
+
+        return;
+    }
+
+    public void emitData(java.util.Map$Entry)
+    {
+        com.yahoo.bullet.storm.FilterBolt r0;
+        java.util.Map$Entry r1;
+        java.lang.Object $r2, $r4;
+        java.lang.String $r3;
+        com.yahoo.bullet.querying.Querier $r5;
+        byte[] $r6;
+
+        r0 := @this: com.yahoo.bullet.storm.FilterBolt;
+
+        r1 := @parameter0: java.util.Map$Entry;
+
+        $r2 = interfaceinvoke r1.<java.util.Map$Entry: java.lang.Object getKey()>();
+
+        $r3 = (java.lang.String) $r2;
+
+        $r4 = interfaceinvoke r1.<java.util.Map$Entry: java.lang.Object getValue()>();
+
+        $r5 = (com.yahoo.bullet.querying.Querier) $r4;
+
+        $r6 = virtualinvoke $r5.<com.yahoo.bullet.querying.Querier: byte[] getData()>();
+
+        specialinvoke r0.<com.yahoo.bullet.storm.FilterBolt: void emit(java.lang.String,java.lang.String,java.lang.Object)>("default", $r3, $r6);
+
+        return;
+    }
+
+    public void emitError(java.util.Map$Entry)
+    {
+        com.yahoo.bullet.storm.FilterBolt r0;
+        java.util.Map$Entry r1;
+        java.lang.Object $r2, $r4;
+        java.lang.String $r3;
+        com.yahoo.bullet.querying.Querier $r5;
+        com.yahoo.bullet.querying.RateLimitError $r6;
+
+        r0 := @this: com.yahoo.bullet.storm.FilterBolt;
+
+        r1 := @parameter0: java.util.Map$Entry;
+
+        $r2 = interfaceinvoke r1.<java.util.Map$Entry: java.lang.Object getKey()>();
+
+        $r3 = (java.lang.String) $r2;
+
+        $r4 = interfaceinvoke r1.<java.util.Map$Entry: java.lang.Object getValue()>();
+
+        $r5 = (com.yahoo.bullet.querying.Querier) $r4;
+
+        $r6 = virtualinvoke $r5.<com.yahoo.bullet.querying.Querier: com.yahoo.bullet.querying.RateLimitError getRateLimitError()>();
+
+        specialinvoke r0.<com.yahoo.bullet.storm.FilterBolt: void emit(java.lang.String,java.lang.String,java.lang.Object)>("error", $r3, $r6);
+
+        return;
+    }
+
+    private void emit(java.lang.String, java.lang.String, java.lang.Object)
+    {
+        java.lang.Object r0;
+        com.yahoo.bullet.storm.FilterBolt r1;
+        java.lang.String r2, r5;
+        java.lang.Object[] $r4;
+        org.apache.storm.task.OutputCollector $r6;
+        org.apache.storm.tuple.Values $r8;
+        java.util.List $r9;
+
+        r1 := @this: com.yahoo.bullet.storm.FilterBolt;
+
+        r2 := @parameter0: java.lang.String;
+
+        r5 := @parameter1: java.lang.String;
+
+        r0 := @parameter2: java.lang.Object;
+
+        if r0 == null goto label1;
+
+        $r6 = r1.<com.yahoo.bullet.storm.FilterBolt: org.apache.storm.task.OutputCollector collector>;
+
+        $r8 = new org.apache.storm.tuple.Values;
+
+        $r4 = newarray (java.lang.Object)[2];
+
+        $r4[0] = r5;
+
+        $r4[1] = r0;
+
+        specialinvoke $r8.<org.apache.storm.tuple.Values: void <init>(java.lang.Object[])>($r4);
+
+        $r9 = (java.util.List) $r8;
+
+        virtualinvoke $r6.<org.apache.storm.task.OutputCollector: java.util.List emit(java.lang.String,java.util.List)>(r2, $r9);
+
+     label1:
+        return;
+    }
+
+    private void updateLatency(org.apache.storm.tuple.Tuple)
+    {
+        com.yahoo.bullet.storm.FilterBolt r0;
+        com.yahoo.bullet.storm.metric.BulletMetrics $r1;
+        boolean $z0;
+        org.apache.storm.tuple.Tuple r2;
+        int $i0;
+        java.lang.Object $r3;
+        java.lang.Long r4, $r6;
+        org.apache.storm.metric.api.ReducedMetric $r5;
+        long $l1, $l2, $l3;
+
+        r0 := @this: com.yahoo.bullet.storm.FilterBolt;
+
+        r2 := @parameter0: org.apache.storm.tuple.Tuple;
+
+        $r1 = r0.<com.yahoo.bullet.storm.FilterBolt: com.yahoo.bullet.storm.metric.BulletMetrics metrics>;
+
+        $z0 = virtualinvoke $r1.<com.yahoo.bullet.storm.metric.BulletMetrics: boolean isEnabled()>();
+
+        if $z0 == 0 goto label1;
+
+        $i0 = interfaceinvoke r2.<org.apache.storm.tuple.Tuple: int size()>();
+
+        if $i0 <= 1 goto label1;
+
+        $r3 = interfaceinvoke r2.<org.apache.storm.tuple.Tuple: java.lang.Object getValue(int)>(1);
+
+        r4 = (java.lang.Long) $r3;
+
+        $r5 = r0.<com.yahoo.bullet.storm.FilterBolt: org.apache.storm.metric.api.ReducedMetric averageLatency>;
+
+        $l1 = staticinvoke <java.lang.System: long currentTimeMillis()>();
+
+        $l2 = virtualinvoke r4.<java.lang.Long: long longValue()>();
+
+        $l3 = $l1 - $l2;
+
+        $r6 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>($l3);
+
+        virtualinvoke $r5.<org.apache.storm.metric.api.ReducedMetric: void update(java.lang.Object)>($r6);
+
+     label1:
+        return;
+    }
+
+    com.yahoo.bullet.querying.QueryManager getManager()
+    {
+        com.yahoo.bullet.storm.FilterBolt r0;
+        com.yahoo.bullet.querying.QueryManager $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.FilterBolt;
+
+        $r1 = r0.<com.yahoo.bullet.storm.FilterBolt: com.yahoo.bullet.querying.QueryManager manager>;
+
+        return $r1;
+    }
+
+    int getStatsTickCount()
+    {
+        com.yahoo.bullet.storm.FilterBolt r0;
+        int $i0;
+
+        r0 := @this: com.yahoo.bullet.storm.FilterBolt;
+
+        $i0 = r0.<com.yahoo.bullet.storm.FilterBolt: int statsTickCount>;
+
+        return $i0;
+    }
+
+    static void <clinit>()
+    {
+        org.slf4j.Logger $r0;
+
+        <com.yahoo.bullet.storm.FilterBolt: long serialVersionUID> = -4357269268404488793L;
+
+        $r0 = staticinvoke <org.slf4j.LoggerFactory: org.slf4j.Logger getLogger(java.lang.Class)>(class "Lcom/yahoo/bullet/storm/FilterBolt;");
+
+        <com.yahoo.bullet.storm.FilterBolt: org.slf4j.Logger log> = $r0;
+
+        return;
+    }
+}

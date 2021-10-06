@@ -1,0 +1,203 @@
+public class com.yahoo.bullet.storm.drpc.DRPCResultPublisher extends java.lang.Object implements com.yahoo.bullet.pubsub.Publisher
+{
+    private static final org.slf4j.Logger log;
+    private org.apache.storm.drpc.ReturnResults bolt;
+    private com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector collector;
+
+    public void <init>(com.yahoo.bullet.common.BulletConfig)
+    {
+        com.yahoo.bullet.storm.drpc.DRPCResultPublisher r0;
+        com.yahoo.bullet.common.BulletConfig r1;
+        java.lang.Object $r2;
+        java.util.Map r3;
+        com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector $r4, $r6;
+        org.apache.storm.task.OutputCollector $r5;
+        org.apache.storm.drpc.ReturnResults $r8, $r9;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.DRPCResultPublisher;
+
+        r1 := @parameter0: com.yahoo.bullet.common.BulletConfig;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        $r2 = virtualinvoke r1.<com.yahoo.bullet.common.BulletConfig: java.lang.Object getRequiredConfigAs(java.lang.String,java.lang.Class)>("bullet.topology.storm.config", class "Ljava/util/Map;");
+
+        r3 = (java.util.Map) $r2;
+
+        $r4 = new com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector;
+
+        specialinvoke $r4.<com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector: void <init>()>();
+
+        r0.<com.yahoo.bullet.storm.drpc.DRPCResultPublisher: com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector collector> = $r4;
+
+        $r5 = new org.apache.storm.task.OutputCollector;
+
+        $r6 = r0.<com.yahoo.bullet.storm.drpc.DRPCResultPublisher: com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector collector>;
+
+        specialinvoke $r5.<org.apache.storm.task.OutputCollector: void <init>(org.apache.storm.task.IOutputCollector)>($r6);
+
+        $r8 = new org.apache.storm.drpc.ReturnResults;
+
+        specialinvoke $r8.<org.apache.storm.drpc.ReturnResults: void <init>()>();
+
+        r0.<com.yahoo.bullet.storm.drpc.DRPCResultPublisher: org.apache.storm.drpc.ReturnResults bolt> = $r8;
+
+        $r9 = r0.<com.yahoo.bullet.storm.drpc.DRPCResultPublisher: org.apache.storm.drpc.ReturnResults bolt>;
+
+        virtualinvoke $r9.<org.apache.storm.drpc.ReturnResults: void prepare(java.util.Map,org.apache.storm.task.TopologyContext,org.apache.storm.task.OutputCollector)>(r3, null, $r5);
+
+        return;
+    }
+
+    public com.yahoo.bullet.pubsub.PubSubMessage send(com.yahoo.bullet.pubsub.PubSubMessage) throws com.yahoo.bullet.pubsub.PubSubException
+    {
+        com.yahoo.bullet.pubsub.PubSubMessage r0;
+        com.yahoo.bullet.pubsub.Metadata r1;
+        java.io.Serializable $r2, $r7;
+        java.lang.String r3, $r6, r8, $r22;
+        java.lang.Object[] $r4, $r11;
+        org.slf4j.Logger $r5;
+        com.yahoo.bullet.storm.drpc.DRPCResultPublisher r13;
+        org.apache.storm.drpc.ReturnResults $r14;
+        com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector $r15, $r16;
+        boolean $z0;
+        java.lang.StringBuilder $r20, $r21, $r25;
+        org.apache.storm.tuple.Values $r23;
+        com.yahoo.bullet.storm.drpc.utils.DRPCTuple $r24;
+        com.yahoo.bullet.pubsub.PubSubException $r26;
+        java.util.List $r27;
+        java.lang.Throwable $r28;
+
+        r13 := @this: com.yahoo.bullet.storm.drpc.DRPCResultPublisher;
+
+        r0 := @parameter0: com.yahoo.bullet.pubsub.PubSubMessage;
+
+        r1 = virtualinvoke r0.<com.yahoo.bullet.pubsub.PubSubMessage: com.yahoo.bullet.pubsub.Metadata getMetadata()>();
+
+        $r2 = virtualinvoke r1.<com.yahoo.bullet.pubsub.Metadata: java.io.Serializable getContent()>();
+
+        r3 = virtualinvoke $r2.<java.lang.Object: java.lang.String toString()>();
+
+        $r5 = <com.yahoo.bullet.storm.drpc.DRPCResultPublisher: org.slf4j.Logger log>;
+
+        $r4 = newarray (java.lang.Object)[3];
+
+        $r4[0] = r3;
+
+        $r6 = virtualinvoke r0.<com.yahoo.bullet.pubsub.PubSubMessage: java.lang.String getId()>();
+
+        $r4[1] = $r6;
+
+        $r7 = virtualinvoke r0.<com.yahoo.bullet.pubsub.PubSubMessage: java.io.Serializable getContent()>();
+
+        $r4[2] = $r7;
+
+        interfaceinvoke $r5.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object[])>("Removing metadata {} for result {}@{}: {}", $r4);
+
+        virtualinvoke r1.<com.yahoo.bullet.pubsub.Metadata: void setContent(java.io.Serializable)>(null);
+
+        r8 = virtualinvoke r0.<com.yahoo.bullet.pubsub.PubSubMessage: java.lang.String asJSON()>();
+
+        $r24 = new com.yahoo.bullet.storm.drpc.utils.DRPCTuple;
+
+        $r23 = new org.apache.storm.tuple.Values;
+
+        $r11 = newarray (java.lang.Object)[2];
+
+        $r11[0] = r8;
+
+        $r11[1] = r3;
+
+        specialinvoke $r23.<org.apache.storm.tuple.Values: void <init>(java.lang.Object[])>($r11);
+
+        $r27 = (java.util.List) $r23;
+
+        specialinvoke $r24.<com.yahoo.bullet.storm.drpc.utils.DRPCTuple: void <init>(java.util.List)>($r27);
+
+        $r14 = r13.<com.yahoo.bullet.storm.drpc.DRPCResultPublisher: org.apache.storm.drpc.ReturnResults bolt>;
+
+        virtualinvoke $r14.<org.apache.storm.drpc.ReturnResults: void execute(org.apache.storm.tuple.Tuple)>($r24);
+
+        $r15 = r13.<com.yahoo.bullet.storm.drpc.DRPCResultPublisher: com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector collector>;
+
+        $z0 = virtualinvoke $r15.<com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector: boolean isAcked()>();
+
+        if $z0 != 0 goto label1;
+
+        $r26 = new com.yahoo.bullet.pubsub.PubSubException;
+
+        $r25 = new java.lang.StringBuilder;
+
+        specialinvoke $r25.<java.lang.StringBuilder: void <init>()>();
+
+        $r20 = virtualinvoke $r25.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Message not acked. Unable to send message through DRPC:\n ");
+
+        $r21 = virtualinvoke $r20.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r8);
+
+        $r22 = virtualinvoke $r21.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $r26.<com.yahoo.bullet.pubsub.PubSubException: void <init>(java.lang.String)>($r22);
+
+        $r28 = (java.lang.Throwable) $r26;
+
+        throw $r28;
+
+     label1:
+        $r16 = r13.<com.yahoo.bullet.storm.drpc.DRPCResultPublisher: com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector collector>;
+
+        virtualinvoke $r16.<com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector: java.util.List reset()>();
+
+        return r0;
+    }
+
+    public void close()
+    {
+        com.yahoo.bullet.storm.drpc.DRPCResultPublisher r0;
+        org.apache.storm.drpc.ReturnResults $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.DRPCResultPublisher;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.DRPCResultPublisher: org.apache.storm.drpc.ReturnResults bolt>;
+
+        virtualinvoke $r1.<org.apache.storm.drpc.ReturnResults: void cleanup()>();
+
+        return;
+    }
+
+    void setBolt(org.apache.storm.drpc.ReturnResults)
+    {
+        com.yahoo.bullet.storm.drpc.DRPCResultPublisher r0;
+        org.apache.storm.drpc.ReturnResults r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.DRPCResultPublisher;
+
+        r1 := @parameter0: org.apache.storm.drpc.ReturnResults;
+
+        r0.<com.yahoo.bullet.storm.drpc.DRPCResultPublisher: org.apache.storm.drpc.ReturnResults bolt> = r1;
+
+        return;
+    }
+
+    com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector getCollector()
+    {
+        com.yahoo.bullet.storm.drpc.DRPCResultPublisher r0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.DRPCResultPublisher;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.DRPCResultPublisher: com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector collector>;
+
+        return $r1;
+    }
+
+    static void <clinit>()
+    {
+        org.slf4j.Logger $r0;
+
+        $r0 = staticinvoke <org.slf4j.LoggerFactory: org.slf4j.Logger getLogger(java.lang.Class)>(class "Lcom/yahoo/bullet/storm/drpc/DRPCResultPublisher;");
+
+        <com.yahoo.bullet.storm.drpc.DRPCResultPublisher: org.slf4j.Logger log> = $r0;
+
+        return;
+    }
+}

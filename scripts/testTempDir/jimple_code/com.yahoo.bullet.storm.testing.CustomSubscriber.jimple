@@ -1,0 +1,274 @@
+public class com.yahoo.bullet.storm.testing.CustomSubscriber extends java.lang.Object implements com.yahoo.bullet.pubsub.Subscriber
+{
+    private java.util.Queue queue;
+    private java.util.List received;
+    private java.util.List committed;
+    private java.util.List failed;
+    private boolean closed;
+    private boolean thrown;
+    private com.yahoo.bullet.pubsub.PubSub$Context context;
+
+    public void <init>(com.yahoo.bullet.pubsub.PubSub$Context)
+    {
+        com.yahoo.bullet.storm.testing.CustomSubscriber r0;
+        java.util.LinkedList $r1;
+        java.util.ArrayList $r2, $r3, $r4;
+        com.yahoo.bullet.pubsub.PubSub$Context r5;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomSubscriber;
+
+        r5 := @parameter0: com.yahoo.bullet.pubsub.PubSub$Context;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        $r1 = new java.util.LinkedList;
+
+        specialinvoke $r1.<java.util.LinkedList: void <init>()>();
+
+        r0.<com.yahoo.bullet.storm.testing.CustomSubscriber: java.util.Queue queue> = $r1;
+
+        $r2 = new java.util.ArrayList;
+
+        specialinvoke $r2.<java.util.ArrayList: void <init>()>();
+
+        r0.<com.yahoo.bullet.storm.testing.CustomSubscriber: java.util.List received> = $r2;
+
+        $r3 = new java.util.ArrayList;
+
+        specialinvoke $r3.<java.util.ArrayList: void <init>()>();
+
+        r0.<com.yahoo.bullet.storm.testing.CustomSubscriber: java.util.List committed> = $r3;
+
+        $r4 = new java.util.ArrayList;
+
+        specialinvoke $r4.<java.util.ArrayList: void <init>()>();
+
+        r0.<com.yahoo.bullet.storm.testing.CustomSubscriber: java.util.List failed> = $r4;
+
+        r0.<com.yahoo.bullet.storm.testing.CustomSubscriber: boolean closed> = 0;
+
+        r0.<com.yahoo.bullet.storm.testing.CustomSubscriber: boolean thrown> = 0;
+
+        r0.<com.yahoo.bullet.storm.testing.CustomSubscriber: com.yahoo.bullet.pubsub.PubSub$Context context> = r5;
+
+        return;
+    }
+
+    public transient void addMessages(com.yahoo.bullet.pubsub.PubSubMessage[])
+    {
+        com.yahoo.bullet.pubsub.PubSubMessage[] r0;
+        int i0, i1;
+        com.yahoo.bullet.pubsub.PubSubMessage r2;
+        com.yahoo.bullet.storm.testing.CustomSubscriber r3;
+        java.util.Queue $r4;
+
+        r3 := @this: com.yahoo.bullet.storm.testing.CustomSubscriber;
+
+        r0 := @parameter0: com.yahoo.bullet.pubsub.PubSubMessage[];
+
+        i0 = lengthof r0;
+
+        i1 = 0;
+
+     label1:
+        if i1 >= i0 goto label2;
+
+        r2 = r0[i1];
+
+        $r4 = r3.<com.yahoo.bullet.storm.testing.CustomSubscriber: java.util.Queue queue>;
+
+        interfaceinvoke $r4.<java.util.Queue: boolean add(java.lang.Object)>(r2);
+
+        i1 = i1 + 1;
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    public com.yahoo.bullet.pubsub.PubSubMessage receive() throws com.yahoo.bullet.pubsub.PubSubException
+    {
+        com.yahoo.bullet.storm.testing.CustomSubscriber r0;
+        java.util.Queue $r1, $r2;
+        boolean $z0;
+        java.lang.Object $r3;
+        com.yahoo.bullet.pubsub.PubSubMessage r4;
+        java.util.List $r5;
+        com.yahoo.bullet.pubsub.PubSubException $r7;
+        java.lang.Throwable $r8;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomSubscriber;
+
+        $r1 = r0.<com.yahoo.bullet.storm.testing.CustomSubscriber: java.util.Queue queue>;
+
+        $z0 = interfaceinvoke $r1.<java.util.Queue: boolean isEmpty()>();
+
+        if $z0 == 0 goto label1;
+
+        $r7 = new com.yahoo.bullet.pubsub.PubSubException;
+
+        specialinvoke $r7.<com.yahoo.bullet.pubsub.PubSubException: void <init>(java.lang.String)>("");
+
+        $r8 = (java.lang.Throwable) $r7;
+
+        throw $r8;
+
+     label1:
+        $r2 = r0.<com.yahoo.bullet.storm.testing.CustomSubscriber: java.util.Queue queue>;
+
+        $r3 = interfaceinvoke $r2.<java.util.Queue: java.lang.Object remove()>();
+
+        r4 = (com.yahoo.bullet.pubsub.PubSubMessage) $r3;
+
+        $r5 = r0.<com.yahoo.bullet.storm.testing.CustomSubscriber: java.util.List received>;
+
+        interfaceinvoke $r5.<java.util.List: boolean add(java.lang.Object)>(r4);
+
+        return r4;
+    }
+
+    public void close() throws java.lang.Exception
+    {
+        com.yahoo.bullet.storm.testing.CustomSubscriber r0;
+        boolean $z0;
+        java.lang.Exception $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomSubscriber;
+
+        $z0 = r0.<com.yahoo.bullet.storm.testing.CustomSubscriber: boolean closed>;
+
+        if $z0 == 0 goto label1;
+
+        r0.<com.yahoo.bullet.storm.testing.CustomSubscriber: boolean thrown> = 1;
+
+        $r1 = new java.lang.Exception;
+
+        specialinvoke $r1.<java.lang.Exception: void <init>()>();
+
+        throw $r1;
+
+     label1:
+        r0.<com.yahoo.bullet.storm.testing.CustomSubscriber: boolean closed> = 1;
+
+        return;
+    }
+
+    public void commit(java.lang.String)
+    {
+        com.yahoo.bullet.storm.testing.CustomSubscriber r0;
+        java.lang.String r1;
+        java.util.List $r2;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomSubscriber;
+
+        r1 := @parameter0: java.lang.String;
+
+        $r2 = r0.<com.yahoo.bullet.storm.testing.CustomSubscriber: java.util.List committed>;
+
+        interfaceinvoke $r2.<java.util.List: boolean add(java.lang.Object)>(r1);
+
+        return;
+    }
+
+    public void fail(java.lang.String)
+    {
+        com.yahoo.bullet.storm.testing.CustomSubscriber r0;
+        java.lang.String r1;
+        java.util.List $r2;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomSubscriber;
+
+        r1 := @parameter0: java.lang.String;
+
+        $r2 = r0.<com.yahoo.bullet.storm.testing.CustomSubscriber: java.util.List failed>;
+
+        interfaceinvoke $r2.<java.util.List: boolean add(java.lang.Object)>(r1);
+
+        return;
+    }
+
+    public java.util.Queue getQueue()
+    {
+        com.yahoo.bullet.storm.testing.CustomSubscriber r0;
+        java.util.Queue $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomSubscriber;
+
+        $r1 = r0.<com.yahoo.bullet.storm.testing.CustomSubscriber: java.util.Queue queue>;
+
+        return $r1;
+    }
+
+    public java.util.List getReceived()
+    {
+        com.yahoo.bullet.storm.testing.CustomSubscriber r0;
+        java.util.List $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomSubscriber;
+
+        $r1 = r0.<com.yahoo.bullet.storm.testing.CustomSubscriber: java.util.List received>;
+
+        return $r1;
+    }
+
+    public java.util.List getCommitted()
+    {
+        com.yahoo.bullet.storm.testing.CustomSubscriber r0;
+        java.util.List $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomSubscriber;
+
+        $r1 = r0.<com.yahoo.bullet.storm.testing.CustomSubscriber: java.util.List committed>;
+
+        return $r1;
+    }
+
+    public java.util.List getFailed()
+    {
+        com.yahoo.bullet.storm.testing.CustomSubscriber r0;
+        java.util.List $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomSubscriber;
+
+        $r1 = r0.<com.yahoo.bullet.storm.testing.CustomSubscriber: java.util.List failed>;
+
+        return $r1;
+    }
+
+    public boolean isClosed()
+    {
+        com.yahoo.bullet.storm.testing.CustomSubscriber r0;
+        boolean $z0;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomSubscriber;
+
+        $z0 = r0.<com.yahoo.bullet.storm.testing.CustomSubscriber: boolean closed>;
+
+        return $z0;
+    }
+
+    public boolean isThrown()
+    {
+        com.yahoo.bullet.storm.testing.CustomSubscriber r0;
+        boolean $z0;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomSubscriber;
+
+        $z0 = r0.<com.yahoo.bullet.storm.testing.CustomSubscriber: boolean thrown>;
+
+        return $z0;
+    }
+
+    public com.yahoo.bullet.pubsub.PubSub$Context getContext()
+    {
+        com.yahoo.bullet.storm.testing.CustomSubscriber r0;
+        com.yahoo.bullet.pubsub.PubSub$Context $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomSubscriber;
+
+        $r1 = r0.<com.yahoo.bullet.storm.testing.CustomSubscriber: com.yahoo.bullet.pubsub.PubSub$Context context>;
+
+        return $r1;
+    }
+}

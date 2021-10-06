@@ -1,0 +1,301 @@
+public class com.yahoo.bullet.storm.TopologyConstants extends java.lang.Object
+{
+    public static final java.lang.String ID_FIELD;
+    public static final java.lang.String QUERY_FIELD;
+    public static final java.lang.String METADATA_FIELD;
+    public static final java.lang.String TICK_FIELD;
+    public static final java.lang.String DATA_FIELD;
+    public static final java.lang.String ERROR_FIELD;
+    public static final java.lang.String RESULT_FIELD;
+    public static final java.lang.String RECORD_FIELD;
+    public static final java.lang.String RECORD_TIMESTAMP_FIELD;
+    public static final java.lang.String REPLAY_TIMESTAMP_FIELD;
+    public static final java.lang.String REPLAY_ACK_FIELD;
+    public static final java.lang.String REPLAY_INDEX_FIELD;
+    public static final java.lang.String REPLAY_BATCH_FIELD;
+    public static final int ID_POSITION;
+    public static final int QUERY_POSITION;
+    public static final int METADATA_POSITION;
+    public static final int ERROR_POSITION;
+    public static final int RECORD_POSITION;
+    public static final int RECORD_TIMESTAMP_POSITION;
+    public static final int DATA_POSITION;
+    public static final int RESULT_POSITION;
+    public static final int RESULT_METADATA_POSITION;
+    public static final int REPLAY_TIMESTAMP_POSITION;
+    public static final int REPLAY_ACK_POSITION;
+    public static final int REPLAY_INDEX_POSITION;
+    public static final int REPLAY_BATCH_POSITION;
+    public static final java.lang.String DATA_COMPONENT;
+    public static final java.lang.String RECORD_COMPONENT;
+    public static final java.lang.String TICK_COMPONENT;
+    public static final java.lang.String QUERY_COMPONENT;
+    public static final java.lang.String FILTER_COMPONENT;
+    public static final java.lang.String JOIN_COMPONENT;
+    public static final java.lang.String RESULT_COMPONENT;
+    public static final java.lang.String LOOP_COMPONENT;
+    public static final java.lang.String REPLAY_COMPONENT;
+    public static final java.lang.String TICK_STREAM;
+    public static final java.lang.String QUERY_STREAM;
+    public static final java.lang.String METADATA_STREAM;
+    public static final java.lang.String RECORD_STREAM;
+    public static final java.lang.String ERROR_STREAM;
+    public static final java.lang.String DATA_STREAM;
+    public static final java.lang.String RESULT_STREAM;
+    public static final java.lang.String FEEDBACK_STREAM;
+    public static final java.lang.String REPLAY_STREAM;
+    public static final java.lang.String CAPTURE_STREAM;
+    public static final java.lang.String METRIC_PREFIX;
+    public static final java.lang.String ACTIVE_QUERIES_METRIC;
+    public static final java.lang.String CREATED_QUERIES_METRIC;
+    public static final java.lang.String IMPROPER_QUERIES_METRIC;
+    public static final java.lang.String RATE_EXCEEDED_QUERIES_METRIC;
+    public static final java.lang.String DUPLICATED_QUERIES_METRIC;
+    public static final java.lang.String LATENCY_METRIC;
+    public static final java.lang.String BATCHED_QUERIES_METRIC;
+    public static final java.lang.String ACTIVE_REPLAYS_METRIC;
+    public static final java.lang.String CREATED_REPLAYS_METRIC;
+    public static final java.lang.String DEFAULT_METRIC;
+    public static final java.util.Set BUILT_IN_METRICS;
+
+    public void <init>()
+    {
+        com.yahoo.bullet.storm.TopologyConstants r0;
+
+        r0 := @this: com.yahoo.bullet.storm.TopologyConstants;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static boolean isKillSignal(com.yahoo.bullet.pubsub.Metadata$Signal)
+    {
+        com.yahoo.bullet.pubsub.Metadata$Signal r0, $r1, $r2;
+        boolean $z0;
+
+        r0 := @parameter0: com.yahoo.bullet.pubsub.Metadata$Signal;
+
+        $r1 = <com.yahoo.bullet.pubsub.Metadata$Signal: com.yahoo.bullet.pubsub.Metadata$Signal KILL>;
+
+        if r0 == $r1 goto label1;
+
+        $r2 = <com.yahoo.bullet.pubsub.Metadata$Signal: com.yahoo.bullet.pubsub.Metadata$Signal COMPLETE>;
+
+        if r0 != $r2 goto label2;
+
+     label1:
+        $z0 = 1;
+
+        goto label3;
+
+     label2:
+        $z0 = 0;
+
+     label3:
+        return $z0;
+    }
+
+    public static boolean isReplaySignal(com.yahoo.bullet.pubsub.Metadata$Signal)
+    {
+        com.yahoo.bullet.pubsub.Metadata$Signal r0, $r1;
+        boolean $z0;
+
+        r0 := @parameter0: com.yahoo.bullet.pubsub.Metadata$Signal;
+
+        $r1 = <com.yahoo.bullet.pubsub.Metadata$Signal: com.yahoo.bullet.pubsub.Metadata$Signal REPLAY>;
+
+        if r0 != $r1 goto label1;
+
+        $z0 = 1;
+
+        goto label2;
+
+     label1:
+        $z0 = 0;
+
+     label2:
+        return $z0;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.Class $r0, $r2, $r4, $r6, $r8, $r10, $r12;
+        java.lang.String $r1, $r3, $r5, $r7, $r9, $r11, $r13;
+        java.util.HashSet $r14;
+        java.lang.String[] $r15;
+        java.util.List $r16;
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String DEFAULT_METRIC> = "default";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String CREATED_REPLAYS_METRIC> = "bullet_created_replays";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String ACTIVE_REPLAYS_METRIC> = "bullet_active_replays";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String BATCHED_QUERIES_METRIC> = "bullet_batched_queries";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String LATENCY_METRIC> = "bullet_filter_latency";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String DUPLICATED_QUERIES_METRIC> = "bullet_duplicated_queries";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String RATE_EXCEEDED_QUERIES_METRIC> = "bullet_rate_exceeded_queries";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String IMPROPER_QUERIES_METRIC> = "bullet_improper_queries";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String CREATED_QUERIES_METRIC> = "bullet_created_queries";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String ACTIVE_QUERIES_METRIC> = "bullet_active_queries";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String METRIC_PREFIX> = "bullet_";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String CAPTURE_STREAM> = "capture";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String REPLAY_STREAM> = "replay";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String FEEDBACK_STREAM> = "feedback";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String RESULT_STREAM> = "default";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String DATA_STREAM> = "default";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String ERROR_STREAM> = "error";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String RECORD_STREAM> = "default";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String METADATA_STREAM> = "metadata";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String QUERY_STREAM> = "default";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String TICK_STREAM> = "default";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String RECORD_COMPONENT> = "DataSource";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String DATA_COMPONENT> = "DataSpout";
+
+        <com.yahoo.bullet.storm.TopologyConstants: int REPLAY_BATCH_POSITION> = 3;
+
+        <com.yahoo.bullet.storm.TopologyConstants: int REPLAY_INDEX_POSITION> = 2;
+
+        <com.yahoo.bullet.storm.TopologyConstants: int REPLAY_ACK_POSITION> = 2;
+
+        <com.yahoo.bullet.storm.TopologyConstants: int REPLAY_TIMESTAMP_POSITION> = 1;
+
+        <com.yahoo.bullet.storm.TopologyConstants: int RESULT_METADATA_POSITION> = 2;
+
+        <com.yahoo.bullet.storm.TopologyConstants: int RESULT_POSITION> = 1;
+
+        <com.yahoo.bullet.storm.TopologyConstants: int DATA_POSITION> = 1;
+
+        <com.yahoo.bullet.storm.TopologyConstants: int RECORD_TIMESTAMP_POSITION> = 1;
+
+        <com.yahoo.bullet.storm.TopologyConstants: int RECORD_POSITION> = 0;
+
+        <com.yahoo.bullet.storm.TopologyConstants: int ERROR_POSITION> = 1;
+
+        <com.yahoo.bullet.storm.TopologyConstants: int METADATA_POSITION> = 1;
+
+        <com.yahoo.bullet.storm.TopologyConstants: int QUERY_POSITION> = 1;
+
+        <com.yahoo.bullet.storm.TopologyConstants: int ID_POSITION> = 0;
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String REPLAY_BATCH_FIELD> = "batch";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String REPLAY_INDEX_FIELD> = "index";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String REPLAY_ACK_FIELD> = "ack";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String REPLAY_TIMESTAMP_FIELD> = "timestamp";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String RECORD_TIMESTAMP_FIELD> = "timestamp";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String RECORD_FIELD> = "record";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String RESULT_FIELD> = "result";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String ERROR_FIELD> = "error";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String DATA_FIELD> = "data";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String TICK_FIELD> = "tick";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String METADATA_FIELD> = "metadata";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String QUERY_FIELD> = "query";
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String ID_FIELD> = "id";
+
+        $r0 = class "Lcom/yahoo/bullet/storm/TickSpout;";
+
+        $r1 = virtualinvoke $r0.<java.lang.Class: java.lang.String getSimpleName()>();
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String TICK_COMPONENT> = $r1;
+
+        $r2 = class "Lcom/yahoo/bullet/storm/QuerySpout;";
+
+        $r3 = virtualinvoke $r2.<java.lang.Class: java.lang.String getSimpleName()>();
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String QUERY_COMPONENT> = $r3;
+
+        $r4 = class "Lcom/yahoo/bullet/storm/FilterBolt;";
+
+        $r5 = virtualinvoke $r4.<java.lang.Class: java.lang.String getSimpleName()>();
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String FILTER_COMPONENT> = $r5;
+
+        $r6 = class "Lcom/yahoo/bullet/storm/JoinBolt;";
+
+        $r7 = virtualinvoke $r6.<java.lang.Class: java.lang.String getSimpleName()>();
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String JOIN_COMPONENT> = $r7;
+
+        $r8 = class "Lcom/yahoo/bullet/storm/ResultBolt;";
+
+        $r9 = virtualinvoke $r8.<java.lang.Class: java.lang.String getSimpleName()>();
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String RESULT_COMPONENT> = $r9;
+
+        $r10 = class "Lcom/yahoo/bullet/storm/LoopBolt;";
+
+        $r11 = virtualinvoke $r10.<java.lang.Class: java.lang.String getSimpleName()>();
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String LOOP_COMPONENT> = $r11;
+
+        $r12 = class "Lcom/yahoo/bullet/storm/ReplayBolt;";
+
+        $r13 = virtualinvoke $r12.<java.lang.Class: java.lang.String getSimpleName()>();
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.lang.String REPLAY_COMPONENT> = $r13;
+
+        $r14 = new java.util.HashSet;
+
+        $r15 = newarray (java.lang.String)[10];
+
+        $r15[0] = "bullet_active_queries";
+
+        $r15[1] = "bullet_created_queries";
+
+        $r15[2] = "bullet_improper_queries";
+
+        $r15[3] = "bullet_rate_exceeded_queries";
+
+        $r15[4] = "bullet_duplicated_queries";
+
+        $r15[5] = "bullet_filter_latency";
+
+        $r15[6] = "bullet_batched_queries";
+
+        $r15[7] = "bullet_active_replays";
+
+        $r15[8] = "bullet_created_replays";
+
+        $r15[9] = "default";
+
+        $r16 = staticinvoke <java.util.Arrays: java.util.List asList(java.lang.Object[])>($r15);
+
+        specialinvoke $r14.<java.util.HashSet: void <init>(java.util.Collection)>($r16);
+
+        <com.yahoo.bullet.storm.TopologyConstants: java.util.Set BUILT_IN_METRICS> = $r14;
+
+        return;
+    }
+}

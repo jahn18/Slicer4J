@@ -1,0 +1,1433 @@
+public class com.yahoo.bullet.storm.testing.CustomBoltDeclarer extends java.lang.Object implements org.apache.storm.topology.BoltDeclarer
+{
+    private java.lang.Number offHeap;
+    private java.lang.Number onHeap;
+    private java.lang.Number cpuLoad;
+    private java.lang.String id;
+    private org.apache.storm.topology.IRichBolt bolt;
+    private java.lang.Number parallelism;
+    private java.util.Map fieldsGroupings;
+    private java.util.Map customGroupings;
+    private java.util.List allGroupings;
+    private java.util.List shuffleGroupings;
+    private java.util.List directGroupings;
+
+    public void <init>(java.lang.String, org.apache.storm.topology.IRichBolt, java.lang.Number)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.util.HashMap $r1, $r2;
+        java.util.ArrayList $r3, $r4, $r5;
+        java.lang.String r6;
+        org.apache.storm.topology.IRichBolt r7;
+        java.lang.Number r8;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r6 := @parameter0: java.lang.String;
+
+        r7 := @parameter1: org.apache.storm.topology.IRichBolt;
+
+        r8 := @parameter2: java.lang.Number;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        $r1 = new java.util.HashMap;
+
+        specialinvoke $r1.<java.util.HashMap: void <init>()>();
+
+        r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.util.Map fieldsGroupings> = $r1;
+
+        $r2 = new java.util.HashMap;
+
+        specialinvoke $r2.<java.util.HashMap: void <init>()>();
+
+        r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.util.Map customGroupings> = $r2;
+
+        $r3 = new java.util.ArrayList;
+
+        specialinvoke $r3.<java.util.ArrayList: void <init>()>();
+
+        r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.util.List allGroupings> = $r3;
+
+        $r4 = new java.util.ArrayList;
+
+        specialinvoke $r4.<java.util.ArrayList: void <init>()>();
+
+        r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.util.List shuffleGroupings> = $r4;
+
+        $r5 = new java.util.ArrayList;
+
+        specialinvoke $r5.<java.util.ArrayList: void <init>()>();
+
+        r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.util.List directGroupings> = $r5;
+
+        r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.lang.String id> = r6;
+
+        r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.IRichBolt bolt> = r7;
+
+        r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.lang.Number parallelism> = r8;
+
+        return;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer setMemoryLoad(java.lang.Number, java.lang.Number)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.Number r1, r2;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.Number;
+
+        r2 := @parameter1: java.lang.Number;
+
+        r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.lang.Number onHeap> = r1;
+
+        r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.lang.Number offHeap> = r2;
+
+        return r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer setCPULoad(java.lang.Number)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.Number r1;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.Number;
+
+        r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.lang.Number cpuLoad> = r1;
+
+        return r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer fieldsGrouping(java.lang.String, java.lang.String, org.apache.storm.tuple.Fields)
+    {
+        java.lang.String r0, r1;
+        org.apache.commons.lang3.tuple.ImmutablePair r2;
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r3;
+        java.util.Map $r4, $r7;
+        java.lang.Object $r5, r10;
+        org.apache.storm.tuple.Fields r6;
+        java.util.ArrayList $r11;
+        java.util.List $r12;
+
+        r3 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r0 := @parameter0: java.lang.String;
+
+        r1 := @parameter1: java.lang.String;
+
+        r6 := @parameter2: org.apache.storm.tuple.Fields;
+
+        r2 = staticinvoke <org.apache.commons.lang3.tuple.ImmutablePair: org.apache.commons.lang3.tuple.ImmutablePair of(java.lang.Object,java.lang.Object)>(r0, r1);
+
+        $r4 = r3.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.util.Map fieldsGroupings>;
+
+        $r5 = interfaceinvoke $r4.<java.util.Map: java.lang.Object get(java.lang.Object)>(r2);
+
+        r10 = (java.util.List) $r5;
+
+        if r10 != null goto label1;
+
+        $r11 = new java.util.ArrayList;
+
+        specialinvoke $r11.<java.util.ArrayList: void <init>()>();
+
+        r10 = $r11;
+
+     label1:
+        $r12 = (java.util.List) r10;
+
+        interfaceinvoke $r12.<java.util.List: boolean add(java.lang.Object)>(r6);
+
+        $r7 = r3.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.util.Map fieldsGroupings>;
+
+        interfaceinvoke $r7.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(r2, r10);
+
+        return r3;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer customGrouping(java.lang.String, java.lang.String, org.apache.storm.grouping.CustomStreamGrouping)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.String r1, r2;
+        java.util.Map $r3;
+        org.apache.commons.lang3.tuple.ImmutablePair $r4;
+        org.apache.storm.grouping.CustomStreamGrouping r5;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: java.lang.String;
+
+        r5 := @parameter2: org.apache.storm.grouping.CustomStreamGrouping;
+
+        $r3 = r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.util.Map customGroupings>;
+
+        $r4 = staticinvoke <org.apache.commons.lang3.tuple.ImmutablePair: org.apache.commons.lang3.tuple.ImmutablePair of(java.lang.Object,java.lang.Object)>(r1, r2);
+
+        interfaceinvoke $r3.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>($r4, r5);
+
+        return r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer allGrouping(java.lang.String, java.lang.String)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.String r1, r2;
+        java.util.List $r3;
+        org.apache.commons.lang3.tuple.ImmutablePair $r4;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: java.lang.String;
+
+        $r3 = r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.util.List allGroupings>;
+
+        $r4 = staticinvoke <org.apache.commons.lang3.tuple.ImmutablePair: org.apache.commons.lang3.tuple.ImmutablePair of(java.lang.Object,java.lang.Object)>(r1, r2);
+
+        interfaceinvoke $r3.<java.util.List: boolean add(java.lang.Object)>($r4);
+
+        return r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer shuffleGrouping(java.lang.String)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.String r1;
+        java.util.List $r2;
+        org.apache.commons.lang3.tuple.ImmutablePair $r3;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        $r2 = r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.util.List shuffleGroupings>;
+
+        $r3 = staticinvoke <org.apache.commons.lang3.tuple.ImmutablePair: org.apache.commons.lang3.tuple.ImmutablePair of(java.lang.Object,java.lang.Object)>(r1, "default");
+
+        interfaceinvoke $r2.<java.util.List: boolean add(java.lang.Object)>($r3);
+
+        return r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer shuffleGrouping(java.lang.String, java.lang.String)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.String r1, r2;
+        java.util.List $r3;
+        org.apache.commons.lang3.tuple.ImmutablePair $r4;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: java.lang.String;
+
+        $r3 = r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.util.List shuffleGroupings>;
+
+        $r4 = staticinvoke <org.apache.commons.lang3.tuple.ImmutablePair: org.apache.commons.lang3.tuple.ImmutablePair of(java.lang.Object,java.lang.Object)>(r1, r2);
+
+        interfaceinvoke $r3.<java.util.List: boolean add(java.lang.Object)>($r4);
+
+        return r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer directGrouping(java.lang.String, java.lang.String)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.String r1, r2;
+        java.util.List $r3;
+        org.apache.commons.lang3.tuple.ImmutablePair $r4;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: java.lang.String;
+
+        $r3 = r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.util.List directGroupings>;
+
+        $r4 = staticinvoke <org.apache.commons.lang3.tuple.ImmutablePair: org.apache.commons.lang3.tuple.ImmutablePair of(java.lang.Object,java.lang.Object)>(r1, r2);
+
+        interfaceinvoke $r3.<java.util.List: boolean add(java.lang.Object)>($r4);
+
+        return r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer addConfigurations(java.util.Map)
+    {
+        java.lang.UnsupportedOperationException $r0;
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r1;
+        java.util.Map r2;
+
+        r1 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r2 := @parameter0: java.util.Map;
+
+        $r0 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $r0.<java.lang.UnsupportedOperationException: void <init>()>();
+
+        throw $r0;
+    }
+
+    public java.util.Map getComponentConfiguration()
+    {
+        java.lang.UnsupportedOperationException $r0;
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r1;
+
+        r1 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        $r0 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $r0.<java.lang.UnsupportedOperationException: void <init>()>();
+
+        throw $r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer addConfiguration(java.lang.String, java.lang.Object)
+    {
+        java.lang.UnsupportedOperationException $r0;
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r1;
+        java.lang.String r2;
+        java.lang.Object r3;
+
+        r1 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r2 := @parameter0: java.lang.String;
+
+        r3 := @parameter1: java.lang.Object;
+
+        $r0 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $r0.<java.lang.UnsupportedOperationException: void <init>()>();
+
+        throw $r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer setDebug(boolean)
+    {
+        java.lang.UnsupportedOperationException $r0;
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r1;
+        boolean z0;
+
+        r1 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        z0 := @parameter0: boolean;
+
+        $r0 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $r0.<java.lang.UnsupportedOperationException: void <init>()>();
+
+        throw $r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer setMaxTaskParallelism(java.lang.Number)
+    {
+        java.lang.UnsupportedOperationException $r0;
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r1;
+        java.lang.Number r2;
+
+        r1 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r2 := @parameter0: java.lang.Number;
+
+        $r0 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $r0.<java.lang.UnsupportedOperationException: void <init>()>();
+
+        throw $r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer setMaxSpoutPending(java.lang.Number)
+    {
+        java.lang.UnsupportedOperationException $r0;
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r1;
+        java.lang.Number r2;
+
+        r1 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r2 := @parameter0: java.lang.Number;
+
+        $r0 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $r0.<java.lang.UnsupportedOperationException: void <init>()>();
+
+        throw $r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer setNumTasks(java.lang.Number)
+    {
+        java.lang.UnsupportedOperationException $r0;
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r1;
+        java.lang.Number r2;
+
+        r1 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r2 := @parameter0: java.lang.Number;
+
+        $r0 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $r0.<java.lang.UnsupportedOperationException: void <init>()>();
+
+        throw $r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer fieldsGrouping(java.lang.String, org.apache.storm.tuple.Fields)
+    {
+        java.lang.UnsupportedOperationException $r0;
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r1;
+        java.lang.String r2;
+        org.apache.storm.tuple.Fields r3;
+
+        r1 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r2 := @parameter0: java.lang.String;
+
+        r3 := @parameter1: org.apache.storm.tuple.Fields;
+
+        $r0 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $r0.<java.lang.UnsupportedOperationException: void <init>()>();
+
+        throw $r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer globalGrouping(java.lang.String)
+    {
+        java.lang.UnsupportedOperationException $r0;
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r1;
+        java.lang.String r2;
+
+        r1 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r2 := @parameter0: java.lang.String;
+
+        $r0 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $r0.<java.lang.UnsupportedOperationException: void <init>()>();
+
+        throw $r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer globalGrouping(java.lang.String, java.lang.String)
+    {
+        java.lang.UnsupportedOperationException $r0;
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r1;
+        java.lang.String r2, r3;
+
+        r1 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r2 := @parameter0: java.lang.String;
+
+        r3 := @parameter1: java.lang.String;
+
+        $r0 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $r0.<java.lang.UnsupportedOperationException: void <init>()>();
+
+        throw $r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer localOrShuffleGrouping(java.lang.String)
+    {
+        java.lang.UnsupportedOperationException $r0;
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r1;
+        java.lang.String r2;
+
+        r1 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r2 := @parameter0: java.lang.String;
+
+        $r0 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $r0.<java.lang.UnsupportedOperationException: void <init>()>();
+
+        throw $r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer localOrShuffleGrouping(java.lang.String, java.lang.String)
+    {
+        java.lang.UnsupportedOperationException $r0;
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r1;
+        java.lang.String r2, r3;
+
+        r1 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r2 := @parameter0: java.lang.String;
+
+        r3 := @parameter1: java.lang.String;
+
+        $r0 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $r0.<java.lang.UnsupportedOperationException: void <init>()>();
+
+        throw $r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer noneGrouping(java.lang.String)
+    {
+        java.lang.UnsupportedOperationException $r0;
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r1;
+        java.lang.String r2;
+
+        r1 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r2 := @parameter0: java.lang.String;
+
+        $r0 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $r0.<java.lang.UnsupportedOperationException: void <init>()>();
+
+        throw $r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer noneGrouping(java.lang.String, java.lang.String)
+    {
+        java.lang.UnsupportedOperationException $r0;
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r1;
+        java.lang.String r2, r3;
+
+        r1 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r2 := @parameter0: java.lang.String;
+
+        r3 := @parameter1: java.lang.String;
+
+        $r0 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $r0.<java.lang.UnsupportedOperationException: void <init>()>();
+
+        throw $r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer allGrouping(java.lang.String)
+    {
+        java.lang.UnsupportedOperationException $r0;
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r1;
+        java.lang.String r2;
+
+        r1 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r2 := @parameter0: java.lang.String;
+
+        $r0 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $r0.<java.lang.UnsupportedOperationException: void <init>()>();
+
+        throw $r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer directGrouping(java.lang.String)
+    {
+        java.lang.UnsupportedOperationException $r0;
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r1;
+        java.lang.String r2;
+
+        r1 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r2 := @parameter0: java.lang.String;
+
+        $r0 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $r0.<java.lang.UnsupportedOperationException: void <init>()>();
+
+        throw $r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer partialKeyGrouping(java.lang.String, org.apache.storm.tuple.Fields)
+    {
+        java.lang.UnsupportedOperationException $r0;
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r1;
+        java.lang.String r2;
+        org.apache.storm.tuple.Fields r3;
+
+        r1 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r2 := @parameter0: java.lang.String;
+
+        r3 := @parameter1: org.apache.storm.tuple.Fields;
+
+        $r0 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $r0.<java.lang.UnsupportedOperationException: void <init>()>();
+
+        throw $r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer partialKeyGrouping(java.lang.String, java.lang.String, org.apache.storm.tuple.Fields)
+    {
+        java.lang.UnsupportedOperationException $r0;
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r1;
+        java.lang.String r2, r3;
+        org.apache.storm.tuple.Fields r4;
+
+        r1 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r2 := @parameter0: java.lang.String;
+
+        r3 := @parameter1: java.lang.String;
+
+        r4 := @parameter2: org.apache.storm.tuple.Fields;
+
+        $r0 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $r0.<java.lang.UnsupportedOperationException: void <init>()>();
+
+        throw $r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer customGrouping(java.lang.String, org.apache.storm.grouping.CustomStreamGrouping)
+    {
+        java.lang.UnsupportedOperationException $r0;
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r1;
+        java.lang.String r2;
+        org.apache.storm.grouping.CustomStreamGrouping r3;
+
+        r1 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r2 := @parameter0: java.lang.String;
+
+        r3 := @parameter1: org.apache.storm.grouping.CustomStreamGrouping;
+
+        $r0 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $r0.<java.lang.UnsupportedOperationException: void <init>()>();
+
+        throw $r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer grouping(org.apache.storm.generated.GlobalStreamId, org.apache.storm.generated.Grouping)
+    {
+        java.lang.UnsupportedOperationException $r0;
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r1;
+        org.apache.storm.generated.GlobalStreamId r2;
+        org.apache.storm.generated.Grouping r3;
+
+        r1 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r2 := @parameter0: org.apache.storm.generated.GlobalStreamId;
+
+        r3 := @parameter1: org.apache.storm.generated.Grouping;
+
+        $r0 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $r0.<java.lang.UnsupportedOperationException: void <init>()>();
+
+        throw $r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer setMemoryLoad(java.lang.Number)
+    {
+        java.lang.UnsupportedOperationException $r0;
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r1;
+        java.lang.Number r2;
+
+        r1 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r2 := @parameter0: java.lang.Number;
+
+        $r0 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $r0.<java.lang.UnsupportedOperationException: void <init>()>();
+
+        throw $r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer addSharedMemory(org.apache.storm.generated.SharedMemory)
+    {
+        java.lang.UnsupportedOperationException $r0;
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r1;
+        org.apache.storm.generated.SharedMemory r2;
+
+        r1 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r2 := @parameter0: org.apache.storm.generated.SharedMemory;
+
+        $r0 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $r0.<java.lang.UnsupportedOperationException: void <init>()>();
+
+        throw $r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer addResources(java.util.Map)
+    {
+        java.lang.UnsupportedOperationException $r0;
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r1;
+        java.util.Map r2;
+
+        r1 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r2 := @parameter0: java.util.Map;
+
+        $r0 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $r0.<java.lang.UnsupportedOperationException: void <init>()>();
+
+        throw $r0;
+    }
+
+    public org.apache.storm.topology.BoltDeclarer addResource(java.lang.String, java.lang.Number)
+    {
+        java.lang.UnsupportedOperationException $r0;
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r1;
+        java.lang.String r2;
+        java.lang.Number r3;
+
+        r1 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r2 := @parameter0: java.lang.String;
+
+        r3 := @parameter1: java.lang.Number;
+
+        $r0 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $r0.<java.lang.UnsupportedOperationException: void <init>()>();
+
+        throw $r0;
+    }
+
+    public java.lang.Number getOffHeap()
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.Number $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        $r1 = r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.lang.Number offHeap>;
+
+        return $r1;
+    }
+
+    public java.lang.Number getOnHeap()
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.Number $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        $r1 = r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.lang.Number onHeap>;
+
+        return $r1;
+    }
+
+    public java.lang.Number getCpuLoad()
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.Number $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        $r1 = r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.lang.Number cpuLoad>;
+
+        return $r1;
+    }
+
+    public java.lang.String getId()
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.String $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        $r1 = r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.lang.String id>;
+
+        return $r1;
+    }
+
+    public org.apache.storm.topology.IRichBolt getBolt()
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        org.apache.storm.topology.IRichBolt $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        $r1 = r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.IRichBolt bolt>;
+
+        return $r1;
+    }
+
+    public java.lang.Number getParallelism()
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.Number $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        $r1 = r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.lang.Number parallelism>;
+
+        return $r1;
+    }
+
+    public java.util.Map getFieldsGroupings()
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.util.Map $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        $r1 = r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.util.Map fieldsGroupings>;
+
+        return $r1;
+    }
+
+    public java.util.Map getCustomGroupings()
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.util.Map $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        $r1 = r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.util.Map customGroupings>;
+
+        return $r1;
+    }
+
+    public java.util.List getAllGroupings()
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.util.List $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        $r1 = r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.util.List allGroupings>;
+
+        return $r1;
+    }
+
+    public java.util.List getShuffleGroupings()
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.util.List $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        $r1 = r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.util.List shuffleGroupings>;
+
+        return $r1;
+    }
+
+    public java.util.List getDirectGroupings()
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.util.List $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        $r1 = r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: java.util.List directGroupings>;
+
+        return $r1;
+    }
+
+    public volatile org.apache.storm.topology.InputDeclarer grouping(org.apache.storm.generated.GlobalStreamId, org.apache.storm.generated.Grouping)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        org.apache.storm.generated.GlobalStreamId r1;
+        org.apache.storm.generated.Grouping r2;
+        org.apache.storm.topology.BoltDeclarer $r3;
+        org.apache.storm.topology.InputDeclarer $r4;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: org.apache.storm.generated.GlobalStreamId;
+
+        r2 := @parameter1: org.apache.storm.generated.Grouping;
+
+        $r3 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer grouping(org.apache.storm.generated.GlobalStreamId,org.apache.storm.generated.Grouping)>(r1, r2);
+
+        $r4 = (org.apache.storm.topology.InputDeclarer) $r3;
+
+        return $r4;
+    }
+
+    public volatile org.apache.storm.topology.InputDeclarer customGrouping(java.lang.String, java.lang.String, org.apache.storm.grouping.CustomStreamGrouping)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.String r1, r2;
+        org.apache.storm.grouping.CustomStreamGrouping r3;
+        org.apache.storm.topology.BoltDeclarer $r4;
+        org.apache.storm.topology.InputDeclarer $r5;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: java.lang.String;
+
+        r3 := @parameter2: org.apache.storm.grouping.CustomStreamGrouping;
+
+        $r4 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer customGrouping(java.lang.String,java.lang.String,org.apache.storm.grouping.CustomStreamGrouping)>(r1, r2, r3);
+
+        $r5 = (org.apache.storm.topology.InputDeclarer) $r4;
+
+        return $r5;
+    }
+
+    public volatile org.apache.storm.topology.InputDeclarer customGrouping(java.lang.String, org.apache.storm.grouping.CustomStreamGrouping)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.String r1;
+        org.apache.storm.grouping.CustomStreamGrouping r2;
+        org.apache.storm.topology.BoltDeclarer $r3;
+        org.apache.storm.topology.InputDeclarer $r4;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: org.apache.storm.grouping.CustomStreamGrouping;
+
+        $r3 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer customGrouping(java.lang.String,org.apache.storm.grouping.CustomStreamGrouping)>(r1, r2);
+
+        $r4 = (org.apache.storm.topology.InputDeclarer) $r3;
+
+        return $r4;
+    }
+
+    public volatile org.apache.storm.topology.InputDeclarer partialKeyGrouping(java.lang.String, java.lang.String, org.apache.storm.tuple.Fields)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.String r1, r2;
+        org.apache.storm.tuple.Fields r3;
+        org.apache.storm.topology.BoltDeclarer $r4;
+        org.apache.storm.topology.InputDeclarer $r5;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: java.lang.String;
+
+        r3 := @parameter2: org.apache.storm.tuple.Fields;
+
+        $r4 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer partialKeyGrouping(java.lang.String,java.lang.String,org.apache.storm.tuple.Fields)>(r1, r2, r3);
+
+        $r5 = (org.apache.storm.topology.InputDeclarer) $r4;
+
+        return $r5;
+    }
+
+    public volatile org.apache.storm.topology.InputDeclarer partialKeyGrouping(java.lang.String, org.apache.storm.tuple.Fields)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.String r1;
+        org.apache.storm.tuple.Fields r2;
+        org.apache.storm.topology.BoltDeclarer $r3;
+        org.apache.storm.topology.InputDeclarer $r4;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: org.apache.storm.tuple.Fields;
+
+        $r3 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer partialKeyGrouping(java.lang.String,org.apache.storm.tuple.Fields)>(r1, r2);
+
+        $r4 = (org.apache.storm.topology.InputDeclarer) $r3;
+
+        return $r4;
+    }
+
+    public volatile org.apache.storm.topology.InputDeclarer directGrouping(java.lang.String, java.lang.String)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.String r1, r2;
+        org.apache.storm.topology.BoltDeclarer $r3;
+        org.apache.storm.topology.InputDeclarer $r4;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: java.lang.String;
+
+        $r3 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer directGrouping(java.lang.String,java.lang.String)>(r1, r2);
+
+        $r4 = (org.apache.storm.topology.InputDeclarer) $r3;
+
+        return $r4;
+    }
+
+    public volatile org.apache.storm.topology.InputDeclarer directGrouping(java.lang.String)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.String r1;
+        org.apache.storm.topology.BoltDeclarer $r2;
+        org.apache.storm.topology.InputDeclarer $r3;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        $r2 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer directGrouping(java.lang.String)>(r1);
+
+        $r3 = (org.apache.storm.topology.InputDeclarer) $r2;
+
+        return $r3;
+    }
+
+    public volatile org.apache.storm.topology.InputDeclarer allGrouping(java.lang.String, java.lang.String)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.String r1, r2;
+        org.apache.storm.topology.BoltDeclarer $r3;
+        org.apache.storm.topology.InputDeclarer $r4;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: java.lang.String;
+
+        $r3 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer allGrouping(java.lang.String,java.lang.String)>(r1, r2);
+
+        $r4 = (org.apache.storm.topology.InputDeclarer) $r3;
+
+        return $r4;
+    }
+
+    public volatile org.apache.storm.topology.InputDeclarer allGrouping(java.lang.String)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.String r1;
+        org.apache.storm.topology.BoltDeclarer $r2;
+        org.apache.storm.topology.InputDeclarer $r3;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        $r2 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer allGrouping(java.lang.String)>(r1);
+
+        $r3 = (org.apache.storm.topology.InputDeclarer) $r2;
+
+        return $r3;
+    }
+
+    public volatile org.apache.storm.topology.InputDeclarer noneGrouping(java.lang.String, java.lang.String)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.String r1, r2;
+        org.apache.storm.topology.BoltDeclarer $r3;
+        org.apache.storm.topology.InputDeclarer $r4;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: java.lang.String;
+
+        $r3 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer noneGrouping(java.lang.String,java.lang.String)>(r1, r2);
+
+        $r4 = (org.apache.storm.topology.InputDeclarer) $r3;
+
+        return $r4;
+    }
+
+    public volatile org.apache.storm.topology.InputDeclarer noneGrouping(java.lang.String)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.String r1;
+        org.apache.storm.topology.BoltDeclarer $r2;
+        org.apache.storm.topology.InputDeclarer $r3;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        $r2 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer noneGrouping(java.lang.String)>(r1);
+
+        $r3 = (org.apache.storm.topology.InputDeclarer) $r2;
+
+        return $r3;
+    }
+
+    public volatile org.apache.storm.topology.InputDeclarer localOrShuffleGrouping(java.lang.String, java.lang.String)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.String r1, r2;
+        org.apache.storm.topology.BoltDeclarer $r3;
+        org.apache.storm.topology.InputDeclarer $r4;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: java.lang.String;
+
+        $r3 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer localOrShuffleGrouping(java.lang.String,java.lang.String)>(r1, r2);
+
+        $r4 = (org.apache.storm.topology.InputDeclarer) $r3;
+
+        return $r4;
+    }
+
+    public volatile org.apache.storm.topology.InputDeclarer localOrShuffleGrouping(java.lang.String)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.String r1;
+        org.apache.storm.topology.BoltDeclarer $r2;
+        org.apache.storm.topology.InputDeclarer $r3;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        $r2 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer localOrShuffleGrouping(java.lang.String)>(r1);
+
+        $r3 = (org.apache.storm.topology.InputDeclarer) $r2;
+
+        return $r3;
+    }
+
+    public volatile org.apache.storm.topology.InputDeclarer shuffleGrouping(java.lang.String, java.lang.String)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.String r1, r2;
+        org.apache.storm.topology.BoltDeclarer $r3;
+        org.apache.storm.topology.InputDeclarer $r4;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: java.lang.String;
+
+        $r3 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer shuffleGrouping(java.lang.String,java.lang.String)>(r1, r2);
+
+        $r4 = (org.apache.storm.topology.InputDeclarer) $r3;
+
+        return $r4;
+    }
+
+    public volatile org.apache.storm.topology.InputDeclarer shuffleGrouping(java.lang.String)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.String r1;
+        org.apache.storm.topology.BoltDeclarer $r2;
+        org.apache.storm.topology.InputDeclarer $r3;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        $r2 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer shuffleGrouping(java.lang.String)>(r1);
+
+        $r3 = (org.apache.storm.topology.InputDeclarer) $r2;
+
+        return $r3;
+    }
+
+    public volatile org.apache.storm.topology.InputDeclarer globalGrouping(java.lang.String, java.lang.String)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.String r1, r2;
+        org.apache.storm.topology.BoltDeclarer $r3;
+        org.apache.storm.topology.InputDeclarer $r4;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: java.lang.String;
+
+        $r3 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer globalGrouping(java.lang.String,java.lang.String)>(r1, r2);
+
+        $r4 = (org.apache.storm.topology.InputDeclarer) $r3;
+
+        return $r4;
+    }
+
+    public volatile org.apache.storm.topology.InputDeclarer globalGrouping(java.lang.String)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.String r1;
+        org.apache.storm.topology.BoltDeclarer $r2;
+        org.apache.storm.topology.InputDeclarer $r3;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        $r2 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer globalGrouping(java.lang.String)>(r1);
+
+        $r3 = (org.apache.storm.topology.InputDeclarer) $r2;
+
+        return $r3;
+    }
+
+    public volatile org.apache.storm.topology.InputDeclarer fieldsGrouping(java.lang.String, java.lang.String, org.apache.storm.tuple.Fields)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.String r1, r2;
+        org.apache.storm.tuple.Fields r3;
+        org.apache.storm.topology.BoltDeclarer $r4;
+        org.apache.storm.topology.InputDeclarer $r5;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: java.lang.String;
+
+        r3 := @parameter2: org.apache.storm.tuple.Fields;
+
+        $r4 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer fieldsGrouping(java.lang.String,java.lang.String,org.apache.storm.tuple.Fields)>(r1, r2, r3);
+
+        $r5 = (org.apache.storm.topology.InputDeclarer) $r4;
+
+        return $r5;
+    }
+
+    public volatile org.apache.storm.topology.InputDeclarer fieldsGrouping(java.lang.String, org.apache.storm.tuple.Fields)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.String r1;
+        org.apache.storm.tuple.Fields r2;
+        org.apache.storm.topology.BoltDeclarer $r3;
+        org.apache.storm.topology.InputDeclarer $r4;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: org.apache.storm.tuple.Fields;
+
+        $r3 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer fieldsGrouping(java.lang.String,org.apache.storm.tuple.Fields)>(r1, r2);
+
+        $r4 = (org.apache.storm.topology.InputDeclarer) $r3;
+
+        return $r4;
+    }
+
+    public volatile org.apache.storm.topology.ComponentConfigurationDeclarer addResource(java.lang.String, java.lang.Number)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.String r1;
+        java.lang.Number r2;
+        org.apache.storm.topology.BoltDeclarer $r3;
+        org.apache.storm.topology.ComponentConfigurationDeclarer $r4;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: java.lang.Number;
+
+        $r3 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer addResource(java.lang.String,java.lang.Number)>(r1, r2);
+
+        $r4 = (org.apache.storm.topology.ComponentConfigurationDeclarer) $r3;
+
+        return $r4;
+    }
+
+    public volatile org.apache.storm.topology.ComponentConfigurationDeclarer addResources(java.util.Map)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.util.Map r1;
+        org.apache.storm.topology.BoltDeclarer $r2;
+        org.apache.storm.topology.ComponentConfigurationDeclarer $r3;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.util.Map;
+
+        $r2 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer addResources(java.util.Map)>(r1);
+
+        $r3 = (org.apache.storm.topology.ComponentConfigurationDeclarer) $r2;
+
+        return $r3;
+    }
+
+    public volatile org.apache.storm.topology.ComponentConfigurationDeclarer setNumTasks(java.lang.Number)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.Number r1;
+        org.apache.storm.topology.BoltDeclarer $r2;
+        org.apache.storm.topology.ComponentConfigurationDeclarer $r3;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.Number;
+
+        $r2 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer setNumTasks(java.lang.Number)>(r1);
+
+        $r3 = (org.apache.storm.topology.ComponentConfigurationDeclarer) $r2;
+
+        return $r3;
+    }
+
+    public volatile org.apache.storm.topology.ComponentConfigurationDeclarer setMaxSpoutPending(java.lang.Number)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.Number r1;
+        org.apache.storm.topology.BoltDeclarer $r2;
+        org.apache.storm.topology.ComponentConfigurationDeclarer $r3;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.Number;
+
+        $r2 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer setMaxSpoutPending(java.lang.Number)>(r1);
+
+        $r3 = (org.apache.storm.topology.ComponentConfigurationDeclarer) $r2;
+
+        return $r3;
+    }
+
+    public volatile org.apache.storm.topology.ComponentConfigurationDeclarer setMaxTaskParallelism(java.lang.Number)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.Number r1;
+        org.apache.storm.topology.BoltDeclarer $r2;
+        org.apache.storm.topology.ComponentConfigurationDeclarer $r3;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.Number;
+
+        $r2 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer setMaxTaskParallelism(java.lang.Number)>(r1);
+
+        $r3 = (org.apache.storm.topology.ComponentConfigurationDeclarer) $r2;
+
+        return $r3;
+    }
+
+    public volatile org.apache.storm.topology.ComponentConfigurationDeclarer setDebug(boolean)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        boolean z0;
+        org.apache.storm.topology.BoltDeclarer $r1;
+        org.apache.storm.topology.ComponentConfigurationDeclarer $r2;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        z0 := @parameter0: boolean;
+
+        $r1 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer setDebug(boolean)>(z0);
+
+        $r2 = (org.apache.storm.topology.ComponentConfigurationDeclarer) $r1;
+
+        return $r2;
+    }
+
+    public volatile org.apache.storm.topology.ComponentConfigurationDeclarer addConfiguration(java.lang.String, java.lang.Object)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.String r1;
+        java.lang.Object r2;
+        org.apache.storm.topology.BoltDeclarer $r3;
+        org.apache.storm.topology.ComponentConfigurationDeclarer $r4;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: java.lang.Object;
+
+        $r3 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer addConfiguration(java.lang.String,java.lang.Object)>(r1, r2);
+
+        $r4 = (org.apache.storm.topology.ComponentConfigurationDeclarer) $r3;
+
+        return $r4;
+    }
+
+    public volatile org.apache.storm.topology.ComponentConfigurationDeclarer addConfigurations(java.util.Map)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.util.Map r1;
+        org.apache.storm.topology.BoltDeclarer $r2;
+        org.apache.storm.topology.ComponentConfigurationDeclarer $r3;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.util.Map;
+
+        $r2 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer addConfigurations(java.util.Map)>(r1);
+
+        $r3 = (org.apache.storm.topology.ComponentConfigurationDeclarer) $r2;
+
+        return $r3;
+    }
+
+    public volatile org.apache.storm.topology.ResourceDeclarer addSharedMemory(org.apache.storm.generated.SharedMemory)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        org.apache.storm.generated.SharedMemory r1;
+        org.apache.storm.topology.BoltDeclarer $r2;
+        org.apache.storm.topology.ResourceDeclarer $r3;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: org.apache.storm.generated.SharedMemory;
+
+        $r2 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer addSharedMemory(org.apache.storm.generated.SharedMemory)>(r1);
+
+        $r3 = (org.apache.storm.topology.ResourceDeclarer) $r2;
+
+        return $r3;
+    }
+
+    public volatile org.apache.storm.topology.ResourceDeclarer setCPULoad(java.lang.Number)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.Number r1;
+        org.apache.storm.topology.BoltDeclarer $r2;
+        org.apache.storm.topology.ResourceDeclarer $r3;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.Number;
+
+        $r2 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer setCPULoad(java.lang.Number)>(r1);
+
+        $r3 = (org.apache.storm.topology.ResourceDeclarer) $r2;
+
+        return $r3;
+    }
+
+    public volatile org.apache.storm.topology.ResourceDeclarer setMemoryLoad(java.lang.Number, java.lang.Number)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.Number r1, r2;
+        org.apache.storm.topology.BoltDeclarer $r3;
+        org.apache.storm.topology.ResourceDeclarer $r4;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.Number;
+
+        r2 := @parameter1: java.lang.Number;
+
+        $r3 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer setMemoryLoad(java.lang.Number,java.lang.Number)>(r1, r2);
+
+        $r4 = (org.apache.storm.topology.ResourceDeclarer) $r3;
+
+        return $r4;
+    }
+
+    public volatile org.apache.storm.topology.ResourceDeclarer setMemoryLoad(java.lang.Number)
+    {
+        com.yahoo.bullet.storm.testing.CustomBoltDeclarer r0;
+        java.lang.Number r1;
+        org.apache.storm.topology.BoltDeclarer $r2;
+        org.apache.storm.topology.ResourceDeclarer $r3;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomBoltDeclarer;
+
+        r1 := @parameter0: java.lang.Number;
+
+        $r2 = virtualinvoke r0.<com.yahoo.bullet.storm.testing.CustomBoltDeclarer: org.apache.storm.topology.BoltDeclarer setMemoryLoad(java.lang.Number)>(r1);
+
+        $r3 = (org.apache.storm.topology.ResourceDeclarer) $r2;
+
+        return $r3;
+    }
+}

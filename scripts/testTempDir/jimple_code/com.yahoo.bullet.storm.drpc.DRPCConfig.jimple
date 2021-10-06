@@ -1,0 +1,373 @@
+public class com.yahoo.bullet.storm.drpc.DRPCConfig extends com.yahoo.bullet.storm.BulletStormConfig
+{
+    private static final org.slf4j.Logger log;
+    private static final long serialVersionUID;
+    public static final java.lang.String PREFIX;
+    public static final java.lang.String DRPC_SERVERS;
+    public static final java.lang.String DRPC_FUNCTION;
+    public static final java.lang.String DRPC_HTTP_PROTOCOL;
+    public static final java.lang.String DRPC_HTTP_PORT;
+    public static final java.lang.String DRPC_HTTP_PATH;
+    public static final java.lang.String DRPC_HTTP_CONNECT_TIMEOUT;
+    public static final java.lang.String DRPC_HTTP_CONNECT_RETRY_LIMIT;
+    public static final java.lang.String DRPC_MAX_UNCOMMITED_MESSAGES;
+    public static final java.util.List DEFAULT_DRPC_SERVERS;
+    public static final java.lang.String DEFAULT_DRPC_FUNCTION;
+    public static final java.lang.String DEFAULT_DRPC_HTTP_PROTOCOL;
+    public static final java.lang.String DEFAULT_DRPC_HTTP_PORT;
+    public static final java.lang.String DEFAULT_DRPC_HTTP_PATH;
+    public static final int DEFAULT_DRPC_HTTP_CONNECT_TIMEOUT;
+    public static final int DEFAULT_DRPC_HTTP_CONNECT_RETRY_LIMIT;
+    public static final int DEFAULT_DRPC_MAX_UNCOMMITED_MESSAGES;
+    private static final com.yahoo.bullet.common.Validator VALIDATOR;
+
+    public void <init>(java.lang.String)
+    {
+        com.yahoo.bullet.storm.drpc.DRPCConfig r0;
+        java.lang.String r2;
+        com.yahoo.bullet.common.Validator $r3;
+        com.yahoo.bullet.storm.BulletStormConfig $r4;
+        com.yahoo.bullet.common.Config $r5;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.DRPCConfig;
+
+        r2 := @parameter0: java.lang.String;
+
+        $r4 = new com.yahoo.bullet.storm.BulletStormConfig;
+
+        specialinvoke $r4.<com.yahoo.bullet.storm.BulletStormConfig: void <init>(java.lang.String)>(r2);
+
+        $r5 = (com.yahoo.bullet.common.Config) $r4;
+
+        specialinvoke r0.<com.yahoo.bullet.storm.drpc.DRPCConfig: void <init>(com.yahoo.bullet.common.Config)>($r5);
+
+        $r3 = <com.yahoo.bullet.storm.drpc.DRPCConfig: com.yahoo.bullet.common.Validator VALIDATOR>;
+
+        virtualinvoke $r3.<com.yahoo.bullet.common.Validator: void validate(com.yahoo.bullet.common.BulletConfig)>(r0);
+
+        return;
+    }
+
+    public void <init>(com.yahoo.bullet.common.Config)
+    {
+        com.yahoo.bullet.storm.drpc.DRPCConfig r0;
+        com.yahoo.bullet.common.Config r1;
+        com.yahoo.bullet.common.Validator $r2;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.DRPCConfig;
+
+        r1 := @parameter0: com.yahoo.bullet.common.Config;
+
+        specialinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: void <init>(com.yahoo.bullet.common.Config)>(r1);
+
+        $r2 = <com.yahoo.bullet.storm.drpc.DRPCConfig: com.yahoo.bullet.common.Validator VALIDATOR>;
+
+        virtualinvoke $r2.<com.yahoo.bullet.common.Validator: void validate(com.yahoo.bullet.common.BulletConfig)>(r0);
+
+        return;
+    }
+
+    public com.yahoo.bullet.storm.drpc.DRPCConfig validate()
+    {
+        com.yahoo.bullet.storm.drpc.DRPCConfig r0;
+        com.yahoo.bullet.common.Validator $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.DRPCConfig;
+
+        $r1 = <com.yahoo.bullet.storm.drpc.DRPCConfig: com.yahoo.bullet.common.Validator VALIDATOR>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.common.Validator: void validate(com.yahoo.bullet.common.BulletConfig)>(r0);
+
+        return r0;
+    }
+
+    public static boolean isStringPositiveInteger(java.lang.Object)
+    {
+        java.lang.Object r0;
+        boolean $z0, $z1, $z2;
+        java.lang.Integer r1;
+        org.slf4j.Logger $r2, $r4;
+        java.lang.NumberFormatException $r3;
+        java.lang.String r5;
+
+        r0 := @parameter0: java.lang.Object;
+
+        $z0 = r0 instanceof java.lang.Number;
+
+        if $z0 != 0 goto label1;
+
+        $z2 = r0 instanceof java.lang.String;
+
+        if $z2 != 0 goto label1;
+
+        $r2 = <com.yahoo.bullet.storm.drpc.DRPCConfig: org.slf4j.Logger log>;
+
+        interfaceinvoke $r2.<org.slf4j.Logger: void warn(java.lang.String,java.lang.Object)>("{} should be a valid positive integer", r0);
+
+        return 0;
+
+     label1:
+        r5 = virtualinvoke r0.<java.lang.Object: java.lang.String toString()>();
+
+        r1 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(java.lang.String)>(r5);
+
+        $z1 = staticinvoke <com.yahoo.bullet.common.Validator: boolean isPositiveInt(java.lang.Object)>(r1);
+
+     label2:
+        return $z1;
+
+     label3:
+        $r3 := @caughtexception;
+
+        $r4 = <com.yahoo.bullet.storm.drpc.DRPCConfig: org.slf4j.Logger log>;
+
+        interfaceinvoke $r4.<org.slf4j.Logger: void warn(java.lang.String,java.lang.Object)>("{} should be a string that is a valid positive integer", r0);
+
+        return 0;
+
+        catch java.lang.NumberFormatException from label1 to label2 with label3;
+    }
+
+    public static boolean windowIsDisabled(java.lang.Object)
+    {
+        java.lang.Object r0, $r3;
+        java.util.List $r1, $r2;
+        java.lang.Boolean r4;
+        boolean $z0;
+        org.slf4j.Logger $r5;
+
+        r0 := @parameter0: java.lang.Object;
+
+        $r1 = (java.util.List) r0;
+
+        $r2 = (java.util.List) $r1;
+
+        $r3 = interfaceinvoke $r2.<java.util.List: java.lang.Object get(int)>(0);
+
+        r4 = (java.lang.Boolean) $r3;
+
+        $z0 = virtualinvoke r4.<java.lang.Boolean: boolean booleanValue()>();
+
+        if $z0 != 0 goto label1;
+
+        $r5 = <com.yahoo.bullet.storm.drpc.DRPCConfig: org.slf4j.Logger log>;
+
+        interfaceinvoke $r5.<org.slf4j.Logger: void error(java.lang.String,java.lang.Object)>("DRPC does not support windowing. You must set {} to true", "bullet.query.window.disable");
+
+        return 0;
+
+     label1:
+        return 1;
+    }
+
+    public volatile com.yahoo.bullet.storm.BulletStormConfig validate()
+    {
+        com.yahoo.bullet.storm.drpc.DRPCConfig r0, $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.DRPCConfig;
+
+        $r1 = virtualinvoke r0.<com.yahoo.bullet.storm.drpc.DRPCConfig: com.yahoo.bullet.storm.drpc.DRPCConfig validate()>();
+
+        return $r1;
+    }
+
+    public volatile com.yahoo.bullet.common.BulletConfig validate()
+    {
+        com.yahoo.bullet.storm.drpc.DRPCConfig r0, $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.DRPCConfig;
+
+        $r1 = virtualinvoke r0.<com.yahoo.bullet.storm.drpc.DRPCConfig: com.yahoo.bullet.storm.drpc.DRPCConfig validate()>();
+
+        return $r1;
+    }
+
+    static void <clinit>()
+    {
+        org.slf4j.Logger $r0;
+        java.util.List $r1, $r7;
+        com.yahoo.bullet.common.Validator $r2, $r3, $r9, $r14, $r22, $r29, $r34, $r42, $r50, $r59;
+        com.yahoo.bullet.common.Validator$Entry $r4, $r6, $r10, $r12, $r15, $r17, $r20, $r23, $r25, $r26, $r30, $r32, $r35, $r37, $r39, $r43, $r45, $r47, $r51, $r53, $r55;
+        java.util.function.Predicate $r5, $r11, $r16, $r19, $r24, $r31, $r36, $r44, $r52, $r61;
+        java.lang.String[] $r18, $r58;
+        java.util.function.Function $r27, $r40, $r48, $r56;
+        java.lang.Integer $r38, $r46, $r54;
+        com.yahoo.bullet.common.Validator$State $r60, $r62;
+
+        <com.yahoo.bullet.storm.drpc.DRPCConfig: int DEFAULT_DRPC_MAX_UNCOMMITED_MESSAGES> = 50;
+
+        <com.yahoo.bullet.storm.drpc.DRPCConfig: int DEFAULT_DRPC_HTTP_CONNECT_RETRY_LIMIT> = 3;
+
+        <com.yahoo.bullet.storm.drpc.DRPCConfig: int DEFAULT_DRPC_HTTP_CONNECT_TIMEOUT> = 5000;
+
+        <com.yahoo.bullet.storm.drpc.DRPCConfig: java.lang.String DEFAULT_DRPC_HTTP_PATH> = "drpc";
+
+        <com.yahoo.bullet.storm.drpc.DRPCConfig: java.lang.String DEFAULT_DRPC_HTTP_PORT> = "3774";
+
+        <com.yahoo.bullet.storm.drpc.DRPCConfig: java.lang.String DEFAULT_DRPC_HTTP_PROTOCOL> = "http";
+
+        <com.yahoo.bullet.storm.drpc.DRPCConfig: java.lang.String DEFAULT_DRPC_FUNCTION> = "bullet-query";
+
+        <com.yahoo.bullet.storm.drpc.DRPCConfig: java.lang.String DRPC_MAX_UNCOMMITED_MESSAGES> = "bullet.pubsub.storm.drpc.max.uncommitted.messages";
+
+        <com.yahoo.bullet.storm.drpc.DRPCConfig: java.lang.String DRPC_HTTP_CONNECT_RETRY_LIMIT> = "bullet.pubsub.storm.drpc.http.connect.retry.limit";
+
+        <com.yahoo.bullet.storm.drpc.DRPCConfig: java.lang.String DRPC_HTTP_CONNECT_TIMEOUT> = "bullet.pubsub.storm.drpc.http.connect.timeout.ms";
+
+        <com.yahoo.bullet.storm.drpc.DRPCConfig: java.lang.String DRPC_HTTP_PATH> = "bullet.pubsub.storm.drpc.http.path";
+
+        <com.yahoo.bullet.storm.drpc.DRPCConfig: java.lang.String DRPC_HTTP_PORT> = "bullet.pubsub.storm.drpc.http.port";
+
+        <com.yahoo.bullet.storm.drpc.DRPCConfig: java.lang.String DRPC_HTTP_PROTOCOL> = "bullet.pubsub.storm.drpc.http.protocol";
+
+        <com.yahoo.bullet.storm.drpc.DRPCConfig: java.lang.String DRPC_FUNCTION> = "bullet.pubsub.storm.drpc.function";
+
+        <com.yahoo.bullet.storm.drpc.DRPCConfig: java.lang.String DRPC_SERVERS> = "bullet.pubsub.storm.drpc.servers";
+
+        <com.yahoo.bullet.storm.drpc.DRPCConfig: java.lang.String PREFIX> = "bullet.pubsub.storm.drpc.";
+
+        <com.yahoo.bullet.storm.drpc.DRPCConfig: long serialVersionUID> = -2767564998976326025L;
+
+        $r0 = staticinvoke <org.slf4j.LoggerFactory: org.slf4j.Logger getLogger(java.lang.Class)>(class "Lcom/yahoo/bullet/storm/drpc/DRPCConfig;");
+
+        <com.yahoo.bullet.storm.drpc.DRPCConfig: org.slf4j.Logger log> = $r0;
+
+        $r1 = staticinvoke <java.util.Collections: java.util.List singletonList(java.lang.Object)>("127.0.0.1");
+
+        <com.yahoo.bullet.storm.drpc.DRPCConfig: java.util.List DEFAULT_DRPC_SERVERS> = $r1;
+
+        $r2 = staticinvoke <com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.common.Validator getValidator()>();
+
+        <com.yahoo.bullet.storm.drpc.DRPCConfig: com.yahoo.bullet.common.Validator VALIDATOR> = $r2;
+
+        $r3 = <com.yahoo.bullet.storm.drpc.DRPCConfig: com.yahoo.bullet.common.Validator VALIDATOR>;
+
+        $r4 = virtualinvoke $r3.<com.yahoo.bullet.common.Validator: com.yahoo.bullet.common.Validator$Entry define(java.lang.String)>("bullet.pubsub.storm.drpc.servers");
+
+        $r5 = staticinvoke <com.yahoo.bullet.storm.drpc.DRPCConfig$isList__170: java.util.function.Predicate bootstrap$()>();
+
+        $r6 = virtualinvoke $r4.<com.yahoo.bullet.common.Validator$Entry: com.yahoo.bullet.common.Validator$Entry checkIf(java.util.function.Predicate)>($r5);
+
+        $r7 = <com.yahoo.bullet.storm.drpc.DRPCConfig: java.util.List DEFAULT_DRPC_SERVERS>;
+
+        virtualinvoke $r6.<com.yahoo.bullet.common.Validator$Entry: com.yahoo.bullet.common.Validator$Entry defaultTo(java.lang.Object)>($r7);
+
+        $r9 = <com.yahoo.bullet.storm.drpc.DRPCConfig: com.yahoo.bullet.common.Validator VALIDATOR>;
+
+        $r10 = virtualinvoke $r9.<com.yahoo.bullet.common.Validator: com.yahoo.bullet.common.Validator$Entry define(java.lang.String)>("bullet.pubsub.storm.drpc.function");
+
+        $r11 = staticinvoke <com.yahoo.bullet.storm.drpc.DRPCConfig$isString__175: java.util.function.Predicate bootstrap$()>();
+
+        $r12 = virtualinvoke $r10.<com.yahoo.bullet.common.Validator$Entry: com.yahoo.bullet.common.Validator$Entry checkIf(java.util.function.Predicate)>($r11);
+
+        virtualinvoke $r12.<com.yahoo.bullet.common.Validator$Entry: com.yahoo.bullet.common.Validator$Entry defaultTo(java.lang.Object)>("bullet-query");
+
+        $r14 = <com.yahoo.bullet.storm.drpc.DRPCConfig: com.yahoo.bullet.common.Validator VALIDATOR>;
+
+        $r15 = virtualinvoke $r14.<com.yahoo.bullet.common.Validator: com.yahoo.bullet.common.Validator$Entry define(java.lang.String)>("bullet.pubsub.storm.drpc.http.protocol");
+
+        $r16 = staticinvoke <com.yahoo.bullet.storm.drpc.DRPCConfig$isString__178: java.util.function.Predicate bootstrap$()>();
+
+        $r17 = virtualinvoke $r15.<com.yahoo.bullet.common.Validator$Entry: com.yahoo.bullet.common.Validator$Entry checkIf(java.util.function.Predicate)>($r16);
+
+        $r18 = newarray (java.lang.String)[2];
+
+        $r18[0] = "http";
+
+        $r18[1] = "https";
+
+        $r19 = staticinvoke <com.yahoo.bullet.common.Validator: java.util.function.Predicate isIn(java.lang.Object[])>($r18);
+
+        $r20 = virtualinvoke $r17.<com.yahoo.bullet.common.Validator$Entry: com.yahoo.bullet.common.Validator$Entry checkIf(java.util.function.Predicate)>($r19);
+
+        virtualinvoke $r20.<com.yahoo.bullet.common.Validator$Entry: com.yahoo.bullet.common.Validator$Entry defaultTo(java.lang.Object)>("http");
+
+        $r22 = <com.yahoo.bullet.storm.drpc.DRPCConfig: com.yahoo.bullet.common.Validator VALIDATOR>;
+
+        $r23 = virtualinvoke $r22.<com.yahoo.bullet.common.Validator: com.yahoo.bullet.common.Validator$Entry define(java.lang.String)>("bullet.pubsub.storm.drpc.http.port");
+
+        $r24 = staticinvoke <com.yahoo.bullet.storm.drpc.DRPCConfig$isStringPositiveInteger__180: java.util.function.Predicate bootstrap$()>();
+
+        $r25 = virtualinvoke $r23.<com.yahoo.bullet.common.Validator$Entry: com.yahoo.bullet.common.Validator$Entry checkIf(java.util.function.Predicate)>($r24);
+
+        $r26 = virtualinvoke $r25.<com.yahoo.bullet.common.Validator$Entry: com.yahoo.bullet.common.Validator$Entry defaultTo(java.lang.Object)>("3774");
+
+        $r27 = staticinvoke <com.yahoo.bullet.storm.drpc.DRPCConfig$toString__183: java.util.function.Function bootstrap$()>();
+
+        virtualinvoke $r26.<com.yahoo.bullet.common.Validator$Entry: com.yahoo.bullet.common.Validator$Entry castTo(java.util.function.Function)>($r27);
+
+        $r29 = <com.yahoo.bullet.storm.drpc.DRPCConfig: com.yahoo.bullet.common.Validator VALIDATOR>;
+
+        $r30 = virtualinvoke $r29.<com.yahoo.bullet.common.Validator: com.yahoo.bullet.common.Validator$Entry define(java.lang.String)>("bullet.pubsub.storm.drpc.http.path");
+
+        $r31 = staticinvoke <com.yahoo.bullet.storm.drpc.DRPCConfig$isString__186: java.util.function.Predicate bootstrap$()>();
+
+        $r32 = virtualinvoke $r30.<com.yahoo.bullet.common.Validator$Entry: com.yahoo.bullet.common.Validator$Entry checkIf(java.util.function.Predicate)>($r31);
+
+        virtualinvoke $r32.<com.yahoo.bullet.common.Validator$Entry: com.yahoo.bullet.common.Validator$Entry defaultTo(java.lang.Object)>("drpc");
+
+        $r34 = <com.yahoo.bullet.storm.drpc.DRPCConfig: com.yahoo.bullet.common.Validator VALIDATOR>;
+
+        $r35 = virtualinvoke $r34.<com.yahoo.bullet.common.Validator: com.yahoo.bullet.common.Validator$Entry define(java.lang.String)>("bullet.pubsub.storm.drpc.http.connect.timeout.ms");
+
+        $r36 = staticinvoke <com.yahoo.bullet.storm.drpc.DRPCConfig$isPositiveInt__188: java.util.function.Predicate bootstrap$()>();
+
+        $r37 = virtualinvoke $r35.<com.yahoo.bullet.common.Validator$Entry: com.yahoo.bullet.common.Validator$Entry checkIf(java.util.function.Predicate)>($r36);
+
+        $r38 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(5000);
+
+        $r39 = virtualinvoke $r37.<com.yahoo.bullet.common.Validator$Entry: com.yahoo.bullet.common.Validator$Entry defaultTo(java.lang.Object)>($r38);
+
+        $r40 = staticinvoke <com.yahoo.bullet.storm.drpc.DRPCConfig$asInt__189: java.util.function.Function bootstrap$()>();
+
+        virtualinvoke $r39.<com.yahoo.bullet.common.Validator$Entry: com.yahoo.bullet.common.Validator$Entry castTo(java.util.function.Function)>($r40);
+
+        $r42 = <com.yahoo.bullet.storm.drpc.DRPCConfig: com.yahoo.bullet.common.Validator VALIDATOR>;
+
+        $r43 = virtualinvoke $r42.<com.yahoo.bullet.common.Validator: com.yahoo.bullet.common.Validator$Entry define(java.lang.String)>("bullet.pubsub.storm.drpc.http.connect.retry.limit");
+
+        $r44 = staticinvoke <com.yahoo.bullet.storm.drpc.DRPCConfig$isPositiveInt__192: java.util.function.Predicate bootstrap$()>();
+
+        $r45 = virtualinvoke $r43.<com.yahoo.bullet.common.Validator$Entry: com.yahoo.bullet.common.Validator$Entry checkIf(java.util.function.Predicate)>($r44);
+
+        $r46 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(3);
+
+        $r47 = virtualinvoke $r45.<com.yahoo.bullet.common.Validator$Entry: com.yahoo.bullet.common.Validator$Entry defaultTo(java.lang.Object)>($r46);
+
+        $r48 = staticinvoke <com.yahoo.bullet.storm.drpc.DRPCConfig$asInt__194: java.util.function.Function bootstrap$()>();
+
+        virtualinvoke $r47.<com.yahoo.bullet.common.Validator$Entry: com.yahoo.bullet.common.Validator$Entry castTo(java.util.function.Function)>($r48);
+
+        $r50 = <com.yahoo.bullet.storm.drpc.DRPCConfig: com.yahoo.bullet.common.Validator VALIDATOR>;
+
+        $r51 = virtualinvoke $r50.<com.yahoo.bullet.common.Validator: com.yahoo.bullet.common.Validator$Entry define(java.lang.String)>("bullet.pubsub.storm.drpc.max.uncommitted.messages");
+
+        $r52 = staticinvoke <com.yahoo.bullet.storm.drpc.DRPCConfig$isPositiveInt__197: java.util.function.Predicate bootstrap$()>();
+
+        $r53 = virtualinvoke $r51.<com.yahoo.bullet.common.Validator$Entry: com.yahoo.bullet.common.Validator$Entry checkIf(java.util.function.Predicate)>($r52);
+
+        $r54 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(50);
+
+        $r55 = virtualinvoke $r53.<com.yahoo.bullet.common.Validator$Entry: com.yahoo.bullet.common.Validator$Entry defaultTo(java.lang.Object)>($r54);
+
+        $r56 = staticinvoke <com.yahoo.bullet.storm.drpc.DRPCConfig$asInt__199: java.util.function.Function bootstrap$()>();
+
+        virtualinvoke $r55.<com.yahoo.bullet.common.Validator$Entry: com.yahoo.bullet.common.Validator$Entry castTo(java.util.function.Function)>($r56);
+
+        $r59 = <com.yahoo.bullet.storm.drpc.DRPCConfig: com.yahoo.bullet.common.Validator VALIDATOR>;
+
+        $r58 = newarray (java.lang.String)[1];
+
+        $r58[0] = "bullet.query.window.disable";
+
+        $r60 = virtualinvoke $r59.<com.yahoo.bullet.common.Validator: com.yahoo.bullet.common.Validator$State evaluate(java.lang.String,java.lang.String[])>("Windowing should be disabled when using the DRPC PubSub", $r58);
+
+        $r61 = staticinvoke <com.yahoo.bullet.storm.drpc.DRPCConfig$windowIsDisabled__202: java.util.function.Predicate bootstrap$()>();
+
+        $r62 = virtualinvoke $r60.<com.yahoo.bullet.common.Validator$State: com.yahoo.bullet.common.Validator$State checkIf(java.util.function.Predicate)>($r61);
+
+        virtualinvoke $r62.<com.yahoo.bullet.common.Validator$State: void orFail()>();
+
+        return;
+    }
+}

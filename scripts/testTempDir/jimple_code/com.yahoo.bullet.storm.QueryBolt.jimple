@@ -1,0 +1,655 @@
+public abstract class com.yahoo.bullet.storm.QueryBolt extends com.yahoo.bullet.storm.ConfigComponent implements org.apache.storm.topology.IRichBolt
+{
+    private static final org.slf4j.Logger log;
+    private static final long serialVersionUID;
+    protected transient com.yahoo.bullet.storm.metric.BulletMetrics metrics;
+    protected transient com.yahoo.bullet.pubsub.PubSubMessageSerDe querySerDe;
+    protected transient org.apache.storm.task.OutputCollector collector;
+    protected transient com.yahoo.bullet.storm.TupleClassifier classifier;
+    protected transient java.lang.String componentTaskID;
+    protected transient long startTimestamp;
+    protected transient boolean replayCompleted;
+    protected transient boolean replayEnabled;
+    protected transient boolean replayBatchCompressEnable;
+    protected transient long replayRequestInterval;
+    protected transient long lastReplayRequest;
+    protected transient int batchCount;
+    protected transient int replayedQueriesCount;
+    protected transient java.util.Set removedIds;
+
+    public void <init>(com.yahoo.bullet.storm.BulletStormConfig)
+    {
+        com.yahoo.bullet.storm.QueryBolt r0;
+        com.yahoo.bullet.storm.BulletStormConfig r1;
+
+        r0 := @this: com.yahoo.bullet.storm.QueryBolt;
+
+        r1 := @parameter0: com.yahoo.bullet.storm.BulletStormConfig;
+
+        specialinvoke r0.<com.yahoo.bullet.storm.ConfigComponent: void <init>(com.yahoo.bullet.storm.BulletStormConfig)>(r1);
+
+        return;
+    }
+
+    public void prepare(java.util.Map, org.apache.storm.task.TopologyContext, org.apache.storm.task.OutputCollector)
+    {
+        com.yahoo.bullet.storm.QueryBolt r0;
+        org.apache.storm.task.OutputCollector r1;
+        com.yahoo.bullet.storm.TupleClassifier $r2;
+        java.lang.StringBuilder $r3, $r6, $r7, $r8;
+        org.apache.storm.task.TopologyContext r4;
+        java.lang.String $r5, $r9;
+        int $i0;
+        com.yahoo.bullet.storm.metric.BulletMetrics $r10;
+        com.yahoo.bullet.storm.BulletStormConfig $r11, $r12, $r14, $r17, $r20;
+        com.yahoo.bullet.pubsub.PubSubMessageSerDe $r13;
+        long $l1, $l2;
+        java.lang.Object $r15, $r18, $r21;
+        java.lang.Boolean $r16, $r19;
+        boolean $z0, $z1, $z2;
+        java.lang.Long $r22;
+        java.util.HashSet $r23;
+        java.util.Map r24;
+
+        r0 := @this: com.yahoo.bullet.storm.QueryBolt;
+
+        r24 := @parameter0: java.util.Map;
+
+        r4 := @parameter1: org.apache.storm.task.TopologyContext;
+
+        r1 := @parameter2: org.apache.storm.task.OutputCollector;
+
+        r0.<com.yahoo.bullet.storm.QueryBolt: org.apache.storm.task.OutputCollector collector> = r1;
+
+        $r2 = new com.yahoo.bullet.storm.TupleClassifier;
+
+        specialinvoke $r2.<com.yahoo.bullet.storm.TupleClassifier: void <init>()>();
+
+        r0.<com.yahoo.bullet.storm.QueryBolt: com.yahoo.bullet.storm.TupleClassifier classifier> = $r2;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<java.lang.StringBuilder: void <init>()>();
+
+        $r5 = virtualinvoke r4.<org.apache.storm.task.TopologyContext: java.lang.String getThisComponentId()>();
+
+        $r6 = virtualinvoke $r3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r5);
+
+        $r7 = virtualinvoke $r6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("-");
+
+        $i0 = virtualinvoke r4.<org.apache.storm.task.TopologyContext: int getThisTaskId()>();
+
+        $r8 = virtualinvoke $r7.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($i0);
+
+        $r9 = virtualinvoke $r8.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        r0.<com.yahoo.bullet.storm.QueryBolt: java.lang.String componentTaskID> = $r9;
+
+        $r10 = new com.yahoo.bullet.storm.metric.BulletMetrics;
+
+        $r11 = r0.<com.yahoo.bullet.storm.QueryBolt: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        specialinvoke $r10.<com.yahoo.bullet.storm.metric.BulletMetrics: void <init>(com.yahoo.bullet.storm.BulletStormConfig)>($r11);
+
+        r0.<com.yahoo.bullet.storm.QueryBolt: com.yahoo.bullet.storm.metric.BulletMetrics metrics> = $r10;
+
+        $r12 = r0.<com.yahoo.bullet.storm.QueryBolt: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        $r13 = staticinvoke <com.yahoo.bullet.pubsub.PubSubMessageSerDe: com.yahoo.bullet.pubsub.PubSubMessageSerDe 'from'(com.yahoo.bullet.common.BulletConfig)>($r12);
+
+        r0.<com.yahoo.bullet.storm.QueryBolt: com.yahoo.bullet.pubsub.PubSubMessageSerDe querySerDe> = $r13;
+
+        $l1 = staticinvoke <java.lang.System: long currentTimeMillis()>();
+
+        r0.<com.yahoo.bullet.storm.QueryBolt: long startTimestamp> = $l1;
+
+        $r14 = r0.<com.yahoo.bullet.storm.QueryBolt: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        $r15 = virtualinvoke $r14.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.replay.enable", class "Ljava/lang/Boolean;");
+
+        $r16 = (java.lang.Boolean) $r15;
+
+        $z0 = virtualinvoke $r16.<java.lang.Boolean: boolean booleanValue()>();
+
+        r0.<com.yahoo.bullet.storm.QueryBolt: boolean replayEnabled> = $z0;
+
+        $r17 = r0.<com.yahoo.bullet.storm.QueryBolt: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        $r18 = virtualinvoke $r17.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.replay.batch.compress.enable", class "Ljava/lang/Boolean;");
+
+        $r19 = (java.lang.Boolean) $r18;
+
+        $z1 = virtualinvoke $r19.<java.lang.Boolean: boolean booleanValue()>();
+
+        r0.<com.yahoo.bullet.storm.QueryBolt: boolean replayBatchCompressEnable> = $z1;
+
+        $r20 = r0.<com.yahoo.bullet.storm.QueryBolt: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        $r21 = virtualinvoke $r20.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.replay.request.interval", class "Ljava/lang/Long;");
+
+        $r22 = (java.lang.Long) $r21;
+
+        $l2 = virtualinvoke $r22.<java.lang.Long: long longValue()>();
+
+        r0.<com.yahoo.bullet.storm.QueryBolt: long replayRequestInterval> = $l2;
+
+        $r23 = new java.util.HashSet;
+
+        specialinvoke $r23.<java.util.HashSet: void <init>()>();
+
+        r0.<com.yahoo.bullet.storm.QueryBolt: java.util.Set removedIds> = $r23;
+
+        $z2 = r0.<com.yahoo.bullet.storm.QueryBolt: boolean replayEnabled>;
+
+        if $z2 == 0 goto label1;
+
+        specialinvoke r0.<com.yahoo.bullet.storm.QueryBolt: void emitReplayRequest()>();
+
+        goto label2;
+
+     label1:
+        r0.<com.yahoo.bullet.storm.QueryBolt: boolean replayCompleted> = 1;
+
+     label2:
+        return;
+    }
+
+    public void cleanup()
+    {
+        com.yahoo.bullet.storm.QueryBolt r0;
+
+        r0 := @this: com.yahoo.bullet.storm.QueryBolt;
+
+        return;
+    }
+
+    protected com.yahoo.bullet.pubsub.Metadata onMeta(org.apache.storm.tuple.Tuple)
+    {
+        org.apache.storm.tuple.Tuple r0;
+        java.lang.String r1;
+        java.lang.Object $r2;
+        com.yahoo.bullet.pubsub.Metadata r3;
+        com.yahoo.bullet.pubsub.Metadata$Signal r4;
+        boolean $z0, $z1;
+        com.yahoo.bullet.storm.QueryBolt r5;
+        org.slf4j.Logger $r6;
+
+        r5 := @this: com.yahoo.bullet.storm.QueryBolt;
+
+        r0 := @parameter0: org.apache.storm.tuple.Tuple;
+
+        r1 = interfaceinvoke r0.<org.apache.storm.tuple.Tuple: java.lang.String getString(int)>(0);
+
+        $r2 = interfaceinvoke r0.<org.apache.storm.tuple.Tuple: java.lang.Object getValue(int)>(1);
+
+        r3 = (com.yahoo.bullet.pubsub.Metadata) $r2;
+
+        if r3 != null goto label1;
+
+        return null;
+
+     label1:
+        r4 = virtualinvoke r3.<com.yahoo.bullet.pubsub.Metadata: com.yahoo.bullet.pubsub.Metadata$Signal getSignal()>();
+
+        $z0 = staticinvoke <com.yahoo.bullet.storm.TopologyConstants: boolean isKillSignal(com.yahoo.bullet.pubsub.Metadata$Signal)>(r4);
+
+        if $z0 == 0 goto label2;
+
+        virtualinvoke r5.<com.yahoo.bullet.storm.QueryBolt: void removeQuery(java.lang.String)>(r1);
+
+        $r6 = <com.yahoo.bullet.storm.QueryBolt: org.slf4j.Logger log>;
+
+        interfaceinvoke $r6.<org.slf4j.Logger: void info(java.lang.String,java.lang.Object,java.lang.Object)>("Received {} signal and killed query: {}", r4, r1);
+
+        goto label3;
+
+     label2:
+        $z1 = staticinvoke <com.yahoo.bullet.storm.TopologyConstants: boolean isReplaySignal(com.yahoo.bullet.pubsub.Metadata$Signal)>(r4);
+
+        if $z1 == 0 goto label3;
+
+        specialinvoke r5.<com.yahoo.bullet.storm.QueryBolt: void handleReplaySignal()>();
+
+     label3:
+        return r3;
+    }
+
+    private void handleReplaySignal()
+    {
+        com.yahoo.bullet.storm.QueryBolt r0;
+        boolean $z0;
+        com.yahoo.bullet.pubsub.Metadata$Signal $r1, $r3;
+        org.slf4j.Logger $r2, $r4;
+        long $l0;
+
+        r0 := @this: com.yahoo.bullet.storm.QueryBolt;
+
+        $z0 = r0.<com.yahoo.bullet.storm.QueryBolt: boolean replayEnabled>;
+
+        if $z0 != 0 goto label1;
+
+        $r4 = <com.yahoo.bullet.storm.QueryBolt: org.slf4j.Logger log>;
+
+        $r3 = <com.yahoo.bullet.pubsub.Metadata$Signal: com.yahoo.bullet.pubsub.Metadata$Signal REPLAY>;
+
+        interfaceinvoke $r4.<org.slf4j.Logger: void warn(java.lang.String,java.lang.Object)>("Received {} signal but replay is not enabled.", $r3);
+
+        return;
+
+     label1:
+        $r2 = <com.yahoo.bullet.storm.QueryBolt: org.slf4j.Logger log>;
+
+        $r1 = <com.yahoo.bullet.pubsub.Metadata$Signal: com.yahoo.bullet.pubsub.Metadata$Signal REPLAY>;
+
+        interfaceinvoke $r2.<org.slf4j.Logger: void info(java.lang.String,java.lang.Object)>("Received {} signal.", $r1);
+
+        $l0 = staticinvoke <java.lang.System: long currentTimeMillis()>();
+
+        r0.<com.yahoo.bullet.storm.QueryBolt: long startTimestamp> = $l0;
+
+        r0.<com.yahoo.bullet.storm.QueryBolt: boolean replayCompleted> = 0;
+
+        r0.<com.yahoo.bullet.storm.QueryBolt: int batchCount> = 0;
+
+        r0.<com.yahoo.bullet.storm.QueryBolt: int replayedQueriesCount> = 0;
+
+        specialinvoke r0.<com.yahoo.bullet.storm.QueryBolt: void emitReplayRequest()>();
+
+        return;
+    }
+
+    protected void onQuery(org.apache.storm.tuple.Tuple)
+    {
+        org.apache.storm.tuple.Tuple r0;
+        java.lang.Object $r1;
+        com.yahoo.bullet.pubsub.PubSubMessage r2;
+        com.yahoo.bullet.storm.QueryBolt r3;
+        java.lang.String $r4;
+        boolean $z0;
+
+        r3 := @this: com.yahoo.bullet.storm.QueryBolt;
+
+        r0 := @parameter0: org.apache.storm.tuple.Tuple;
+
+        $r1 = interfaceinvoke r0.<org.apache.storm.tuple.Tuple: java.lang.Object getValue(int)>(1);
+
+        r2 = (com.yahoo.bullet.pubsub.PubSubMessage) $r1;
+
+        $r4 = virtualinvoke r2.<com.yahoo.bullet.pubsub.PubSubMessage: java.lang.String getId()>();
+
+        $z0 = virtualinvoke r3.<com.yahoo.bullet.storm.QueryBolt: boolean hasQuery(java.lang.String)>($r4);
+
+        if $z0 == 0 goto label1;
+
+        return;
+
+     label1:
+        virtualinvoke r3.<com.yahoo.bullet.storm.QueryBolt: void initializeQuery(com.yahoo.bullet.pubsub.PubSubMessage)>(r2);
+
+        return;
+    }
+
+    protected void onBatch(org.apache.storm.tuple.Tuple)
+    {
+        com.yahoo.bullet.storm.QueryBolt r0;
+        boolean $z0, $z1;
+        org.apache.storm.tuple.Tuple r1;
+        java.lang.Long $r2, $r28, $r29;
+        long l0, $l2, $l9, $l13;
+        java.lang.Integer $r3, $r5, $r18, $r20, $r21;
+        int i1, $i4, $i5, $i6, $i7, $i8, $i10, $i11, $i12;
+        byte $b3;
+        org.slf4j.Logger $r4, $r17, $r19, $r27, $r30;
+        java.lang.Object $r6, $r23, $r26;
+        java.util.Set $r8, $r9, $r22;
+        java.util.function.Predicate $r11, $r14;
+        java.util.Collection $r12;
+        java.util.stream.Stream $r13, $r15;
+        java.util.function.Consumer $r16;
+        byte[] $r24, $r25;
+        java.util.Map $r31;
+
+        r0 := @this: com.yahoo.bullet.storm.QueryBolt;
+
+        r1 := @parameter0: org.apache.storm.tuple.Tuple;
+
+        $z0 = r0.<com.yahoo.bullet.storm.QueryBolt: boolean replayCompleted>;
+
+        if $z0 == 0 goto label1;
+
+        $r30 = <com.yahoo.bullet.storm.QueryBolt: org.slf4j.Logger log>;
+
+        interfaceinvoke $r30.<org.slf4j.Logger: void warn(java.lang.String)>("Batch arrived while no ongoing replay. Ignoring...");
+
+        return;
+
+     label1:
+        $r2 = interfaceinvoke r1.<org.apache.storm.tuple.Tuple: java.lang.Long getLong(int)>(1);
+
+        l0 = virtualinvoke $r2.<java.lang.Long: long longValue()>();
+
+        $r3 = interfaceinvoke r1.<org.apache.storm.tuple.Tuple: java.lang.Integer getInteger(int)>(2);
+
+        i1 = virtualinvoke $r3.<java.lang.Integer: int intValue()>();
+
+        $l2 = r0.<com.yahoo.bullet.storm.QueryBolt: long startTimestamp>;
+
+        $b3 = l0 cmp $l2;
+
+        if $b3 == 0 goto label2;
+
+        $r27 = <com.yahoo.bullet.storm.QueryBolt: org.slf4j.Logger log>;
+
+        $r28 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(l0);
+
+        $l13 = r0.<com.yahoo.bullet.storm.QueryBolt: long startTimestamp>;
+
+        $r29 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>($l13);
+
+        interfaceinvoke $r27.<org.slf4j.Logger: void warn(java.lang.String,java.lang.Object,java.lang.Object)>("Batch timestamp {} does not match bolt start timestamp {}. Ignoring...", $r28, $r29);
+
+        return;
+
+     label2:
+        $r4 = <com.yahoo.bullet.storm.QueryBolt: org.slf4j.Logger log>;
+
+        $r5 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(i1);
+
+        interfaceinvoke $r4.<org.slf4j.Logger: void info(java.lang.String,java.lang.Object)>("Received batch with index {}", $r5);
+
+        $z1 = r0.<com.yahoo.bullet.storm.QueryBolt: boolean replayBatchCompressEnable>;
+
+        if $z1 == 0 goto label3;
+
+        $r23 = interfaceinvoke r1.<org.apache.storm.tuple.Tuple: java.lang.Object getValue(int)>(3);
+
+        $r24 = (byte[]) $r23;
+
+        $r25 = (byte[]) $r24;
+
+        $r26 = staticinvoke <com.yahoo.bullet.storm.batching.BatchManager: java.lang.Object decompress(byte[])>($r25);
+
+        $r31 = (java.util.Map) $r26;
+
+        goto label4;
+
+     label3:
+        $r6 = interfaceinvoke r1.<org.apache.storm.tuple.Tuple: java.lang.Object getValue(int)>(3);
+
+        $r31 = (java.util.Map) $r6;
+
+     label4:
+        if $r31 != null goto label5;
+
+        $r19 = <com.yahoo.bullet.storm.QueryBolt: org.slf4j.Logger log>;
+
+        $i11 = r0.<com.yahoo.bullet.storm.QueryBolt: int batchCount>;
+
+        $r20 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($i11);
+
+        $i12 = r0.<com.yahoo.bullet.storm.QueryBolt: int replayedQueriesCount>;
+
+        $r21 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($i12);
+
+        interfaceinvoke $r19.<org.slf4j.Logger: void info(java.lang.String,java.lang.Object,java.lang.Object)>("Total batches: {}. Total queries replayed: {}", $r20, $r21);
+
+        r0.<com.yahoo.bullet.storm.QueryBolt: boolean replayCompleted> = 1;
+
+        $r22 = r0.<com.yahoo.bullet.storm.QueryBolt: java.util.Set removedIds>;
+
+        interfaceinvoke $r22.<java.util.Set: void clear()>();
+
+        return;
+
+     label5:
+        $r8 = r0.<com.yahoo.bullet.storm.QueryBolt: java.util.Set removedIds>;
+
+        $r9 = interfaceinvoke $r31.<java.util.Map: java.util.Set keySet()>();
+
+        virtualinvoke $r9.<java.lang.Object: java.lang.Class getClass()>();
+
+        $r11 = staticinvoke <com.yahoo.bullet.storm.QueryBolt$remove__21: java.util.function.Predicate bootstrap$(java.util.Set)>($r9);
+
+        interfaceinvoke $r8.<java.util.Set: boolean removeIf(java.util.function.Predicate)>($r11);
+
+        $r12 = interfaceinvoke $r31.<java.util.Map: java.util.Collection values()>();
+
+        $r13 = interfaceinvoke $r12.<java.util.Collection: java.util.stream.Stream stream()>();
+
+        $r14 = staticinvoke <com.yahoo.bullet.storm.QueryBolt$lambda_onBatch_0__24: java.util.function.Predicate bootstrap$(com.yahoo.bullet.storm.QueryBolt)>(r0);
+
+        $r15 = interfaceinvoke $r13.<java.util.stream.Stream: java.util.stream.Stream filter(java.util.function.Predicate)>($r14);
+
+        $r16 = staticinvoke <com.yahoo.bullet.storm.QueryBolt$initializeQuery__25: java.util.function.Consumer bootstrap$(com.yahoo.bullet.storm.QueryBolt)>(r0);
+
+        interfaceinvoke $r15.<java.util.stream.Stream: void forEach(java.util.function.Consumer)>($r16);
+
+        $i4 = r0.<com.yahoo.bullet.storm.QueryBolt: int batchCount>;
+
+        $i5 = $i4 + 1;
+
+        r0.<com.yahoo.bullet.storm.QueryBolt: int batchCount> = $i5;
+
+        $i6 = r0.<com.yahoo.bullet.storm.QueryBolt: int replayedQueriesCount>;
+
+        $i7 = interfaceinvoke $r31.<java.util.Map: int size()>();
+
+        $i8 = $i6 + $i7;
+
+        r0.<com.yahoo.bullet.storm.QueryBolt: int replayedQueriesCount> = $i8;
+
+        $l9 = staticinvoke <java.lang.System: long currentTimeMillis()>();
+
+        r0.<com.yahoo.bullet.storm.QueryBolt: long lastReplayRequest> = $l9;
+
+        $r17 = <com.yahoo.bullet.storm.QueryBolt: org.slf4j.Logger log>;
+
+        $i10 = interfaceinvoke $r31.<java.util.Map: int size()>();
+
+        $r18 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($i10);
+
+        interfaceinvoke $r17.<org.slf4j.Logger: void info(java.lang.String,java.lang.Object)>("Initialized {} queries.", $r18);
+
+        return;
+    }
+
+    protected abstract boolean hasQuery(java.lang.String);
+
+    protected abstract void initializeQuery(com.yahoo.bullet.pubsub.PubSubMessage);
+
+    protected com.yahoo.bullet.querying.Querier createQuerier(com.yahoo.bullet.querying.Querier$Mode, java.lang.String, com.yahoo.bullet.query.Query, com.yahoo.bullet.pubsub.Metadata, com.yahoo.bullet.common.BulletConfig)
+    {
+        com.yahoo.bullet.querying.Querier $r0;
+        com.yahoo.bullet.querying.Querier$Mode r1;
+        com.yahoo.bullet.querying.RunningQuery $r2;
+        java.lang.String r3;
+        com.yahoo.bullet.query.Query r4;
+        com.yahoo.bullet.pubsub.Metadata r5;
+        com.yahoo.bullet.common.BulletConfig r6;
+        com.yahoo.bullet.storm.QueryBolt r7;
+
+        r7 := @this: com.yahoo.bullet.storm.QueryBolt;
+
+        r1 := @parameter0: com.yahoo.bullet.querying.Querier$Mode;
+
+        r3 := @parameter1: java.lang.String;
+
+        r4 := @parameter2: com.yahoo.bullet.query.Query;
+
+        r5 := @parameter3: com.yahoo.bullet.pubsub.Metadata;
+
+        r6 := @parameter4: com.yahoo.bullet.common.BulletConfig;
+
+        $r0 = new com.yahoo.bullet.querying.Querier;
+
+        $r2 = new com.yahoo.bullet.querying.RunningQuery;
+
+        specialinvoke $r2.<com.yahoo.bullet.querying.RunningQuery: void <init>(java.lang.String,com.yahoo.bullet.query.Query,com.yahoo.bullet.pubsub.Metadata)>(r3, r4, r5);
+
+        specialinvoke $r0.<com.yahoo.bullet.querying.Querier: void <init>(com.yahoo.bullet.querying.Querier$Mode,com.yahoo.bullet.querying.RunningQuery,com.yahoo.bullet.common.BulletConfig)>(r1, $r2, r6);
+
+        return $r0;
+    }
+
+    protected void removeQuery(java.lang.String)
+    {
+        com.yahoo.bullet.storm.QueryBolt r0;
+        boolean $z0;
+        java.lang.String r1;
+        java.util.Set $r2;
+
+        r0 := @this: com.yahoo.bullet.storm.QueryBolt;
+
+        r1 := @parameter0: java.lang.String;
+
+        $z0 = r0.<com.yahoo.bullet.storm.QueryBolt: boolean replayCompleted>;
+
+        if $z0 != 0 goto label1;
+
+        $r2 = r0.<com.yahoo.bullet.storm.QueryBolt: java.util.Set removedIds>;
+
+        interfaceinvoke $r2.<java.util.Set: boolean add(java.lang.Object)>(r1);
+
+     label1:
+        return;
+    }
+
+    protected void emitReplayRequestIfNecessary()
+    {
+        com.yahoo.bullet.storm.QueryBolt r0;
+        boolean $z0, $z1;
+        long $l0, $l1, $l2, $l3;
+        byte $b4;
+
+        r0 := @this: com.yahoo.bullet.storm.QueryBolt;
+
+        $z0 = r0.<com.yahoo.bullet.storm.QueryBolt: boolean replayEnabled>;
+
+        if $z0 == 0 goto label1;
+
+        $z1 = r0.<com.yahoo.bullet.storm.QueryBolt: boolean replayCompleted>;
+
+        if $z1 != 0 goto label1;
+
+        $l0 = staticinvoke <java.lang.System: long currentTimeMillis()>();
+
+        $l2 = r0.<com.yahoo.bullet.storm.QueryBolt: long lastReplayRequest>;
+
+        $l1 = r0.<com.yahoo.bullet.storm.QueryBolt: long replayRequestInterval>;
+
+        $l3 = $l2 + $l1;
+
+        $b4 = $l0 cmp $l3;
+
+        if $b4 < 0 goto label1;
+
+        specialinvoke r0.<com.yahoo.bullet.storm.QueryBolt: void emitReplayRequest()>();
+
+     label1:
+        return;
+    }
+
+    private void emitReplayRequest()
+    {
+        com.yahoo.bullet.storm.QueryBolt r0;
+        long $l0, $l1, $l2;
+        org.slf4j.Logger $r1;
+        java.lang.String $r2, $r6;
+        java.lang.Long $r3, $r10;
+        java.lang.Object[] $r5;
+        org.apache.storm.task.OutputCollector $r8;
+        com.yahoo.bullet.pubsub.Metadata$Signal $r9;
+        com.yahoo.bullet.pubsub.Metadata $r12;
+        org.apache.storm.tuple.Values $r13;
+        java.util.List $r14;
+
+        r0 := @this: com.yahoo.bullet.storm.QueryBolt;
+
+        $r1 = <com.yahoo.bullet.storm.QueryBolt: org.slf4j.Logger log>;
+
+        $r2 = r0.<com.yahoo.bullet.storm.QueryBolt: java.lang.String componentTaskID>;
+
+        $l0 = r0.<com.yahoo.bullet.storm.QueryBolt: long startTimestamp>;
+
+        $r3 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>($l0);
+
+        interfaceinvoke $r1.<org.slf4j.Logger: void info(java.lang.String,java.lang.Object,java.lang.Object)>("Emitting replay request from {} with start time {}", $r2, $r3);
+
+        $r8 = r0.<com.yahoo.bullet.storm.QueryBolt: org.apache.storm.task.OutputCollector collector>;
+
+        $r13 = new org.apache.storm.tuple.Values;
+
+        $r5 = newarray (java.lang.Object)[2];
+
+        $r6 = r0.<com.yahoo.bullet.storm.QueryBolt: java.lang.String componentTaskID>;
+
+        $r5[0] = $r6;
+
+        $r12 = new com.yahoo.bullet.pubsub.Metadata;
+
+        $r9 = <com.yahoo.bullet.pubsub.Metadata$Signal: com.yahoo.bullet.pubsub.Metadata$Signal REPLAY>;
+
+        $l1 = r0.<com.yahoo.bullet.storm.QueryBolt: long startTimestamp>;
+
+        $r10 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>($l1);
+
+        specialinvoke $r12.<com.yahoo.bullet.pubsub.Metadata: void <init>(com.yahoo.bullet.pubsub.Metadata$Signal,java.io.Serializable)>($r9, $r10);
+
+        $r5[1] = $r12;
+
+        specialinvoke $r13.<org.apache.storm.tuple.Values: void <init>(java.lang.Object[])>($r5);
+
+        $r14 = (java.util.List) $r13;
+
+        virtualinvoke $r8.<org.apache.storm.task.OutputCollector: java.util.List emit(java.lang.String,java.util.List)>("feedback", $r14);
+
+        $l2 = staticinvoke <java.lang.System: long currentTimeMillis()>();
+
+        r0.<com.yahoo.bullet.storm.QueryBolt: long lastReplayRequest> = $l2;
+
+        return;
+    }
+
+    public boolean lambda$onBatch$0(com.yahoo.bullet.pubsub.PubSubMessage)
+    {
+        com.yahoo.bullet.pubsub.PubSubMessage r0;
+        com.yahoo.bullet.storm.QueryBolt r1;
+        java.lang.String $r2;
+        boolean $z0, $z1;
+
+        r1 := @this: com.yahoo.bullet.storm.QueryBolt;
+
+        r0 := @parameter0: com.yahoo.bullet.pubsub.PubSubMessage;
+
+        if r0 == null goto label1;
+
+        $r2 = virtualinvoke r0.<com.yahoo.bullet.pubsub.PubSubMessage: java.lang.String getId()>();
+
+        $z0 = virtualinvoke r1.<com.yahoo.bullet.storm.QueryBolt: boolean hasQuery(java.lang.String)>($r2);
+
+        if $z0 != 0 goto label1;
+
+        $z1 = 1;
+
+        goto label2;
+
+     label1:
+        $z1 = 0;
+
+     label2:
+        return $z1;
+    }
+
+    static void <clinit>()
+    {
+        org.slf4j.Logger $r0;
+
+        <com.yahoo.bullet.storm.QueryBolt: long serialVersionUID> = 4567140628827887965L;
+
+        $r0 = staticinvoke <org.slf4j.LoggerFactory: org.slf4j.Logger getLogger(java.lang.Class)>(class "Lcom/yahoo/bullet/storm/QueryBolt;");
+
+        <com.yahoo.bullet.storm.QueryBolt: org.slf4j.Logger log> = $r0;
+
+        return;
+    }
+}

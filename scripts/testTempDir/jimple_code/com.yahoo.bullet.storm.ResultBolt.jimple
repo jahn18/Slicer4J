@@ -1,0 +1,85 @@
+public class com.yahoo.bullet.storm.ResultBolt extends com.yahoo.bullet.storm.PublisherBolt
+{
+    private static final org.slf4j.Logger log;
+    private static final long serialVersionUID;
+
+    public void <init>(com.yahoo.bullet.storm.BulletStormConfig)
+    {
+        com.yahoo.bullet.storm.ResultBolt r0;
+        com.yahoo.bullet.storm.BulletStormConfig r1;
+
+        r0 := @this: com.yahoo.bullet.storm.ResultBolt;
+
+        r1 := @parameter0: com.yahoo.bullet.storm.BulletStormConfig;
+
+        specialinvoke r0.<com.yahoo.bullet.storm.PublisherBolt: void <init>(com.yahoo.bullet.storm.BulletStormConfig)>(r1);
+
+        return;
+    }
+
+    protected com.yahoo.bullet.pubsub.Publisher createPublisher() throws com.yahoo.bullet.pubsub.PubSubException
+    {
+        com.yahoo.bullet.storm.ResultBolt r0;
+        com.yahoo.bullet.storm.BulletStormConfig $r1;
+        com.yahoo.bullet.pubsub.PubSub r2;
+        com.yahoo.bullet.pubsub.Publisher r3;
+        org.slf4j.Logger $r4;
+
+        r0 := @this: com.yahoo.bullet.storm.ResultBolt;
+
+        $r1 = r0.<com.yahoo.bullet.storm.ResultBolt: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        r2 = staticinvoke <com.yahoo.bullet.pubsub.PubSub: com.yahoo.bullet.pubsub.PubSub 'from'(com.yahoo.bullet.common.BulletConfig)>($r1);
+
+        r3 = virtualinvoke r2.<com.yahoo.bullet.pubsub.PubSub: com.yahoo.bullet.pubsub.Publisher getPublisher()>();
+
+        $r4 = <com.yahoo.bullet.storm.ResultBolt: org.slf4j.Logger log>;
+
+        interfaceinvoke $r4.<org.slf4j.Logger: void info(java.lang.String,java.lang.Object,java.lang.Object)>("Setup PubSub: {} with Publisher: {}", r2, r3);
+
+        return r3;
+    }
+
+    public void execute(org.apache.storm.tuple.Tuple)
+    {
+        org.apache.storm.tuple.Tuple r0;
+        java.lang.String r1, r2;
+        java.lang.Object $r3;
+        com.yahoo.bullet.pubsub.Metadata r4;
+        com.yahoo.bullet.storm.ResultBolt r5;
+        com.yahoo.bullet.pubsub.PubSubMessage $r6;
+
+        r5 := @this: com.yahoo.bullet.storm.ResultBolt;
+
+        r0 := @parameter0: org.apache.storm.tuple.Tuple;
+
+        r1 = interfaceinvoke r0.<org.apache.storm.tuple.Tuple: java.lang.String getString(int)>(0);
+
+        r2 = interfaceinvoke r0.<org.apache.storm.tuple.Tuple: java.lang.String getString(int)>(1);
+
+        $r3 = interfaceinvoke r0.<org.apache.storm.tuple.Tuple: java.lang.Object getValue(int)>(2);
+
+        r4 = (com.yahoo.bullet.pubsub.Metadata) $r3;
+
+        $r6 = new com.yahoo.bullet.pubsub.PubSubMessage;
+
+        specialinvoke $r6.<com.yahoo.bullet.pubsub.PubSubMessage: void <init>(java.lang.String,java.io.Serializable,com.yahoo.bullet.pubsub.Metadata)>(r1, r2, r4);
+
+        virtualinvoke r5.<com.yahoo.bullet.storm.ResultBolt: void publish(com.yahoo.bullet.pubsub.PubSubMessage,org.apache.storm.tuple.Tuple)>($r6, r0);
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        org.slf4j.Logger $r0;
+
+        <com.yahoo.bullet.storm.ResultBolt: long serialVersionUID> = -1927930701345251113L;
+
+        $r0 = staticinvoke <org.slf4j.LoggerFactory: org.slf4j.Logger getLogger(java.lang.Class)>(class "Lcom/yahoo/bullet/storm/ResultBolt;");
+
+        <com.yahoo.bullet.storm.ResultBolt: org.slf4j.Logger log> = $r0;
+
+        return;
+    }
+}

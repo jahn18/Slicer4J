@@ -1,0 +1,127 @@
+public class com.yahoo.bullet.storm.testing.CustomIRichSpout extends java.lang.Object implements org.apache.storm.topology.IRichSpout
+{
+
+    public void <init>()
+    {
+        com.yahoo.bullet.storm.testing.CustomIRichSpout r0;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomIRichSpout;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public void open(java.util.Map, org.apache.storm.task.TopologyContext, org.apache.storm.spout.SpoutOutputCollector)
+    {
+        com.yahoo.bullet.storm.testing.CustomIRichSpout r0;
+        java.util.Map r1;
+        org.apache.storm.task.TopologyContext r2;
+        org.apache.storm.spout.SpoutOutputCollector r3;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomIRichSpout;
+
+        r1 := @parameter0: java.util.Map;
+
+        r2 := @parameter1: org.apache.storm.task.TopologyContext;
+
+        r3 := @parameter2: org.apache.storm.spout.SpoutOutputCollector;
+
+        return;
+    }
+
+    public void close()
+    {
+        com.yahoo.bullet.storm.testing.CustomIRichSpout r0;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomIRichSpout;
+
+        return;
+    }
+
+    public void activate()
+    {
+        com.yahoo.bullet.storm.testing.CustomIRichSpout r0;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomIRichSpout;
+
+        return;
+    }
+
+    public void deactivate()
+    {
+        com.yahoo.bullet.storm.testing.CustomIRichSpout r0;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomIRichSpout;
+
+        return;
+    }
+
+    public void nextTuple()
+    {
+        com.yahoo.bullet.storm.testing.CustomIRichSpout r0;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomIRichSpout;
+
+        return;
+    }
+
+    public void ack(java.lang.Object)
+    {
+        com.yahoo.bullet.storm.testing.CustomIRichSpout r0;
+        java.lang.Object r1;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomIRichSpout;
+
+        r1 := @parameter0: java.lang.Object;
+
+        return;
+    }
+
+    public void fail(java.lang.Object)
+    {
+        com.yahoo.bullet.storm.testing.CustomIRichSpout r0;
+        java.lang.Object r1;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomIRichSpout;
+
+        r1 := @parameter0: java.lang.Object;
+
+        return;
+    }
+
+    public void declareOutputFields(org.apache.storm.topology.OutputFieldsDeclarer)
+    {
+        org.apache.storm.topology.OutputFieldsDeclarer r0;
+        org.apache.storm.tuple.Fields $r1;
+        java.lang.String[] $r2;
+        com.yahoo.bullet.storm.testing.CustomIRichSpout r3;
+
+        r3 := @this: com.yahoo.bullet.storm.testing.CustomIRichSpout;
+
+        r0 := @parameter0: org.apache.storm.topology.OutputFieldsDeclarer;
+
+        $r1 = new org.apache.storm.tuple.Fields;
+
+        $r2 = newarray (java.lang.String)[2];
+
+        $r2[0] = "record";
+
+        $r2[1] = "timestamp";
+
+        specialinvoke $r1.<org.apache.storm.tuple.Fields: void <init>(java.lang.String[])>($r2);
+
+        interfaceinvoke r0.<org.apache.storm.topology.OutputFieldsDeclarer: void declare(org.apache.storm.tuple.Fields)>($r1);
+
+        return;
+    }
+
+    public java.util.Map getComponentConfiguration()
+    {
+        com.yahoo.bullet.storm.testing.CustomIRichSpout r0;
+
+        r0 := @this: com.yahoo.bullet.storm.testing.CustomIRichSpout;
+
+        return null;
+    }
+}

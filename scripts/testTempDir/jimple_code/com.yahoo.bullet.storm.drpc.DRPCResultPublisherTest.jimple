@@ -1,0 +1,262 @@
+public class com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest extends java.lang.Object
+{
+    private com.yahoo.bullet.storm.drpc.DRPCResultPublisher publisher;
+    private com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector collector;
+    private com.yahoo.bullet.storm.drpc.MockReturnResults injectedMockBolt;
+
+    public void <init>()
+    {
+        com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest r0;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public void setup()
+    {
+        com.yahoo.bullet.storm.drpc.DRPCConfig $r0;
+        com.yahoo.bullet.common.Config $r2;
+        java.util.Optional $r3;
+        java.util.Map r4;
+        com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest r5;
+        com.yahoo.bullet.storm.drpc.DRPCResultPublisher $r6, $r7, $r12;
+        com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector $r8, $r10;
+        com.yahoo.bullet.storm.drpc.MockReturnResults $r9, $r11;
+
+        r5 := @this: com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest;
+
+        $r0 = new com.yahoo.bullet.storm.drpc.DRPCConfig;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.drpc.DRPCConfig: void <init>(java.lang.String)>("test_drpc_config.yaml");
+
+        $r2 = new com.yahoo.bullet.common.Config;
+
+        specialinvoke $r2.<com.yahoo.bullet.common.Config: void <init>(java.lang.String)>("test_storm_config.yaml");
+
+        $r3 = staticinvoke <java.util.Optional: java.util.Optional empty()>();
+
+        r4 = virtualinvoke $r2.<com.yahoo.bullet.common.Config: java.util.Map getAll(java.util.Optional)>($r3);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.drpc.DRPCConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.storm.config", r4);
+
+        $r6 = new com.yahoo.bullet.storm.drpc.DRPCResultPublisher;
+
+        specialinvoke $r6.<com.yahoo.bullet.storm.drpc.DRPCResultPublisher: void <init>(com.yahoo.bullet.common.BulletConfig)>($r0);
+
+        r5.<com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest: com.yahoo.bullet.storm.drpc.DRPCResultPublisher publisher> = $r6;
+
+        $r7 = r5.<com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest: com.yahoo.bullet.storm.drpc.DRPCResultPublisher publisher>;
+
+        $r8 = virtualinvoke $r7.<com.yahoo.bullet.storm.drpc.DRPCResultPublisher: com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector getCollector()>();
+
+        r5.<com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest: com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector collector> = $r8;
+
+        $r9 = new com.yahoo.bullet.storm.drpc.MockReturnResults;
+
+        $r10 = r5.<com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest: com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector collector>;
+
+        specialinvoke $r9.<com.yahoo.bullet.storm.drpc.MockReturnResults: void <init>(com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector,int)>($r10, 5);
+
+        r5.<com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest: com.yahoo.bullet.storm.drpc.MockReturnResults injectedMockBolt> = $r9;
+
+        $r12 = r5.<com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest: com.yahoo.bullet.storm.drpc.DRPCResultPublisher publisher>;
+
+        $r11 = r5.<com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest: com.yahoo.bullet.storm.drpc.MockReturnResults injectedMockBolt>;
+
+        virtualinvoke $r12.<com.yahoo.bullet.storm.drpc.DRPCResultPublisher: void setBolt(org.apache.storm.drpc.ReturnResults)>($r11);
+
+        return;
+    }
+
+    public void testSending() throws java.lang.Exception
+    {
+        com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest r0;
+        com.yahoo.bullet.storm.drpc.MockReturnResults $r1, $r7, $r18;
+        int $i0, $i2, $i4;
+        long $l1, $l3, $l5;
+        com.yahoo.bullet.pubsub.PubSubMessage $r2, $r13;
+        com.yahoo.bullet.pubsub.Metadata $r3, $r14;
+        java.lang.String $r4, $r15;
+        com.yahoo.bullet.storm.drpc.DRPCResultPublisher $r5, $r16;
+        com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector $r8, $r9, $r10, $r11, $r19, $r20, $r21, $r22;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5;
+        java.util.List $r12, $r23;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest: com.yahoo.bullet.storm.drpc.MockReturnResults injectedMockBolt>;
+
+        $i0 = virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.MockReturnResults: int getCount()>();
+
+        $l1 = (long) $i0;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l1, 0L);
+
+        $r2 = new com.yahoo.bullet.pubsub.PubSubMessage;
+
+        $r3 = new com.yahoo.bullet.pubsub.Metadata;
+
+        $r4 = staticinvoke <com.yahoo.bullet.storm.drpc.MockDRPCSpout: java.lang.String makeReturnInfo(java.lang.String,java.lang.String,int)>("a", "testHost", 80);
+
+        specialinvoke $r3.<com.yahoo.bullet.pubsub.Metadata: void <init>(com.yahoo.bullet.pubsub.Metadata$Signal,java.io.Serializable)>(null, $r4);
+
+        specialinvoke $r2.<com.yahoo.bullet.pubsub.PubSubMessage: void <init>(java.lang.String,java.io.Serializable,com.yahoo.bullet.pubsub.Metadata)>("foo", "{}", $r3);
+
+        $r5 = r0.<com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest: com.yahoo.bullet.storm.drpc.DRPCResultPublisher publisher>;
+
+        virtualinvoke $r5.<com.yahoo.bullet.storm.drpc.DRPCResultPublisher: com.yahoo.bullet.pubsub.PubSubMessage send(com.yahoo.bullet.pubsub.PubSubMessage)>($r2);
+
+        $r7 = r0.<com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest: com.yahoo.bullet.storm.drpc.MockReturnResults injectedMockBolt>;
+
+        $i2 = virtualinvoke $r7.<com.yahoo.bullet.storm.drpc.MockReturnResults: int getCount()>();
+
+        $l3 = (long) $i2;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l3, 1L);
+
+        $r8 = r0.<com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest: com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector collector>;
+
+        $z0 = virtualinvoke $r8.<com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector: boolean isAcked()>();
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z0);
+
+        $r9 = r0.<com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest: com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector collector>;
+
+        $z1 = virtualinvoke $r9.<com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector: boolean isFailed()>();
+
+        staticinvoke <org.junit.Assert: void assertFalse(boolean)>($z1);
+
+        $r10 = r0.<com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest: com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector collector>;
+
+        $z2 = virtualinvoke $r10.<com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector: boolean haveOutput()>();
+
+        staticinvoke <org.junit.Assert: void assertFalse(boolean)>($z2);
+
+        $r11 = r0.<com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest: com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector collector>;
+
+        $r12 = virtualinvoke $r11.<com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector: java.util.List reset()>();
+
+        staticinvoke <org.junit.Assert: void assertNull(java.lang.Object)>($r12);
+
+        $r13 = new com.yahoo.bullet.pubsub.PubSubMessage;
+
+        $r14 = new com.yahoo.bullet.pubsub.Metadata;
+
+        $r15 = staticinvoke <com.yahoo.bullet.storm.drpc.MockDRPCSpout: java.lang.String makeReturnInfo(java.lang.String,java.lang.String,int)>("b", "testHost", 80);
+
+        specialinvoke $r14.<com.yahoo.bullet.pubsub.Metadata: void <init>(com.yahoo.bullet.pubsub.Metadata$Signal,java.io.Serializable)>(null, $r15);
+
+        specialinvoke $r13.<com.yahoo.bullet.pubsub.PubSubMessage: void <init>(java.lang.String,java.io.Serializable,com.yahoo.bullet.pubsub.Metadata)>("bar", "{}", $r14);
+
+        $r16 = r0.<com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest: com.yahoo.bullet.storm.drpc.DRPCResultPublisher publisher>;
+
+        virtualinvoke $r16.<com.yahoo.bullet.storm.drpc.DRPCResultPublisher: com.yahoo.bullet.pubsub.PubSubMessage send(com.yahoo.bullet.pubsub.PubSubMessage)>($r13);
+
+        $r18 = r0.<com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest: com.yahoo.bullet.storm.drpc.MockReturnResults injectedMockBolt>;
+
+        $i4 = virtualinvoke $r18.<com.yahoo.bullet.storm.drpc.MockReturnResults: int getCount()>();
+
+        $l5 = (long) $i4;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l5, 2L);
+
+        $r19 = r0.<com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest: com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector collector>;
+
+        $z3 = virtualinvoke $r19.<com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector: boolean isAcked()>();
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z3);
+
+        $r20 = r0.<com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest: com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector collector>;
+
+        $z4 = virtualinvoke $r20.<com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector: boolean isFailed()>();
+
+        staticinvoke <org.junit.Assert: void assertFalse(boolean)>($z4);
+
+        $r21 = r0.<com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest: com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector collector>;
+
+        $z5 = virtualinvoke $r21.<com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector: boolean haveOutput()>();
+
+        staticinvoke <org.junit.Assert: void assertFalse(boolean)>($z5);
+
+        $r22 = r0.<com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest: com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector collector>;
+
+        $r23 = virtualinvoke $r22.<com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector: java.util.List reset()>();
+
+        staticinvoke <org.junit.Assert: void assertNull(java.lang.Object)>($r23);
+
+        return;
+    }
+
+    public void testFailing() throws java.lang.Exception
+    {
+        com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest r0;
+        com.yahoo.bullet.storm.drpc.MockReturnResults $r1, $r2;
+        int $i0;
+        long $l1;
+        com.yahoo.bullet.pubsub.PubSubMessage $r3;
+        com.yahoo.bullet.pubsub.Metadata $r4;
+        java.lang.String $r5;
+        com.yahoo.bullet.storm.drpc.DRPCResultPublisher $r7;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest: com.yahoo.bullet.storm.drpc.MockReturnResults injectedMockBolt>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.MockReturnResults: void setFailNumber(int)>(1);
+
+        $r2 = r0.<com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest: com.yahoo.bullet.storm.drpc.MockReturnResults injectedMockBolt>;
+
+        $i0 = virtualinvoke $r2.<com.yahoo.bullet.storm.drpc.MockReturnResults: int getCount()>();
+
+        $l1 = (long) $i0;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l1, 0L);
+
+        $r3 = new com.yahoo.bullet.pubsub.PubSubMessage;
+
+        $r4 = new com.yahoo.bullet.pubsub.Metadata;
+
+        $r5 = staticinvoke <com.yahoo.bullet.storm.drpc.MockDRPCSpout: java.lang.String makeReturnInfo(java.lang.String,java.lang.String,int)>("a", "testHost", 80);
+
+        specialinvoke $r4.<com.yahoo.bullet.pubsub.Metadata: void <init>(com.yahoo.bullet.pubsub.Metadata$Signal,java.io.Serializable)>(null, $r5);
+
+        specialinvoke $r3.<com.yahoo.bullet.pubsub.PubSubMessage: void <init>(java.lang.String,java.io.Serializable,com.yahoo.bullet.pubsub.Metadata)>("foo", "{}", $r4);
+
+        $r7 = r0.<com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest: com.yahoo.bullet.storm.drpc.DRPCResultPublisher publisher>;
+
+        virtualinvoke $r7.<com.yahoo.bullet.storm.drpc.DRPCResultPublisher: com.yahoo.bullet.pubsub.PubSubMessage send(com.yahoo.bullet.pubsub.PubSubMessage)>($r3);
+
+        return;
+    }
+
+    public void testCleaningUp()
+    {
+        com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest r0;
+        com.yahoo.bullet.storm.drpc.MockReturnResults $r1, $r3;
+        boolean $z0, $z1;
+        com.yahoo.bullet.storm.drpc.DRPCResultPublisher $r2;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest: com.yahoo.bullet.storm.drpc.MockReturnResults injectedMockBolt>;
+
+        $z0 = virtualinvoke $r1.<com.yahoo.bullet.storm.drpc.MockReturnResults: boolean isCleanedUp()>();
+
+        staticinvoke <org.junit.Assert: void assertFalse(boolean)>($z0);
+
+        $r2 = r0.<com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest: com.yahoo.bullet.storm.drpc.DRPCResultPublisher publisher>;
+
+        virtualinvoke $r2.<com.yahoo.bullet.storm.drpc.DRPCResultPublisher: void close()>();
+
+        $r3 = r0.<com.yahoo.bullet.storm.drpc.DRPCResultPublisherTest: com.yahoo.bullet.storm.drpc.MockReturnResults injectedMockBolt>;
+
+        $z1 = virtualinvoke $r3.<com.yahoo.bullet.storm.drpc.MockReturnResults: boolean isCleanedUp()>();
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z1);
+
+        return;
+    }
+}

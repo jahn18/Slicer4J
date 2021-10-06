@@ -1,0 +1,749 @@
+public class com.yahoo.bullet.storm.BulletStormConfigTest extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        com.yahoo.bullet.storm.BulletStormConfigTest r0;
+
+        r0 := @this: com.yahoo.bullet.storm.BulletStormConfigTest;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public void testDefaultInitialization()
+    {
+        com.yahoo.bullet.storm.BulletStormConfig $r0;
+        java.lang.Object $r2, $r3, $r5;
+        java.lang.Long $r4;
+        java.lang.Integer $r6;
+        com.yahoo.bullet.storm.BulletStormConfigTest r7;
+
+        r7 := @this: com.yahoo.bullet.storm.BulletStormConfigTest;
+
+        $r0 = new com.yahoo.bullet.storm.BulletStormConfig;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void <init>()>();
+
+        $r2 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.name");
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r2, "bullet-topology");
+
+        $r3 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.query.max.duration.ms");
+
+        $r4 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(9223372036854775807L);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r3, $r4);
+
+        $r5 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.query.aggregation.max.size");
+
+        $r6 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(500);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r5, $r6);
+
+        return;
+    }
+
+    public void testNoFiles()
+    {
+        com.yahoo.bullet.storm.BulletStormConfig $r0, $r7;
+        java.lang.String $r1;
+        java.lang.Object $r2, $r3, $r5, $r8;
+        java.lang.Long $r4;
+        java.lang.Integer $r6;
+        com.yahoo.bullet.storm.BulletStormConfigTest r9;
+
+        r9 := @this: com.yahoo.bullet.storm.BulletStormConfigTest;
+
+        $r0 = new com.yahoo.bullet.storm.BulletStormConfig;
+
+        $r1 = (java.lang.String) null;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void <init>(java.lang.String)>($r1);
+
+        $r2 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.name");
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r2, "bullet-topology");
+
+        $r3 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.query.max.duration.ms");
+
+        $r4 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(9223372036854775807L);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r3, $r4);
+
+        $r5 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.query.aggregation.max.size");
+
+        $r6 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(500);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r5, $r6);
+
+        $r7 = new com.yahoo.bullet.storm.BulletStormConfig;
+
+        specialinvoke $r7.<com.yahoo.bullet.storm.BulletStormConfig: void <init>(java.lang.String)>("");
+
+        $r8 = virtualinvoke $r7.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.name");
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r8, "bullet-topology");
+
+        return;
+    }
+
+    public void testCustomConfig()
+    {
+        com.yahoo.bullet.storm.BulletStormConfig $r0;
+        java.lang.Object $r2, $r3, $r5, $r7, $r8, $r10, $r12;
+        java.lang.Long $r4, $r6;
+        java.lang.Boolean $r9;
+        java.lang.Integer $r11;
+        java.lang.Double $r13;
+        com.yahoo.bullet.storm.BulletStormConfigTest r14;
+
+        r14 := @this: com.yahoo.bullet.storm.BulletStormConfigTest;
+
+        $r0 = new com.yahoo.bullet.storm.BulletStormConfig;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void <init>(java.lang.String)>("test_config.yaml");
+
+        $r2 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.name");
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r2, "test");
+
+        $r3 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.query.default.duration.ms");
+
+        $r4 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(1000L);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r3, $r4);
+
+        $r5 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.query.max.duration.ms");
+
+        $r6 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(10000L);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r5, $r6);
+
+        $r7 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("fake.setting");
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r7, "bar");
+
+        $r8 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.metrics.enable");
+
+        $r9 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(0);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r8, $r9);
+
+        $r10 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.query.aggregation.max.size");
+
+        $r11 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(500);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r10, $r11);
+
+        $r12 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.query.spout.cpu.load");
+
+        $r13 = staticinvoke <java.lang.Double: java.lang.Double valueOf(double)>(20.0);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r12, $r13);
+
+        return;
+    }
+
+    public void testGettingNonStormSettingsOnly()
+    {
+        com.yahoo.bullet.storm.BulletStormConfig $r0;
+        com.yahoo.bullet.common.Config $r1;
+        java.util.Map r3;
+        int $i0;
+        long $l1;
+        java.lang.Object $r4, $r5;
+        com.yahoo.bullet.storm.BulletStormConfigTest r6;
+
+        r6 := @this: com.yahoo.bullet.storm.BulletStormConfigTest;
+
+        $r0 = new com.yahoo.bullet.storm.BulletStormConfig;
+
+        $r1 = (com.yahoo.bullet.common.Config) null;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void <init>(com.yahoo.bullet.common.Config)>($r1);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.custom.storm.foo", "bar");
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.custom.bar", "baz");
+
+        r3 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.util.Map getCustomStormSettings()>();
+
+        $i0 = interfaceinvoke r3.<java.util.Map: int size()>();
+
+        $l1 = (long) $i0;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l1, 2L);
+
+        $r4 = interfaceinvoke r3.<java.util.Map: java.lang.Object get(java.lang.Object)>("storm.foo");
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r4, "bar");
+
+        $r5 = interfaceinvoke r3.<java.util.Map: java.lang.Object get(java.lang.Object)>("bar");
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r5, "baz");
+
+        return;
+    }
+
+    public void testInvalidMetricMapping()
+    {
+        com.yahoo.bullet.storm.BulletStormConfig $r0;
+        com.yahoo.bullet.common.Config $r1;
+        java.lang.Object $r4, $r8, $r12, $r17, $r22;
+        java.util.Map $r5, $r9, $r10, $r13, $r15, $r18, $r20, $r24;
+        java.lang.Long $r6;
+        java.lang.Integer $r14, $r19, $r23;
+        com.yahoo.bullet.storm.BulletStormConfigTest r25;
+
+        r25 := @this: com.yahoo.bullet.storm.BulletStormConfigTest;
+
+        $r0 = new com.yahoo.bullet.storm.BulletStormConfig;
+
+        $r1 = (com.yahoo.bullet.common.Config) null;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void <init>(com.yahoo.bullet.common.Config)>($r1);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.metrics.built.in.emit.interval.mapping", null);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        $r4 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.metrics.built.in.emit.interval.mapping");
+
+        $r5 = <com.yahoo.bullet.storm.BulletStormConfig: java.util.Map DEFAULT_TOPOLOGY_METRICS_BUILT_IN_EMIT_INTERVAL_MAPPING>;
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r4, $r5);
+
+        $r6 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(1L);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.metrics.built.in.emit.interval.mapping", $r6);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        $r8 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.metrics.built.in.emit.interval.mapping");
+
+        $r9 = <com.yahoo.bullet.storm.BulletStormConfig: java.util.Map DEFAULT_TOPOLOGY_METRICS_BUILT_IN_EMIT_INTERVAL_MAPPING>;
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r8, $r9);
+
+        $r10 = staticinvoke <java.util.Collections: java.util.Map singletonMap(java.lang.Object,java.lang.Object)>("bullet_filter_latency", "foo");
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.metrics.built.in.emit.interval.mapping", $r10);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        $r12 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.metrics.built.in.emit.interval.mapping");
+
+        $r13 = <com.yahoo.bullet.storm.BulletStormConfig: java.util.Map DEFAULT_TOPOLOGY_METRICS_BUILT_IN_EMIT_INTERVAL_MAPPING>;
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r12, $r13);
+
+        $r14 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(50);
+
+        $r15 = staticinvoke <java.util.Collections: java.util.Map singletonMap(java.lang.Object,java.lang.Object)>("foo", $r14);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.metrics.built.in.emit.interval.mapping", $r15);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        $r17 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.metrics.built.in.emit.interval.mapping");
+
+        $r18 = <com.yahoo.bullet.storm.BulletStormConfig: java.util.Map DEFAULT_TOPOLOGY_METRICS_BUILT_IN_EMIT_INTERVAL_MAPPING>;
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r17, $r18);
+
+        $r19 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(60);
+
+        $r20 = staticinvoke <java.util.Collections: java.util.Map singletonMap(java.lang.Object,java.lang.Object)>("bullet_filter_latency", $r19);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.metrics.built.in.emit.interval.mapping", $r20);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        $r22 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.metrics.built.in.emit.interval.mapping");
+
+        $r23 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(60);
+
+        $r24 = staticinvoke <java.util.Collections: java.util.Map singletonMap(java.lang.Object,java.lang.Object)>("bullet_filter_latency", $r23);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r22, $r24);
+
+        return;
+    }
+
+    public void testIntervalMappingNotPresent()
+    {
+        com.yahoo.bullet.storm.BulletStormConfig $r0;
+        com.yahoo.bullet.common.Config $r1;
+        java.lang.Boolean $r3, $r8;
+        java.util.HashMap $r4, $r9;
+        java.lang.Object $r6, $r11;
+        java.util.Map $r7, $r12;
+        com.yahoo.bullet.storm.BulletStormConfigTest r13;
+
+        r13 := @this: com.yahoo.bullet.storm.BulletStormConfigTest;
+
+        $r0 = new com.yahoo.bullet.storm.BulletStormConfig;
+
+        $r1 = (com.yahoo.bullet.common.Config) null;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void <init>(com.yahoo.bullet.common.Config)>($r1);
+
+        $r3 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(1);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.metrics.built.in.enable", $r3);
+
+        $r4 = new java.util.HashMap;
+
+        specialinvoke $r4.<java.util.HashMap: void <init>()>();
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.metrics.built.in.emit.interval.mapping", $r4);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        $r6 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.metrics.built.in.emit.interval.mapping");
+
+        $r7 = <com.yahoo.bullet.storm.BulletStormConfig: java.util.Map DEFAULT_TOPOLOGY_METRICS_BUILT_IN_EMIT_INTERVAL_MAPPING>;
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r6, $r7);
+
+        $r8 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(0);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.metrics.built.in.enable", $r8);
+
+        $r9 = new java.util.HashMap;
+
+        specialinvoke $r9.<java.util.HashMap: void <init>()>();
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.metrics.built.in.emit.interval.mapping", $r9);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        $r11 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.metrics.built.in.emit.interval.mapping");
+
+        $r12 = staticinvoke <java.util.Collections: java.util.Map emptyMap()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r11, $r12);
+
+        return;
+    }
+
+    public void testTickIntervalIsHighEnough()
+    {
+        com.yahoo.bullet.storm.BulletStormConfig $r0;
+        com.yahoo.bullet.common.Config $r1;
+        java.lang.Integer $r3, $r6, $r7, $r10;
+        java.lang.Object $r5, $r9;
+        com.yahoo.bullet.storm.BulletStormConfigTest r11;
+
+        r11 := @this: com.yahoo.bullet.storm.BulletStormConfigTest;
+
+        $r0 = new com.yahoo.bullet.storm.BulletStormConfig;
+
+        $r1 = (com.yahoo.bullet.common.Config) null;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void <init>(com.yahoo.bullet.common.Config)>($r1);
+
+        $r3 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(1);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.tick.spout.interval.ms", $r3);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        $r5 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.tick.spout.interval.ms");
+
+        $r6 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(100);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r5, $r6);
+
+        $r7 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(10);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.tick.spout.interval.ms", $r7);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        $r9 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.tick.spout.interval.ms");
+
+        $r10 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(10);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r9, $r10);
+
+        return;
+    }
+
+    public void testLoopBoltOverridesIsAMapWithStringKeys()
+    {
+        com.yahoo.bullet.storm.BulletStormConfig $r0;
+        com.yahoo.bullet.common.Config $r1;
+        java.lang.Object $r4, $r8, $r13, $r18, $r28;
+        java.util.Map $r5, $r9, $r11, $r14, $r16, $r20;
+        java.util.HashMap $r6, $r21;
+        java.lang.Integer $r10;
+        java.util.List $r15, $r19;
+        java.lang.Long $r23;
+        java.util.ArrayList $r25;
+        com.yahoo.bullet.storm.BulletStormConfigTest r29;
+
+        r29 := @this: com.yahoo.bullet.storm.BulletStormConfigTest;
+
+        $r0 = new com.yahoo.bullet.storm.BulletStormConfig;
+
+        $r1 = (com.yahoo.bullet.common.Config) null;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void <init>(com.yahoo.bullet.common.Config)>($r1);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.loop.bolt.pubsub.overrides", null);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        $r4 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.loop.bolt.pubsub.overrides");
+
+        $r5 = <com.yahoo.bullet.storm.BulletStormConfig: java.util.Map DEFAULT_LOOP_BOLT_PUBSUB_OVERRIDES>;
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r4, $r5);
+
+        $r6 = new java.util.HashMap;
+
+        specialinvoke $r6.<java.util.HashMap: void <init>()>();
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.loop.bolt.pubsub.overrides", $r6);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        $r8 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.loop.bolt.pubsub.overrides");
+
+        $r9 = <com.yahoo.bullet.storm.BulletStormConfig: java.util.Map DEFAULT_LOOP_BOLT_PUBSUB_OVERRIDES>;
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r8, $r9);
+
+        $r10 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(1);
+
+        $r11 = staticinvoke <java.util.Collections: java.util.Map singletonMap(java.lang.Object,java.lang.Object)>($r10, "foo");
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.loop.bolt.pubsub.overrides", $r11);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        $r13 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.loop.bolt.pubsub.overrides");
+
+        $r14 = <com.yahoo.bullet.storm.BulletStormConfig: java.util.Map DEFAULT_LOOP_BOLT_PUBSUB_OVERRIDES>;
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r13, $r14);
+
+        $r15 = staticinvoke <java.util.Collections: java.util.List singletonList(java.lang.Object)>("bar");
+
+        $r16 = staticinvoke <java.util.Collections: java.util.Map singletonMap(java.lang.Object,java.lang.Object)>("foo", $r15);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.loop.bolt.pubsub.overrides", $r16);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        $r18 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.loop.bolt.pubsub.overrides");
+
+        $r19 = staticinvoke <java.util.Collections: java.util.List singletonList(java.lang.Object)>("bar");
+
+        $r20 = staticinvoke <java.util.Collections: java.util.Map singletonMap(java.lang.Object,java.lang.Object)>("foo", $r19);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r18, $r20);
+
+        $r21 = new java.util.HashMap;
+
+        specialinvoke $r21.<java.util.HashMap: void <init>()>();
+
+        $r23 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(1L);
+
+        interfaceinvoke $r21.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>("foo", $r23);
+
+        $r25 = new java.util.ArrayList;
+
+        specialinvoke $r25.<java.util.ArrayList: void <init>()>();
+
+        interfaceinvoke $r21.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>("bar", $r25);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.loop.bolt.pubsub.overrides", $r21);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        $r28 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.loop.bolt.pubsub.overrides");
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r28, $r21);
+
+        return;
+    }
+
+    public void testProperMetricsConsumers()
+    {
+        com.yahoo.bullet.storm.BulletStormConfig $r0;
+        com.yahoo.bullet.common.Config $r1;
+        java.lang.Object $r3, $r8, $r13, $r17, $r23;
+        java.util.List $r4, $r11, $r14, $r15, $r18, $r21, $r26;
+        java.lang.Boolean $r5;
+        java.util.ArrayList $r6, $r9;
+        java.lang.Integer $r10;
+        java.lang.Class $r19, $r24;
+        java.lang.String $r20, $r25;
+        com.yahoo.bullet.storm.BulletStormConfigTest r27;
+
+        r27 := @this: com.yahoo.bullet.storm.BulletStormConfigTest;
+
+        $r0 = new com.yahoo.bullet.storm.BulletStormConfig;
+
+        $r1 = (com.yahoo.bullet.common.Config) null;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void <init>(com.yahoo.bullet.common.Config)>($r1);
+
+        $r3 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.metrics.classes");
+
+        $r4 = <com.yahoo.bullet.storm.BulletStormConfig: java.util.List DEFAULT_TOPOLOGY_METRICS_CLASSES>;
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r3, $r4);
+
+        $r5 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(1);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.metrics.enable", $r5);
+
+        $r6 = new java.util.ArrayList;
+
+        specialinvoke $r6.<java.util.ArrayList: void <init>()>();
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.metrics.classes", $r6);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        $r8 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.metrics.classes");
+
+        $r9 = new java.util.ArrayList;
+
+        specialinvoke $r9.<java.util.ArrayList: void <init>()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r8, $r9);
+
+        $r10 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(1);
+
+        $r11 = staticinvoke <java.util.Collections: java.util.List singletonList(java.lang.Object)>($r10);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.metrics.classes", $r11);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        $r13 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.metrics.classes");
+
+        $r14 = <com.yahoo.bullet.storm.BulletStormConfig: java.util.List DEFAULT_TOPOLOGY_METRICS_CLASSES>;
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r13, $r14);
+
+        $r15 = staticinvoke <java.util.Collections: java.util.List singletonList(java.lang.Object)>("foo");
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.metrics.classes", $r15);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        $r17 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.metrics.classes");
+
+        $r18 = <com.yahoo.bullet.storm.BulletStormConfig: java.util.List DEFAULT_TOPOLOGY_METRICS_CLASSES>;
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r17, $r18);
+
+        $r19 = class "Lcom/yahoo/bullet/storm/testing/CustomIMetricsConsumer;";
+
+        $r20 = virtualinvoke $r19.<java.lang.Class: java.lang.String getName()>();
+
+        $r21 = staticinvoke <java.util.Collections: java.util.List singletonList(java.lang.Object)>($r20);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.metrics.classes", $r21);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        $r23 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.metrics.classes");
+
+        $r24 = class "Lcom/yahoo/bullet/storm/testing/CustomIMetricsConsumer;";
+
+        $r25 = virtualinvoke $r24.<java.lang.Class: java.lang.String getName()>();
+
+        $r26 = staticinvoke <java.util.Collections: java.util.List singletonList(java.lang.Object)>($r25);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r23, $r26);
+
+        return;
+    }
+
+    public void testPreStartDelayIsEnoughForWindowMinEmit()
+    {
+        com.yahoo.bullet.storm.BulletStormConfig $r0;
+        com.yahoo.bullet.common.Config $r1;
+        java.lang.Integer $r3, $r4, $r5, $r8, $r10, $r12, $r13, $r14, $r15, $r18, $r20, $r22, $r23, $r24, $r25, $r28, $r30, $r32;
+        java.lang.Object $r7, $r9, $r11, $r17, $r19, $r21, $r27, $r29, $r31;
+        com.yahoo.bullet.storm.BulletStormConfigTest r33;
+
+        r33 := @this: com.yahoo.bullet.storm.BulletStormConfigTest;
+
+        $r0 = new com.yahoo.bullet.storm.BulletStormConfig;
+
+        $r1 = (com.yahoo.bullet.common.Config) null;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void <init>(com.yahoo.bullet.common.Config)>($r1);
+
+        $r3 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(100);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.tick.spout.interval.ms", $r3);
+
+        $r4 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(2);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.join.bolt.query.pre.start.delay.ticks", $r4);
+
+        $r5 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(400);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.query.window.min.emit.every.ms", $r5);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        $r7 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.tick.spout.interval.ms");
+
+        $r8 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(100);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r7, $r8);
+
+        $r9 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.join.bolt.query.pre.start.delay.ticks");
+
+        $r10 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(2);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r9, $r10);
+
+        $r11 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.query.window.min.emit.every.ms");
+
+        $r12 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(400);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r11, $r12);
+
+        $r13 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(100);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.tick.spout.interval.ms", $r13);
+
+        $r14 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(5);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.join.bolt.query.pre.start.delay.ticks", $r14);
+
+        $r15 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(700);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.query.window.min.emit.every.ms", $r15);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        $r17 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.tick.spout.interval.ms");
+
+        $r18 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(100);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r17, $r18);
+
+        $r19 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.join.bolt.query.pre.start.delay.ticks");
+
+        $r20 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(5);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r19, $r20);
+
+        $r21 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.query.window.min.emit.every.ms");
+
+        $r22 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(700);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r21, $r22);
+
+        $r23 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(20);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.tick.spout.interval.ms", $r23);
+
+        $r24 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(3);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.join.bolt.query.pre.start.delay.ticks", $r24);
+
+        $r25 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(100);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.query.window.min.emit.every.ms", $r25);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        $r27 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.tick.spout.interval.ms");
+
+        $r28 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(20);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r27, $r28);
+
+        $r29 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.join.bolt.query.pre.start.delay.ticks");
+
+        $r30 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(3);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r29, $r30);
+
+        $r31 = virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.query.window.min.emit.every.ms");
+
+        $r32 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(100);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r31, $r32);
+
+        return;
+    }
+
+    public void testPreStartDelayIsTooSmall()
+    {
+        com.yahoo.bullet.storm.BulletStormConfig $r0;
+        com.yahoo.bullet.common.Config $r1;
+        java.lang.Integer $r3, $r4, $r5;
+        com.yahoo.bullet.storm.BulletStormConfigTest r7;
+
+        r7 := @this: com.yahoo.bullet.storm.BulletStormConfigTest;
+
+        $r0 = new com.yahoo.bullet.storm.BulletStormConfig;
+
+        $r1 = (com.yahoo.bullet.common.Config) null;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void <init>(com.yahoo.bullet.common.Config)>($r1);
+
+        $r3 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(100);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.tick.spout.interval.ms", $r3);
+
+        $r4 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(3);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.join.bolt.query.pre.start.delay.ticks", $r4);
+
+        $r5 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(400);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.query.window.min.emit.every.ms", $r5);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        return;
+    }
+
+    public void testWindowMinEmitIsTooSmall()
+    {
+        com.yahoo.bullet.storm.BulletStormConfig $r0;
+        com.yahoo.bullet.common.Config $r1;
+        java.lang.Integer $r3, $r4, $r5;
+        com.yahoo.bullet.storm.BulletStormConfigTest r7;
+
+        r7 := @this: com.yahoo.bullet.storm.BulletStormConfigTest;
+
+        $r0 = new com.yahoo.bullet.storm.BulletStormConfig;
+
+        $r1 = (com.yahoo.bullet.common.Config) null;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void <init>(com.yahoo.bullet.common.Config)>($r1);
+
+        $r3 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(100);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.tick.spout.interval.ms", $r3);
+
+        $r4 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(3);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.join.bolt.query.pre.start.delay.ticks", $r4);
+
+        $r5 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(100);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.query.window.min.emit.every.ms", $r5);
+
+        virtualinvoke $r0.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        return;
+    }
+}

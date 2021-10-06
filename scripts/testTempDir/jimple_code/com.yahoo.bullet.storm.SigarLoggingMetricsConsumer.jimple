@@ -1,0 +1,57 @@
+public class com.yahoo.bullet.storm.SigarLoggingMetricsConsumer extends org.apache.storm.metric.LoggingMetricsConsumer
+{
+    public static final java.util.Map METRICS;
+
+    public void <init>()
+    {
+        com.yahoo.bullet.storm.SigarLoggingMetricsConsumer r0;
+
+        r0 := @this: com.yahoo.bullet.storm.SigarLoggingMetricsConsumer;
+
+        specialinvoke r0.<org.apache.storm.metric.LoggingMetricsConsumer: void <init>()>();
+
+        return;
+    }
+
+    public static void register(org.apache.storm.Config, com.yahoo.bullet.storm.BulletStormConfig)
+    {
+        org.apache.storm.Config r0;
+        java.util.HashMap $r1;
+        java.lang.Object $r2;
+        java.util.Map r3, $r4;
+        com.yahoo.bullet.storm.BulletStormConfig r6;
+
+        r0 := @parameter0: org.apache.storm.Config;
+
+        r6 := @parameter1: com.yahoo.bullet.storm.BulletStormConfig;
+
+        virtualinvoke r0.<org.apache.storm.Config: void registerMetricsConsumer(java.lang.Class)>(class "Lorg/apache/storm/metric/LoggingMetricsConsumer;");
+
+        $r1 = new java.util.HashMap;
+
+        specialinvoke $r1.<java.util.HashMap: void <init>()>();
+
+        $r2 = virtualinvoke r0.<org.apache.storm.Config: java.lang.Object getOrDefault(java.lang.Object,java.lang.Object)>("topology.worker.metrics", $r1);
+
+        r3 = (java.util.Map) $r2;
+
+        $r4 = <com.yahoo.bullet.storm.SigarLoggingMetricsConsumer: java.util.Map METRICS>;
+
+        interfaceinvoke r3.<java.util.Map: void putAll(java.util.Map)>($r4);
+
+        virtualinvoke r0.<org.apache.storm.Config: java.lang.Object put(java.lang.Object,java.lang.Object)>("topology.worker.metrics", r3);
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.util.Map $r0;
+
+        $r0 = staticinvoke <java.util.Collections: java.util.Map singletonMap(java.lang.Object,java.lang.Object)>("CPU", "org.apache.storm.metrics.sigar.CPUMetric");
+
+        <com.yahoo.bullet.storm.SigarLoggingMetricsConsumer: java.util.Map METRICS> = $r0;
+
+        return;
+    }
+}

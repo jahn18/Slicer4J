@@ -1,0 +1,189 @@
+public abstract class com.yahoo.bullet.storm.PublisherBolt extends com.yahoo.bullet.storm.ConfigComponent implements org.apache.storm.topology.IRichBolt
+{
+    private static final org.slf4j.Logger log;
+    private static final long serialVersionUID;
+    private transient org.apache.storm.task.OutputCollector collector;
+    protected transient com.yahoo.bullet.pubsub.Publisher publisher;
+
+    public void <init>(com.yahoo.bullet.storm.BulletStormConfig)
+    {
+        com.yahoo.bullet.storm.PublisherBolt r0;
+        com.yahoo.bullet.storm.BulletStormConfig r1;
+
+        r0 := @this: com.yahoo.bullet.storm.PublisherBolt;
+
+        r1 := @parameter0: com.yahoo.bullet.storm.BulletStormConfig;
+
+        specialinvoke r0.<com.yahoo.bullet.storm.ConfigComponent: void <init>(com.yahoo.bullet.storm.BulletStormConfig)>(r1);
+
+        return;
+    }
+
+    public void prepare(java.util.Map, org.apache.storm.task.TopologyContext, org.apache.storm.task.OutputCollector)
+    {
+        com.yahoo.bullet.storm.PublisherBolt r0;
+        java.util.Map r1;
+        com.yahoo.bullet.storm.BulletStormConfig $r2, $r4;
+        org.apache.storm.task.TopologyContext r3;
+        org.apache.storm.task.OutputCollector r5;
+        com.yahoo.bullet.pubsub.Publisher $r6;
+        java.lang.Throwable $r7;
+        java.lang.RuntimeException $r9;
+
+        r0 := @this: com.yahoo.bullet.storm.PublisherBolt;
+
+        r1 := @parameter0: java.util.Map;
+
+        r3 := @parameter1: org.apache.storm.task.TopologyContext;
+
+        r5 := @parameter2: org.apache.storm.task.OutputCollector;
+
+        $r2 = r0.<com.yahoo.bullet.storm.PublisherBolt: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        virtualinvoke $r2.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.storm.config", r1);
+
+        $r4 = r0.<com.yahoo.bullet.storm.PublisherBolt: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        virtualinvoke $r4.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.storm.context", r3);
+
+        r0.<com.yahoo.bullet.storm.PublisherBolt: org.apache.storm.task.OutputCollector collector> = r5;
+
+     label1:
+        $r6 = virtualinvoke r0.<com.yahoo.bullet.storm.PublisherBolt: com.yahoo.bullet.pubsub.Publisher createPublisher()>();
+
+        r0.<com.yahoo.bullet.storm.PublisherBolt: com.yahoo.bullet.pubsub.Publisher publisher> = $r6;
+
+     label2:
+        goto label4;
+
+     label3:
+        $r7 := @caughtexception;
+
+        $r9 = new java.lang.RuntimeException;
+
+        specialinvoke $r9.<java.lang.RuntimeException: void <init>(java.lang.String,java.lang.Throwable)>("Cannot create PubSub instance or a Publisher for it.", $r7);
+
+        throw $r9;
+
+     label4:
+        return;
+
+        catch com.yahoo.bullet.pubsub.PubSubException from label1 to label2 with label3;
+    }
+
+    protected abstract com.yahoo.bullet.pubsub.Publisher createPublisher() throws com.yahoo.bullet.pubsub.PubSubException;
+
+    protected void publish(com.yahoo.bullet.pubsub.PubSubMessage, org.apache.storm.tuple.Tuple)
+    {
+        com.yahoo.bullet.storm.PublisherBolt r0;
+        com.yahoo.bullet.pubsub.PubSubMessage r1;
+        com.yahoo.bullet.pubsub.Publisher $r2;
+        org.apache.storm.tuple.Tuple r4;
+        org.apache.storm.task.OutputCollector $r5;
+        java.lang.Throwable $r6;
+        org.slf4j.Logger $r8;
+        java.lang.String $r9;
+        com.yahoo.bullet.pubsub.PubSubException $r10;
+
+        r0 := @this: com.yahoo.bullet.storm.PublisherBolt;
+
+        r1 := @parameter0: com.yahoo.bullet.pubsub.PubSubMessage;
+
+        r4 := @parameter1: org.apache.storm.tuple.Tuple;
+
+     label1:
+        $r2 = r0.<com.yahoo.bullet.storm.PublisherBolt: com.yahoo.bullet.pubsub.Publisher publisher>;
+
+        interfaceinvoke $r2.<com.yahoo.bullet.pubsub.Publisher: com.yahoo.bullet.pubsub.PubSubMessage send(com.yahoo.bullet.pubsub.PubSubMessage)>(r1);
+
+     label2:
+        goto label4;
+
+     label3:
+        $r6 := @caughtexception;
+
+        $r8 = <com.yahoo.bullet.storm.PublisherBolt: org.slf4j.Logger log>;
+
+        $r10 = (com.yahoo.bullet.pubsub.PubSubException) $r6;
+
+        $r9 = virtualinvoke $r10.<com.yahoo.bullet.pubsub.PubSubException: java.lang.String getMessage()>();
+
+        interfaceinvoke $r8.<org.slf4j.Logger: void error(java.lang.String)>($r9);
+
+     label4:
+        $r5 = r0.<com.yahoo.bullet.storm.PublisherBolt: org.apache.storm.task.OutputCollector collector>;
+
+        virtualinvoke $r5.<org.apache.storm.task.OutputCollector: void ack(org.apache.storm.tuple.Tuple)>(r4);
+
+        return;
+
+        catch com.yahoo.bullet.pubsub.PubSubException from label1 to label2 with label3;
+    }
+
+    public void cleanup()
+    {
+        com.yahoo.bullet.storm.PublisherBolt r0;
+        com.yahoo.bullet.pubsub.Publisher $r1;
+        java.lang.Exception $r2;
+        org.slf4j.Logger $r4;
+
+        r0 := @this: com.yahoo.bullet.storm.PublisherBolt;
+
+     label1:
+        $r1 = r0.<com.yahoo.bullet.storm.PublisherBolt: com.yahoo.bullet.pubsub.Publisher publisher>;
+
+        interfaceinvoke $r1.<com.yahoo.bullet.pubsub.Publisher: void close()>();
+
+     label2:
+        goto label4;
+
+     label3:
+        $r2 := @caughtexception;
+
+        $r4 = <com.yahoo.bullet.storm.PublisherBolt: org.slf4j.Logger log>;
+
+        interfaceinvoke $r4.<org.slf4j.Logger: void error(java.lang.String,java.lang.Throwable)>("Could not close Publisher.", $r2);
+
+     label4:
+        return;
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+
+    public void declareOutputFields(org.apache.storm.topology.OutputFieldsDeclarer)
+    {
+        com.yahoo.bullet.storm.PublisherBolt r0;
+        org.apache.storm.topology.OutputFieldsDeclarer r1;
+
+        r0 := @this: com.yahoo.bullet.storm.PublisherBolt;
+
+        r1 := @parameter0: org.apache.storm.topology.OutputFieldsDeclarer;
+
+        return;
+    }
+
+    com.yahoo.bullet.pubsub.Publisher getPublisher()
+    {
+        com.yahoo.bullet.storm.PublisherBolt r0;
+        com.yahoo.bullet.pubsub.Publisher $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.PublisherBolt;
+
+        $r1 = r0.<com.yahoo.bullet.storm.PublisherBolt: com.yahoo.bullet.pubsub.Publisher publisher>;
+
+        return $r1;
+    }
+
+    static void <clinit>()
+    {
+        org.slf4j.Logger $r0;
+
+        <com.yahoo.bullet.storm.PublisherBolt: long serialVersionUID> = -3198734196446239476L;
+
+        $r0 = staticinvoke <org.slf4j.LoggerFactory: org.slf4j.Logger getLogger(java.lang.Class)>(class "Lcom/yahoo/bullet/storm/PublisherBolt;");
+
+        <com.yahoo.bullet.storm.PublisherBolt: org.slf4j.Logger log> = $r0;
+
+        return;
+    }
+}

@@ -1,0 +1,244 @@
+public class com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber extends com.yahoo.bullet.pubsub.BufferingSubscriber
+{
+    private static final org.slf4j.Logger log;
+    private org.apache.storm.drpc.DRPCSpout spout;
+    private com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector collector;
+    private java.util.Map emittedIDs;
+
+    public void <init>(com.yahoo.bullet.common.BulletConfig, int)
+    {
+        com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber r0;
+        com.yahoo.bullet.common.BulletConfig r1;
+        int i0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector $r2;
+        org.apache.storm.drpc.DRPCSpout $r3;
+        java.lang.Object $r4;
+        java.lang.String $r5;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber;
+
+        r1 := @parameter0: com.yahoo.bullet.common.BulletConfig;
+
+        i0 := @parameter1: int;
+
+        $r2 = new com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector;
+
+        specialinvoke $r2.<com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector: void <init>()>();
+
+        $r3 = new org.apache.storm.drpc.DRPCSpout;
+
+        $r4 = virtualinvoke r1.<com.yahoo.bullet.common.BulletConfig: java.lang.Object getRequiredConfigAs(java.lang.String,java.lang.Class)>("bullet.pubsub.storm.drpc.function", class "Ljava/lang/String;");
+
+        $r5 = (java.lang.String) $r4;
+
+        specialinvoke $r3.<org.apache.storm.drpc.DRPCSpout: void <init>(java.lang.String)>($r5);
+
+        specialinvoke r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: void <init>(com.yahoo.bullet.common.BulletConfig,int,com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector,org.apache.storm.drpc.DRPCSpout)>(r1, i0, $r2, $r3);
+
+        return;
+    }
+
+    void <init>(com.yahoo.bullet.common.BulletConfig, int, com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector, org.apache.storm.drpc.DRPCSpout)
+    {
+        com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber r0;
+        int i0;
+        com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector r1;
+        org.apache.storm.drpc.DRPCSpout r2;
+        java.util.HashMap $r3;
+        com.yahoo.bullet.common.BulletConfig r4;
+        java.lang.Object $r5, $r7;
+        java.util.Map r6;
+        org.apache.storm.task.TopologyContext r8;
+        org.apache.storm.spout.SpoutOutputCollector $r9;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber;
+
+        r4 := @parameter0: com.yahoo.bullet.common.BulletConfig;
+
+        i0 := @parameter1: int;
+
+        r1 := @parameter2: com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector;
+
+        r2 := @parameter3: org.apache.storm.drpc.DRPCSpout;
+
+        specialinvoke r0.<com.yahoo.bullet.pubsub.BufferingSubscriber: void <init>(int)>(i0);
+
+        r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector collector> = r1;
+
+        r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: org.apache.storm.drpc.DRPCSpout spout> = r2;
+
+        $r3 = new java.util.HashMap;
+
+        specialinvoke $r3.<java.util.HashMap: void <init>()>();
+
+        r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: java.util.Map emittedIDs> = $r3;
+
+        $r5 = virtualinvoke r4.<com.yahoo.bullet.common.BulletConfig: java.lang.Object getRequiredConfigAs(java.lang.String,java.lang.Class)>("bullet.topology.storm.config", class "Ljava/util/Map;");
+
+        r6 = (java.util.Map) $r5;
+
+        $r7 = virtualinvoke r4.<com.yahoo.bullet.common.BulletConfig: java.lang.Object getRequiredConfigAs(java.lang.String,java.lang.Class)>("bullet.topology.storm.context", class "Lorg/apache/storm/task/TopologyContext;");
+
+        r8 = (org.apache.storm.task.TopologyContext) $r7;
+
+        $r9 = new org.apache.storm.spout.SpoutOutputCollector;
+
+        specialinvoke $r9.<org.apache.storm.spout.SpoutOutputCollector: void <init>(org.apache.storm.spout.ISpoutOutputCollector)>(r1);
+
+        virtualinvoke r2.<org.apache.storm.drpc.DRPCSpout: void open(java.util.Map,org.apache.storm.task.TopologyContext,org.apache.storm.spout.SpoutOutputCollector)>(r6, r8, $r9);
+
+        return;
+    }
+
+    public java.util.List getMessages()
+    {
+        com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber r0;
+        org.apache.storm.drpc.DRPCSpout $r1;
+        com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector $r2, $r3;
+        boolean $z0;
+        java.util.List r4, r7, r9, $r24;
+        org.slf4j.Logger $r5, $r15;
+        java.lang.Object $r6, $r8, r10, $r11, $r13;
+        java.lang.String r12, r14, r17, r18;
+        com.yahoo.bullet.pubsub.PubSubMessage r16, $r19;
+        com.yahoo.bullet.pubsub.Metadata $r20;
+        java.util.Map $r22;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: org.apache.storm.drpc.DRPCSpout spout>;
+
+        virtualinvoke $r1.<org.apache.storm.drpc.DRPCSpout: void nextTuple()>();
+
+        $r2 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector collector>;
+
+        $z0 = virtualinvoke $r2.<com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector: boolean haveOutput()>();
+
+        if $z0 != 0 goto label1;
+
+        return null;
+
+     label1:
+        $r3 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector collector>;
+
+        r4 = virtualinvoke $r3.<com.yahoo.bullet.storm.drpc.utils.DRPCOutputCollector: java.util.List reset()>();
+
+        $r5 = <com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: org.slf4j.Logger log>;
+
+        interfaceinvoke $r5.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object)>("Have a message through DRPC {}", r4);
+
+        $r6 = interfaceinvoke r4.<java.util.List: java.lang.Object get(int)>(0);
+
+        r7 = (java.util.List) $r6;
+
+        $r8 = interfaceinvoke r7.<java.util.List: java.lang.Object get(int)>(0);
+
+        r9 = (java.util.List) $r8;
+
+        r10 = interfaceinvoke r7.<java.util.List: java.lang.Object get(int)>(1);
+
+        $r11 = interfaceinvoke r9.<java.util.List: java.lang.Object get(int)>(0);
+
+        r12 = (java.lang.String) $r11;
+
+        $r13 = interfaceinvoke r9.<java.util.List: java.lang.Object get(int)>(1);
+
+        r14 = (java.lang.String) $r13;
+
+        $r15 = <com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: org.slf4j.Logger log>;
+
+        interfaceinvoke $r15.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object,java.lang.Object)>("Read message\n{}\nfrom DRPC with return information {}", r12, r14);
+
+        r16 = staticinvoke <com.yahoo.bullet.pubsub.PubSubMessage: com.yahoo.bullet.pubsub.PubSubMessage fromJSON(java.lang.String)>(r12);
+
+        r17 = virtualinvoke r16.<com.yahoo.bullet.pubsub.PubSubMessage: java.lang.String getId()>();
+
+        r18 = virtualinvoke r16.<com.yahoo.bullet.pubsub.PubSubMessage: java.lang.String getContentAsString()>();
+
+        $r19 = new com.yahoo.bullet.pubsub.PubSubMessage;
+
+        $r20 = new com.yahoo.bullet.pubsub.Metadata;
+
+        specialinvoke $r20.<com.yahoo.bullet.pubsub.Metadata: void <init>(com.yahoo.bullet.pubsub.Metadata$Signal,java.io.Serializable)>(null, r14);
+
+        specialinvoke $r19.<com.yahoo.bullet.pubsub.PubSubMessage: void <init>(java.lang.String,java.io.Serializable,com.yahoo.bullet.pubsub.Metadata)>(r17, r18, $r20);
+
+        $r22 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: java.util.Map emittedIDs>;
+
+        interfaceinvoke $r22.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(r17, r10);
+
+        $r24 = staticinvoke <java.util.Collections: java.util.List singletonList(java.lang.Object)>($r19);
+
+        return $r24;
+    }
+
+    public void commit(java.lang.String)
+    {
+        com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber r0;
+        java.lang.String r1;
+        java.util.Map $r2;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber;
+
+        r1 := @parameter0: java.lang.String;
+
+        specialinvoke r0.<com.yahoo.bullet.pubsub.BufferingSubscriber: void commit(java.lang.String)>(r1);
+
+        $r2 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: java.util.Map emittedIDs>;
+
+        interfaceinvoke $r2.<java.util.Map: java.lang.Object remove(java.lang.Object)>(r1);
+
+        return;
+    }
+
+    public void close()
+    {
+        com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber r0;
+        java.util.Map $r1, $r3;
+        org.slf4j.Logger $r2, $r8;
+        java.util.Collection $r4;
+        org.apache.storm.drpc.DRPCSpout $r5, $r9;
+        java.util.function.Consumer $r7;
+
+        r0 := @this: com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber;
+
+        $r2 = <com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: org.slf4j.Logger log>;
+
+        $r1 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: java.util.Map emittedIDs>;
+
+        interfaceinvoke $r2.<org.slf4j.Logger: void warn(java.lang.String,java.lang.Object)>("Failing all pending requests: {}", $r1);
+
+        $r3 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: java.util.Map emittedIDs>;
+
+        $r4 = interfaceinvoke $r3.<java.util.Map: java.util.Collection values()>();
+
+        $r5 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: org.apache.storm.drpc.DRPCSpout spout>;
+
+        virtualinvoke $r5.<java.lang.Object: java.lang.Class getClass()>();
+
+        $r7 = staticinvoke <com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber$fail__184: java.util.function.Consumer bootstrap$(org.apache.storm.drpc.DRPCSpout)>($r5);
+
+        interfaceinvoke $r4.<java.util.Collection: void forEach(java.util.function.Consumer)>($r7);
+
+        $r8 = <com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: org.slf4j.Logger log>;
+
+        interfaceinvoke $r8.<org.slf4j.Logger: void info(java.lang.String)>("Closing spout...");
+
+        $r9 = r0.<com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: org.apache.storm.drpc.DRPCSpout spout>;
+
+        virtualinvoke $r9.<org.apache.storm.drpc.DRPCSpout: void close()>();
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        org.slf4j.Logger $r0;
+
+        $r0 = staticinvoke <org.slf4j.LoggerFactory: org.slf4j.Logger getLogger(java.lang.Class)>(class "Lcom/yahoo/bullet/storm/drpc/DRPCQuerySubscriber;");
+
+        <com.yahoo.bullet.storm.drpc.DRPCQuerySubscriber: org.slf4j.Logger log> = $r0;
+
+        return;
+    }
+}

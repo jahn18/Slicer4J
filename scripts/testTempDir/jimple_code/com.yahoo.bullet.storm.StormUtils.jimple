@@ -1,0 +1,945 @@
+public class com.yahoo.bullet.storm.StormUtils extends java.lang.Object
+{
+    private static final org.slf4j.Logger log;
+    private static final int POSITIVE_INT_MASK;
+    public static final java.lang.String HYPHEN;
+
+    public void <init>()
+    {
+        com.yahoo.bullet.storm.StormUtils r0;
+
+        r0 := @this: com.yahoo.bullet.storm.StormUtils;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static void submit(com.yahoo.bullet.storm.BulletStormConfig, java.lang.String, org.apache.storm.topology.TopologyBuilder, org.apache.storm.Config) throws java.lang.Exception
+    {
+        com.yahoo.bullet.storm.BulletStormConfig r0;
+        java.lang.String r2, r9, $r70, $r76, $r82, $r85, $r88, $r91, $r99, $r103, $r108, $r113, $r118, $r120, $r128, $r130, $r137, $r139, $r141, $r158, $r161, $r164, $r167, $r170, $r178, $r181, $r183, $r188, $r192, $r196, $r198, $r201, $r209, $r211, $r213, $r219;
+        org.apache.storm.topology.TopologyBuilder r4;
+        org.apache.storm.Config r6;
+        java.lang.Object $r8, $r10, $r12, $r14, $r16, $r19, $r21, $r23, $r25, $r27, $r29, $r31, $r33, $r35, $r37, $r39, $r41, $r43, $r45, $r47, $r49, $r51, $r53, $r55, $r57, $r59, $r61, $r63, $r65, $r67, $r153, $r225;
+        java.lang.Number r11, r13, r15, r17, r20, r22, r24, r26, r28, r30, r32, r34, r36, r38, r40, r42, r44, r46, r48, r50, r52, r54, r56, r58, r60, r62, r64;
+        java.lang.Integer r18;
+        java.lang.Boolean $r66, $r68, r148, $r151;
+        boolean z0, z1, $z2;
+        org.apache.storm.topology.SpoutDeclarer $r71, $r73, $r77, $r79;
+        org.apache.storm.topology.ResourceDeclarer $r72, $r78, $r95, $r124, $r133, $r145, $r174, $r205, $r222;
+        org.apache.storm.topology.BoltDeclarer $r83, $r86, $r89, $r92, $r94, $r96, $r100, $r107, $r112, $r117, $r121, $r123, $r125, $r129, $r132, $r134, $r138, $r142, $r144, $r146, $r159, $r162, $r165, $r168, $r171, $r173, $r175, $r179, $r184, $r187, $r191, $r195, $r199, $r202, $r204, $r206, $r210, $r214, $r218, $r221, $r223;
+        org.apache.storm.topology.InputDeclarer $r84, $r87, $r90, $r93, $r104, $r109, $r114, $r119, $r122, $r131, $r140, $r143, $r160, $r163, $r166, $r169, $r172, $r182, $r185, $r189, $r193, $r197, $r200, $r203, $r212, $r215, $r220;
+        java.lang.String[] $r102, $r106, $r111, $r116, $r217;
+        java.util.Map $r149, $r244;
+        org.apache.storm.generated.StormTopology $r150;
+        java.util.List r154;
+        java.util.function.Consumer $r155;
+        org.slf4j.Logger $r156;
+        com.yahoo.bullet.storm.QuerySpout $r226;
+        com.yahoo.bullet.storm.TickSpout $r227;
+        com.yahoo.bullet.storm.FilterBolt $r228, $r236;
+        com.yahoo.bullet.storm.JoinBolt $r229, $r237;
+        com.yahoo.bullet.storm.grouping.IDGrouping $r230, $r231, $r232;
+        com.yahoo.bullet.storm.grouping.TaskIndexCaptureGrouping $r233;
+        com.yahoo.bullet.storm.ReplayBolt $r234;
+        org.apache.storm.tuple.Fields $r235, $r238, $r239, $r240, $r241;
+        com.yahoo.bullet.storm.ResultBolt $r242;
+        com.yahoo.bullet.storm.LoopBolt $r243;
+
+        r0 := @parameter0: com.yahoo.bullet.storm.BulletStormConfig;
+
+        r2 := @parameter1: java.lang.String;
+
+        r4 := @parameter2: org.apache.storm.topology.TopologyBuilder;
+
+        r6 := @parameter3: org.apache.storm.Config;
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(r0);
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(r2);
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(r4);
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(r6);
+
+        $r8 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.name", class "Ljava/lang/String;");
+
+        r9 = (java.lang.String) $r8;
+
+        $r10 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.query.spout.parallelism", class "Ljava/lang/Number;");
+
+        r11 = (java.lang.Number) $r10;
+
+        $r12 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.query.spout.cpu.load", class "Ljava/lang/Number;");
+
+        r13 = (java.lang.Number) $r12;
+
+        $r14 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.query.spout.memory.on.heap.load", class "Ljava/lang/Number;");
+
+        r15 = (java.lang.Number) $r14;
+
+        $r16 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.query.spout.memory.off.heap.load", class "Ljava/lang/Number;");
+
+        r17 = (java.lang.Number) $r16;
+
+        r18 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(1);
+
+        $r19 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.tick.spout.cpu.load", class "Ljava/lang/Number;");
+
+        r20 = (java.lang.Number) $r19;
+
+        $r21 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.tick.spout.memory.on.heap.load", class "Ljava/lang/Number;");
+
+        r22 = (java.lang.Number) $r21;
+
+        $r23 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.tick.spout.memory.off.heap.load", class "Ljava/lang/Number;");
+
+        r24 = (java.lang.Number) $r23;
+
+        $r25 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.filter.bolt.parallelism", class "Ljava/lang/Number;");
+
+        r26 = (java.lang.Number) $r25;
+
+        $r27 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.filter.bolt.cpu.load", class "Ljava/lang/Number;");
+
+        r28 = (java.lang.Number) $r27;
+
+        $r29 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.filter.bolt.memory.on.heap.load", class "Ljava/lang/Number;");
+
+        r30 = (java.lang.Number) $r29;
+
+        $r31 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.filter.bolt.memory.off.heap.load", class "Ljava/lang/Number;");
+
+        r32 = (java.lang.Number) $r31;
+
+        $r33 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.join.bolt.parallelism", class "Ljava/lang/Number;");
+
+        r34 = (java.lang.Number) $r33;
+
+        $r35 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.join.bolt.cpu.load", class "Ljava/lang/Number;");
+
+        r36 = (java.lang.Number) $r35;
+
+        $r37 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.join.bolt.memory.on.heap.load", class "Ljava/lang/Number;");
+
+        r38 = (java.lang.Number) $r37;
+
+        $r39 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.join.bolt.memory.off.heap.load", class "Ljava/lang/Number;");
+
+        r40 = (java.lang.Number) $r39;
+
+        $r41 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.result.bolt.parallelism", class "Ljava/lang/Number;");
+
+        r42 = (java.lang.Number) $r41;
+
+        $r43 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.result.bolt.cpu.load", class "Ljava/lang/Number;");
+
+        r44 = (java.lang.Number) $r43;
+
+        $r45 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.result.bolt.memory.on.heap.load", class "Ljava/lang/Number;");
+
+        r46 = (java.lang.Number) $r45;
+
+        $r47 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.result.bolt.memory.off.heap.load", class "Ljava/lang/Number;");
+
+        r48 = (java.lang.Number) $r47;
+
+        $r49 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.loop.bolt.parallelism", class "Ljava/lang/Number;");
+
+        r50 = (java.lang.Number) $r49;
+
+        $r51 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.loop.bolt.cpu.load", class "Ljava/lang/Number;");
+
+        r52 = (java.lang.Number) $r51;
+
+        $r53 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.loop.bolt.memory.on.heap.load", class "Ljava/lang/Number;");
+
+        r54 = (java.lang.Number) $r53;
+
+        $r55 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.loop.bolt.memory.off.heap.load", class "Ljava/lang/Number;");
+
+        r56 = (java.lang.Number) $r55;
+
+        $r57 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.replay.bolt.parallelism", class "Ljava/lang/Number;");
+
+        r58 = (java.lang.Number) $r57;
+
+        $r59 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.replay.bolt.cpu.load", class "Ljava/lang/Number;");
+
+        r60 = (java.lang.Number) $r59;
+
+        $r61 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.replay.bolt.memory.on.heap.load", class "Ljava/lang/Number;");
+
+        r62 = (java.lang.Number) $r61;
+
+        $r63 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.replay.bolt.memory.off.heap.load", class "Ljava/lang/Number;");
+
+        r64 = (java.lang.Number) $r63;
+
+        $r65 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.query.window.disable", class "Ljava/lang/Boolean;");
+
+        $r66 = (java.lang.Boolean) $r65;
+
+        z0 = virtualinvoke $r66.<java.lang.Boolean: boolean booleanValue()>();
+
+        $r67 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.replay.enable", class "Ljava/lang/Boolean;");
+
+        $r68 = (java.lang.Boolean) $r67;
+
+        z1 = virtualinvoke $r68.<java.lang.Boolean: boolean booleanValue()>();
+
+        $r70 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String QUERY_COMPONENT>;
+
+        $r226 = new com.yahoo.bullet.storm.QuerySpout;
+
+        specialinvoke $r226.<com.yahoo.bullet.storm.QuerySpout: void <init>(com.yahoo.bullet.storm.BulletStormConfig)>(r0);
+
+        $r71 = virtualinvoke r4.<org.apache.storm.topology.TopologyBuilder: org.apache.storm.topology.SpoutDeclarer setSpout(java.lang.String,org.apache.storm.topology.IRichSpout,java.lang.Number)>($r70, $r226, r11);
+
+        $r72 = interfaceinvoke $r71.<org.apache.storm.topology.SpoutDeclarer: org.apache.storm.topology.ResourceDeclarer setCPULoad(java.lang.Number)>(r13);
+
+        $r73 = (org.apache.storm.topology.SpoutDeclarer) $r72;
+
+        interfaceinvoke $r73.<org.apache.storm.topology.SpoutDeclarer: org.apache.storm.topology.ResourceDeclarer setMemoryLoad(java.lang.Number,java.lang.Number)>(r15, r17);
+
+        $r76 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String TICK_COMPONENT>;
+
+        $r227 = new com.yahoo.bullet.storm.TickSpout;
+
+        specialinvoke $r227.<com.yahoo.bullet.storm.TickSpout: void <init>(com.yahoo.bullet.storm.BulletStormConfig)>(r0);
+
+        $r77 = virtualinvoke r4.<org.apache.storm.topology.TopologyBuilder: org.apache.storm.topology.SpoutDeclarer setSpout(java.lang.String,org.apache.storm.topology.IRichSpout,java.lang.Number)>($r76, $r227, r18);
+
+        $r78 = interfaceinvoke $r77.<org.apache.storm.topology.SpoutDeclarer: org.apache.storm.topology.ResourceDeclarer setCPULoad(java.lang.Number)>(r20);
+
+        $r79 = (org.apache.storm.topology.SpoutDeclarer) $r78;
+
+        interfaceinvoke $r79.<org.apache.storm.topology.SpoutDeclarer: org.apache.storm.topology.ResourceDeclarer setMemoryLoad(java.lang.Number,java.lang.Number)>(r22, r24);
+
+        if z1 == 0 goto label1;
+
+        $r158 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String FILTER_COMPONENT>;
+
+        $r228 = new com.yahoo.bullet.storm.FilterBolt;
+
+        specialinvoke $r228.<com.yahoo.bullet.storm.FilterBolt: void <init>(java.lang.String,com.yahoo.bullet.storm.BulletStormConfig)>(r2, r0);
+
+        $r159 = virtualinvoke r4.<org.apache.storm.topology.TopologyBuilder: org.apache.storm.topology.BoltDeclarer setBolt(java.lang.String,org.apache.storm.topology.IRichBolt,java.lang.Number)>($r158, $r228, r26);
+
+        $r160 = interfaceinvoke $r159.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer shuffleGrouping(java.lang.String)>(r2);
+
+        $r162 = (org.apache.storm.topology.BoltDeclarer) $r160;
+
+        $r161 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String QUERY_COMPONENT>;
+
+        $r163 = interfaceinvoke $r162.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer allGrouping(java.lang.String,java.lang.String)>($r161, "default");
+
+        $r165 = (org.apache.storm.topology.BoltDeclarer) $r163;
+
+        $r164 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String QUERY_COMPONENT>;
+
+        $r166 = interfaceinvoke $r165.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer allGrouping(java.lang.String,java.lang.String)>($r164, "metadata");
+
+        $r168 = (org.apache.storm.topology.BoltDeclarer) $r166;
+
+        $r167 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String REPLAY_COMPONENT>;
+
+        $r169 = interfaceinvoke $r168.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer directGrouping(java.lang.String,java.lang.String)>($r167, "replay");
+
+        $r171 = (org.apache.storm.topology.BoltDeclarer) $r169;
+
+        $r170 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String TICK_COMPONENT>;
+
+        $r172 = interfaceinvoke $r171.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer allGrouping(java.lang.String,java.lang.String)>($r170, "default");
+
+        $r173 = (org.apache.storm.topology.BoltDeclarer) $r172;
+
+        $r174 = interfaceinvoke $r173.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.ResourceDeclarer setCPULoad(java.lang.Number)>(r28);
+
+        $r175 = (org.apache.storm.topology.BoltDeclarer) $r174;
+
+        interfaceinvoke $r175.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.ResourceDeclarer setMemoryLoad(java.lang.Number,java.lang.Number)>(r30, r32);
+
+        $r178 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String JOIN_COMPONENT>;
+
+        $r229 = new com.yahoo.bullet.storm.JoinBolt;
+
+        specialinvoke $r229.<com.yahoo.bullet.storm.JoinBolt: void <init>(com.yahoo.bullet.storm.BulletStormConfig)>(r0);
+
+        $r179 = virtualinvoke r4.<org.apache.storm.topology.TopologyBuilder: org.apache.storm.topology.BoltDeclarer setBolt(java.lang.String,org.apache.storm.topology.IRichBolt,java.lang.Number)>($r178, $r229, r34);
+
+        $r181 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String QUERY_COMPONENT>;
+
+        $r230 = new com.yahoo.bullet.storm.grouping.IDGrouping;
+
+        specialinvoke $r230.<com.yahoo.bullet.storm.grouping.IDGrouping: void <init>()>();
+
+        $r182 = interfaceinvoke $r179.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer customGrouping(java.lang.String,java.lang.String,org.apache.storm.grouping.CustomStreamGrouping)>($r181, "default", $r230);
+
+        $r184 = (org.apache.storm.topology.BoltDeclarer) $r182;
+
+        $r183 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String QUERY_COMPONENT>;
+
+        $r185 = interfaceinvoke $r184.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer allGrouping(java.lang.String,java.lang.String)>($r183, "metadata");
+
+        $r187 = (org.apache.storm.topology.BoltDeclarer) $r185;
+
+        $r188 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String FILTER_COMPONENT>;
+
+        $r231 = new com.yahoo.bullet.storm.grouping.IDGrouping;
+
+        specialinvoke $r231.<com.yahoo.bullet.storm.grouping.IDGrouping: void <init>()>();
+
+        $r189 = interfaceinvoke $r187.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer customGrouping(java.lang.String,java.lang.String,org.apache.storm.grouping.CustomStreamGrouping)>($r188, "default", $r231);
+
+        $r191 = (org.apache.storm.topology.BoltDeclarer) $r189;
+
+        $r192 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String FILTER_COMPONENT>;
+
+        $r232 = new com.yahoo.bullet.storm.grouping.IDGrouping;
+
+        specialinvoke $r232.<com.yahoo.bullet.storm.grouping.IDGrouping: void <init>()>();
+
+        $r193 = interfaceinvoke $r191.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer customGrouping(java.lang.String,java.lang.String,org.apache.storm.grouping.CustomStreamGrouping)>($r192, "error", $r232);
+
+        $r195 = (org.apache.storm.topology.BoltDeclarer) $r193;
+
+        $r196 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String REPLAY_COMPONENT>;
+
+        $r233 = new com.yahoo.bullet.storm.grouping.TaskIndexCaptureGrouping;
+
+        specialinvoke $r233.<com.yahoo.bullet.storm.grouping.TaskIndexCaptureGrouping: void <init>()>();
+
+        $r197 = interfaceinvoke $r195.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer customGrouping(java.lang.String,java.lang.String,org.apache.storm.grouping.CustomStreamGrouping)>($r196, "capture", $r233);
+
+        $r199 = (org.apache.storm.topology.BoltDeclarer) $r197;
+
+        $r198 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String REPLAY_COMPONENT>;
+
+        $r200 = interfaceinvoke $r199.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer directGrouping(java.lang.String,java.lang.String)>($r198, "replay");
+
+        $r202 = (org.apache.storm.topology.BoltDeclarer) $r200;
+
+        $r201 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String TICK_COMPONENT>;
+
+        $r203 = interfaceinvoke $r202.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer allGrouping(java.lang.String,java.lang.String)>($r201, "default");
+
+        $r204 = (org.apache.storm.topology.BoltDeclarer) $r203;
+
+        $r205 = interfaceinvoke $r204.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.ResourceDeclarer setCPULoad(java.lang.Number)>(r36);
+
+        $r206 = (org.apache.storm.topology.BoltDeclarer) $r205;
+
+        interfaceinvoke $r206.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.ResourceDeclarer setMemoryLoad(java.lang.Number,java.lang.Number)>(r38, r40);
+
+        $r209 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String REPLAY_COMPONENT>;
+
+        $r234 = new com.yahoo.bullet.storm.ReplayBolt;
+
+        specialinvoke $r234.<com.yahoo.bullet.storm.ReplayBolt: void <init>(com.yahoo.bullet.storm.BulletStormConfig)>(r0);
+
+        $r210 = virtualinvoke r4.<org.apache.storm.topology.TopologyBuilder: org.apache.storm.topology.BoltDeclarer setBolt(java.lang.String,org.apache.storm.topology.IRichBolt,java.lang.Number)>($r209, $r234, r58);
+
+        $r211 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String QUERY_COMPONENT>;
+
+        $r212 = interfaceinvoke $r210.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer allGrouping(java.lang.String,java.lang.String)>($r211, "default");
+
+        $r214 = (org.apache.storm.topology.BoltDeclarer) $r212;
+
+        $r213 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String QUERY_COMPONENT>;
+
+        $r215 = interfaceinvoke $r214.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer allGrouping(java.lang.String,java.lang.String)>($r213, "metadata");
+
+        $r218 = (org.apache.storm.topology.BoltDeclarer) $r215;
+
+        $r219 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String QUERY_COMPONENT>;
+
+        $r235 = new org.apache.storm.tuple.Fields;
+
+        $r217 = newarray (java.lang.String)[1];
+
+        $r217[0] = "id";
+
+        specialinvoke $r235.<org.apache.storm.tuple.Fields: void <init>(java.lang.String[])>($r217);
+
+        $r220 = interfaceinvoke $r218.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer fieldsGrouping(java.lang.String,java.lang.String,org.apache.storm.tuple.Fields)>($r219, "replay", $r235);
+
+        $r221 = (org.apache.storm.topology.BoltDeclarer) $r220;
+
+        $r222 = interfaceinvoke $r221.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.ResourceDeclarer setCPULoad(java.lang.Number)>(r60);
+
+        $r223 = (org.apache.storm.topology.BoltDeclarer) $r222;
+
+        interfaceinvoke $r223.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.ResourceDeclarer setMemoryLoad(java.lang.Number,java.lang.Number)>(r62, r64);
+
+        goto label2;
+
+     label1:
+        $r82 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String FILTER_COMPONENT>;
+
+        $r236 = new com.yahoo.bullet.storm.FilterBolt;
+
+        specialinvoke $r236.<com.yahoo.bullet.storm.FilterBolt: void <init>(java.lang.String,com.yahoo.bullet.storm.BulletStormConfig)>(r2, r0);
+
+        $r83 = virtualinvoke r4.<org.apache.storm.topology.TopologyBuilder: org.apache.storm.topology.BoltDeclarer setBolt(java.lang.String,org.apache.storm.topology.IRichBolt,java.lang.Number)>($r82, $r236, r26);
+
+        $r84 = interfaceinvoke $r83.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer shuffleGrouping(java.lang.String)>(r2);
+
+        $r86 = (org.apache.storm.topology.BoltDeclarer) $r84;
+
+        $r85 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String QUERY_COMPONENT>;
+
+        $r87 = interfaceinvoke $r86.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer allGrouping(java.lang.String,java.lang.String)>($r85, "default");
+
+        $r89 = (org.apache.storm.topology.BoltDeclarer) $r87;
+
+        $r88 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String QUERY_COMPONENT>;
+
+        $r90 = interfaceinvoke $r89.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer allGrouping(java.lang.String,java.lang.String)>($r88, "metadata");
+
+        $r92 = (org.apache.storm.topology.BoltDeclarer) $r90;
+
+        $r91 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String TICK_COMPONENT>;
+
+        $r93 = interfaceinvoke $r92.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer allGrouping(java.lang.String,java.lang.String)>($r91, "default");
+
+        $r94 = (org.apache.storm.topology.BoltDeclarer) $r93;
+
+        $r95 = interfaceinvoke $r94.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.ResourceDeclarer setCPULoad(java.lang.Number)>(r28);
+
+        $r96 = (org.apache.storm.topology.BoltDeclarer) $r95;
+
+        interfaceinvoke $r96.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.ResourceDeclarer setMemoryLoad(java.lang.Number,java.lang.Number)>(r30, r32);
+
+        $r99 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String JOIN_COMPONENT>;
+
+        $r237 = new com.yahoo.bullet.storm.JoinBolt;
+
+        specialinvoke $r237.<com.yahoo.bullet.storm.JoinBolt: void <init>(com.yahoo.bullet.storm.BulletStormConfig)>(r0);
+
+        $r100 = virtualinvoke r4.<org.apache.storm.topology.TopologyBuilder: org.apache.storm.topology.BoltDeclarer setBolt(java.lang.String,org.apache.storm.topology.IRichBolt,java.lang.Number)>($r99, $r237, r34);
+
+        $r103 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String QUERY_COMPONENT>;
+
+        $r238 = new org.apache.storm.tuple.Fields;
+
+        $r102 = newarray (java.lang.String)[1];
+
+        $r102[0] = "id";
+
+        specialinvoke $r238.<org.apache.storm.tuple.Fields: void <init>(java.lang.String[])>($r102);
+
+        $r104 = interfaceinvoke $r100.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer fieldsGrouping(java.lang.String,java.lang.String,org.apache.storm.tuple.Fields)>($r103, "default", $r238);
+
+        $r107 = (org.apache.storm.topology.BoltDeclarer) $r104;
+
+        $r108 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String QUERY_COMPONENT>;
+
+        $r239 = new org.apache.storm.tuple.Fields;
+
+        $r106 = newarray (java.lang.String)[1];
+
+        $r106[0] = "id";
+
+        specialinvoke $r239.<org.apache.storm.tuple.Fields: void <init>(java.lang.String[])>($r106);
+
+        $r109 = interfaceinvoke $r107.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer fieldsGrouping(java.lang.String,java.lang.String,org.apache.storm.tuple.Fields)>($r108, "metadata", $r239);
+
+        $r112 = (org.apache.storm.topology.BoltDeclarer) $r109;
+
+        $r113 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String FILTER_COMPONENT>;
+
+        $r240 = new org.apache.storm.tuple.Fields;
+
+        $r111 = newarray (java.lang.String)[1];
+
+        $r111[0] = "id";
+
+        specialinvoke $r240.<org.apache.storm.tuple.Fields: void <init>(java.lang.String[])>($r111);
+
+        $r114 = interfaceinvoke $r112.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer fieldsGrouping(java.lang.String,java.lang.String,org.apache.storm.tuple.Fields)>($r113, "default", $r240);
+
+        $r117 = (org.apache.storm.topology.BoltDeclarer) $r114;
+
+        $r118 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String FILTER_COMPONENT>;
+
+        $r241 = new org.apache.storm.tuple.Fields;
+
+        $r116 = newarray (java.lang.String)[1];
+
+        $r116[0] = "id";
+
+        specialinvoke $r241.<org.apache.storm.tuple.Fields: void <init>(java.lang.String[])>($r116);
+
+        $r119 = interfaceinvoke $r117.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer fieldsGrouping(java.lang.String,java.lang.String,org.apache.storm.tuple.Fields)>($r118, "error", $r241);
+
+        $r121 = (org.apache.storm.topology.BoltDeclarer) $r119;
+
+        $r120 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String TICK_COMPONENT>;
+
+        $r122 = interfaceinvoke $r121.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer allGrouping(java.lang.String,java.lang.String)>($r120, "default");
+
+        $r123 = (org.apache.storm.topology.BoltDeclarer) $r122;
+
+        $r124 = interfaceinvoke $r123.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.ResourceDeclarer setCPULoad(java.lang.Number)>(r36);
+
+        $r125 = (org.apache.storm.topology.BoltDeclarer) $r124;
+
+        interfaceinvoke $r125.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.ResourceDeclarer setMemoryLoad(java.lang.Number,java.lang.Number)>(r38, r40);
+
+     label2:
+        $r128 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String RESULT_COMPONENT>;
+
+        $r242 = new com.yahoo.bullet.storm.ResultBolt;
+
+        specialinvoke $r242.<com.yahoo.bullet.storm.ResultBolt: void <init>(com.yahoo.bullet.storm.BulletStormConfig)>(r0);
+
+        $r129 = virtualinvoke r4.<org.apache.storm.topology.TopologyBuilder: org.apache.storm.topology.BoltDeclarer setBolt(java.lang.String,org.apache.storm.topology.IRichBolt,java.lang.Number)>($r128, $r242, r42);
+
+        $r130 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String JOIN_COMPONENT>;
+
+        $r131 = interfaceinvoke $r129.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer shuffleGrouping(java.lang.String,java.lang.String)>($r130, "default");
+
+        $r132 = (org.apache.storm.topology.BoltDeclarer) $r131;
+
+        $r133 = interfaceinvoke $r132.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.ResourceDeclarer setCPULoad(java.lang.Number)>(r44);
+
+        $r134 = (org.apache.storm.topology.BoltDeclarer) $r133;
+
+        interfaceinvoke $r134.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.ResourceDeclarer setMemoryLoad(java.lang.Number,java.lang.Number)>(r46, r48);
+
+        if z0 == 0 goto label3;
+
+        if z1 != 0 goto label3;
+
+        $r156 = <com.yahoo.bullet.storm.StormUtils: org.slf4j.Logger log>;
+
+        interfaceinvoke $r156.<org.slf4j.Logger: void info(java.lang.String)>("Windowing and replay are disabled. Skipping hooking in the Loop Bolt...");
+
+        goto label4;
+
+     label3:
+        $r137 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String LOOP_COMPONENT>;
+
+        $r243 = new com.yahoo.bullet.storm.LoopBolt;
+
+        specialinvoke $r243.<com.yahoo.bullet.storm.LoopBolt: void <init>(com.yahoo.bullet.storm.BulletStormConfig)>(r0);
+
+        $r138 = virtualinvoke r4.<org.apache.storm.topology.TopologyBuilder: org.apache.storm.topology.BoltDeclarer setBolt(java.lang.String,org.apache.storm.topology.IRichBolt,java.lang.Number)>($r137, $r243, r50);
+
+        $r139 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String FILTER_COMPONENT>;
+
+        $r140 = interfaceinvoke $r138.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer shuffleGrouping(java.lang.String,java.lang.String)>($r139, "feedback");
+
+        $r142 = (org.apache.storm.topology.BoltDeclarer) $r140;
+
+        $r141 = <com.yahoo.bullet.storm.TopologyConstants: java.lang.String JOIN_COMPONENT>;
+
+        $r143 = interfaceinvoke $r142.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer shuffleGrouping(java.lang.String,java.lang.String)>($r141, "feedback");
+
+        $r144 = (org.apache.storm.topology.BoltDeclarer) $r143;
+
+        $r145 = interfaceinvoke $r144.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.ResourceDeclarer setCPULoad(java.lang.Number)>(r52);
+
+        $r146 = (org.apache.storm.topology.BoltDeclarer) $r145;
+
+        interfaceinvoke $r146.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.ResourceDeclarer setMemoryLoad(java.lang.Number,java.lang.Number)>(r54, r56);
+
+     label4:
+        $r225 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object get(java.lang.String)>("bullet.topology.metrics.enable");
+
+        r148 = (java.lang.Boolean) $r225;
+
+        $z2 = virtualinvoke r148.<java.lang.Boolean: boolean booleanValue()>();
+
+        if $z2 == 0 goto label5;
+
+        $r151 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(1);
+
+        virtualinvoke r6.<org.apache.storm.Config: java.lang.Object put(java.lang.Object,java.lang.Object)>("topology.enable.v2.metrics.tick", $r151);
+
+        $r153 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.metrics.classes", class "Ljava/util/List;");
+
+        r154 = (java.util.List) $r153;
+
+        $r155 = staticinvoke <com.yahoo.bullet.storm.StormUtils$lambda_submit_0__223: java.util.function.Consumer bootstrap$(org.apache.storm.Config,com.yahoo.bullet.storm.BulletStormConfig)>(r6, r0);
+
+        interfaceinvoke r154.<java.util.List: void forEach(java.util.function.Consumer)>($r155);
+
+     label5:
+        $r149 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.util.Map getCustomStormSettings()>();
+
+        virtualinvoke r6.<org.apache.storm.Config: void putAll(java.util.Map)>($r149);
+
+        $r150 = virtualinvoke r4.<org.apache.storm.topology.TopologyBuilder: org.apache.storm.generated.StormTopology createTopology()>();
+
+        $r244 = (java.util.Map) r6;
+
+        staticinvoke <org.apache.storm.StormSubmitter: void submitTopology(java.lang.String,java.util.Map,org.apache.storm.generated.StormTopology)>(r9, $r244, $r150);
+
+        return;
+    }
+
+    public static void submit(com.yahoo.bullet.storm.BulletStormConfig, java.lang.String, org.apache.storm.topology.TopologyBuilder) throws java.lang.Exception
+    {
+        com.yahoo.bullet.storm.BulletStormConfig r0;
+        java.lang.String r1;
+        org.apache.storm.topology.TopologyBuilder r2;
+        org.apache.storm.Config $r3;
+
+        r0 := @parameter0: com.yahoo.bullet.storm.BulletStormConfig;
+
+        r1 := @parameter1: java.lang.String;
+
+        r2 := @parameter2: org.apache.storm.topology.TopologyBuilder;
+
+        $r3 = new org.apache.storm.Config;
+
+        specialinvoke $r3.<org.apache.storm.Config: void <init>()>();
+
+        staticinvoke <com.yahoo.bullet.storm.StormUtils: void submit(com.yahoo.bullet.storm.BulletStormConfig,java.lang.String,org.apache.storm.topology.TopologyBuilder,org.apache.storm.Config)>(r0, r1, r2, $r3);
+
+        return;
+    }
+
+    private static void addDSLSpout(com.yahoo.bullet.storm.BulletStormConfig, org.apache.storm.topology.TopologyBuilder)
+    {
+        com.yahoo.bullet.storm.BulletStormConfig r0;
+        java.lang.Object $r1, $r3, $r5, $r7, $r9, $r11, $r21, $r22, $r24, $r26, $r38, r42;
+        java.lang.Number r2, r4, r6, r8, r23, r25, r27, r44;
+        java.lang.Boolean r10, r12;
+        boolean $z0, $z1, $z2;
+        org.apache.storm.topology.TopologyBuilder r14;
+        org.apache.storm.topology.SpoutDeclarer $r15, $r17;
+        org.apache.storm.topology.ResourceDeclarer $r16, $r32;
+        java.lang.Object[] $r19, $r35;
+        org.slf4j.Logger $r20, $r36, $r39;
+        org.apache.storm.topology.BoltDeclarer $r29, $r31, $r33;
+        org.apache.storm.topology.InputDeclarer $r30;
+        java.lang.String r41, $r43;
+        com.yahoo.bullet.storm.DSLConnectorSpout $r45;
+        com.yahoo.bullet.storm.DSLSpout $r46;
+        com.yahoo.bullet.storm.DSLBolt $r47;
+        org.apache.storm.topology.IRichSpout $r48;
+
+        r0 := @parameter0: com.yahoo.bullet.storm.BulletStormConfig;
+
+        r14 := @parameter1: org.apache.storm.topology.TopologyBuilder;
+
+        $r1 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.dsl.spout.parallelism", class "Ljava/lang/Number;");
+
+        r2 = (java.lang.Number) $r1;
+
+        $r3 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.dsl.spout.cpu.load", class "Ljava/lang/Number;");
+
+        r4 = (java.lang.Number) $r3;
+
+        $r5 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.dsl.spout.memory.on.heap.load", class "Ljava/lang/Number;");
+
+        r6 = (java.lang.Number) $r5;
+
+        $r7 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.dsl.spout.memory.off.heap.load", class "Ljava/lang/Number;");
+
+        r8 = (java.lang.Number) $r7;
+
+        $r9 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.dsl.spout.connector.as.spout.enable", class "Ljava/lang/Boolean;");
+
+        r10 = (java.lang.Boolean) $r9;
+
+        $r11 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.dsl.bolt.enable", class "Ljava/lang/Boolean;");
+
+        r12 = (java.lang.Boolean) $r11;
+
+        $z0 = virtualinvoke r10.<java.lang.Boolean: boolean booleanValue()>();
+
+        if $z0 == 0 goto label1;
+
+        $r38 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.dsl.spout.connector.class.name", class "Ljava/lang/String;");
+
+        r41 = (java.lang.String) $r38;
+
+        $r39 = <com.yahoo.bullet.storm.StormUtils: org.slf4j.Logger log>;
+
+        interfaceinvoke $r39.<org.slf4j.Logger: void info(java.lang.String,java.lang.Object)>("Using the SpoutConnector with the spout {} as the DSLSpout", r41);
+
+        $r45 = new com.yahoo.bullet.storm.DSLConnectorSpout;
+
+        specialinvoke $r45.<com.yahoo.bullet.storm.DSLConnectorSpout: void <init>(com.yahoo.bullet.storm.BulletStormConfig)>(r0);
+
+        r42 = $r45;
+
+        goto label2;
+
+     label1:
+        $r46 = new com.yahoo.bullet.storm.DSLSpout;
+
+        specialinvoke $r46.<com.yahoo.bullet.storm.DSLSpout: void <init>(com.yahoo.bullet.storm.BulletStormConfig)>(r0);
+
+        r42 = $r46;
+
+     label2:
+        $z1 = virtualinvoke r12.<java.lang.Boolean: boolean booleanValue()>();
+
+        if $z1 == 0 goto label3;
+
+        $r43 = "DataSpout";
+
+        goto label4;
+
+     label3:
+        $r43 = "DataSource";
+
+     label4:
+        $r48 = (org.apache.storm.topology.IRichSpout) r42;
+
+        $r15 = virtualinvoke r14.<org.apache.storm.topology.TopologyBuilder: org.apache.storm.topology.SpoutDeclarer setSpout(java.lang.String,org.apache.storm.topology.IRichSpout,java.lang.Number)>($r43, $r48, r2);
+
+        $r16 = interfaceinvoke $r15.<org.apache.storm.topology.SpoutDeclarer: org.apache.storm.topology.ResourceDeclarer setCPULoad(java.lang.Number)>(r4);
+
+        $r17 = (org.apache.storm.topology.SpoutDeclarer) $r16;
+
+        interfaceinvoke $r17.<org.apache.storm.topology.SpoutDeclarer: org.apache.storm.topology.ResourceDeclarer setMemoryLoad(java.lang.Number,java.lang.Number)>(r6, r8);
+
+        $r20 = <com.yahoo.bullet.storm.StormUtils: org.slf4j.Logger log>;
+
+        $r19 = newarray (java.lang.Object)[4];
+
+        $r19[0] = r2;
+
+        $r19[1] = r4;
+
+        $r19[2] = r6;
+
+        $r19[3] = r8;
+
+        interfaceinvoke $r20.<org.slf4j.Logger: void info(java.lang.String,java.lang.Object[])>("Added DSLSpout with Parallelism {}, CPU load {}, On-heap memory {}, Off-heap memory {}", $r19);
+
+        $z2 = virtualinvoke r12.<java.lang.Boolean: boolean booleanValue()>();
+
+        if $z2 == 0 goto label5;
+
+        $r21 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.dsl.bolt.parallelism", class "Ljava/lang/Number;");
+
+        r44 = (java.lang.Number) $r21;
+
+        $r22 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.dsl.bolt.cpu.load", class "Ljava/lang/Number;");
+
+        r23 = (java.lang.Number) $r22;
+
+        $r24 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.dsl.bolt.memory.on.heap.load", class "Ljava/lang/Number;");
+
+        r25 = (java.lang.Number) $r24;
+
+        $r26 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.dsl.bolt.memory.off.heap.load", class "Ljava/lang/Number;");
+
+        r27 = (java.lang.Number) $r26;
+
+        $r47 = new com.yahoo.bullet.storm.DSLBolt;
+
+        specialinvoke $r47.<com.yahoo.bullet.storm.DSLBolt: void <init>(com.yahoo.bullet.storm.BulletStormConfig)>(r0);
+
+        $r29 = virtualinvoke r14.<org.apache.storm.topology.TopologyBuilder: org.apache.storm.topology.BoltDeclarer setBolt(java.lang.String,org.apache.storm.topology.IRichBolt,java.lang.Number)>("DataSource", $r47, r44);
+
+        $r30 = interfaceinvoke $r29.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.InputDeclarer shuffleGrouping(java.lang.String)>("DataSpout");
+
+        $r31 = (org.apache.storm.topology.BoltDeclarer) $r30;
+
+        $r32 = interfaceinvoke $r31.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.ResourceDeclarer setCPULoad(java.lang.Number)>(r23);
+
+        $r33 = (org.apache.storm.topology.BoltDeclarer) $r32;
+
+        interfaceinvoke $r33.<org.apache.storm.topology.BoltDeclarer: org.apache.storm.topology.ResourceDeclarer setMemoryLoad(java.lang.Number,java.lang.Number)>(r25, r27);
+
+        $r36 = <com.yahoo.bullet.storm.StormUtils: org.slf4j.Logger log>;
+
+        $r35 = newarray (java.lang.Object)[4];
+
+        $r35[0] = r44;
+
+        $r35[1] = r23;
+
+        $r35[2] = r25;
+
+        $r35[3] = r27;
+
+        interfaceinvoke $r36.<org.slf4j.Logger: void info(java.lang.String,java.lang.Object[])>("Added DSLBolt with Parallelism {}, CPU load {}, On-heap memory {}, Off-heap memory {}", $r35);
+
+     label5:
+        return;
+    }
+
+    private static void addBulletSpout(com.yahoo.bullet.storm.BulletStormConfig, org.apache.storm.topology.TopologyBuilder) throws java.lang.Exception
+    {
+        com.yahoo.bullet.storm.BulletStormConfig r0;
+        java.lang.Object $r1, $r3, $r5, $r7, $r9, $r11;
+        java.lang.String r2;
+        java.util.List r4;
+        java.lang.Number r6, r8, r10, r12;
+        org.apache.storm.topology.TopologyBuilder r13;
+        org.apache.storm.topology.IRichSpout $r14;
+        org.apache.storm.topology.SpoutDeclarer $r15, $r17;
+        org.apache.storm.topology.ResourceDeclarer $r16;
+        java.lang.Object[] $r19;
+        org.slf4j.Logger $r20;
+
+        r0 := @parameter0: com.yahoo.bullet.storm.BulletStormConfig;
+
+        r13 := @parameter1: org.apache.storm.topology.TopologyBuilder;
+
+        $r1 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.bullet.spout.class.name", class "Ljava/lang/String;");
+
+        r2 = (java.lang.String) $r1;
+
+        $r3 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.bullet.spout.args", class "Ljava/util/List;");
+
+        r4 = (java.util.List) $r3;
+
+        $r5 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.bullet.spout.parallelism", class "Ljava/lang/Number;");
+
+        r6 = (java.lang.Number) $r5;
+
+        $r7 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.bullet.spout.cpu.load", class "Ljava/lang/Number;");
+
+        r8 = (java.lang.Number) $r7;
+
+        $r9 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.bullet.spout.memory.on.heap.load", class "Ljava/lang/Number;");
+
+        r10 = (java.lang.Number) $r9;
+
+        $r11 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.bullet.spout.memory.off.heap.load", class "Ljava/lang/Number;");
+
+        r12 = (java.lang.Number) $r11;
+
+        $r14 = staticinvoke <com.yahoo.bullet.storm.ReflectionUtils: org.apache.storm.topology.IRichSpout getSpout(java.lang.String,java.util.List)>(r2, r4);
+
+        $r15 = virtualinvoke r13.<org.apache.storm.topology.TopologyBuilder: org.apache.storm.topology.SpoutDeclarer setSpout(java.lang.String,org.apache.storm.topology.IRichSpout,java.lang.Number)>("DataSource", $r14, r6);
+
+        $r16 = interfaceinvoke $r15.<org.apache.storm.topology.SpoutDeclarer: org.apache.storm.topology.ResourceDeclarer setCPULoad(java.lang.Number)>(r8);
+
+        $r17 = (org.apache.storm.topology.SpoutDeclarer) $r16;
+
+        interfaceinvoke $r17.<org.apache.storm.topology.SpoutDeclarer: org.apache.storm.topology.ResourceDeclarer setMemoryLoad(java.lang.Number,java.lang.Number)>(r10, r12);
+
+        $r20 = <com.yahoo.bullet.storm.StormUtils: org.slf4j.Logger log>;
+
+        $r19 = newarray (java.lang.Object)[4];
+
+        $r19[0] = r6;
+
+        $r19[1] = r8;
+
+        $r19[2] = r10;
+
+        $r19[3] = r12;
+
+        interfaceinvoke $r20.<org.slf4j.Logger: void info(java.lang.String,java.lang.Object[])>("Added spout with Parallelism {}, CPU load {}, On-heap memory {}, Off-heap memory {}", $r19);
+
+        return;
+    }
+
+    public static void submit(com.yahoo.bullet.storm.BulletStormConfig, org.apache.storm.topology.TopologyBuilder, org.apache.storm.Config) throws java.lang.Exception
+    {
+        com.yahoo.bullet.storm.BulletStormConfig r0;
+        java.lang.Object $r1;
+        java.lang.Boolean r2;
+        boolean $z0;
+        org.apache.storm.topology.TopologyBuilder r3;
+        org.apache.storm.Config r4;
+
+        r0 := @parameter0: com.yahoo.bullet.storm.BulletStormConfig;
+
+        r3 := @parameter1: org.apache.storm.topology.TopologyBuilder;
+
+        r4 := @parameter2: org.apache.storm.Config;
+
+        $r1 = virtualinvoke r0.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.dsl.spout.enable", class "Ljava/lang/Boolean;");
+
+        r2 = (java.lang.Boolean) $r1;
+
+        $z0 = virtualinvoke r2.<java.lang.Boolean: boolean booleanValue()>();
+
+        if $z0 == 0 goto label1;
+
+        staticinvoke <com.yahoo.bullet.storm.StormUtils: void addDSLSpout(com.yahoo.bullet.storm.BulletStormConfig,org.apache.storm.topology.TopologyBuilder)>(r0, r3);
+
+        goto label2;
+
+     label1:
+        staticinvoke <com.yahoo.bullet.storm.StormUtils: void addBulletSpout(com.yahoo.bullet.storm.BulletStormConfig,org.apache.storm.topology.TopologyBuilder)>(r0, r3);
+
+     label2:
+        staticinvoke <com.yahoo.bullet.storm.StormUtils: void submit(com.yahoo.bullet.storm.BulletStormConfig,java.lang.String,org.apache.storm.topology.TopologyBuilder,org.apache.storm.Config)>(r0, "DataSource", r3, r4);
+
+        return;
+    }
+
+    public static void submit(com.yahoo.bullet.storm.BulletStormConfig, org.apache.storm.topology.TopologyBuilder) throws java.lang.Exception
+    {
+        com.yahoo.bullet.storm.BulletStormConfig r0;
+        org.apache.storm.topology.TopologyBuilder r1;
+        org.apache.storm.Config $r2;
+
+        r0 := @parameter0: com.yahoo.bullet.storm.BulletStormConfig;
+
+        r1 := @parameter1: org.apache.storm.topology.TopologyBuilder;
+
+        $r2 = new org.apache.storm.Config;
+
+        specialinvoke $r2.<org.apache.storm.Config: void <init>()>();
+
+        staticinvoke <com.yahoo.bullet.storm.StormUtils: void submit(com.yahoo.bullet.storm.BulletStormConfig,org.apache.storm.topology.TopologyBuilder,org.apache.storm.Config)>(r0, r1, $r2);
+
+        return;
+    }
+
+    public static int getHashIndex(java.lang.Object, int)
+    {
+        java.lang.Object r0;
+        int $i0, i1, $i2, $i3;
+
+        r0 := @parameter0: java.lang.Object;
+
+        i1 := @parameter1: int;
+
+        $i0 = virtualinvoke r0.<java.lang.Object: int hashCode()>();
+
+        $i2 = $i0 & 2147483647;
+
+        $i3 = $i2 % i1;
+
+        return $i3;
+    }
+
+    public static void lambda$submit$0(org.apache.storm.Config, com.yahoo.bullet.storm.BulletStormConfig, java.lang.String)
+    {
+        java.lang.String r0;
+        org.apache.storm.Config r1;
+        com.yahoo.bullet.storm.BulletStormConfig r2;
+
+        r1 := @parameter0: org.apache.storm.Config;
+
+        r2 := @parameter1: com.yahoo.bullet.storm.BulletStormConfig;
+
+        r0 := @parameter2: java.lang.String;
+
+        staticinvoke <com.yahoo.bullet.storm.ReflectionUtils: void registerMetricsConsumer(java.lang.String,org.apache.storm.Config,com.yahoo.bullet.storm.BulletStormConfig)>(r0, r1, r2);
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        org.slf4j.Logger $r0;
+
+        <com.yahoo.bullet.storm.StormUtils: java.lang.String HYPHEN> = "-";
+
+        <com.yahoo.bullet.storm.StormUtils: int POSITIVE_INT_MASK> = 2147483647;
+
+        $r0 = staticinvoke <org.slf4j.LoggerFactory: org.slf4j.Logger getLogger(java.lang.Class)>(class "Lcom/yahoo/bullet/storm/StormUtils;");
+
+        <com.yahoo.bullet.storm.StormUtils: org.slf4j.Logger log> = $r0;
+
+        return;
+    }
+}

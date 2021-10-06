@@ -1,0 +1,328 @@
+class com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt extends com.yahoo.bullet.storm.QueryBolt
+{
+    private boolean cleaned;
+    private org.apache.storm.metric.api.ReducedMetric averagingMetric;
+    private com.yahoo.bullet.storm.metric.AbsoluteCountMetric countMetric;
+    private int tupleCount;
+    private java.util.Map queries;
+    private int initializedQueryCount;
+
+    void <init>(com.yahoo.bullet.storm.BulletStormConfig)
+    {
+        com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt r0;
+        com.yahoo.bullet.storm.BulletStormConfig r1;
+
+        r0 := @this: com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt;
+
+        r1 := @parameter0: com.yahoo.bullet.storm.BulletStormConfig;
+
+        specialinvoke r0.<com.yahoo.bullet.storm.QueryBolt: void <init>(com.yahoo.bullet.storm.BulletStormConfig)>(r1);
+
+        r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: boolean cleaned> = 0;
+
+        return;
+    }
+
+    public void prepare(java.util.Map, org.apache.storm.task.TopologyContext, org.apache.storm.task.OutputCollector)
+    {
+        com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt r0;
+        java.util.Map r1;
+        org.apache.storm.task.TopologyContext r2;
+        org.apache.storm.task.OutputCollector r3;
+        java.util.HashMap $r4;
+        com.yahoo.bullet.storm.metric.BulletMetrics $r5, $r7;
+        org.apache.storm.metric.api.ReducedMetric $r6;
+        com.yahoo.bullet.storm.metric.AbsoluteCountMetric $r8;
+
+        r0 := @this: com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt;
+
+        r1 := @parameter0: java.util.Map;
+
+        r2 := @parameter1: org.apache.storm.task.TopologyContext;
+
+        r3 := @parameter2: org.apache.storm.task.OutputCollector;
+
+        specialinvoke r0.<com.yahoo.bullet.storm.QueryBolt: void prepare(java.util.Map,org.apache.storm.task.TopologyContext,org.apache.storm.task.OutputCollector)>(r1, r2, r3);
+
+        $r4 = new java.util.HashMap;
+
+        specialinvoke $r4.<java.util.HashMap: void <init>()>();
+
+        r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: java.util.Map queries> = $r4;
+
+        $r5 = r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: com.yahoo.bullet.storm.metric.BulletMetrics metrics>;
+
+        $r6 = virtualinvoke $r5.<com.yahoo.bullet.storm.metric.BulletMetrics: org.apache.storm.metric.api.ReducedMetric registerAveragingMetric(java.lang.String,org.apache.storm.task.TopologyContext)>("foo", r2);
+
+        r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: org.apache.storm.metric.api.ReducedMetric averagingMetric> = $r6;
+
+        $r7 = r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: com.yahoo.bullet.storm.metric.BulletMetrics metrics>;
+
+        $r8 = virtualinvoke $r7.<com.yahoo.bullet.storm.metric.BulletMetrics: com.yahoo.bullet.storm.metric.AbsoluteCountMetric registerAbsoluteCountMetric(java.lang.String,org.apache.storm.task.TopologyContext)>("bar", r2);
+
+        r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: com.yahoo.bullet.storm.metric.AbsoluteCountMetric countMetric> = $r8;
+
+        return;
+    }
+
+    public void execute(org.apache.storm.tuple.Tuple)
+    {
+        com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt r0;
+        int $i0, $i1, $i2;
+        com.yahoo.bullet.storm.metric.AbsoluteCountMetric $r1;
+        com.yahoo.bullet.storm.metric.BulletMetrics $r2, $r3;
+        boolean $z0;
+        org.apache.storm.tuple.Tuple r4;
+        org.apache.storm.metric.api.ReducedMetric $r6;
+        java.lang.Integer $r7;
+
+        r0 := @this: com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt;
+
+        r4 := @parameter0: org.apache.storm.tuple.Tuple;
+
+        $i0 = r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: int tupleCount>;
+
+        $i1 = $i0 + 1;
+
+        r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: int tupleCount> = $i1;
+
+        $r2 = r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: com.yahoo.bullet.storm.metric.BulletMetrics metrics>;
+
+        $r1 = r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: com.yahoo.bullet.storm.metric.AbsoluteCountMetric countMetric>;
+
+        virtualinvoke $r2.<com.yahoo.bullet.storm.metric.BulletMetrics: void updateCount(com.yahoo.bullet.storm.metric.AbsoluteCountMetric,long)>($r1, 1L);
+
+        $r3 = r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: com.yahoo.bullet.storm.metric.BulletMetrics metrics>;
+
+        $z0 = virtualinvoke $r3.<com.yahoo.bullet.storm.metric.BulletMetrics: boolean isEnabled()>();
+
+        if $z0 == 0 goto label1;
+
+        $r6 = r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: org.apache.storm.metric.api.ReducedMetric averagingMetric>;
+
+        $i2 = r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: int tupleCount>;
+
+        $r7 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($i2);
+
+        virtualinvoke $r6.<org.apache.storm.metric.api.ReducedMetric: void update(java.lang.Object)>($r7);
+
+     label1:
+        if r4 == null goto label2;
+
+        virtualinvoke r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: com.yahoo.bullet.pubsub.Metadata onMeta(org.apache.storm.tuple.Tuple)>(r4);
+
+     label2:
+        return;
+    }
+
+    public void declareOutputFields(org.apache.storm.topology.OutputFieldsDeclarer)
+    {
+        com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt r0;
+        org.apache.storm.topology.OutputFieldsDeclarer r1;
+
+        r0 := @this: com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt;
+
+        r1 := @parameter0: org.apache.storm.topology.OutputFieldsDeclarer;
+
+        return;
+    }
+
+    public void cleanup()
+    {
+        com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt r0;
+
+        r0 := @this: com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt;
+
+        specialinvoke r0.<com.yahoo.bullet.storm.QueryBolt: void cleanup()>();
+
+        r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: boolean cleaned> = 1;
+
+        return;
+    }
+
+    protected boolean hasQuery(java.lang.String)
+    {
+        com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt r0;
+        java.lang.String r1;
+
+        r0 := @this: com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt;
+
+        r1 := @parameter0: java.lang.String;
+
+        return 0;
+    }
+
+    protected void initializeQuery(com.yahoo.bullet.pubsub.PubSubMessage)
+    {
+        com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt r0;
+        int $i0, $i1;
+        com.yahoo.bullet.pubsub.PubSubMessage r1;
+
+        r0 := @this: com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt;
+
+        r1 := @parameter0: com.yahoo.bullet.pubsub.PubSubMessage;
+
+        $i0 = r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: int initializedQueryCount>;
+
+        $i1 = $i0 + 1;
+
+        r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: int initializedQueryCount> = $i1;
+
+        return;
+    }
+
+    protected void removeQuery(java.lang.String)
+    {
+        com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt r0;
+        java.lang.String r1;
+        java.util.Map $r2;
+
+        r0 := @this: com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt;
+
+        r1 := @parameter0: java.lang.String;
+
+        $r2 = r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: java.util.Map queries>;
+
+        interfaceinvoke $r2.<java.util.Map: java.lang.Object remove(java.lang.Object)>(r1);
+
+        return;
+    }
+
+    boolean isMetricsEnabled()
+    {
+        com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt r0;
+        com.yahoo.bullet.storm.metric.BulletMetrics $r1;
+        boolean $z0;
+
+        r0 := @this: com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt;
+
+        $r1 = r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: com.yahoo.bullet.storm.metric.BulletMetrics metrics>;
+
+        $z0 = virtualinvoke $r1.<com.yahoo.bullet.storm.metric.BulletMetrics: boolean isEnabled()>();
+
+        return $z0;
+    }
+
+    java.util.Map getMetricsMapping()
+    {
+        com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt r0;
+        com.yahoo.bullet.storm.metric.BulletMetrics $r1;
+        java.util.Map $r2;
+
+        r0 := @this: com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt;
+
+        $r1 = r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: com.yahoo.bullet.storm.metric.BulletMetrics metrics>;
+
+        $r2 = virtualinvoke $r1.<com.yahoo.bullet.storm.metric.BulletMetrics: java.util.Map getMetricsIntervalMapping()>();
+
+        return $r2;
+    }
+
+    org.apache.storm.task.OutputCollector getCollector()
+    {
+        com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt r0;
+        org.apache.storm.task.OutputCollector $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt;
+
+        $r1 = r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: org.apache.storm.task.OutputCollector collector>;
+
+        return $r1;
+    }
+
+    com.yahoo.bullet.storm.TupleClassifier getClassifier()
+    {
+        com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt r0;
+        com.yahoo.bullet.storm.TupleClassifier $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt;
+
+        $r1 = r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: com.yahoo.bullet.storm.TupleClassifier classifier>;
+
+        return $r1;
+    }
+
+    java.util.Map getQueries()
+    {
+        com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt r0;
+        java.util.Map $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt;
+
+        $r1 = r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: java.util.Map queries>;
+
+        return $r1;
+    }
+
+    public boolean isCleaned()
+    {
+        com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt r0;
+        boolean $z0;
+
+        r0 := @this: com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt;
+
+        $z0 = r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: boolean cleaned>;
+
+        return $z0;
+    }
+
+    public org.apache.storm.metric.api.ReducedMetric getAveragingMetric()
+    {
+        com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt r0;
+        org.apache.storm.metric.api.ReducedMetric $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt;
+
+        $r1 = r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: org.apache.storm.metric.api.ReducedMetric averagingMetric>;
+
+        return $r1;
+    }
+
+    public com.yahoo.bullet.storm.metric.AbsoluteCountMetric getCountMetric()
+    {
+        com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt r0;
+        com.yahoo.bullet.storm.metric.AbsoluteCountMetric $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt;
+
+        $r1 = r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: com.yahoo.bullet.storm.metric.AbsoluteCountMetric countMetric>;
+
+        return $r1;
+    }
+
+    public int getTupleCount()
+    {
+        com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt r0;
+        int $i0;
+
+        r0 := @this: com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt;
+
+        $i0 = r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: int tupleCount>;
+
+        return $i0;
+    }
+
+    public int getInitializedQueryCount()
+    {
+        com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt r0;
+        int $i0;
+
+        r0 := @this: com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt;
+
+        $i0 = r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: int initializedQueryCount>;
+
+        return $i0;
+    }
+
+    static int access$000(com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt)
+    {
+        com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt r0;
+        int $i0;
+
+        r0 := @parameter0: com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt;
+
+        $i0 = r0.<com.yahoo.bullet.storm.QueryBoltTest$TestQueryBolt: int initializedQueryCount>;
+
+        return $i0;
+    }
+}

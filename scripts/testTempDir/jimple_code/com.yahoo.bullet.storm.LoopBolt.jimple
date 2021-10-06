@@ -1,0 +1,143 @@
+public class com.yahoo.bullet.storm.LoopBolt extends com.yahoo.bullet.storm.PublisherBolt
+{
+    private static final org.slf4j.Logger log;
+    private static final long serialVersionUID;
+
+    public void <init>(com.yahoo.bullet.storm.BulletStormConfig)
+    {
+        com.yahoo.bullet.storm.LoopBolt r0;
+        com.yahoo.bullet.storm.BulletStormConfig r1;
+
+        r0 := @this: com.yahoo.bullet.storm.LoopBolt;
+
+        r1 := @parameter0: com.yahoo.bullet.storm.BulletStormConfig;
+
+        specialinvoke r0.<com.yahoo.bullet.storm.PublisherBolt: void <init>(com.yahoo.bullet.storm.BulletStormConfig)>(r1);
+
+        return;
+    }
+
+    protected com.yahoo.bullet.pubsub.Publisher createPublisher() throws com.yahoo.bullet.pubsub.PubSubException
+    {
+        com.yahoo.bullet.storm.LoopBolt r0;
+        com.yahoo.bullet.storm.BulletStormConfig $r1, $r3, $r8, $r16;
+        com.yahoo.bullet.pubsub.PubSub r2;
+        java.lang.Object $r4;
+        java.util.Map r5;
+        org.slf4j.Logger $r6, $r13, $r15;
+        java.util.function.BiConsumer $r11;
+        com.yahoo.bullet.pubsub.PubSub$Context $r12;
+        com.yahoo.bullet.pubsub.Publisher r14;
+        com.yahoo.bullet.common.Config $r17;
+
+        r0 := @this: com.yahoo.bullet.storm.LoopBolt;
+
+        $r1 = r0.<com.yahoo.bullet.storm.LoopBolt: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        r2 = staticinvoke <com.yahoo.bullet.pubsub.PubSub: com.yahoo.bullet.pubsub.PubSub 'from'(com.yahoo.bullet.common.BulletConfig)>($r1);
+
+        $r3 = r0.<com.yahoo.bullet.storm.LoopBolt: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        $r4 = virtualinvoke $r3.<com.yahoo.bullet.storm.BulletStormConfig: java.lang.Object getAs(java.lang.String,java.lang.Class)>("bullet.topology.loop.bolt.pubsub.overrides", class "Ljava/util/Map;");
+
+        r5 = (java.util.Map) $r4;
+
+        $r6 = <com.yahoo.bullet.storm.LoopBolt: org.slf4j.Logger log>;
+
+        interfaceinvoke $r6.<org.slf4j.Logger: void info(java.lang.String,java.lang.Object)>("Loaded pubsub overrides: {}", r5);
+
+        $r16 = new com.yahoo.bullet.storm.BulletStormConfig;
+
+        $r8 = r0.<com.yahoo.bullet.storm.LoopBolt: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        $r17 = (com.yahoo.bullet.common.Config) $r8;
+
+        specialinvoke $r16.<com.yahoo.bullet.storm.BulletStormConfig: void <init>(com.yahoo.bullet.common.Config)>($r17);
+
+        virtualinvoke $r16.<java.lang.Object: java.lang.Class getClass()>();
+
+        $r11 = staticinvoke <com.yahoo.bullet.storm.LoopBolt$set__163: java.util.function.BiConsumer bootstrap$(com.yahoo.bullet.storm.BulletStormConfig)>($r16);
+
+        interfaceinvoke r5.<java.util.Map: void forEach(java.util.function.BiConsumer)>($r11);
+
+        $r12 = <com.yahoo.bullet.pubsub.PubSub$Context: com.yahoo.bullet.pubsub.PubSub$Context QUERY_SUBMISSION>;
+
+        virtualinvoke r2.<com.yahoo.bullet.pubsub.PubSub: void switchContext(com.yahoo.bullet.pubsub.PubSub$Context,com.yahoo.bullet.common.BulletConfig)>($r12, $r16);
+
+        $r13 = <com.yahoo.bullet.storm.LoopBolt: org.slf4j.Logger log>;
+
+        interfaceinvoke $r13.<org.slf4j.Logger: void info(java.lang.String)>("Switched the PubSub into query submission mode");
+
+        r14 = virtualinvoke r2.<com.yahoo.bullet.pubsub.PubSub: com.yahoo.bullet.pubsub.Publisher getPublisher()>();
+
+        $r15 = <com.yahoo.bullet.storm.LoopBolt: org.slf4j.Logger log>;
+
+        interfaceinvoke $r15.<org.slf4j.Logger: void info(java.lang.String,java.lang.Object,java.lang.Object)>("Setup PubSub: {} with Publisher: {}", r2, r14);
+
+        return r14;
+    }
+
+    public void execute(org.apache.storm.tuple.Tuple)
+    {
+        org.apache.storm.tuple.Tuple r0;
+        java.lang.String r1;
+        java.lang.Object $r2;
+        com.yahoo.bullet.pubsub.Metadata r3;
+        java.lang.Object[] $r4;
+        org.slf4j.Logger $r5;
+        com.yahoo.bullet.pubsub.Metadata$Signal $r6;
+        java.io.Serializable $r7;
+        com.yahoo.bullet.storm.LoopBolt r8;
+        com.yahoo.bullet.pubsub.PubSubMessage $r9;
+        byte[] $r10;
+
+        r8 := @this: com.yahoo.bullet.storm.LoopBolt;
+
+        r0 := @parameter0: org.apache.storm.tuple.Tuple;
+
+        r1 = interfaceinvoke r0.<org.apache.storm.tuple.Tuple: java.lang.String getString(int)>(0);
+
+        $r2 = interfaceinvoke r0.<org.apache.storm.tuple.Tuple: java.lang.Object getValue(int)>(1);
+
+        r3 = (com.yahoo.bullet.pubsub.Metadata) $r2;
+
+        $r5 = <com.yahoo.bullet.storm.LoopBolt: org.slf4j.Logger log>;
+
+        $r4 = newarray (java.lang.Object)[3];
+
+        $r4[0] = r1;
+
+        $r6 = virtualinvoke r3.<com.yahoo.bullet.pubsub.Metadata: com.yahoo.bullet.pubsub.Metadata$Signal getSignal()>();
+
+        $r4[1] = $r6;
+
+        $r7 = virtualinvoke r3.<com.yahoo.bullet.pubsub.Metadata: java.io.Serializable getContent()>();
+
+        $r4[2] = $r7;
+
+        interfaceinvoke $r5.<org.slf4j.Logger: void info(java.lang.String,java.lang.Object[])>("Looping back metadata with id {}, signal {}, and content {}", $r4);
+
+        $r9 = new com.yahoo.bullet.pubsub.PubSubMessage;
+
+        $r10 = (byte[]) null;
+
+        specialinvoke $r9.<com.yahoo.bullet.pubsub.PubSubMessage: void <init>(java.lang.String,java.io.Serializable,com.yahoo.bullet.pubsub.Metadata)>(r1, $r10, r3);
+
+        virtualinvoke r8.<com.yahoo.bullet.storm.LoopBolt: void publish(com.yahoo.bullet.pubsub.PubSubMessage,org.apache.storm.tuple.Tuple)>($r9, r0);
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        org.slf4j.Logger $r0;
+
+        <com.yahoo.bullet.storm.LoopBolt: long serialVersionUID> = 1291597467671042429L;
+
+        $r0 = staticinvoke <org.slf4j.LoggerFactory: org.slf4j.Logger getLogger(java.lang.Class)>(class "Lcom/yahoo/bullet/storm/LoopBolt;");
+
+        <com.yahoo.bullet.storm.LoopBolt: org.slf4j.Logger log> = $r0;
+
+        return;
+    }
+}

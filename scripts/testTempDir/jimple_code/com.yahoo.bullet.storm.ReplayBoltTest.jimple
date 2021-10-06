@@ -1,0 +1,2032 @@
+public class com.yahoo.bullet.storm.ReplayBoltTest extends java.lang.Object
+{
+    private static final int NUM_PARTITIONS;
+    private com.yahoo.bullet.storm.ReplayBolt bolt;
+    private com.yahoo.bullet.storm.testing.CustomCollector collector;
+    private com.yahoo.bullet.storm.testing.CustomTopologyContext context;
+    private com.yahoo.bullet.storm.BulletStormConfig config;
+    private com.yahoo.bullet.storage.StorageManager storageManager;
+
+    public void <init>()
+    {
+        com.yahoo.bullet.storm.ReplayBoltTest r0;
+
+        r0 := @this: com.yahoo.bullet.storm.ReplayBoltTest;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public void setup()
+    {
+        com.yahoo.bullet.storm.ReplayBoltTest r0;
+        com.yahoo.bullet.storm.testing.CustomCollector $r1, $r12;
+        com.yahoo.bullet.storm.testing.CustomTopologyContext $r2, $r13;
+        com.yahoo.bullet.storm.BulletStormConfig $r3, $r4, $r6, $r7, $r11;
+        java.lang.Boolean $r5;
+        java.util.HashMap $r9;
+        com.yahoo.bullet.storm.ReplayBolt $r10, $r15, $r16, $r17;
+        org.apache.storm.topology.IRichBolt $r14;
+        boolean $z0;
+        com.yahoo.bullet.storage.StorageManager $r18;
+
+        r0 := @this: com.yahoo.bullet.storm.ReplayBoltTest;
+
+        $r1 = new com.yahoo.bullet.storm.testing.CustomCollector;
+
+        specialinvoke $r1.<com.yahoo.bullet.storm.testing.CustomCollector: void <init>()>();
+
+        r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomCollector collector> = $r1;
+
+        $r2 = new com.yahoo.bullet.storm.testing.CustomTopologyContext;
+
+        specialinvoke $r2.<com.yahoo.bullet.storm.testing.CustomTopologyContext: void <init>()>();
+
+        r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomTopologyContext context> = $r2;
+
+        $r3 = new com.yahoo.bullet.storm.BulletStormConfig;
+
+        specialinvoke $r3.<com.yahoo.bullet.storm.BulletStormConfig: void <init>(java.lang.String)>("test_config.yaml");
+
+        r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.BulletStormConfig config> = $r3;
+
+        $r4 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        $r5 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(1);
+
+        virtualinvoke $r4.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.metrics.built.in.enable", $r5);
+
+        $r6 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        virtualinvoke $r6.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.storage.class.name", "com.yahoo.bullet.storm.ReplayBoltTest$TestStorageManager");
+
+        $r7 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        virtualinvoke $r7.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        $r9 = new java.util.HashMap;
+
+        specialinvoke $r9.<java.util.HashMap: void <init>()>();
+
+        $r10 = new com.yahoo.bullet.storm.ReplayBolt;
+
+        $r11 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        specialinvoke $r10.<com.yahoo.bullet.storm.ReplayBolt: void <init>(com.yahoo.bullet.storm.BulletStormConfig)>($r11);
+
+        $r13 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomTopologyContext context>;
+
+        $r12 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomCollector collector>;
+
+        $r14 = staticinvoke <com.yahoo.bullet.storm.testing.ComponentUtils: org.apache.storm.topology.IRichBolt prepare(java.util.Map,org.apache.storm.topology.IRichBolt,org.apache.storm.task.TopologyContext,org.apache.storm.task.IOutputCollector)>($r9, $r10, $r13, $r12);
+
+        $r15 = (com.yahoo.bullet.storm.ReplayBolt) $r14;
+
+        r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt> = $r15;
+
+        $r16 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $z0 = virtualinvoke $r16.<com.yahoo.bullet.storm.ReplayBolt: boolean isReplayBatchCompressEnable()>();
+
+        staticinvoke <org.junit.Assert: void assertFalse(boolean)>($z0);
+
+        $r17 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r18 = virtualinvoke $r17.<com.yahoo.bullet.storm.ReplayBolt: com.yahoo.bullet.storage.StorageManager getStorageManager()>();
+
+        r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storage.StorageManager storageManager> = $r18;
+
+        return;
+    }
+
+    public void testPrepare()
+    {
+        com.yahoo.bullet.storm.ReplayBoltTest r0;
+        com.yahoo.bullet.storm.testing.CustomCollector $r1, $r4;
+        int $i0, $i2, $i4;
+        long $l1, $l3, $l5, $l6;
+        com.yahoo.bullet.storm.ReplayBolt $r2, $r5, $r7, $r9, $r11, $r13, $r17, $r21, $r25, $r27, $r29, $r35;
+        org.apache.storm.task.OutputCollector $r3;
+        com.yahoo.bullet.storm.TupleClassifier $r6;
+        com.yahoo.bullet.storm.metric.BulletMetrics $r8;
+        boolean $z0, $z1;
+        com.yahoo.bullet.storm.metric.AbsoluteCountMetric $r10, $r18, $r30;
+        com.yahoo.bullet.storm.metric.MapCountMetric $r12, $r14, $r22, $r26;
+        com.yahoo.bullet.storm.testing.CustomTopologyContext $r15, $r19, $r23, $r33;
+        org.apache.storm.metric.api.IMetric $r16, $r20, $r24;
+        com.yahoo.bullet.storm.batching.BatchManager $r28;
+        java.lang.Object $r31;
+        java.lang.Long $r32, $r34;
+        java.util.Map $r36;
+
+        r0 := @this: com.yahoo.bullet.storm.ReplayBoltTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomCollector collector>;
+
+        $i0 = virtualinvoke $r1.<com.yahoo.bullet.storm.testing.CustomCollector: int getAckedCount()>();
+
+        $l1 = (long) $i0;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l1, 0L);
+
+        $r2 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r3 = virtualinvoke $r2.<com.yahoo.bullet.storm.ReplayBolt: org.apache.storm.task.OutputCollector getCollector()>();
+
+        virtualinvoke $r3.<org.apache.storm.task.OutputCollector: void ack(org.apache.storm.tuple.Tuple)>(null);
+
+        $r4 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomCollector collector>;
+
+        $i2 = virtualinvoke $r4.<com.yahoo.bullet.storm.testing.CustomCollector: int getAckedCount()>();
+
+        $l3 = (long) $i2;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l3, 1L);
+
+        $r5 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r6 = virtualinvoke $r5.<com.yahoo.bullet.storm.ReplayBolt: com.yahoo.bullet.storm.TupleClassifier getClassifier()>();
+
+        staticinvoke <org.junit.Assert: void assertNotNull(java.lang.Object)>($r6);
+
+        $r7 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r8 = virtualinvoke $r7.<com.yahoo.bullet.storm.ReplayBolt: com.yahoo.bullet.storm.metric.BulletMetrics getMetrics()>();
+
+        $z0 = virtualinvoke $r8.<com.yahoo.bullet.storm.metric.BulletMetrics: boolean isEnabled()>();
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z0);
+
+        $r9 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r10 = virtualinvoke $r9.<com.yahoo.bullet.storm.ReplayBolt: com.yahoo.bullet.storm.metric.AbsoluteCountMetric getBatchedQueriesCount()>();
+
+        staticinvoke <org.junit.Assert: void assertNotNull(java.lang.Object)>($r10);
+
+        $r11 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r12 = virtualinvoke $r11.<com.yahoo.bullet.storm.ReplayBolt: com.yahoo.bullet.storm.metric.MapCountMetric getActiveReplaysCount()>();
+
+        staticinvoke <org.junit.Assert: void assertNotNull(java.lang.Object)>($r12);
+
+        $r13 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r14 = virtualinvoke $r13.<com.yahoo.bullet.storm.ReplayBolt: com.yahoo.bullet.storm.metric.MapCountMetric getCreatedReplaysCount()>();
+
+        staticinvoke <org.junit.Assert: void assertNotNull(java.lang.Object)>($r14);
+
+        $r15 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomTopologyContext context>;
+
+        $r16 = virtualinvoke $r15.<com.yahoo.bullet.storm.testing.CustomTopologyContext: org.apache.storm.metric.api.IMetric getRegisteredMetricByName(java.lang.String)>("bullet_batched_queries");
+
+        $r17 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r18 = virtualinvoke $r17.<com.yahoo.bullet.storm.ReplayBolt: com.yahoo.bullet.storm.metric.AbsoluteCountMetric getBatchedQueriesCount()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r16, $r18);
+
+        $r19 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomTopologyContext context>;
+
+        $r20 = virtualinvoke $r19.<com.yahoo.bullet.storm.testing.CustomTopologyContext: org.apache.storm.metric.api.IMetric getRegisteredMetricByName(java.lang.String)>("bullet_active_replays");
+
+        $r21 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r22 = virtualinvoke $r21.<com.yahoo.bullet.storm.ReplayBolt: com.yahoo.bullet.storm.metric.MapCountMetric getActiveReplaysCount()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r20, $r22);
+
+        $r23 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomTopologyContext context>;
+
+        $r24 = virtualinvoke $r23.<com.yahoo.bullet.storm.testing.CustomTopologyContext: org.apache.storm.metric.api.IMetric getRegisteredMetricByName(java.lang.String)>("bullet_created_replays");
+
+        $r25 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r26 = virtualinvoke $r25.<com.yahoo.bullet.storm.ReplayBolt: com.yahoo.bullet.storm.metric.MapCountMetric getCreatedReplaysCount()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r24, $r26);
+
+        $r27 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r28 = virtualinvoke $r27.<com.yahoo.bullet.storm.ReplayBolt: com.yahoo.bullet.storm.batching.BatchManager getBatchManager()>();
+
+        $i4 = virtualinvoke $r28.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l5 = (long) $i4;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l5, 3L);
+
+        $r29 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r30 = virtualinvoke $r29.<com.yahoo.bullet.storm.ReplayBolt: com.yahoo.bullet.storm.metric.AbsoluteCountMetric getBatchedQueriesCount()>();
+
+        $r31 = virtualinvoke $r30.<com.yahoo.bullet.storm.metric.AbsoluteCountMetric: java.lang.Object getValueAndReset()>();
+
+        $r32 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(3L);
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($r31, $r32);
+
+        $r33 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomTopologyContext context>;
+
+        $r34 = virtualinvoke $r33.<com.yahoo.bullet.storm.testing.CustomTopologyContext: java.lang.Long getLongMetric(java.lang.String)>("bullet_batched_queries");
+
+        $l6 = virtualinvoke $r34.<java.lang.Long: long longValue()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l6, 3L);
+
+        $r35 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r36 = virtualinvoke $r35.<com.yahoo.bullet.storm.ReplayBolt: java.util.Map getReplays()>();
+
+        $z1 = interfaceinvoke $r36.<java.util.Map: boolean isEmpty()>();
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z1);
+
+        return;
+    }
+
+    public void testPrepareCouldNotCreateStorageManager()
+    {
+        com.yahoo.bullet.storm.ReplayBoltTest r0;
+        com.yahoo.bullet.storm.BulletStormConfig $r1, $r2, $r3, $r7;
+        java.util.HashMap $r5;
+        com.yahoo.bullet.storm.ReplayBolt $r6, $r11;
+        com.yahoo.bullet.storm.testing.CustomTopologyContext $r8;
+        com.yahoo.bullet.storm.testing.CustomCollector $r9;
+        org.apache.storm.topology.IRichBolt $r10;
+
+        r0 := @this: com.yahoo.bullet.storm.ReplayBoltTest;
+
+        $r1 = new com.yahoo.bullet.storm.BulletStormConfig;
+
+        specialinvoke $r1.<com.yahoo.bullet.storm.BulletStormConfig: void <init>(java.lang.String)>("test_config.yaml");
+
+        r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.BulletStormConfig config> = $r1;
+
+        $r2 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        virtualinvoke $r2.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.storage.class.name", "");
+
+        $r3 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        virtualinvoke $r3.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        $r5 = new java.util.HashMap;
+
+        specialinvoke $r5.<java.util.HashMap: void <init>()>();
+
+        $r6 = new com.yahoo.bullet.storm.ReplayBolt;
+
+        $r7 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        specialinvoke $r6.<com.yahoo.bullet.storm.ReplayBolt: void <init>(com.yahoo.bullet.storm.BulletStormConfig)>($r7);
+
+        $r8 = new com.yahoo.bullet.storm.testing.CustomTopologyContext;
+
+        specialinvoke $r8.<com.yahoo.bullet.storm.testing.CustomTopologyContext: void <init>()>();
+
+        $r9 = new com.yahoo.bullet.storm.testing.CustomCollector;
+
+        specialinvoke $r9.<com.yahoo.bullet.storm.testing.CustomCollector: void <init>()>();
+
+        $r10 = staticinvoke <com.yahoo.bullet.storm.testing.ComponentUtils: org.apache.storm.topology.IRichBolt prepare(java.util.Map,org.apache.storm.topology.IRichBolt,org.apache.storm.task.TopologyContext,org.apache.storm.task.IOutputCollector)>($r5, $r6, $r8, $r9);
+
+        $r11 = (com.yahoo.bullet.storm.ReplayBolt) $r10;
+
+        r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt> = $r11;
+
+        return;
+    }
+
+    public void testPrepareCouldNotGetStoredQueries()
+    {
+        com.yahoo.bullet.storm.ReplayBoltTest r0;
+        com.yahoo.bullet.storm.BulletStormConfig $r1, $r2, $r3, $r7;
+        java.util.HashMap $r5;
+        com.yahoo.bullet.storm.ReplayBolt $r6, $r11;
+        com.yahoo.bullet.storm.testing.CustomTopologyContext $r8;
+        com.yahoo.bullet.storm.testing.CustomCollector $r9;
+        org.apache.storm.topology.IRichBolt $r10;
+
+        r0 := @this: com.yahoo.bullet.storm.ReplayBoltTest;
+
+        $r1 = new com.yahoo.bullet.storm.BulletStormConfig;
+
+        specialinvoke $r1.<com.yahoo.bullet.storm.BulletStormConfig: void <init>(java.lang.String)>("test_config.yaml");
+
+        r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.BulletStormConfig config> = $r1;
+
+        $r2 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        virtualinvoke $r2.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.storage.class.name", "com.yahoo.bullet.storm.ReplayBoltTest$ThrowingStorageManager");
+
+        $r3 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        virtualinvoke $r3.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        $r5 = new java.util.HashMap;
+
+        specialinvoke $r5.<java.util.HashMap: void <init>()>();
+
+        $r6 = new com.yahoo.bullet.storm.ReplayBolt;
+
+        $r7 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        specialinvoke $r6.<com.yahoo.bullet.storm.ReplayBolt: void <init>(com.yahoo.bullet.storm.BulletStormConfig)>($r7);
+
+        $r8 = new com.yahoo.bullet.storm.testing.CustomTopologyContext;
+
+        specialinvoke $r8.<com.yahoo.bullet.storm.testing.CustomTopologyContext: void <init>()>();
+
+        $r9 = new com.yahoo.bullet.storm.testing.CustomCollector;
+
+        specialinvoke $r9.<com.yahoo.bullet.storm.testing.CustomCollector: void <init>()>();
+
+        $r10 = staticinvoke <com.yahoo.bullet.storm.testing.ComponentUtils: org.apache.storm.topology.IRichBolt prepare(java.util.Map,org.apache.storm.topology.IRichBolt,org.apache.storm.task.TopologyContext,org.apache.storm.task.IOutputCollector)>($r5, $r6, $r8, $r9);
+
+        $r11 = (com.yahoo.bullet.storm.ReplayBolt) $r10;
+
+        r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt> = $r11;
+
+        return;
+    }
+
+    public void testDeclareOutputFields()
+    {
+        com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer $r0;
+        com.yahoo.bullet.storm.ReplayBoltTest r2;
+        com.yahoo.bullet.storm.ReplayBolt $r3;
+        org.apache.storm.tuple.Fields $r4, $r7;
+        java.lang.String[] $r5, $r8;
+
+        r2 := @this: com.yahoo.bullet.storm.ReplayBoltTest;
+
+        $r0 = new com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer;
+
+        specialinvoke $r0.<com.yahoo.bullet.storm.testing.CustomOutputFieldsDeclarer: void <init>()>();
+
+        $r3 = r2.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        virtualinvoke $r3.<com.yahoo.bullet.storm.ReplayBolt: void declareOutputFields(org.apache.storm.topology.OutputFieldsDeclarer)>($r0);
+
+        $r4 = new org.apache.storm.tuple.Fields;
+
+        $r5 = newarray (java.lang.String)[4];
+
+        $r5[0] = "id";
+
+        $r5[1] = "timestamp";
+
+        $r5[2] = "index";
+
+        $r5[3] = "batch";
+
+        specialinvoke $r4.<org.apache.storm.tuple.Fields: void <init>(java.lang.String[])>($r5);
+
+        $r7 = new org.apache.storm.tuple.Fields;
+
+        $r8 = newarray (java.lang.String)[0];
+
+        specialinvoke $r7.<org.apache.storm.tuple.Fields: void <init>(java.lang.String[])>($r8);
+
+        return;
+    }
+
+    public void testUnknownTuple()
+    {
+        java.lang.Object[] $r0;
+        com.yahoo.bullet.storm.TupleClassifier$Type $r1;
+        org.apache.storm.tuple.Tuple r2;
+        com.yahoo.bullet.storm.ReplayBoltTest r3;
+        com.yahoo.bullet.storm.ReplayBolt $r4;
+        com.yahoo.bullet.storm.testing.CustomCollector $r5;
+        boolean $z0;
+
+        r3 := @this: com.yahoo.bullet.storm.ReplayBoltTest;
+
+        $r1 = <com.yahoo.bullet.storm.TupleClassifier$Type: com.yahoo.bullet.storm.TupleClassifier$Type UNKNOWN_TUPLE>;
+
+        $r0 = newarray (java.lang.Object)[2];
+
+        $r0[0] = "";
+
+        $r0[1] = "";
+
+        r2 = staticinvoke <com.yahoo.bullet.storm.testing.TupleUtils: org.apache.storm.tuple.Tuple makeTuple(com.yahoo.bullet.storm.TupleClassifier$Type,java.lang.Object[])>($r1, $r0);
+
+        $r4 = r3.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        virtualinvoke $r4.<com.yahoo.bullet.storm.ReplayBolt: void execute(org.apache.storm.tuple.Tuple)>(r2);
+
+        $r5 = r3.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomCollector collector>;
+
+        $z0 = virtualinvoke $r5.<com.yahoo.bullet.storm.testing.CustomCollector: boolean wasAcked(org.apache.storm.tuple.Tuple)>(r2);
+
+        staticinvoke <org.junit.Assert: void assertFalse(boolean)>($z0);
+
+        return;
+    }
+
+    public void testCleanup()
+    {
+        com.yahoo.bullet.storm.ReplayBoltTest r0;
+        com.yahoo.bullet.storm.ReplayBolt $r1;
+
+        r0 := @this: com.yahoo.bullet.storm.ReplayBoltTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        virtualinvoke $r1.<com.yahoo.bullet.storm.ReplayBolt: void cleanup()>();
+
+        return;
+    }
+
+    public void testOnQuery()
+    {
+        java.lang.Object[] $r0;
+        com.yahoo.bullet.storm.TupleClassifier$Type $r1;
+        org.apache.storm.tuple.Tuple r2;
+        com.yahoo.bullet.storm.ReplayBoltTest r3;
+        com.yahoo.bullet.storm.ReplayBolt $r4, $r5, $r9, $r10;
+        com.yahoo.bullet.storm.batching.BatchManager $r6, $r11;
+        int $i0, $i3;
+        long $l1, $l2, $l4, $l5;
+        com.yahoo.bullet.storm.testing.CustomTopologyContext $r7, $r12;
+        java.lang.Long $r8, $r13;
+
+        r3 := @this: com.yahoo.bullet.storm.ReplayBoltTest;
+
+        $r1 = <com.yahoo.bullet.storm.TupleClassifier$Type: com.yahoo.bullet.storm.TupleClassifier$Type QUERY_TUPLE>;
+
+        $r0 = newarray (java.lang.Object)[2];
+
+        $r0[0] = "123";
+
+        $r0[1] = null;
+
+        r2 = staticinvoke <com.yahoo.bullet.storm.testing.TupleUtils: org.apache.storm.tuple.Tuple makeIDTuple(com.yahoo.bullet.storm.TupleClassifier$Type,java.lang.Object[])>($r1, $r0);
+
+        $r4 = r3.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        virtualinvoke $r4.<com.yahoo.bullet.storm.ReplayBolt: void execute(org.apache.storm.tuple.Tuple)>(r2);
+
+        $r5 = r3.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r6 = virtualinvoke $r5.<com.yahoo.bullet.storm.ReplayBolt: com.yahoo.bullet.storm.batching.BatchManager getBatchManager()>();
+
+        $i0 = virtualinvoke $r6.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l1 = (long) $i0;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l1, 4L);
+
+        $r7 = r3.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomTopologyContext context>;
+
+        $r8 = virtualinvoke $r7.<com.yahoo.bullet.storm.testing.CustomTopologyContext: java.lang.Long getLongMetric(java.lang.String)>("bullet_batched_queries");
+
+        $l2 = virtualinvoke $r8.<java.lang.Long: long longValue()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l2, 4L);
+
+        $r9 = r3.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        virtualinvoke $r9.<com.yahoo.bullet.storm.ReplayBolt: void execute(org.apache.storm.tuple.Tuple)>(r2);
+
+        $r10 = r3.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r11 = virtualinvoke $r10.<com.yahoo.bullet.storm.ReplayBolt: com.yahoo.bullet.storm.batching.BatchManager getBatchManager()>();
+
+        $i3 = virtualinvoke $r11.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l4 = (long) $i3;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l4, 4L);
+
+        $r12 = r3.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomTopologyContext context>;
+
+        $r13 = virtualinvoke $r12.<com.yahoo.bullet.storm.testing.CustomTopologyContext: java.lang.Long getLongMetric(java.lang.String)>("bullet_batched_queries");
+
+        $l5 = virtualinvoke $r13.<java.lang.Long: long longValue()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l5, 4L);
+
+        return;
+    }
+
+    public void testOnMeta()
+    {
+        com.yahoo.bullet.storm.ReplayBoltTest r0;
+        com.yahoo.bullet.storm.ReplayBolt $r1, $r8, $r11, $r18, $r21, $r28, $r31;
+        com.yahoo.bullet.storm.batching.BatchManager $r2, $r12, $r22, $r32;
+        int $i0, $i3, $i6, $i9;
+        long $l1, $l2, $l4, $l5, $l7, $l8, $l10, $l11;
+        com.yahoo.bullet.storm.testing.CustomTopologyContext $r3, $r13, $r23, $r33;
+        java.lang.Long $r4, $r14, $r24, $r34;
+        java.lang.Object[] $r5, $r15, $r25;
+        com.yahoo.bullet.pubsub.Metadata $r6, $r16, $r26;
+        com.yahoo.bullet.pubsub.Metadata$Signal $r7, $r17, $r27;
+        com.yahoo.bullet.storm.TupleClassifier$Type $r9, $r19, $r29;
+        org.apache.storm.tuple.Tuple $r10, $r20, $r30;
+
+        r0 := @this: com.yahoo.bullet.storm.ReplayBoltTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r2 = virtualinvoke $r1.<com.yahoo.bullet.storm.ReplayBolt: com.yahoo.bullet.storm.batching.BatchManager getBatchManager()>();
+
+        $i0 = virtualinvoke $r2.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l1 = (long) $i0;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l1, 3L);
+
+        $r3 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomTopologyContext context>;
+
+        $r4 = virtualinvoke $r3.<com.yahoo.bullet.storm.testing.CustomTopologyContext: java.lang.Long getLongMetric(java.lang.String)>("bullet_batched_queries");
+
+        $l2 = virtualinvoke $r4.<java.lang.Long: long longValue()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l2, 3L);
+
+        $r8 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r9 = <com.yahoo.bullet.storm.TupleClassifier$Type: com.yahoo.bullet.storm.TupleClassifier$Type METADATA_TUPLE>;
+
+        $r5 = newarray (java.lang.Object)[2];
+
+        $r5[0] = "0";
+
+        $r6 = new com.yahoo.bullet.pubsub.Metadata;
+
+        $r7 = <com.yahoo.bullet.pubsub.Metadata$Signal: com.yahoo.bullet.pubsub.Metadata$Signal COMPLETE>;
+
+        specialinvoke $r6.<com.yahoo.bullet.pubsub.Metadata: void <init>(com.yahoo.bullet.pubsub.Metadata$Signal,java.io.Serializable)>($r7, null);
+
+        $r5[1] = $r6;
+
+        $r10 = staticinvoke <com.yahoo.bullet.storm.testing.TupleUtils: org.apache.storm.tuple.Tuple makeIDTuple(com.yahoo.bullet.storm.TupleClassifier$Type,java.lang.Object[])>($r9, $r5);
+
+        virtualinvoke $r8.<com.yahoo.bullet.storm.ReplayBolt: void execute(org.apache.storm.tuple.Tuple)>($r10);
+
+        $r11 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r12 = virtualinvoke $r11.<com.yahoo.bullet.storm.ReplayBolt: com.yahoo.bullet.storm.batching.BatchManager getBatchManager()>();
+
+        $i3 = virtualinvoke $r12.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l4 = (long) $i3;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l4, 2L);
+
+        $r13 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomTopologyContext context>;
+
+        $r14 = virtualinvoke $r13.<com.yahoo.bullet.storm.testing.CustomTopologyContext: java.lang.Long getLongMetric(java.lang.String)>("bullet_batched_queries");
+
+        $l5 = virtualinvoke $r14.<java.lang.Long: long longValue()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l5, 2L);
+
+        $r18 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r19 = <com.yahoo.bullet.storm.TupleClassifier$Type: com.yahoo.bullet.storm.TupleClassifier$Type METADATA_TUPLE>;
+
+        $r15 = newarray (java.lang.Object)[2];
+
+        $r15[0] = "1";
+
+        $r16 = new com.yahoo.bullet.pubsub.Metadata;
+
+        $r17 = <com.yahoo.bullet.pubsub.Metadata$Signal: com.yahoo.bullet.pubsub.Metadata$Signal COMPLETE>;
+
+        specialinvoke $r16.<com.yahoo.bullet.pubsub.Metadata: void <init>(com.yahoo.bullet.pubsub.Metadata$Signal,java.io.Serializable)>($r17, null);
+
+        $r15[1] = $r16;
+
+        $r20 = staticinvoke <com.yahoo.bullet.storm.testing.TupleUtils: org.apache.storm.tuple.Tuple makeIDTuple(com.yahoo.bullet.storm.TupleClassifier$Type,java.lang.Object[])>($r19, $r15);
+
+        virtualinvoke $r18.<com.yahoo.bullet.storm.ReplayBolt: void execute(org.apache.storm.tuple.Tuple)>($r20);
+
+        $r21 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r22 = virtualinvoke $r21.<com.yahoo.bullet.storm.ReplayBolt: com.yahoo.bullet.storm.batching.BatchManager getBatchManager()>();
+
+        $i6 = virtualinvoke $r22.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l7 = (long) $i6;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l7, 1L);
+
+        $r23 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomTopologyContext context>;
+
+        $r24 = virtualinvoke $r23.<com.yahoo.bullet.storm.testing.CustomTopologyContext: java.lang.Long getLongMetric(java.lang.String)>("bullet_batched_queries");
+
+        $l8 = virtualinvoke $r24.<java.lang.Long: long longValue()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l8, 1L);
+
+        $r28 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r29 = <com.yahoo.bullet.storm.TupleClassifier$Type: com.yahoo.bullet.storm.TupleClassifier$Type METADATA_TUPLE>;
+
+        $r25 = newarray (java.lang.Object)[2];
+
+        $r25[0] = "2";
+
+        $r26 = new com.yahoo.bullet.pubsub.Metadata;
+
+        $r27 = <com.yahoo.bullet.pubsub.Metadata$Signal: com.yahoo.bullet.pubsub.Metadata$Signal COMPLETE>;
+
+        specialinvoke $r26.<com.yahoo.bullet.pubsub.Metadata: void <init>(com.yahoo.bullet.pubsub.Metadata$Signal,java.io.Serializable)>($r27, null);
+
+        $r25[1] = $r26;
+
+        $r30 = staticinvoke <com.yahoo.bullet.storm.testing.TupleUtils: org.apache.storm.tuple.Tuple makeIDTuple(com.yahoo.bullet.storm.TupleClassifier$Type,java.lang.Object[])>($r29, $r25);
+
+        virtualinvoke $r28.<com.yahoo.bullet.storm.ReplayBolt: void execute(org.apache.storm.tuple.Tuple)>($r30);
+
+        $r31 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r32 = virtualinvoke $r31.<com.yahoo.bullet.storm.ReplayBolt: com.yahoo.bullet.storm.batching.BatchManager getBatchManager()>();
+
+        $i9 = virtualinvoke $r32.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l10 = (long) $i9;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l10, 0L);
+
+        $r33 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomTopologyContext context>;
+
+        $r34 = virtualinvoke $r33.<com.yahoo.bullet.storm.testing.CustomTopologyContext: java.lang.Long getLongMetric(java.lang.String)>("bullet_batched_queries");
+
+        $l11 = virtualinvoke $r34.<java.lang.Long: long longValue()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l11, 0L);
+
+        return;
+    }
+
+    public void testOnMetaIgnoreTuple()
+    {
+        com.yahoo.bullet.storm.ReplayBoltTest r0;
+        java.lang.Object[] $r1, $r5;
+        com.yahoo.bullet.storm.TupleClassifier$Type $r2, $r9;
+        com.yahoo.bullet.storm.ReplayBolt $r3, $r8;
+        org.apache.storm.tuple.Tuple $r4, $r10;
+        com.yahoo.bullet.pubsub.Metadata $r6;
+        com.yahoo.bullet.pubsub.Metadata$Signal $r7;
+
+        r0 := @this: com.yahoo.bullet.storm.ReplayBoltTest;
+
+        $r3 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r2 = <com.yahoo.bullet.storm.TupleClassifier$Type: com.yahoo.bullet.storm.TupleClassifier$Type METADATA_TUPLE>;
+
+        $r1 = newarray (java.lang.Object)[2];
+
+        $r1[0] = "";
+
+        $r1[1] = null;
+
+        $r4 = staticinvoke <com.yahoo.bullet.storm.testing.TupleUtils: org.apache.storm.tuple.Tuple makeIDTuple(com.yahoo.bullet.storm.TupleClassifier$Type,java.lang.Object[])>($r2, $r1);
+
+        virtualinvoke $r3.<com.yahoo.bullet.storm.ReplayBolt: void execute(org.apache.storm.tuple.Tuple)>($r4);
+
+        $r8 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r9 = <com.yahoo.bullet.storm.TupleClassifier$Type: com.yahoo.bullet.storm.TupleClassifier$Type METADATA_TUPLE>;
+
+        $r5 = newarray (java.lang.Object)[2];
+
+        $r5[0] = "";
+
+        $r6 = new com.yahoo.bullet.pubsub.Metadata;
+
+        $r7 = <com.yahoo.bullet.pubsub.Metadata$Signal: com.yahoo.bullet.pubsub.Metadata$Signal CUSTOM>;
+
+        specialinvoke $r6.<com.yahoo.bullet.pubsub.Metadata: void <init>(com.yahoo.bullet.pubsub.Metadata$Signal,java.io.Serializable)>($r7, null);
+
+        $r5[1] = $r6;
+
+        $r10 = staticinvoke <com.yahoo.bullet.storm.testing.TupleUtils: org.apache.storm.tuple.Tuple makeIDTuple(com.yahoo.bullet.storm.TupleClassifier$Type,java.lang.Object[])>($r9, $r5);
+
+        virtualinvoke $r8.<com.yahoo.bullet.storm.ReplayBolt: void execute(org.apache.storm.tuple.Tuple)>($r10);
+
+        return;
+    }
+
+    public void testHandleReplaySignal()
+    {
+        com.yahoo.bullet.storm.ReplayBoltTest r0;
+        com.yahoo.bullet.storm.ReplayBolt $r1, $r5, $r7, $r16, $r19, $r21;
+        java.util.Map $r2, $r6, $r20;
+        com.yahoo.bullet.storm.ReplayBolt$Replay $r3;
+        int $i0, $i2, $i5, $i7;
+        long $l1, $l3, $l4, $l6, $l8, $l9;
+        com.yahoo.bullet.storm.batching.BatchManager $r8, $r22;
+        com.yahoo.bullet.storm.testing.CustomTopologyContext $r9, $r23;
+        java.lang.Long $r10, $r24;
+        com.yahoo.bullet.storage.StorageManager $r11;
+        java.lang.Object[] $r13;
+        com.yahoo.bullet.pubsub.Metadata $r14;
+        com.yahoo.bullet.pubsub.Metadata$Signal $r15;
+        com.yahoo.bullet.storm.TupleClassifier$Type $r17;
+        org.apache.storm.tuple.Tuple $r18;
+
+        r0 := @this: com.yahoo.bullet.storm.ReplayBoltTest;
+
+        $r1 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r2 = virtualinvoke $r1.<com.yahoo.bullet.storm.ReplayBolt: java.util.Map getReplays()>();
+
+        $r3 = new com.yahoo.bullet.storm.ReplayBolt$Replay;
+
+        specialinvoke $r3.<com.yahoo.bullet.storm.ReplayBolt$Replay: void <init>(int,long,java.util.List)>(18, 0L, null);
+
+        interfaceinvoke $r2.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>("FilterBolt-18", $r3);
+
+        $r5 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r6 = virtualinvoke $r5.<com.yahoo.bullet.storm.ReplayBolt: java.util.Map getReplays()>();
+
+        $i0 = interfaceinvoke $r6.<java.util.Map: int size()>();
+
+        $l1 = (long) $i0;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l1, 1L);
+
+        $r7 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r8 = virtualinvoke $r7.<com.yahoo.bullet.storm.ReplayBolt: com.yahoo.bullet.storm.batching.BatchManager getBatchManager()>();
+
+        $i2 = virtualinvoke $r8.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l3 = (long) $i2;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l3, 3L);
+
+        $r9 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomTopologyContext context>;
+
+        $r10 = virtualinvoke $r9.<com.yahoo.bullet.storm.testing.CustomTopologyContext: java.lang.Long getLongMetric(java.lang.String)>("bullet_batched_queries");
+
+        $l4 = virtualinvoke $r10.<java.lang.Long: long longValue()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l4, 3L);
+
+        $r11 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storage.StorageManager storageManager>;
+
+        virtualinvoke $r11.<com.yahoo.bullet.storage.StorageManager: java.util.concurrent.CompletableFuture remove(java.lang.String)>("0");
+
+        $r16 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r17 = <com.yahoo.bullet.storm.TupleClassifier$Type: com.yahoo.bullet.storm.TupleClassifier$Type METADATA_TUPLE>;
+
+        $r13 = newarray (java.lang.Object)[2];
+
+        $r13[0] = "123";
+
+        $r14 = new com.yahoo.bullet.pubsub.Metadata;
+
+        $r15 = <com.yahoo.bullet.pubsub.Metadata$Signal: com.yahoo.bullet.pubsub.Metadata$Signal REPLAY>;
+
+        specialinvoke $r14.<com.yahoo.bullet.pubsub.Metadata: void <init>(com.yahoo.bullet.pubsub.Metadata$Signal,java.io.Serializable)>($r15, null);
+
+        $r13[1] = $r14;
+
+        $r18 = staticinvoke <com.yahoo.bullet.storm.testing.TupleUtils: org.apache.storm.tuple.Tuple makeIDTuple(com.yahoo.bullet.storm.TupleClassifier$Type,java.lang.Object[])>($r17, $r13);
+
+        virtualinvoke $r16.<com.yahoo.bullet.storm.ReplayBolt: void execute(org.apache.storm.tuple.Tuple)>($r18);
+
+        $r19 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r20 = virtualinvoke $r19.<com.yahoo.bullet.storm.ReplayBolt: java.util.Map getReplays()>();
+
+        $i5 = interfaceinvoke $r20.<java.util.Map: int size()>();
+
+        $l6 = (long) $i5;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l6, 0L);
+
+        $r21 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r22 = virtualinvoke $r21.<com.yahoo.bullet.storm.ReplayBolt: com.yahoo.bullet.storm.batching.BatchManager getBatchManager()>();
+
+        $i7 = virtualinvoke $r22.<com.yahoo.bullet.storm.batching.BatchManager: int size()>();
+
+        $l8 = (long) $i7;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l8, 2L);
+
+        $r23 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomTopologyContext context>;
+
+        $r24 = virtualinvoke $r23.<com.yahoo.bullet.storm.testing.CustomTopologyContext: java.lang.Long getLongMetric(java.lang.String)>("bullet_batched_queries");
+
+        $l9 = virtualinvoke $r24.<java.lang.Long: long longValue()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l9, 2L);
+
+        return;
+    }
+
+    public void testReplayFilterBolt()
+    {
+        long l0, $l4, $l5, $l6, $l8, $l10, $l12, $l14, $l15, $l17, $l19, $l21, $l23, $l25, $l27, $l28, $l29, $l31, $l33, $l35, $l36;
+        java.lang.Object[] $r0, $r5;
+        com.yahoo.bullet.storm.TupleClassifier$Type $r1, $r6;
+        java.lang.Long $r2, $r7, $r18, $r23, $r43, $r45, $r60, $r62;
+        java.lang.Boolean $r3, $r8, $r28, $r33;
+        org.apache.storm.tuple.Tuple r4, r9, $r13, $r17, $r21, $r26, $r31, $r36;
+        java.lang.Integer $r10, $r14;
+        org.mockito.stubbing.Stubber $r11, $r15, $r19, $r24, $r29, $r34;
+        java.lang.Object $r12, $r16, $r20, $r25, $r30, $r35, $r48, $r52;
+        com.yahoo.bullet.storm.ReplayBoltTest r38;
+        com.yahoo.bullet.storm.ReplayBolt $r39, $r40, $r46, $r53, $r54, $r63, $r65;
+        java.util.Map $r41, $r47;
+        int $i3, $i7, $i9, $i11, $i13, $i16, $i18, $i20, $i22, $i24, $i26, $i30, $i32, $i34, i37;
+        com.yahoo.bullet.storm.testing.CustomTopologyContext $r42, $r44, $r59, $r61;
+        com.yahoo.bullet.storm.ReplayBolt$Replay r49;
+        java.util.List $r50, $r51, $r55;
+        boolean $z0;
+        com.yahoo.bullet.storm.testing.CustomCollector $r56, $r57, $r58, $r64;
+
+        r38 := @this: com.yahoo.bullet.storm.ReplayBoltTest;
+
+        l0 = staticinvoke <java.lang.System: long currentTimeMillis()>();
+
+        $r1 = <com.yahoo.bullet.storm.TupleClassifier$Type: com.yahoo.bullet.storm.TupleClassifier$Type REPLAY_TUPLE>;
+
+        $r0 = newarray (java.lang.Object)[3];
+
+        $r0[0] = "FilterBolt-18";
+
+        $r2 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(l0);
+
+        $r0[1] = $r2;
+
+        $r3 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(0);
+
+        $r0[2] = $r3;
+
+        r4 = staticinvoke <com.yahoo.bullet.storm.testing.TupleUtils: org.apache.storm.tuple.Tuple makeIDTuple(com.yahoo.bullet.storm.TupleClassifier$Type,java.lang.Object[])>($r1, $r0);
+
+        $r6 = <com.yahoo.bullet.storm.TupleClassifier$Type: com.yahoo.bullet.storm.TupleClassifier$Type REPLAY_TUPLE>;
+
+        $r5 = newarray (java.lang.Object)[3];
+
+        $r5[0] = "FilterBolt-18";
+
+        $r7 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(l0);
+
+        $r5[1] = $r7;
+
+        $r8 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(1);
+
+        $r5[2] = $r8;
+
+        r9 = staticinvoke <com.yahoo.bullet.storm.testing.TupleUtils: org.apache.storm.tuple.Tuple makeIDTuple(com.yahoo.bullet.storm.TupleClassifier$Type,java.lang.Object[])>($r6, $r5);
+
+        $r10 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(4);
+
+        $r11 = staticinvoke <org.mockito.Mockito: org.mockito.stubbing.Stubber doReturn(java.lang.Object)>($r10);
+
+        $r12 = interfaceinvoke $r11.<org.mockito.stubbing.Stubber: java.lang.Object when(java.lang.Object)>(r4);
+
+        $r13 = (org.apache.storm.tuple.Tuple) $r12;
+
+        interfaceinvoke $r13.<org.apache.storm.tuple.Tuple: int getSourceTask()>();
+
+        $r14 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(4);
+
+        $r15 = staticinvoke <org.mockito.Mockito: org.mockito.stubbing.Stubber doReturn(java.lang.Object)>($r14);
+
+        $r16 = interfaceinvoke $r15.<org.mockito.stubbing.Stubber: java.lang.Object when(java.lang.Object)>(r9);
+
+        $r17 = (org.apache.storm.tuple.Tuple) $r16;
+
+        interfaceinvoke $r17.<org.apache.storm.tuple.Tuple: int getSourceTask()>();
+
+        $r18 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(l0);
+
+        $r19 = staticinvoke <org.mockito.Mockito: org.mockito.stubbing.Stubber doReturn(java.lang.Object)>($r18);
+
+        $r20 = interfaceinvoke $r19.<org.mockito.stubbing.Stubber: java.lang.Object when(java.lang.Object)>(r4);
+
+        $r21 = (org.apache.storm.tuple.Tuple) $r20;
+
+        interfaceinvoke $r21.<org.apache.storm.tuple.Tuple: java.lang.Long getLong(int)>(1);
+
+        $r23 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(l0);
+
+        $r24 = staticinvoke <org.mockito.Mockito: org.mockito.stubbing.Stubber doReturn(java.lang.Object)>($r23);
+
+        $r25 = interfaceinvoke $r24.<org.mockito.stubbing.Stubber: java.lang.Object when(java.lang.Object)>(r9);
+
+        $r26 = (org.apache.storm.tuple.Tuple) $r25;
+
+        interfaceinvoke $r26.<org.apache.storm.tuple.Tuple: java.lang.Long getLong(int)>(1);
+
+        $r28 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(0);
+
+        $r29 = staticinvoke <org.mockito.Mockito: org.mockito.stubbing.Stubber doReturn(java.lang.Object)>($r28);
+
+        $r30 = interfaceinvoke $r29.<org.mockito.stubbing.Stubber: java.lang.Object when(java.lang.Object)>(r4);
+
+        $r31 = (org.apache.storm.tuple.Tuple) $r30;
+
+        interfaceinvoke $r31.<org.apache.storm.tuple.Tuple: java.lang.Boolean getBoolean(int)>(2);
+
+        $r33 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(1);
+
+        $r34 = staticinvoke <org.mockito.Mockito: org.mockito.stubbing.Stubber doReturn(java.lang.Object)>($r33);
+
+        $r35 = interfaceinvoke $r34.<org.mockito.stubbing.Stubber: java.lang.Object when(java.lang.Object)>(r9);
+
+        $r36 = (org.apache.storm.tuple.Tuple) $r35;
+
+        interfaceinvoke $r36.<org.apache.storm.tuple.Tuple: java.lang.Boolean getBoolean(int)>(2);
+
+        $r39 = r38.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        virtualinvoke $r39.<com.yahoo.bullet.storm.ReplayBolt: void execute(org.apache.storm.tuple.Tuple)>(r4);
+
+        $r40 = r38.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r41 = virtualinvoke $r40.<com.yahoo.bullet.storm.ReplayBolt: java.util.Map getReplays()>();
+
+        $i3 = interfaceinvoke $r41.<java.util.Map: int size()>();
+
+        $l4 = (long) $i3;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l4, 1L);
+
+        $r42 = r38.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomTopologyContext context>;
+
+        $r43 = virtualinvoke $r42.<com.yahoo.bullet.storm.testing.CustomTopologyContext: java.lang.Long getDimensionLongMetric(java.lang.String,java.lang.String)>("bullet_active_replays", "FilterBolt-18");
+
+        $l5 = virtualinvoke $r43.<java.lang.Long: long longValue()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l5, 1L);
+
+        $r44 = r38.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomTopologyContext context>;
+
+        $r45 = virtualinvoke $r44.<com.yahoo.bullet.storm.testing.CustomTopologyContext: java.lang.Long getDimensionLongMetric(java.lang.String,java.lang.String)>("bullet_created_replays", "FilterBolt-18");
+
+        $l6 = virtualinvoke $r45.<java.lang.Long: long longValue()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l6, 1L);
+
+        $r46 = r38.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r47 = virtualinvoke $r46.<com.yahoo.bullet.storm.ReplayBolt: java.util.Map getReplays()>();
+
+        $r48 = interfaceinvoke $r47.<java.util.Map: java.lang.Object get(java.lang.Object)>("FilterBolt-18");
+
+        r49 = (com.yahoo.bullet.storm.ReplayBolt$Replay) $r48;
+
+        $r50 = virtualinvoke r49.<com.yahoo.bullet.storm.ReplayBolt$Replay: java.util.List getBatches()>();
+
+        $i7 = interfaceinvoke $r50.<java.util.List: int size()>();
+
+        $l8 = (long) $i7;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l8, 4L);
+
+        $r51 = virtualinvoke r49.<com.yahoo.bullet.storm.ReplayBolt$Replay: java.util.List getBatches()>();
+
+        $r52 = interfaceinvoke $r51.<java.util.List: java.lang.Object get(int)>(0);
+
+        $z0 = $r52 instanceof java.util.Map;
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z0);
+
+        $i9 = virtualinvoke r49.<com.yahoo.bullet.storm.ReplayBolt$Replay: int getAnchor()>();
+
+        $l10 = (long) $i9;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l10, 4L);
+
+        $i11 = virtualinvoke r49.<com.yahoo.bullet.storm.ReplayBolt$Replay: int getIndex()>();
+
+        $l12 = (long) $i11;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l12, 0L);
+
+        $i13 = virtualinvoke r49.<com.yahoo.bullet.storm.ReplayBolt$Replay: int getTaskID()>();
+
+        $l14 = (long) $i13;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l14, 18L);
+
+        $l15 = virtualinvoke r49.<com.yahoo.bullet.storm.ReplayBolt$Replay: long getTimestamp()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l15, l0);
+
+        i37 = 1;
+
+     label1:
+        if i37 > 4 goto label2;
+
+        $r65 = r38.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        virtualinvoke $r65.<com.yahoo.bullet.storm.ReplayBolt: void execute(org.apache.storm.tuple.Tuple)>(r9);
+
+        $i32 = virtualinvoke r49.<com.yahoo.bullet.storm.ReplayBolt$Replay: int getAnchor()>();
+
+        $l33 = (long) $i32;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l33, 4L);
+
+        $i34 = virtualinvoke r49.<com.yahoo.bullet.storm.ReplayBolt$Replay: int getIndex()>();
+
+        $l36 = (long) $i34;
+
+        $l35 = (long) i37;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l36, $l35);
+
+        i37 = i37 + 1;
+
+        goto label1;
+
+     label2:
+        $r53 = r38.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        virtualinvoke $r53.<com.yahoo.bullet.storm.ReplayBolt: void execute(org.apache.storm.tuple.Tuple)>(r4);
+
+        $i16 = virtualinvoke r49.<com.yahoo.bullet.storm.ReplayBolt$Replay: int getAnchor()>();
+
+        $l17 = (long) $i16;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l17, 4L);
+
+        $i18 = virtualinvoke r49.<com.yahoo.bullet.storm.ReplayBolt$Replay: int getIndex()>();
+
+        $l19 = (long) $i18;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l19, 4L);
+
+        $r54 = r38.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        virtualinvoke $r54.<com.yahoo.bullet.storm.ReplayBolt: void execute(org.apache.storm.tuple.Tuple)>(r9);
+
+        $r55 = virtualinvoke r49.<com.yahoo.bullet.storm.ReplayBolt$Replay: java.util.List getBatches()>();
+
+        staticinvoke <org.junit.Assert: void assertNull(java.lang.Object)>($r55);
+
+        $i20 = virtualinvoke r49.<com.yahoo.bullet.storm.ReplayBolt$Replay: int getAnchor()>();
+
+        $l21 = (long) $i20;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l21, -1L);
+
+        $r56 = r38.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomCollector collector>;
+
+        $i22 = virtualinvoke $r56.<com.yahoo.bullet.storm.testing.CustomCollector: int getEmittedCount()>();
+
+        $l23 = (long) $i22;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l23, 6L);
+
+        $r57 = r38.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomCollector collector>;
+
+        $i24 = virtualinvoke $r57.<com.yahoo.bullet.storm.testing.CustomCollector: int getAckedCount()>();
+
+        $l25 = (long) $i24;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l25, 6L);
+
+        $r58 = r38.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomCollector collector>;
+
+        $i26 = virtualinvoke $r58.<com.yahoo.bullet.storm.testing.CustomCollector: int getFailedCount()>();
+
+        $l27 = (long) $i26;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l27, 1L);
+
+        $r59 = r38.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomTopologyContext context>;
+
+        $r60 = virtualinvoke $r59.<com.yahoo.bullet.storm.testing.CustomTopologyContext: java.lang.Long getDimensionLongMetric(java.lang.String,java.lang.String)>("bullet_active_replays", "FilterBolt-18");
+
+        $l28 = virtualinvoke $r60.<java.lang.Long: long longValue()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l28, 0L);
+
+        $r61 = r38.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomTopologyContext context>;
+
+        $r62 = virtualinvoke $r61.<com.yahoo.bullet.storm.testing.CustomTopologyContext: java.lang.Long getDimensionLongMetric(java.lang.String,java.lang.String)>("bullet_created_replays", "FilterBolt-18");
+
+        $l29 = virtualinvoke $r62.<java.lang.Long: long longValue()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l29, 1L);
+
+        $r63 = r38.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        virtualinvoke $r63.<com.yahoo.bullet.storm.ReplayBolt: void execute(org.apache.storm.tuple.Tuple)>(r9);
+
+        $r64 = r38.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomCollector collector>;
+
+        $i30 = virtualinvoke $r64.<com.yahoo.bullet.storm.testing.CustomCollector: int getFailedCount()>();
+
+        $l31 = (long) $i30;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l31, 2L);
+
+        return;
+    }
+
+    public void testReplayJoinBolt()
+    {
+        long l0, $l1, $l4, $l6, $l7, $l8, $l10, $l12, $l14, $l16, $l17, $l19, $l20, $l21, $l23, $l25, $l27, $l29, $l30, $l31, $l33, $l35, $l37, $l39, $l41, $l43, $l44, $l45, $l47;
+        java.lang.Object[] $r0, $r5;
+        com.yahoo.bullet.storm.TupleClassifier$Type $r1, $r6;
+        java.lang.Long $r2, $r7, $r18, $r23, $r47, $r49, $r63, $r65, $r77, $r79;
+        java.lang.Boolean $r3, $r8, $r28, $r33;
+        org.apache.storm.tuple.Tuple r4, r9, $r13, $r17, $r21, $r26, $r31, $r36;
+        java.lang.Integer $r10, $r14, $r39, $r40;
+        org.mockito.stubbing.Stubber $r11, $r15, $r19, $r24, $r29, $r34;
+        java.lang.Object $r12, $r16, $r20, $r25, $r30, $r35, $r52, $r55, $r59, $r68;
+        java.util.Map $r38, $r45, $r51, $r58, $r61, $r67, $r83;
+        com.yahoo.bullet.storm.ReplayBoltTest r42;
+        com.yahoo.bullet.storm.ReplayBolt $r43, $r44, $r50, $r56, $r57, $r60, $r66, $r70, $r71, $r80, $r81;
+        int $i5, $i9, $i11, $i13, $i15, $i18, $i22, $i24, $i26, $i28, $i32, $i34, $i36, $i38, $i40, $i42, $i46;
+        com.yahoo.bullet.storm.testing.CustomTopologyContext $r46, $r48, $r62, $r64, $r76, $r78;
+        java.util.List $r53, $r54, $r69, $r72;
+        boolean $z0;
+        com.yahoo.bullet.storm.testing.CustomCollector $r73, $r74, $r75, $r82;
+        com.yahoo.bullet.storm.ReplayBolt$Replay r84, r85;
+
+        r42 := @this: com.yahoo.bullet.storm.ReplayBoltTest;
+
+        l0 = staticinvoke <java.lang.System: long currentTimeMillis()>();
+
+        $r1 = <com.yahoo.bullet.storm.TupleClassifier$Type: com.yahoo.bullet.storm.TupleClassifier$Type REPLAY_TUPLE>;
+
+        $r0 = newarray (java.lang.Object)[3];
+
+        $r0[0] = "JoinBolt-21";
+
+        $r2 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(l0);
+
+        $r0[1] = $r2;
+
+        $r3 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(0);
+
+        $r0[2] = $r3;
+
+        r4 = staticinvoke <com.yahoo.bullet.storm.testing.TupleUtils: org.apache.storm.tuple.Tuple makeIDTuple(com.yahoo.bullet.storm.TupleClassifier$Type,java.lang.Object[])>($r1, $r0);
+
+        $r6 = <com.yahoo.bullet.storm.TupleClassifier$Type: com.yahoo.bullet.storm.TupleClassifier$Type REPLAY_TUPLE>;
+
+        $r5 = newarray (java.lang.Object)[3];
+
+        $r5[0] = "JoinBolt-21";
+
+        $l1 = l0 + 1L;
+
+        $r7 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>($l1);
+
+        $r5[1] = $r7;
+
+        $r8 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(1);
+
+        $r5[2] = $r8;
+
+        r9 = staticinvoke <com.yahoo.bullet.storm.testing.TupleUtils: org.apache.storm.tuple.Tuple makeIDTuple(com.yahoo.bullet.storm.TupleClassifier$Type,java.lang.Object[])>($r6, $r5);
+
+        $r10 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(4);
+
+        $r11 = staticinvoke <org.mockito.Mockito: org.mockito.stubbing.Stubber doReturn(java.lang.Object)>($r10);
+
+        $r12 = interfaceinvoke $r11.<org.mockito.stubbing.Stubber: java.lang.Object when(java.lang.Object)>(r4);
+
+        $r13 = (org.apache.storm.tuple.Tuple) $r12;
+
+        interfaceinvoke $r13.<org.apache.storm.tuple.Tuple: int getSourceTask()>();
+
+        $r14 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(5);
+
+        $r15 = staticinvoke <org.mockito.Mockito: org.mockito.stubbing.Stubber doReturn(java.lang.Object)>($r14);
+
+        $r16 = interfaceinvoke $r15.<org.mockito.stubbing.Stubber: java.lang.Object when(java.lang.Object)>(r9);
+
+        $r17 = (org.apache.storm.tuple.Tuple) $r16;
+
+        interfaceinvoke $r17.<org.apache.storm.tuple.Tuple: int getSourceTask()>();
+
+        $r18 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(l0);
+
+        $r19 = staticinvoke <org.mockito.Mockito: org.mockito.stubbing.Stubber doReturn(java.lang.Object)>($r18);
+
+        $r20 = interfaceinvoke $r19.<org.mockito.stubbing.Stubber: java.lang.Object when(java.lang.Object)>(r4);
+
+        $r21 = (org.apache.storm.tuple.Tuple) $r20;
+
+        interfaceinvoke $r21.<org.apache.storm.tuple.Tuple: java.lang.Long getLong(int)>(1);
+
+        $l4 = l0 + 1L;
+
+        $r23 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>($l4);
+
+        $r24 = staticinvoke <org.mockito.Mockito: org.mockito.stubbing.Stubber doReturn(java.lang.Object)>($r23);
+
+        $r25 = interfaceinvoke $r24.<org.mockito.stubbing.Stubber: java.lang.Object when(java.lang.Object)>(r9);
+
+        $r26 = (org.apache.storm.tuple.Tuple) $r25;
+
+        interfaceinvoke $r26.<org.apache.storm.tuple.Tuple: java.lang.Long getLong(int)>(1);
+
+        $r28 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(0);
+
+        $r29 = staticinvoke <org.mockito.Mockito: org.mockito.stubbing.Stubber doReturn(java.lang.Object)>($r28);
+
+        $r30 = interfaceinvoke $r29.<org.mockito.stubbing.Stubber: java.lang.Object when(java.lang.Object)>(r4);
+
+        $r31 = (org.apache.storm.tuple.Tuple) $r30;
+
+        interfaceinvoke $r31.<org.apache.storm.tuple.Tuple: java.lang.Boolean getBoolean(int)>(2);
+
+        $r33 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(1);
+
+        $r34 = staticinvoke <org.mockito.Mockito: org.mockito.stubbing.Stubber doReturn(java.lang.Object)>($r33);
+
+        $r35 = interfaceinvoke $r34.<org.mockito.stubbing.Stubber: java.lang.Object when(java.lang.Object)>(r9);
+
+        $r36 = (org.apache.storm.tuple.Tuple) $r35;
+
+        interfaceinvoke $r36.<org.apache.storm.tuple.Tuple: java.lang.Boolean getBoolean(int)>(2);
+
+        $r38 = <com.yahoo.bullet.storm.grouping.TaskIndexCaptureGrouping: java.util.Map TASK_INDEX_MAP>;
+
+        $r39 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(21);
+
+        $r40 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(0);
+
+        interfaceinvoke $r38.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>($r39, $r40);
+
+        $r43 = r42.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        virtualinvoke $r43.<com.yahoo.bullet.storm.ReplayBolt: void execute(org.apache.storm.tuple.Tuple)>(r4);
+
+        $r44 = r42.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r45 = virtualinvoke $r44.<com.yahoo.bullet.storm.ReplayBolt: java.util.Map getReplays()>();
+
+        $i5 = interfaceinvoke $r45.<java.util.Map: int size()>();
+
+        $l6 = (long) $i5;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l6, 1L);
+
+        $r46 = r42.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomTopologyContext context>;
+
+        $r47 = virtualinvoke $r46.<com.yahoo.bullet.storm.testing.CustomTopologyContext: java.lang.Long getDimensionLongMetric(java.lang.String,java.lang.String)>("bullet_active_replays", "JoinBolt-21");
+
+        $l7 = virtualinvoke $r47.<java.lang.Long: long longValue()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l7, 1L);
+
+        $r48 = r42.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomTopologyContext context>;
+
+        $r49 = virtualinvoke $r48.<com.yahoo.bullet.storm.testing.CustomTopologyContext: java.lang.Long getDimensionLongMetric(java.lang.String,java.lang.String)>("bullet_created_replays", "JoinBolt-21");
+
+        $l8 = virtualinvoke $r49.<java.lang.Long: long longValue()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l8, 1L);
+
+        $r50 = r42.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r51 = virtualinvoke $r50.<com.yahoo.bullet.storm.ReplayBolt: java.util.Map getReplays()>();
+
+        $r52 = interfaceinvoke $r51.<java.util.Map: java.lang.Object get(java.lang.Object)>("JoinBolt-21");
+
+        r84 = (com.yahoo.bullet.storm.ReplayBolt$Replay) $r52;
+
+        $r53 = virtualinvoke r84.<com.yahoo.bullet.storm.ReplayBolt$Replay: java.util.List getBatches()>();
+
+        $i9 = interfaceinvoke $r53.<java.util.List: int size()>();
+
+        $l10 = (long) $i9;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l10, 1L);
+
+        $r54 = virtualinvoke r84.<com.yahoo.bullet.storm.ReplayBolt$Replay: java.util.List getBatches()>();
+
+        $r55 = interfaceinvoke $r54.<java.util.List: java.lang.Object get(int)>(0);
+
+        $z0 = $r55 instanceof java.util.Map;
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z0);
+
+        $i11 = virtualinvoke r84.<com.yahoo.bullet.storm.ReplayBolt$Replay: int getAnchor()>();
+
+        $l12 = (long) $i11;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l12, 4L);
+
+        $i13 = virtualinvoke r84.<com.yahoo.bullet.storm.ReplayBolt$Replay: int getIndex()>();
+
+        $l14 = (long) $i13;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l14, 0L);
+
+        $i15 = virtualinvoke r84.<com.yahoo.bullet.storm.ReplayBolt$Replay: int getTaskID()>();
+
+        $l16 = (long) $i15;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l16, 21L);
+
+        $l17 = virtualinvoke r84.<com.yahoo.bullet.storm.ReplayBolt$Replay: long getTimestamp()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l17, l0);
+
+        $r56 = r42.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        virtualinvoke $r56.<com.yahoo.bullet.storm.ReplayBolt: void execute(org.apache.storm.tuple.Tuple)>(r9);
+
+        $r57 = r42.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r58 = virtualinvoke $r57.<com.yahoo.bullet.storm.ReplayBolt: java.util.Map getReplays()>();
+
+        $r59 = interfaceinvoke $r58.<java.util.Map: java.lang.Object get(java.lang.Object)>("JoinBolt-21");
+
+        staticinvoke <org.junit.Assert: void assertNotEquals(java.lang.Object,java.lang.Object)>($r59, r84);
+
+        $r60 = r42.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r61 = virtualinvoke $r60.<com.yahoo.bullet.storm.ReplayBolt: java.util.Map getReplays()>();
+
+        $i18 = interfaceinvoke $r61.<java.util.Map: int size()>();
+
+        $l19 = (long) $i18;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l19, 1L);
+
+        $r62 = r42.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomTopologyContext context>;
+
+        $r63 = virtualinvoke $r62.<com.yahoo.bullet.storm.testing.CustomTopologyContext: java.lang.Long getDimensionLongMetric(java.lang.String,java.lang.String)>("bullet_active_replays", "JoinBolt-21");
+
+        $l20 = virtualinvoke $r63.<java.lang.Long: long longValue()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l20, 1L);
+
+        $r64 = r42.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomTopologyContext context>;
+
+        $r65 = virtualinvoke $r64.<com.yahoo.bullet.storm.testing.CustomTopologyContext: java.lang.Long getDimensionLongMetric(java.lang.String,java.lang.String)>("bullet_created_replays", "JoinBolt-21");
+
+        $l21 = virtualinvoke $r65.<java.lang.Long: long longValue()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l21, 2L);
+
+        $r66 = r42.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r67 = virtualinvoke $r66.<com.yahoo.bullet.storm.ReplayBolt: java.util.Map getReplays()>();
+
+        $r68 = interfaceinvoke $r67.<java.util.Map: java.lang.Object get(java.lang.Object)>("JoinBolt-21");
+
+        r85 = (com.yahoo.bullet.storm.ReplayBolt$Replay) $r68;
+
+        $r69 = virtualinvoke r85.<com.yahoo.bullet.storm.ReplayBolt$Replay: java.util.List getBatches()>();
+
+        $i22 = interfaceinvoke $r69.<java.util.List: int size()>();
+
+        $l23 = (long) $i22;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l23, 1L);
+
+        $i24 = virtualinvoke r85.<com.yahoo.bullet.storm.ReplayBolt$Replay: int getAnchor()>();
+
+        $l25 = (long) $i24;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l25, 5L);
+
+        $i26 = virtualinvoke r85.<com.yahoo.bullet.storm.ReplayBolt$Replay: int getIndex()>();
+
+        $l27 = (long) $i26;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l27, 0L);
+
+        $i28 = virtualinvoke r85.<com.yahoo.bullet.storm.ReplayBolt$Replay: int getTaskID()>();
+
+        $l29 = (long) $i28;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l29, 21L);
+
+        $l30 = virtualinvoke r85.<com.yahoo.bullet.storm.ReplayBolt$Replay: long getTimestamp()>();
+
+        $l31 = l0 + 1L;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l30, $l31);
+
+        $r70 = r42.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        virtualinvoke $r70.<com.yahoo.bullet.storm.ReplayBolt: void execute(org.apache.storm.tuple.Tuple)>(r9);
+
+        $i32 = virtualinvoke r85.<com.yahoo.bullet.storm.ReplayBolt$Replay: int getAnchor()>();
+
+        $l33 = (long) $i32;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l33, 5L);
+
+        $i34 = virtualinvoke r85.<com.yahoo.bullet.storm.ReplayBolt$Replay: int getIndex()>();
+
+        $l35 = (long) $i34;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l35, 1L);
+
+        $r71 = r42.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        virtualinvoke $r71.<com.yahoo.bullet.storm.ReplayBolt: void execute(org.apache.storm.tuple.Tuple)>(r9);
+
+        $r72 = virtualinvoke r85.<com.yahoo.bullet.storm.ReplayBolt$Replay: java.util.List getBatches()>();
+
+        staticinvoke <org.junit.Assert: void assertNull(java.lang.Object)>($r72);
+
+        $i36 = virtualinvoke r85.<com.yahoo.bullet.storm.ReplayBolt$Replay: int getAnchor()>();
+
+        $l37 = (long) $i36;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l37, -1L);
+
+        $r73 = r42.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomCollector collector>;
+
+        $i38 = virtualinvoke $r73.<com.yahoo.bullet.storm.testing.CustomCollector: int getEmittedCount()>();
+
+        $l39 = (long) $i38;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l39, 3L);
+
+        $r74 = r42.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomCollector collector>;
+
+        $i40 = virtualinvoke $r74.<com.yahoo.bullet.storm.testing.CustomCollector: int getAckedCount()>();
+
+        $l41 = (long) $i40;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l41, 3L);
+
+        $r75 = r42.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomCollector collector>;
+
+        $i42 = virtualinvoke $r75.<com.yahoo.bullet.storm.testing.CustomCollector: int getFailedCount()>();
+
+        $l43 = (long) $i42;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l43, 1L);
+
+        $r76 = r42.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomTopologyContext context>;
+
+        $r77 = virtualinvoke $r76.<com.yahoo.bullet.storm.testing.CustomTopologyContext: java.lang.Long getDimensionLongMetric(java.lang.String,java.lang.String)>("bullet_active_replays", "JoinBolt-21");
+
+        $l44 = virtualinvoke $r77.<java.lang.Long: long longValue()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l44, 0L);
+
+        $r78 = r42.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomTopologyContext context>;
+
+        $r79 = virtualinvoke $r78.<com.yahoo.bullet.storm.testing.CustomTopologyContext: java.lang.Long getDimensionLongMetric(java.lang.String,java.lang.String)>("bullet_created_replays", "JoinBolt-21");
+
+        $l45 = virtualinvoke $r79.<java.lang.Long: long longValue()>();
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l45, 2L);
+
+        $r80 = r42.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        virtualinvoke $r80.<com.yahoo.bullet.storm.ReplayBolt: void execute(org.apache.storm.tuple.Tuple)>(r4);
+
+        $r81 = r42.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        virtualinvoke $r81.<com.yahoo.bullet.storm.ReplayBolt: void execute(org.apache.storm.tuple.Tuple)>(r9);
+
+        $r82 = r42.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomCollector collector>;
+
+        $i46 = virtualinvoke $r82.<com.yahoo.bullet.storm.testing.CustomCollector: int getFailedCount()>();
+
+        $l47 = (long) $i46;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l47, 3L);
+
+        $r83 = <com.yahoo.bullet.storm.grouping.TaskIndexCaptureGrouping: java.util.Map TASK_INDEX_MAP>;
+
+        interfaceinvoke $r83.<java.util.Map: void clear()>();
+
+        return;
+    }
+
+    public void testReplayFilterBoltWithCompression()
+    {
+        com.yahoo.bullet.storm.ReplayBoltTest r0;
+        com.yahoo.bullet.storm.BulletStormConfig $r1, $r2, $r4, $r8;
+        java.lang.Boolean $r3, $r17, $r28;
+        java.util.HashMap $r6;
+        com.yahoo.bullet.storm.ReplayBolt $r7, $r12, $r13, $r33, $r34;
+        com.yahoo.bullet.storm.testing.CustomCollector $r9;
+        com.yahoo.bullet.storm.testing.CustomTopologyContext $r10;
+        org.apache.storm.topology.IRichBolt $r11;
+        boolean $z0, $z1;
+        long l0, $l3;
+        java.lang.Object[] $r14;
+        com.yahoo.bullet.storm.TupleClassifier$Type $r15;
+        java.lang.Long $r16, $r23;
+        org.apache.storm.tuple.Tuple r18, $r22, $r26, $r31;
+        java.lang.Integer $r19;
+        org.mockito.stubbing.Stubber $r20, $r24, $r29;
+        java.lang.Object $r21, $r25, $r30, $r36, $r40;
+        java.util.Map $r35;
+        com.yahoo.bullet.storm.ReplayBolt$Replay r37;
+        java.util.List $r38, $r39;
+        int $i2;
+
+        r0 := @this: com.yahoo.bullet.storm.ReplayBoltTest;
+
+        $r1 = new com.yahoo.bullet.storm.BulletStormConfig;
+
+        specialinvoke $r1.<com.yahoo.bullet.storm.BulletStormConfig: void <init>(java.lang.String)>("test_config.yaml");
+
+        r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.BulletStormConfig config> = $r1;
+
+        $r2 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        $r3 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(1);
+
+        virtualinvoke $r2.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.replay.batch.compress.enable", $r3);
+
+        $r4 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        virtualinvoke $r4.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        $r6 = new java.util.HashMap;
+
+        specialinvoke $r6.<java.util.HashMap: void <init>()>();
+
+        $r7 = new com.yahoo.bullet.storm.ReplayBolt;
+
+        $r8 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        specialinvoke $r7.<com.yahoo.bullet.storm.ReplayBolt: void <init>(com.yahoo.bullet.storm.BulletStormConfig)>($r8);
+
+        $r10 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomTopologyContext context>;
+
+        $r9 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomCollector collector>;
+
+        $r11 = staticinvoke <com.yahoo.bullet.storm.testing.ComponentUtils: org.apache.storm.topology.IRichBolt prepare(java.util.Map,org.apache.storm.topology.IRichBolt,org.apache.storm.task.TopologyContext,org.apache.storm.task.IOutputCollector)>($r6, $r7, $r10, $r9);
+
+        $r12 = (com.yahoo.bullet.storm.ReplayBolt) $r11;
+
+        r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt> = $r12;
+
+        $r13 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $z0 = virtualinvoke $r13.<com.yahoo.bullet.storm.ReplayBolt: boolean isReplayBatchCompressEnable()>();
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z0);
+
+        l0 = staticinvoke <java.lang.System: long currentTimeMillis()>();
+
+        $r15 = <com.yahoo.bullet.storm.TupleClassifier$Type: com.yahoo.bullet.storm.TupleClassifier$Type REPLAY_TUPLE>;
+
+        $r14 = newarray (java.lang.Object)[3];
+
+        $r14[0] = "FilterBolt-18";
+
+        $r16 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(l0);
+
+        $r14[1] = $r16;
+
+        $r17 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(0);
+
+        $r14[2] = $r17;
+
+        r18 = staticinvoke <com.yahoo.bullet.storm.testing.TupleUtils: org.apache.storm.tuple.Tuple makeIDTuple(com.yahoo.bullet.storm.TupleClassifier$Type,java.lang.Object[])>($r15, $r14);
+
+        $r19 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(4);
+
+        $r20 = staticinvoke <org.mockito.Mockito: org.mockito.stubbing.Stubber doReturn(java.lang.Object)>($r19);
+
+        $r21 = interfaceinvoke $r20.<org.mockito.stubbing.Stubber: java.lang.Object when(java.lang.Object)>(r18);
+
+        $r22 = (org.apache.storm.tuple.Tuple) $r21;
+
+        interfaceinvoke $r22.<org.apache.storm.tuple.Tuple: int getSourceTask()>();
+
+        $r23 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(l0);
+
+        $r24 = staticinvoke <org.mockito.Mockito: org.mockito.stubbing.Stubber doReturn(java.lang.Object)>($r23);
+
+        $r25 = interfaceinvoke $r24.<org.mockito.stubbing.Stubber: java.lang.Object when(java.lang.Object)>(r18);
+
+        $r26 = (org.apache.storm.tuple.Tuple) $r25;
+
+        interfaceinvoke $r26.<org.apache.storm.tuple.Tuple: java.lang.Long getLong(int)>(1);
+
+        $r28 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(0);
+
+        $r29 = staticinvoke <org.mockito.Mockito: org.mockito.stubbing.Stubber doReturn(java.lang.Object)>($r28);
+
+        $r30 = interfaceinvoke $r29.<org.mockito.stubbing.Stubber: java.lang.Object when(java.lang.Object)>(r18);
+
+        $r31 = (org.apache.storm.tuple.Tuple) $r30;
+
+        interfaceinvoke $r31.<org.apache.storm.tuple.Tuple: java.lang.Boolean getBoolean(int)>(2);
+
+        $r33 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        virtualinvoke $r33.<com.yahoo.bullet.storm.ReplayBolt: void execute(org.apache.storm.tuple.Tuple)>(r18);
+
+        $r34 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r35 = virtualinvoke $r34.<com.yahoo.bullet.storm.ReplayBolt: java.util.Map getReplays()>();
+
+        $r36 = interfaceinvoke $r35.<java.util.Map: java.lang.Object get(java.lang.Object)>("FilterBolt-18");
+
+        r37 = (com.yahoo.bullet.storm.ReplayBolt$Replay) $r36;
+
+        $r38 = virtualinvoke r37.<com.yahoo.bullet.storm.ReplayBolt$Replay: java.util.List getBatches()>();
+
+        $i2 = interfaceinvoke $r38.<java.util.List: int size()>();
+
+        $l3 = (long) $i2;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l3, 4L);
+
+        $r39 = virtualinvoke r37.<com.yahoo.bullet.storm.ReplayBolt$Replay: java.util.List getBatches()>();
+
+        $r40 = interfaceinvoke $r39.<java.util.List: java.lang.Object get(int)>(0);
+
+        $z1 = $r40 instanceof byte[];
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z1);
+
+        return;
+    }
+
+    public void testReplayJoinBoltWithCompression()
+    {
+        com.yahoo.bullet.storm.ReplayBoltTest r0;
+        com.yahoo.bullet.storm.BulletStormConfig $r1, $r2, $r4, $r8;
+        java.lang.Boolean $r3, $r17, $r28;
+        java.util.HashMap $r6;
+        com.yahoo.bullet.storm.ReplayBolt $r7, $r12, $r13, $r37, $r38;
+        com.yahoo.bullet.storm.testing.CustomCollector $r9;
+        com.yahoo.bullet.storm.testing.CustomTopologyContext $r10;
+        org.apache.storm.topology.IRichBolt $r11;
+        boolean $z0, $z1;
+        long l0, $l3;
+        java.lang.Object[] $r14;
+        com.yahoo.bullet.storm.TupleClassifier$Type $r15;
+        java.lang.Long $r16, $r23;
+        org.apache.storm.tuple.Tuple r18, $r22, $r26, $r31;
+        java.lang.Integer $r19, $r34, $r35;
+        org.mockito.stubbing.Stubber $r20, $r24, $r29;
+        java.lang.Object $r21, $r25, $r30, $r40, $r44;
+        java.util.Map $r33, $r39;
+        com.yahoo.bullet.storm.ReplayBolt$Replay r41;
+        java.util.List $r42, $r43;
+        int $i2;
+
+        r0 := @this: com.yahoo.bullet.storm.ReplayBoltTest;
+
+        $r1 = new com.yahoo.bullet.storm.BulletStormConfig;
+
+        specialinvoke $r1.<com.yahoo.bullet.storm.BulletStormConfig: void <init>(java.lang.String)>("test_config.yaml");
+
+        r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.BulletStormConfig config> = $r1;
+
+        $r2 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        $r3 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(1);
+
+        virtualinvoke $r2.<com.yahoo.bullet.storm.BulletStormConfig: void set(java.lang.String,java.lang.Object)>("bullet.topology.replay.batch.compress.enable", $r3);
+
+        $r4 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        virtualinvoke $r4.<com.yahoo.bullet.storm.BulletStormConfig: com.yahoo.bullet.storm.BulletStormConfig validate()>();
+
+        $r6 = new java.util.HashMap;
+
+        specialinvoke $r6.<java.util.HashMap: void <init>()>();
+
+        $r7 = new com.yahoo.bullet.storm.ReplayBolt;
+
+        $r8 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.BulletStormConfig config>;
+
+        specialinvoke $r7.<com.yahoo.bullet.storm.ReplayBolt: void <init>(com.yahoo.bullet.storm.BulletStormConfig)>($r8);
+
+        $r10 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomTopologyContext context>;
+
+        $r9 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.testing.CustomCollector collector>;
+
+        $r11 = staticinvoke <com.yahoo.bullet.storm.testing.ComponentUtils: org.apache.storm.topology.IRichBolt prepare(java.util.Map,org.apache.storm.topology.IRichBolt,org.apache.storm.task.TopologyContext,org.apache.storm.task.IOutputCollector)>($r6, $r7, $r10, $r9);
+
+        $r12 = (com.yahoo.bullet.storm.ReplayBolt) $r11;
+
+        r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt> = $r12;
+
+        $r13 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $z0 = virtualinvoke $r13.<com.yahoo.bullet.storm.ReplayBolt: boolean isReplayBatchCompressEnable()>();
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z0);
+
+        l0 = staticinvoke <java.lang.System: long currentTimeMillis()>();
+
+        $r15 = <com.yahoo.bullet.storm.TupleClassifier$Type: com.yahoo.bullet.storm.TupleClassifier$Type REPLAY_TUPLE>;
+
+        $r14 = newarray (java.lang.Object)[3];
+
+        $r14[0] = "JoinBolt-21";
+
+        $r16 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(l0);
+
+        $r14[1] = $r16;
+
+        $r17 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(0);
+
+        $r14[2] = $r17;
+
+        r18 = staticinvoke <com.yahoo.bullet.storm.testing.TupleUtils: org.apache.storm.tuple.Tuple makeIDTuple(com.yahoo.bullet.storm.TupleClassifier$Type,java.lang.Object[])>($r15, $r14);
+
+        $r19 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(4);
+
+        $r20 = staticinvoke <org.mockito.Mockito: org.mockito.stubbing.Stubber doReturn(java.lang.Object)>($r19);
+
+        $r21 = interfaceinvoke $r20.<org.mockito.stubbing.Stubber: java.lang.Object when(java.lang.Object)>(r18);
+
+        $r22 = (org.apache.storm.tuple.Tuple) $r21;
+
+        interfaceinvoke $r22.<org.apache.storm.tuple.Tuple: int getSourceTask()>();
+
+        $r23 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(l0);
+
+        $r24 = staticinvoke <org.mockito.Mockito: org.mockito.stubbing.Stubber doReturn(java.lang.Object)>($r23);
+
+        $r25 = interfaceinvoke $r24.<org.mockito.stubbing.Stubber: java.lang.Object when(java.lang.Object)>(r18);
+
+        $r26 = (org.apache.storm.tuple.Tuple) $r25;
+
+        interfaceinvoke $r26.<org.apache.storm.tuple.Tuple: java.lang.Long getLong(int)>(1);
+
+        $r28 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(0);
+
+        $r29 = staticinvoke <org.mockito.Mockito: org.mockito.stubbing.Stubber doReturn(java.lang.Object)>($r28);
+
+        $r30 = interfaceinvoke $r29.<org.mockito.stubbing.Stubber: java.lang.Object when(java.lang.Object)>(r18);
+
+        $r31 = (org.apache.storm.tuple.Tuple) $r30;
+
+        interfaceinvoke $r31.<org.apache.storm.tuple.Tuple: java.lang.Boolean getBoolean(int)>(2);
+
+        $r33 = <com.yahoo.bullet.storm.grouping.TaskIndexCaptureGrouping: java.util.Map TASK_INDEX_MAP>;
+
+        $r34 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(21);
+
+        $r35 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(0);
+
+        interfaceinvoke $r33.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>($r34, $r35);
+
+        $r37 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        virtualinvoke $r37.<com.yahoo.bullet.storm.ReplayBolt: void execute(org.apache.storm.tuple.Tuple)>(r18);
+
+        $r38 = r0.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r39 = virtualinvoke $r38.<com.yahoo.bullet.storm.ReplayBolt: java.util.Map getReplays()>();
+
+        $r40 = interfaceinvoke $r39.<java.util.Map: java.lang.Object get(java.lang.Object)>("JoinBolt-21");
+
+        r41 = (com.yahoo.bullet.storm.ReplayBolt$Replay) $r40;
+
+        $r42 = virtualinvoke r41.<com.yahoo.bullet.storm.ReplayBolt$Replay: java.util.List getBatches()>();
+
+        $i2 = interfaceinvoke $r42.<java.util.List: int size()>();
+
+        $l3 = (long) $i2;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l3, 1L);
+
+        $r43 = virtualinvoke r41.<com.yahoo.bullet.storm.ReplayBolt$Replay: java.util.List getBatches()>();
+
+        $r44 = interfaceinvoke $r43.<java.util.List: java.lang.Object get(int)>(0);
+
+        $z1 = $r44 instanceof byte[];
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($z1);
+
+        return;
+    }
+
+    public void testDoubleReplay()
+    {
+        long l0, $l4, $l6, $l8, $l10, $l12, $l14, $l16, $l18, $l20;
+        java.lang.Object[] $r0, $r5;
+        com.yahoo.bullet.storm.TupleClassifier$Type $r1, $r6;
+        java.lang.Long $r2, $r7, $r18, $r23;
+        java.lang.Boolean $r3, $r8, $r28, $r33, $r49;
+        org.apache.storm.tuple.Tuple r4, r9, $r13, $r17, $r21, $r26, $r31, $r36, $r52;
+        java.lang.Integer $r10, $r14;
+        org.mockito.stubbing.Stubber $r11, $r15, $r19, $r24, $r29, $r34, $r50;
+        java.lang.Object $r12, $r16, $r20, $r25, $r30, $r35, $r44, $r51;
+        com.yahoo.bullet.storm.ReplayBoltTest r38;
+        com.yahoo.bullet.storm.ReplayBolt $r39, $r40, $r42, $r46, $r47, $r54, $r55;
+        java.util.Map $r41, $r43, $r48, $r56;
+        int $i3, $i5, $i7, $i9, $i11, $i13, $i15, $i17, $i19;
+        com.yahoo.bullet.storm.ReplayBolt$Replay r45;
+
+        r38 := @this: com.yahoo.bullet.storm.ReplayBoltTest;
+
+        l0 = staticinvoke <java.lang.System: long currentTimeMillis()>();
+
+        $r1 = <com.yahoo.bullet.storm.TupleClassifier$Type: com.yahoo.bullet.storm.TupleClassifier$Type REPLAY_TUPLE>;
+
+        $r0 = newarray (java.lang.Object)[3];
+
+        $r0[0] = "FilterBolt-18";
+
+        $r2 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(l0);
+
+        $r0[1] = $r2;
+
+        $r3 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(0);
+
+        $r0[2] = $r3;
+
+        r4 = staticinvoke <com.yahoo.bullet.storm.testing.TupleUtils: org.apache.storm.tuple.Tuple makeIDTuple(com.yahoo.bullet.storm.TupleClassifier$Type,java.lang.Object[])>($r1, $r0);
+
+        $r6 = <com.yahoo.bullet.storm.TupleClassifier$Type: com.yahoo.bullet.storm.TupleClassifier$Type REPLAY_TUPLE>;
+
+        $r5 = newarray (java.lang.Object)[3];
+
+        $r5[0] = "FilterBolt-18";
+
+        $r7 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(l0);
+
+        $r5[1] = $r7;
+
+        $r8 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(1);
+
+        $r5[2] = $r8;
+
+        r9 = staticinvoke <com.yahoo.bullet.storm.testing.TupleUtils: org.apache.storm.tuple.Tuple makeIDTuple(com.yahoo.bullet.storm.TupleClassifier$Type,java.lang.Object[])>($r6, $r5);
+
+        $r10 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(4);
+
+        $r11 = staticinvoke <org.mockito.Mockito: org.mockito.stubbing.Stubber doReturn(java.lang.Object)>($r10);
+
+        $r12 = interfaceinvoke $r11.<org.mockito.stubbing.Stubber: java.lang.Object when(java.lang.Object)>(r4);
+
+        $r13 = (org.apache.storm.tuple.Tuple) $r12;
+
+        interfaceinvoke $r13.<org.apache.storm.tuple.Tuple: int getSourceTask()>();
+
+        $r14 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(5);
+
+        $r15 = staticinvoke <org.mockito.Mockito: org.mockito.stubbing.Stubber doReturn(java.lang.Object)>($r14);
+
+        $r16 = interfaceinvoke $r15.<org.mockito.stubbing.Stubber: java.lang.Object when(java.lang.Object)>(r9);
+
+        $r17 = (org.apache.storm.tuple.Tuple) $r16;
+
+        interfaceinvoke $r17.<org.apache.storm.tuple.Tuple: int getSourceTask()>();
+
+        $r18 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(l0);
+
+        $r19 = staticinvoke <org.mockito.Mockito: org.mockito.stubbing.Stubber doReturn(java.lang.Object)>($r18);
+
+        $r20 = interfaceinvoke $r19.<org.mockito.stubbing.Stubber: java.lang.Object when(java.lang.Object)>(r4);
+
+        $r21 = (org.apache.storm.tuple.Tuple) $r20;
+
+        interfaceinvoke $r21.<org.apache.storm.tuple.Tuple: java.lang.Long getLong(int)>(1);
+
+        $r23 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(l0);
+
+        $r24 = staticinvoke <org.mockito.Mockito: org.mockito.stubbing.Stubber doReturn(java.lang.Object)>($r23);
+
+        $r25 = interfaceinvoke $r24.<org.mockito.stubbing.Stubber: java.lang.Object when(java.lang.Object)>(r9);
+
+        $r26 = (org.apache.storm.tuple.Tuple) $r25;
+
+        interfaceinvoke $r26.<org.apache.storm.tuple.Tuple: java.lang.Long getLong(int)>(1);
+
+        $r28 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(0);
+
+        $r29 = staticinvoke <org.mockito.Mockito: org.mockito.stubbing.Stubber doReturn(java.lang.Object)>($r28);
+
+        $r30 = interfaceinvoke $r29.<org.mockito.stubbing.Stubber: java.lang.Object when(java.lang.Object)>(r4);
+
+        $r31 = (org.apache.storm.tuple.Tuple) $r30;
+
+        interfaceinvoke $r31.<org.apache.storm.tuple.Tuple: java.lang.Boolean getBoolean(int)>(2);
+
+        $r33 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(1);
+
+        $r34 = staticinvoke <org.mockito.Mockito: org.mockito.stubbing.Stubber doReturn(java.lang.Object)>($r33);
+
+        $r35 = interfaceinvoke $r34.<org.mockito.stubbing.Stubber: java.lang.Object when(java.lang.Object)>(r9);
+
+        $r36 = (org.apache.storm.tuple.Tuple) $r35;
+
+        interfaceinvoke $r36.<org.apache.storm.tuple.Tuple: java.lang.Boolean getBoolean(int)>(2);
+
+        $r39 = r38.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        virtualinvoke $r39.<com.yahoo.bullet.storm.ReplayBolt: void execute(org.apache.storm.tuple.Tuple)>(r4);
+
+        $r40 = r38.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r41 = virtualinvoke $r40.<com.yahoo.bullet.storm.ReplayBolt: java.util.Map getReplays()>();
+
+        $i3 = interfaceinvoke $r41.<java.util.Map: int size()>();
+
+        $l4 = (long) $i3;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l4, 1L);
+
+        $r42 = r38.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r43 = virtualinvoke $r42.<com.yahoo.bullet.storm.ReplayBolt: java.util.Map getReplays()>();
+
+        $r44 = interfaceinvoke $r43.<java.util.Map: java.lang.Object get(java.lang.Object)>("FilterBolt-18");
+
+        r45 = (com.yahoo.bullet.storm.ReplayBolt$Replay) $r44;
+
+        $i5 = virtualinvoke r45.<com.yahoo.bullet.storm.ReplayBolt$Replay: int getAnchor()>();
+
+        $l6 = (long) $i5;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l6, 4L);
+
+        $i7 = virtualinvoke r45.<com.yahoo.bullet.storm.ReplayBolt$Replay: int getIndex()>();
+
+        $l8 = (long) $i7;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l8, 0L);
+
+        $r46 = r38.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        virtualinvoke $r46.<com.yahoo.bullet.storm.ReplayBolt: void execute(org.apache.storm.tuple.Tuple)>(r9);
+
+        $r47 = r38.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r48 = virtualinvoke $r47.<com.yahoo.bullet.storm.ReplayBolt: java.util.Map getReplays()>();
+
+        $i9 = interfaceinvoke $r48.<java.util.Map: int size()>();
+
+        $l10 = (long) $i9;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l10, 1L);
+
+        $i11 = virtualinvoke r45.<com.yahoo.bullet.storm.ReplayBolt$Replay: int getAnchor()>();
+
+        $l12 = (long) $i11;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l12, 4L);
+
+        $i13 = virtualinvoke r45.<com.yahoo.bullet.storm.ReplayBolt$Replay: int getIndex()>();
+
+        $l14 = (long) $i13;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l14, 0L);
+
+        $r49 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(0);
+
+        $r50 = staticinvoke <org.mockito.Mockito: org.mockito.stubbing.Stubber doReturn(java.lang.Object)>($r49);
+
+        $r51 = interfaceinvoke $r50.<org.mockito.stubbing.Stubber: java.lang.Object when(java.lang.Object)>(r9);
+
+        $r52 = (org.apache.storm.tuple.Tuple) $r51;
+
+        interfaceinvoke $r52.<org.apache.storm.tuple.Tuple: java.lang.Boolean getBoolean(int)>(2);
+
+        $r54 = r38.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        virtualinvoke $r54.<com.yahoo.bullet.storm.ReplayBolt: void execute(org.apache.storm.tuple.Tuple)>(r9);
+
+        $r55 = r38.<com.yahoo.bullet.storm.ReplayBoltTest: com.yahoo.bullet.storm.ReplayBolt bolt>;
+
+        $r56 = virtualinvoke $r55.<com.yahoo.bullet.storm.ReplayBolt: java.util.Map getReplays()>();
+
+        $i15 = interfaceinvoke $r56.<java.util.Map: int size()>();
+
+        $l16 = (long) $i15;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l16, 1L);
+
+        $i17 = virtualinvoke r45.<com.yahoo.bullet.storm.ReplayBolt$Replay: int getAnchor()>();
+
+        $l18 = (long) $i17;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l18, 5L);
+
+        $i19 = virtualinvoke r45.<com.yahoo.bullet.storm.ReplayBolt$Replay: int getIndex()>();
+
+        $l20 = (long) $i19;
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>($l20, 0L);
+
+        return;
+    }
+
+    public static void <clinit>()
+    {
+        <com.yahoo.bullet.storm.ReplayBoltTest: int NUM_PARTITIONS> = 4;
+
+        return;
+    }
+}
