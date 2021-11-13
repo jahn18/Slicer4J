@@ -105,7 +105,7 @@ public class getStaticGraph {
                         staticDependencies.get(sc.getName()).put(parameter, 1);
                     }
                 }
-                // Data: Dependency Return type
+                // Data Dependency: Return type
                 String returnType = mt.getReturnType().toString();
                 if(staticDependencies.get(sc.getName()).containsKey(returnType)) {
                     int oldCall = staticDependencies.get(sc.getName()).get(returnType);

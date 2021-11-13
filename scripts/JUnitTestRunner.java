@@ -53,7 +53,9 @@ public class JUnitTestRunner {
         TestExecutionSummary summary = listener.getSummary();
         
         int i = 0;
-        if (summary.getTestsFailedCount() > 0) {
+        if(summary.getTestsFailedCount() == 0 && summary.getTestsSucceededCount() == 0) {
+            System.out.println("No tests were run");
+        } else if (summary.getTestsFailedCount() > 0) {
             System.out.println("Test fail");
             i = 1;
         } else {

@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.ArrayDeque;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
@@ -482,7 +483,7 @@ public class Slicer {
         Options.v().set_output_format(Options.output_format_jimple);
         Options.v().set_keep_line_number(true);
         
-        // Options.v().set_whole_program(true);
+        //Options.v().set_whole_program(true);
         // Options.v().set_allow_phantom_refs(true);
         // Options.v().setPhaseOption("cg.spark", "on");
         Options.v().setPhaseOption("jb", "use-original-names:true");
